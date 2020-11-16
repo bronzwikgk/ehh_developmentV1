@@ -121,7 +121,7 @@ function click(e) {
        var element = document.getElementsByTagName("html")[0];
        var jsonOutput = createJsonFromNode(element);
       //  var jsonOutput = createJsonFromNode(targetElement);
-        console.log(jsonOutput);
+        console.log(JSON.stringify(jsonOutput));
 
         var htmlOutput = createJson2Html(jsonOutput);
         console.log(htmlOutput);

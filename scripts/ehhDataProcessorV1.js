@@ -25,6 +25,9 @@ function set(output, input, key) {
 
             }
         } else {
+//            console.log(key, input[key]);
+            output.setAttribute(key, input[key]);
+
              }
 
     }
