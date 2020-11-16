@@ -1,11 +1,13 @@
 //referance Code https://github.com/azaslavsky/domJSON/blob/master/src/domJSON.js
+//https://github.com/moappi/json2html/blob/master/json2html.js
+//https://melaka.aspirethemes.com/ sample
+//https://github.com/Jxck/html2json/blob/master/src/html2json.js
 //This function set's a key from the subject to entity
 function set(output, input, key) {
 
     if (!getEntityType(output).includes("HTML")) {
         output[input[key].name] = input[key].value;
     }
-
     //console.log(input, getEntityType(input),output);
 
     if (getEntityType(output).includes("HTML")) {
@@ -20,7 +22,7 @@ function set(output, input, key) {
                 //element.removeAttribute(key);
                 //console.log(element);
             } else {
-                console.log(key, input[key]);
+               // console.log(key, input[key]);
                 output.setAttribute(key, input[key]);
 
             }
@@ -31,7 +33,6 @@ function set(output, input, key) {
              }
 
     }
-
     return output;
 }
 function iterarateObj(input, output, previousSW) {
