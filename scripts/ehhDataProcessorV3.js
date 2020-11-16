@@ -38,6 +38,8 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
         
         if (input[i] != 'undefined') {
          // console.log(input[i],iterateArrayResponse);
+            var temp[input[key].name] = input[key].value;
+            console.log("temp",temp);
             iterateArrayResponse = setEntity(input, iterateArrayResponse, input[i]);
 }
         
@@ -50,6 +52,7 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
 function setEntity(input, output,key ,outputType) {
    // console.log(output, typeof output,);
     if (getEntityType(output) === 'Array') { 
+        
         output.push(key : input[key].value;);
     }
     return output;
