@@ -1,9 +1,5 @@
 //referance Code https://github.com/azaslavsky/domJSON/blob/master/src/domJSON.js
 
-// var element = document.getElementsByTagName("html")[0];
-// var jsonOutput = createJsonFromNode(element);
-// console.log(jsonOutput);
-
 //This function set's a key from the subject to entity
 function set(output, input, key) {
 
@@ -33,8 +29,6 @@ function set(output, input, key) {
 
     return output;
 }
-//iterates all the keys
-//Options to be added
 function iterarateObj(input, output, previousSW) {
     if (!output) { var output = {}; }
     for (var key in input) {
@@ -104,28 +98,6 @@ function createJson2Html(input) {
 
     return output;
 }
-//This function validates a valid Url, Returns True or false
-function isValidUrl(string) {
-    try {
-        new URL(string);
-    } catch (_) {
-        return false;
-    }
-
-    return true;
-}
-//This function validates a valid Url, Returns True or false
-function isValidHttpUrl(string) {
-    let url;
-
-    try {
-        url = new URL(string);
-    } catch (_) {
-        return false;
-    }
-
-    return url.protocol === "http:" || url.protocol === "https:";
-}
 //this function takes an relative path and returns with an absolute path.
 function toAbsolute(relativePath) {
     //const url = new URL(url[, base])
@@ -134,20 +106,8 @@ function toAbsolute(relativePath) {
     return absoluteURL;
     //=> "https://stackoverflow.com/questions/mypath"
 }
-//helper Function to get the name protoNameof an entity
-function getEntityType(entity) {
-    return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
-}
 
 function save(entity, keyTitle) {
     // console.log("saving", keyTitle, JSON.stringify(entity));
     window.localStorage.setItem(keyTitle, JSON.stringify(entity));
-}
-
-function find(entity, keyTofind) {
-    //console.log("finding", keyTofind, "in", entity);
-    var result = Object.keys(entity).filter(function (key, index, self) {
-        return !key.indexOf(keyTofind);
-    });
-    return result;
 }

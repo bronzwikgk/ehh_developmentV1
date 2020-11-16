@@ -117,7 +117,10 @@ function click(e) {
         var entity2Find = "CSSStyleRule";
         var values = "active";
         var request = "get";
-        var jsonOutput = createJsonFromNode(targetElement);
+       
+       var element = document.getElementsByTagName("html")[0];
+       var jsonOutput = createJsonFromNode(element);
+      //  var jsonOutput = createJsonFromNode(targetElement);
         console.log(jsonOutput);
 
         var htmlOutput = createJson2Html(jsonOutput);
