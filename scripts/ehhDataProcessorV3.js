@@ -1,7 +1,6 @@
 
 function createEntity(input, output, outputType, model2Process) { 
-   console.log(input.tagName,model2Process);
- 
+   console.log("input",input,"output",output,outputType);
     switch (outputType) {
         case 'json':
             var output = {
@@ -24,9 +23,11 @@ function createEntity(input, output, outputType, model2Process) {
         default:
             output = 'Invalid day';
     }
-    console.log(output); // Tuesday
+  //  console.log(output); // Tuesday
     return output;;
 }
+
+
 
 function iterateArrayEntity(input, iterateArrayResponse, outputType) {
    // console.log("iterateArrayResponse",iterateArrayResponse);
@@ -36,21 +37,26 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
         if (typeof input === 'object') {
             var key = {};
             if (input[i] != 'undefined' && typeof (input[i]) != "undefined") {
-             //  console.log(input[i],iterateArrayResponse);
-                key[input[i].name] = input[i].value;
-               console.log("Key", key);
-                iterateArrayResponse = setEntity(input, iterateArrayResponse, key);
+                if (input[i].nodeType === Node.ELEMENT_NODE ){
+                    console.log(input[i],iterateArrayResponse,'json');
+                  // key = createEntity(input[i],iterateArrayResponse,'json')
+                   // iterateArrayResponse.push();
+                }
+               
+                //key = createEntity(input[i],key,'json')
+              // console.log("Key", key);
+                //iterateArrayResponse = setEntity(key, iterateArrayResponse, key);
             }
         }
     }
-   console.log("iterateArrayResponse",iterateArrayResponse);
+  // console.log("iterateArrayResponse",iterateArrayResponse);
     return iterateArrayResponse;
 }
 
 function setEntity(input, output,key ,outputType) {
     //console.log(output, typeof output,);
     if (getEntityType(output) === 'Array') { 
-        output.push(key);
+        output.push(input);
     }
     if (getEntityType(output) === 'Object') {
         output[input[key].name] = input[key].value;
@@ -67,8 +73,7 @@ function iterateObjectEntity(input, iterateObjResponse, outputType) {
     for (key in input) { 
        //console.log("foundKey", key, input[key], input[key].valueOf());
         if (key && input[key] != undefined && input[key] != 'function' && typeof (input[key].value) != "undefined") { 
-       
-            console.log("foundKey", key, input[key], input[key].valueOf());
+            //console.log("foundKey", key, input[key], input[key].valueOf());
             iterateObjResponse = setEntity(input, iterateObjResponse,key)
         }
     }
