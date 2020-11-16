@@ -120,9 +120,9 @@ function click(e) {
         var element = document.getElementsByTagName("body")[0];
         var jsonOutput = ehhCreate(element, output, outputType);
       //  var jsonOutput = createJsonFromNode(element);
-        console.log(JSON.stringify(jsonOutput));
-        //var htmlOutput = createJson2Html(jsonOutput);
-        //console.log(htmlOutput);
+        console.log(jsonOutput);
+        // var htmlOutput = createJson2Html(jsonOutput);
+        // console.log(htmlOutput);
         // var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
         // var myWindow = window.open("", windowFeatures);
 

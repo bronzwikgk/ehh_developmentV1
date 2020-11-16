@@ -38,6 +38,24 @@ function set(output, input, key) {
 }
 
 
+function append(output, input, outputType) { 
+    // if (previousSW === 'ehhCreate') {
+    //     if (input[index].nodeType === Node.ELEMENT_NODE || input[index].nodeType === Node.TEXT_NODE) {
+    //         console.log("input", input, "output", outputResponse, previousSW);
+    //         outputResponse.push(createJsonFromNode(input[index]));
+    //     }
+    // }
+
+    // if (previousSW === 'createJson2Html') {
+    //     console.log("fromCreateJson  inside", output, key, input[key]);
+    //     outputResponse.appendChild(createJson2Html(input[index]));
+    //     // output = set(output, input, key);
+    }
+
+
+
+
+}
 function iterarateObj(input, output, previousSW) {
     if (!output) { var output = {}; }
     for (var key in input) {
@@ -51,40 +69,29 @@ function iterarateObj(input, output, previousSW) {
            // console.log(output);
         }
     }
-    console.log(output);
+  //  console.log(output);
     return output;
 }
-function iterateArray(input, output, previousSW) {
-    // console.log(entity);
+
+function iterateArray(input, output, previousSW, outputType) {
+   
     if (!outputResponse) { var outputResponse = []; }
     input.forEach(function (element, index) {
         // console.log(input[index]);
-        if (previousSW === 'ehhCreate') {
-            if (input[index].nodeType === Node.ELEMENT_NODE || input[index].nodeType === Node.TEXT_NODE) {
-              //  console.log("input", input, "output", outputResponse,previousSW);
-                outputResponse.push(createJsonFromNode(input[index]));
-            }
-        }
-
-        if (previousSW === 'createJson2Html') {
-            // console.log("fromCreateJson  inside", output, key,input[key]);
-            outputResponse.appendChild(createJson2Html(input[index]));
-            // output = set(output, input, key);
-        }
+        append( input, output,outputType);
     });
     return outputResponse;
 }
 
 function ehhCreate(input,output, outputType ,previousSW) {
  console.log("Createing ", outputType, "from", isObject_(input), typeof input, getEntityType(input),output);
-    
-    switch (outputType) {
+           switch (outputType) {
         case 'json':
             var output = {
                 tagName: input.tagName,
                 name: input.name,
-                attributes: iterarateObj(input.attributes, output, arguments.callee.name),
-                childNodes: iterateArray(input.childNodes, output, arguments.callee.name),
+                attributes: iterarateObj(input.attributes, {}, arguments.callee.name),
+                childNodes: iterateArray(input.childNodes, [], arguments.callee.name),
                 //  parent: nodeEl.parentNode.tagName,
                 nodeType: input.nodeType,
                 nodeValue: input.nodeValue
@@ -112,24 +119,11 @@ function ehhCreate(input,output, outputType ,previousSW) {
             ehhCase = 'Invalid day';
     }
     console.log(output); // Tuesday
-
-
     return output;;
 }
 
-function createJsonFromNode(nodeEl) {
-    // console.log(nodeEl.tagName.toLowerCase());
-    var node = {
-        tagName: nodeEl.tagName,
-        name: nodeEl.name,
-        attributes: iterarateObj(nodeEl.attributes, node, arguments.callee.name),
-        childNodes: iterateArray(nodeEl.childNodes, node, arguments.callee.name),
-        //  parent: nodeEl.parentNode.tagName,
-        nodeType: nodeEl.nodeType,
-        nodeValue: nodeEl.nodeValue
-    }
-    return node;
-}
+
+
 function createJson2Html(input) {
     //console.log(entity);
     if (input.nodeType === 1) {
@@ -153,6 +147,7 @@ function createJson2Html(input) {
 
     return output;
 }
+
 //this function takes an relative path and returns with an absolute path.
 function toAbsolute(relativePath) {
     //const url = new URL(url[, base])
