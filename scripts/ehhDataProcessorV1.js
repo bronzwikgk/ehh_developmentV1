@@ -138,9 +138,6 @@ function toAbsolute(relativePath) {
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
-// var htmlOutput = createJson2Html(jsonOutput);
-// console.log(htmlOutput);
-
 
 function save(entity, keyTitle) {
     // console.log("saving", keyTitle, JSON.stringify(entity));
@@ -154,10 +151,3 @@ function find(entity, keyTofind) {
     });
     return result;
 }
-
-
-// var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
-// var myWindow = window.open("", windowFeatures);
-
-// var tempHtml = myWindow.document.getElementsByTagName("html")[0];
-// myWindow.document.replaceChild(htmlOutput, tempHtml);

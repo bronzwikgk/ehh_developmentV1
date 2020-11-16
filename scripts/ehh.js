@@ -119,6 +119,15 @@ function click(e) {
         var request = "get";
         var jsonOutput = createJsonFromNode(targetElement);
         console.log(jsonOutput);
+
+        var htmlOutput = createJson2Html(jsonOutput);
+        console.log(htmlOutput);
+
+        var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
+        var myWindow = window.open("", windowFeatures);
+
+        var tempHtml = myWindow.document.getElementsByTagName("html")[0];
+        myWindow.document.replaceChild(htmlOutput, tempHtml);
        // ehhProcessEntity(targetElement, entity2Process, entity2Find,values,output,outputType,request);     
     }
 
