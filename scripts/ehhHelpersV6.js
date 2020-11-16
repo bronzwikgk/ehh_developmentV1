@@ -118,20 +118,4 @@ function isArray(o) {
  }
 
 
-function save(entity, keyTitle) {
-    // console.log("saving", keyTitle, JSON.stringify(entity));
-    window.localStorage.setItem(keyTitle, JSON.stringify(entity));
-}
 
-function find(entity, keyTofind) {
-    //console.log("finding", keyTofind, "in", entity);
-    var result = Object.keys(entity).filter(function (key, index, self) {
-      return !key.indexOf(keyTofind);
-    });
-    return result;
-  }
-
-
-function getEntityType(entity) {
-  return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
-}

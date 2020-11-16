@@ -117,7 +117,9 @@ function click(e) {
         var entity2Find = "CSSStyleRule";
         var values = "active";
         var request = "get";
-        ehhProcessEntity(targetElement, entity2Process, entity2Find,values,output,outputType,request);     
+        var jsonOutput = createJsonFromNode(targetElement);
+        console.log(jsonOutput);
+       // ehhProcessEntity(targetElement, entity2Process, entity2Find,values,output,outputType,request);     
     }
 
 
