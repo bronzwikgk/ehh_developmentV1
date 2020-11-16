@@ -117,20 +117,17 @@ function click(e) {
         var entity2Find = "CSSStyleRule";
         var values = "active";
         var request = "get";
-       
-       var element = document.getElementsByTagName("html")[0];
-       var jsonOutput = createJsonFromNode(element);
-      //  var jsonOutput = createJsonFromNode(targetElement);
-        console.log(JSON.stringify(jsonOutput));
+        var element = document.getElementsByTagName("html")[0];
+        var jsonOutput = ehhCreate(element, output, outputType);
+        //var jsonOutput = createJsonFromNode(element);
+        //console.log(JSON.stringify(jsonOutput));
+        //var htmlOutput = createJson2Html(jsonOutput);
+        //console.log(htmlOutput);
+        // var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
+        // var myWindow = window.open("", windowFeatures);
 
-        var htmlOutput = createJson2Html(jsonOutput);
-        console.log(htmlOutput);
-
-        var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
-        var myWindow = window.open("", windowFeatures);
-
-        var tempHtml = myWindow.document.getElementsByTagName("html")[0];
-        myWindow.document.replaceChild(htmlOutput, tempHtml);
+        // var tempHtml = myWindow.document.getElementsByTagName("html")[0];
+        // myWindow.document.replaceChild(htmlOutput, tempHtml);
        // ehhProcessEntity(targetElement, entity2Process, entity2Find,values,output,outputType,request);     
     }
 

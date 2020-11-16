@@ -67,6 +67,49 @@ function iterateArray(input, output, previousSW) {
     });
     return output;
 }
+
+function ehhCreate(input, output, outputType ,previousSW) {
+    console.log("Createing ", isObject_(output), "from", isObject_(input), typeof input, getEntityType(input));
+    
+    switch (outputType) {
+        case 'json':
+            var output = {
+                tagName: input.tagName,
+                name: input.name,
+                attributes: iterarateObj(input.attributes, output, arguments.callee.name),
+                childNodes: iterateArray(input.childNodes, output, arguments.callee.name),
+                //  parent: nodeEl.parentNode.tagName,
+                nodeType: input.nodeType,
+                nodeValue: input.nodeValue
+            }
+            break;
+        case 'html':
+            ehhCase = 'Monday';
+            break;
+        case 'array':
+            ehhCase = 'Tuesday';
+            break;
+        case 4:
+            ehhCase = 'Wednesday';
+            break;
+        case 5:
+            ehhCase = 'Thursday';
+            break;
+        case 6:
+            ehhCase = 'Friday';
+            break;
+        case 7:
+            ehhCase = 'Saturday';
+            break;
+        default:
+            ehhCase = 'Invalid day';
+    }
+    console.log(output); // Tuesday
+
+
+    return output;;
+}
+
 function createJsonFromNode(nodeEl) {
     // console.log(nodeEl.tagName.toLowerCase());
     var node = {
