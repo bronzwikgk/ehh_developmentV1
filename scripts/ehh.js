@@ -1,4 +1,7 @@
 
+let event = {
+    "origin": ["mouse", "window", "ehh", "HTTP", "keyBoard"],
+}
 window.onload = OnLoad();
 
 function OnLoad(e) {
@@ -7,7 +10,7 @@ function OnLoad(e) {
     var listeners = createListeners(this);
 }
 function createListeners(entity) {
-   console.log(entity);
+  // console.log(entity);
     var events = find(entity, 'on');
   // console.log("events Found",events);
     var a = events.forEach(create);
@@ -17,12 +20,6 @@ function createListeners(entity) {
     console.log("listernes created & Saved to local storagea at ", new Date().toLocaleString().replace(',', ''), this.constructor.name);
 
 }
-
-let event = {
-    "origin": ["mouse", "window", "ehh", "HTTP", "keyBoard"],
-}
-
-
 function initState(e) {
     var nodes = [];
     //currentState = e.type;
