@@ -55,22 +55,23 @@ function setEntity(input, output,key ,outputType) {
 
 
 
+
     return output;
 }
 
 function iterateObjectEntity(input, iterateObjResponse, outputType) {
     if (!iterateObjResponse) { var iterateObjResponse = {}; }
-    console.log("input",input, typeof input);
+  //  console.log("input", input, typeof input, input.length, isObjectArray_(input), isArray(input));
     for (key in input) { 
-       console.log("foundKey", key, input[key], input[key].valueOf());
-
-        if (key && input[key] != undefined && input[key] != 'function') { 
-          console.log("foundKey", key, input[key], input[key].valueOf());
-
+     //  console.log("foundKey", key, input[key], input[key].valueOf());
+        if (key && input[key] != undefined && input[key] != 'function' && typeof (input[key].value) != "undefined") { 
+       
+            console.log("foundKey", key, input[key], input[key].valueOf());
+            iterateObjResponse = setEntity(input, iterateObjResponse,key)
         }
     }
 
-
+    return iterateObjResponse;
 }
 
 
