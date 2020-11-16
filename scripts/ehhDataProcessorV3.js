@@ -8,7 +8,7 @@ function createEntity(input, output, outputType, model2Process) {
                 tagName: input.tagName,
                 name: input.name,
                 attributes: iterateArrayEntity(input.attributes,[], arguments.callee.name),
-                //childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
+                childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
                 //  parent: nodeEl.parentNode.tagName,
                 nodeType: input.nodeType,
                 nodeValue: input.nodeValue
@@ -31,30 +31,32 @@ function createEntity(input, output, outputType, model2Process) {
 function iterateArrayEntity(input, iterateArrayResponse, outputType) {
    // console.log("iterateArrayResponse",iterateArrayResponse);
     if (!iterateArrayResponse) { var iterateArrayResponse = []; }
-
-    console.log("input", input, typeof input, input.length, isObjectArray_(input),isArray(input));
-
+    
+    console.log("input", input, typeof input, input.length, isObjectArray_(input), isArray(input));
+    
     for (i = 0; i <= input.length; i++) {
-        
-        if (input[i] != 'undefined') {
-         // console.log(input[i],iterateArrayResponse);
-            var temp[input[key].name] = input[key].value;
-            console.log("temp",temp);
-            iterateArrayResponse = setEntity(input, iterateArrayResponse, input[i]);
-}
-        
-
+        if (typeof input === 'object') {
+            var key = {};
+            if (input[i] != 'undefined' && typeof (input[i]) != "undefined") {
+             //  console.log(input[i],iterateArrayResponse);
+                key[input[i].name] = input[i].value;
+               // console.log("temp", temp);
+                iterateArrayResponse = setEntity(input, iterateArrayResponse, key);
+            }
+        }
     }
-    console.log(iterateArrayResponse);
+    console.log("iterateArrayResponse",iterateArrayResponse);
     return iterateArrayResponse;
 }
 
 function setEntity(input, output,key ,outputType) {
    // console.log(output, typeof output,);
     if (getEntityType(output) === 'Array') { 
-        
-        output.push(key : input[key].value;);
+        output.push(key);
     }
+
+
+
     return output;
 }
 
