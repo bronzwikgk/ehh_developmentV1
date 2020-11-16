@@ -8,7 +8,7 @@ function createEntity(input, output, outputType, model2Process) {
                 tagName: input.tagName,
                 name: input.name,
                 attributes: iterateObjectEntity(input.attributes,{}, arguments.callee.name),
-               // childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
+                childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
                 //  parent: nodeEl.parentNode.tagName,
                 nodeType: input.nodeType,
                 nodeValue: input.nodeValue
@@ -48,11 +48,13 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
 }
 
 function setEntity(input, output,key ,outputType) {
-   // console.log(output, typeof output,);
+    console.log(output, typeof output,);
     if (getEntityType(output) === 'Array') { 
         output.push(key);
     }
-
+    if (getEntityType(output) === 'Object') {
+        output[input[key].name] = input[key].value;
+    }
 
 
 
