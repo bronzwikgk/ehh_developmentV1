@@ -7,8 +7,8 @@ function createEntity(input, output, outputType, model2Process) {
             var output = {
                 tagName: input.tagName,
                 name: input.name,
-                attributes: iterateArrayEntity(input.attributes,[], arguments.callee.name),
-                childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
+                attributes: iterateObjectEntity(input.attributes,{}, arguments.callee.name),
+               // childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
                 //  parent: nodeEl.parentNode.tagName,
                 nodeType: input.nodeType,
                 nodeValue: input.nodeValue
@@ -31,10 +31,8 @@ function createEntity(input, output, outputType, model2Process) {
 function iterateArrayEntity(input, iterateArrayResponse, outputType) {
    // console.log("iterateArrayResponse",iterateArrayResponse);
     if (!iterateArrayResponse) { var iterateArrayResponse = []; }
-    
-    console.log("input", input, typeof input, input.length, isObjectArray_(input), isArray(input));
-    
-    for (i = 0; i <= input.length; i++) {
+       console.log("input", input, typeof input, input.length, isObjectArray_(input), isArray(input));
+       for (i = 0; i <= input.length; i++) {
         if (typeof input === 'object') {
             var key = {};
             if (input[i] != 'undefined' && typeof (input[i]) != "undefined") {
@@ -60,7 +58,7 @@ function setEntity(input, output,key ,outputType) {
     return output;
 }
 
-function iterateObjectEntity(input, output, outputType) {
+function iterateObjectEntity(input, iterateObjResponse, outputType) {
     if (!iterateObjResponse) { var iterateObjResponse = {}; }
     console.log("input",input, typeof input);
     for (key in input) { 
