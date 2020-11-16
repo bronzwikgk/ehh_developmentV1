@@ -123,6 +123,8 @@ function createJsonFromNode(nodeEl) {
     }
     return node;
 }
+
+
 function createJson2Html(input) {
     //console.log(entity);
     if (input.nodeType === 1) {

@@ -5,7 +5,8 @@
 //This function set's a key from the subject to entity
 function set(output, input, key) {
 
-    if (isObject_(output) === 'true') {
+    if (!getEntityType(output).includes("HTML")) {
+
         output[input[key].name] = input[key].value;
     }
     //console.log(input, getEntityType(input),output);
@@ -41,13 +42,16 @@ function iterarateObj(input, output, previousSW) {
     if (!output) { var output = {}; }
     for (var key in input) {
         if (input[key] && input[key].value !== undefined) {
+            //console.log(output, input, key);
             output = set(output, input, key);
+         
         }
         if (previousSW === 'createJson2Html') {
-            output = set(output, input, key);
+           output = set(output, input, key);
+           // console.log(output);
         }
     }
-
+    console.log(output);
     return output;
 }
 function iterateArray(input, output, previousSW) {
@@ -57,7 +61,7 @@ function iterateArray(input, output, previousSW) {
         // console.log(input[index]);
         if (previousSW === 'ehhCreate') {
             if (input[index].nodeType === Node.ELEMENT_NODE || input[index].nodeType === Node.TEXT_NODE) {
-                console.log("input", input, "output", outputResponse,previousSW);
+              //  console.log("input", input, "output", outputResponse,previousSW);
                 outputResponse.push(createJsonFromNode(input[index]));
             }
         }
@@ -71,8 +75,8 @@ function iterateArray(input, output, previousSW) {
     return outputResponse;
 }
 
-function ehhCreate(input, output, outputType ,previousSW) {
-  //  console.log("Createing ", isObject_(output), "from", isObject_(input), typeof input, getEntityType(input));
+function ehhCreate(input,output, outputType ,previousSW) {
+ console.log("Createing ", outputType, "from", isObject_(input), typeof input, getEntityType(input),output);
     
     switch (outputType) {
         case 'json':
