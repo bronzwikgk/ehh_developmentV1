@@ -118,8 +118,8 @@ function click(e) {
         var values = "active";
         var request = "get";
         var element = document.getElementsByTagName("html")[0];
-        var jsonOutput = ehhCreate(element, output, outputType);
-        //var jsonOutput = createJsonFromNode(element);
+       // var jsonOutput = ehhCreate(element, output, outputType);
+        var jsonOutput = createJsonFromNode(element);
         //console.log(JSON.stringify(jsonOutput));
         //var htmlOutput = createJson2Html(jsonOutput);
         //console.log(htmlOutput);

@@ -5,7 +5,7 @@
 //This function set's a key from the subject to entity
 function set(output, input, key) {
 
-    if (!getEntityType(output).includes("HTML")) {
+    if (isObject_(output) === 'true') {
         output[input[key].name] = input[key].value;
     }
     //console.log(input, getEntityType(input),output);
@@ -35,6 +35,8 @@ function set(output, input, key) {
     }
     return output;
 }
+
+
 function iterarateObj(input, output, previousSW) {
     if (!output) { var output = {}; }
     for (var key in input) {
@@ -50,26 +52,27 @@ function iterarateObj(input, output, previousSW) {
 }
 function iterateArray(input, output, previousSW) {
     // console.log(entity);
-    if (!output) { var output = []; }
+    if (!outputResponse) { var outputResponse = []; }
     input.forEach(function (element, index) {
         // console.log(input[index]);
-        if (previousSW === 'createJsonFromNode') {
+        if (previousSW === 'ehhCreate') {
             if (input[index].nodeType === Node.ELEMENT_NODE || input[index].nodeType === Node.TEXT_NODE) {
-                output.push(createJsonFromNode(input[index]));
+                console.log("input", input, "output", outputResponse,previousSW);
+                outputResponse.push(createJsonFromNode(input[index]));
             }
         }
 
         if (previousSW === 'createJson2Html') {
             // console.log("fromCreateJson  inside", output, key,input[key]);
-            output.appendChild(createJson2Html(input[index]));
+            outputResponse.appendChild(createJson2Html(input[index]));
             // output = set(output, input, key);
         }
     });
-    return output;
+    return outputResponse;
 }
 
 function ehhCreate(input, output, outputType ,previousSW) {
-    console.log("Createing ", isObject_(output), "from", isObject_(input), typeof input, getEntityType(input));
+  //  console.log("Createing ", isObject_(output), "from", isObject_(input), typeof input, getEntityType(input));
     
     switch (outputType) {
         case 'json':
