@@ -1,5 +1,4 @@
 //referance Code https://github.com/azaslavsky/domJSON/blob/master/src/domJSON.js
-
 //This function set's a key from the subject to entity
 function set(output, input, key) {
 
@@ -20,10 +19,13 @@ function set(output, input, key) {
                 output.setAttribute(key, absoluteUrl);
                 //element.removeAttribute(key);
                 //console.log(element);
+            } else {
+                console.log(key, input[key]);
+                output.setAttribute(key, input[key]);
+
             }
         } else {
-            output.setAttribute(key, input[key]);
-        }
+             }
 
     }
 
@@ -74,7 +76,6 @@ function createJsonFromNode(nodeEl) {
     }
     return node;
 }
-
 function createJson2Html(input) {
     //console.log(entity);
     if (input.nodeType === 1) {
