@@ -134,7 +134,7 @@ function click(e) {
         
         
       //  var jsonOutput = createJsonFromNode(element);
-        console.log(jsonOutput);
+        console.log(JSON.stringify(jsonOutput));
         // var htmlOutput = createJson2Html(jsonOutput);
         // console.log(htmlOutput);
         // var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";

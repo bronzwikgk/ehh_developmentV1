@@ -37,8 +37,8 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
     for (i = 0; i <= input.length; i++) {
         
         if (input[i] != 'undefined') {
-            console.log(input[i],iterateArrayResponse);
-            iterateArrayResponse = setEntity(input[i], iterateArrayResponse);
+         // console.log(input[i],iterateArrayResponse);
+            iterateArrayResponse = setEntity(input, iterateArrayResponse, input[i]);
 }
         
 
@@ -47,10 +47,10 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
     return iterateArrayResponse;
 }
 
-function setEntity(input, output, outputType) {
-    console.log(output, typeof output,);
+function setEntity(input, output,key ,outputType) {
+   // console.log(output, typeof output,);
     if (getEntityType(output) === 'Array') { 
-        output.push(input);
+        output.push(key : input[key].value;);
     }
     return output;
 }
