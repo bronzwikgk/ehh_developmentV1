@@ -1,15 +1,13 @@
-//string, number, bigint, boolean, symbol, null and undefined
+
 window.onload = OnLoad();
-console.log("uo",window.navigator);
+
 function OnLoad(e) {
     //window storage == session storage
     console.log("ehh is running! on >>>", window.document.title, window.document.location.origin);
-  //  var listeners = createListeners(this);
-    var response = onLocationChange();
-    
+    var listeners = createListeners(this);
 }
 function createListeners(entity) {
-  // console.log(entity);
+   console.log(entity);
     var events = find(entity, 'on');
   // console.log("events Found",events);
     var a = events.forEach(create);
@@ -28,15 +26,9 @@ let event = {
 function initState(e) {
     var nodes = [];
     //currentState = e.type;
-    let i = 0;
     document.documentElement.querySelectorAll('*').forEach(function (node) {
-        node.setAttribute("currentstate", "inDom"); node.setAttribute("prevstate", "intiated");
-        if (!node.hasAttribute("ehhId")) { 
-          //  console.log(i,i++,"ehhId",);
-            node.setAttribute("ehhId", "ehhId" + i); i++;
-
-        }
-
+        node.setAttribute("currentstate", "inDom"); node.setAttribute("prevstate", "");
+       //  console.log(node);
     });
     
 }
@@ -76,7 +68,7 @@ function conductEvent(e) {
             // console.log(e.constructor.name, e.type, "captured", e.target.constructor.name);
              //createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
              e.preventDefault();
-            // rightClick(e);    
+             rightClick(e);    
          } 
      }
 }
@@ -86,14 +78,14 @@ function conductEvent(e) {
 //https://github.com/philipwalton/router/blob/master/index.js
 
 
+
 function onEvent(e) {
    // console.log(e.constructor.name, e.type, "captured", e.target.tagName);
-    // if (e.type === "pageshow") {
-    //     //console.log(e.constructor.name, e.type, "captured", e.target.tagName);
-    //  //  initState(e);
-    //     // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
-    // }
-    if (e.constructor.name === "MouseEvent") {
+    if (e.type === "pageshow") {
+        //console.log(e.constructor.name, e.type, "captured", e.target.tagName);
+       initState(e);
+        // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
+    } if (e.constructor.name === "MouseEvent") {
         //console.log(e.constructor.name, e.type, "captured", e.target.tagName);
         changeState(e);
         // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
@@ -105,68 +97,36 @@ function create(entity) {
 }
 
 function rightClick(event) { 
-
-   
-    var contextElement = document.querySelector("ehhContextMenu");
-    //var contextElement = component.getElementById("ehhContextMenu");
-    
-    console.log(contextElement);
+    //console.log("contextClick", event);
+    var contextElement = document.getElementById("context-menu");
     contextElement.style.top = event.clientY + "px";
     contextElement.style.left = event.clientX + "px";
     contextElement.style.display = 'block';
-
-
 }
 
-
-
-// for (i = 0; i < acc.length; i++) {
-//     acc[i].addEventListener("click", function () {
-//         this.classList.toggle("active");
-//         var panel = this.nextElementSibling;
-//         if (panel.style.display === "block") {
-//             panel.style.display = "none";
-//         } else {
-//             panel.style.display = "block";
-//         }
-//     });
-// }
-
-
-//https://www.w3schools.com/howto/howto_js_collapsible.asp
 function click(e) { 
     var targetElement = e.target;
     console.log(getEntityType(targetElement));
-    console.log(targetElement);
-    if (targetElement.classList.contains("toggle")) {
-        console.log("toggle");
-        targetElement.classList.toggle("active");
-        var panel = targetElement.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-     }
+    var contextElement = document.getElementById("context-menu");  
+    if(contextElement.hasAttribute("currentState")){
+        //console.log("clickedOn",targetElement);  
+        contextElement.style.display = 'none';
+
+    } if (getEntityType(targetElement).includes("Element") && targetElement!= contextElement) { 
+       // console.log("foundclick", targetElement);
+        var output = {};
+        var outputType = "json";
+        var entity2Process = "CSSRuleList";
+        var entity2Find = "CSSStyleRule";
+        var values = "active";
+        var request = "get";
+        ehhProcessEntity(targetElement, entity2Process, entity2Find,values,output,outputType,request);     
+    }
 
 
-    // var contextElement = document.getElementById("ehhContextMenu");  
-    // if(contextElement.hasAttribute("currentState")){
-    //     //console.log("clickedOn",targetElement);  
-    //     contextElement.style.display = 'none';
-
-    // } if (getEntityType(targetElement).includes("Element") && targetElement!= contextElement) { 
-    //    // console.log("foundclick", targetElement);
-    //     var output = {};
-    //     var outputType = "html";
-    //     var entity2Process = "cssRules";
-    //     var entity2Find = "style";
-    //     var values = "active";
-    //     var request = "processEntity";
-    //     let itemLength=parseInt(0);
-    //     processEntity(targetElement, entity2Process, entity2Find,values,output,outputType,request,"click",itemLength);             
-    // }
 }
+
+
 
 function mouseOver(e) {
     // console.log(e.constructor.name, e.type, "captured", e.target.constructor.name);
