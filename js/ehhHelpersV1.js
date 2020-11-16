@@ -5,6 +5,18 @@
 // var invalidjsontext = '{"firstnam""James","surname":"Bond","mobile":["007-700-007","001-007-007-0007"]}'; 
 // console.log("With Valid JSON Text: "+IsValidJSONString(validjsontext));
 // console.log("With inValid JSON Text: "+IsValidJSONString(invalidjsontext));
+    
+    /**
+* Checks that an HTMLelement has a non-empty `name` and `value` property.
+* @param  {Element} element  the element to check
+* @return {Bool}             true if the element is an input, false if not
+*/
+    const isValidElement = element => {
+        return element.name && element.value;
+    };
+
+
+    
 function IsValidJSONString(str) {
     try {
         JSON.parse(str);
