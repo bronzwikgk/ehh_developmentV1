@@ -1,4 +1,5 @@
 
+
 let event = {
     "origin": ["mouse", "window", "ehh", "HTTP", "keyBoard"],
 }
@@ -103,7 +104,7 @@ function rightClick(event) {
 
 function click(e) { 
     var targetElement = e.target;
-    console.log(getEntityType(targetElement));
+  //  console.log(getEntityType(targetElement));
     var contextElement = document.getElementById("context-menu");  
     if(contextElement.hasAttribute("currentState")){
         //console.log("clickedOn",targetElement);  
@@ -111,14 +112,27 @@ function click(e) {
 
     } if (getEntityType(targetElement).includes("Element") && targetElement!= contextElement) { 
        // console.log("foundclick", targetElement);
-        var output = {};
+       
         var outputType = "json";
         var entity2Process = "CSSRuleList";
         var entity2Find = "CSSStyleRule";
         var values = "active";
         var request = "get";
         var element = document.getElementsByTagName("body")[0];
-        var jsonOutput = ehhCreate(element, output, outputType);
+        var output = {};
+        var nodeEntityInJson = {
+            tagName: 'get',
+            name: 'get',
+            attributes: 'getAll',
+            childNodes: 'getAll',
+            nodeType: 'get',
+            nodeValue: 'get'
+        }
+
+
+        var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
+        
+        
       //  var jsonOutput = createJsonFromNode(element);
         console.log(jsonOutput);
         // var htmlOutput = createJson2Html(jsonOutput);

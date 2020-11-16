@@ -124,7 +124,6 @@ function createJsonFromNode(nodeEl) {
     return node;
 }
 
-
 function createJson2Html(input) {
     //console.log(entity);
     if (input.nodeType === 1) {
@@ -155,9 +154,4 @@ function toAbsolute(relativePath) {
     // console.log(absoluteURL);
     return absoluteURL;
     //=> "https://stackoverflow.com/questions/mypath"
-}
-
-function save(entity, keyTitle) {
-    // console.log("saving", keyTitle, JSON.stringify(entity));
-    window.localStorage.setItem(keyTitle, JSON.stringify(entity));
 }

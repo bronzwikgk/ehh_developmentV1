@@ -73,12 +73,12 @@ function iterarateObj(input, output, previousSW) {
     return output;
 }
 
-function iterateArray(input, output, previousSW, outputType) {
+function iterateArray(input, output, previousSW) {
    
     if (!outputResponse) { var outputResponse = []; }
     input.forEach(function (element, index) {
         // console.log(input[index]);
-        append( input, output,outputType);
+        append(output, input, outputType)
     });
     return outputResponse;
 }
