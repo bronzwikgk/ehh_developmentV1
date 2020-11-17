@@ -34,3 +34,7 @@ refCode/Icon
 scripts/Icon
 style/Icon
 testData/Icon
+*.ini
+scripts/Icon
+style/Icon
+testData/Icon
