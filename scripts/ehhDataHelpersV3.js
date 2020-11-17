@@ -9,6 +9,16 @@ function isValidUrl(string) {
 
     return true;
 }
+
+
+/** Returns the name of a set property in an object, or else "unknown". */
+function getOneOf(object) {
+    for (var key in object) {
+        return key;
+    }
+    return 'unknown';
+}
+
 //This function validates a valid Url, Returns True or false
 function isValidHttpUrl(string) {
     let url;

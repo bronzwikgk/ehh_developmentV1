@@ -14,3 +14,16 @@ Context Menu >> Sample Chrome Extension
 Theme Builder  >> https://themer.dev/
 Design ref>>https://codepen.io/calvinalx/pen/aOZNwj
 CSS Selector Refe >> https://www.w3.org/TR/CSS21/selector.html%23id-selectors
+
+https://chromium.googlesource.com/chromium/src/+/master/chrome/browser/resources/components/components.js
+https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/docs/examples/api
+Implement Snippet, sample Snippet  "http://www.betterprogramming.com/htmlclipper.html"
+https://chromium.googlesource.com/chromium/src/+/master/chrome/browser/resources/components/
+https://www.youtube.com/watch?v=c85EStPZR8M
+https://www.youtube.com/watch?v=JaMCxVWtW58
+https://chromium.googlesource.com/chromium/src/+/master/chrome/browser/resources/components/
+https://chromium.googlesource.com/chromium/src/+/master/chrome/browser/resources/omnibox
+https://developer.chrome.com/extensions/declarativeNetRequest
+http://dynamicsjs.com/
+https://www.youtube.com/watch?v=wYcvzLFHFN0
+https://www.youtube.com/watch?v=8K2ihr3NC40
