@@ -7,7 +7,7 @@ class JSON2HTML {
         ];
     }
 
-    static build(json) {
+    static toHTML(json) {
         if (!json || !json.tag) return '';
         const attributes = JSON2HTMLBuilder.attributes(json);
         if (JSON2HTMLBuilder.isSelfCloseTag(json)) {
@@ -17,7 +17,7 @@ class JSON2HTML {
         return `<${json.tag}${attributes}>${children}</${json.tag}>`;
     }
 
-    static unbuild(html) {
+    static toJson(html) {
         if (!html) return {};
         const el = document.createElement('html');
         el.innerHTML = html;

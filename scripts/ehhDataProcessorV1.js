@@ -147,11 +147,3 @@ function createJson2Html(input) {
 
     return output;
 }
-//this function takes an relative path and returns with an absolute path.
-function toAbsolute(relativePath) {
-    //const url = new URL(url[, base])
-    var absoluteURL = new URL(relativePath, document.baseURI).href
-    // console.log(absoluteURL);
-    return absoluteURL;
-    //=> "https://stackoverflow.com/questions/mypath"
-}

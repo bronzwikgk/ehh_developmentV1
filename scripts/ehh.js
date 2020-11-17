@@ -129,14 +129,14 @@ function click(e) {
             nodeValue: 'get'
         }
 
-
-        var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
+        var jsonOutput = process.node2json(element);
+        //var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
         
         
-      //  var jsonOutput = createJsonFromNode(element);
-        console.log(JSON.stringify(jsonOutput));
-        // var htmlOutput = createJson2Html(jsonOutput);
-        // console.log(htmlOutput);
+    
+      console.log(jsonOutput);
+        var htmlOutput = process.json2node(jsonOutput);
+        console.log(htmlOutput);
         // var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
         // var myWindow = window.open("", windowFeatures);
 

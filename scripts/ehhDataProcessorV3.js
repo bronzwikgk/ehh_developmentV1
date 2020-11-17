@@ -1,42 +1,7 @@
 
-class JSON2HTMLUnbuilder {
-    static attributes(nodeEl) {
-        const attributes = {};
-        const keys = Object.keys(nodeEl.attributes);
-        for (const index in keys) {
-            if ({}.hasOwnProperty.call(keys, index)) {
-                const key = keys[index];
-                const attribute = nodeEl.attributes[key];
-                attributes[attribute.name] = attribute.value;
-            }
-        }
-        return attributes;
-    }
-
-    static children(nodeEl) {
-        const children = [];
-        nodeEl.childNodes.forEach(function (element, index) {
-            if (nodeEl.childNodes[index].nodeType === Node.ELEMENT_NODE) {
-                children.push(JSON2HTMLUnbuilder.node2json(element, index));
-            }
-            if (nodeEl.childNodes[index].nodeType === Node.TEXT_NODE) {
-                children.push(nodeEl.childNodes[index].textContent);
-            }
-        });
-        return children;
-    }
-    static node2json(nodeEl) {
-        return {
-            tag: nodeEl.tagName.toLowerCase(),
-            attributes: JSON2HTMLUnbuilder.attributes(nodeEl),
-            children: JSON2HTMLUnbuilder.children(nodeEl),
-        };
-    }
-}
-
 function createEntity(input, output, outputType, model2Process) { 
   
-    if (!input) return '';
+    if (!typeof input === 'object') return '';
     console.log("input", input, "output", output, outputType);
     switch (outputType) {
         case 'json':
@@ -44,7 +9,7 @@ function createEntity(input, output, outputType, model2Process) {
                 tagName: input.tagName,
                 name: input.name,
                 attributes: iterateObjectEntity(input.attributes,{}, arguments.callee.name),
-                childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
+               // childNodes: iterateArrayEntity(input.childNodes, [], arguments.callee.name),
                 //  parent: nodeEl.parentNode.tagName,
                 nodeType: input.nodeType,
                 nodeValue: input.nodeValue
@@ -59,7 +24,7 @@ function createEntity(input, output, outputType, model2Process) {
         default:
             output = 'Invalid day';
     }
-  //  console.log(output); // Tuesday
+   console.log('output',output); // Tuesday
     return output;;
 }
 
@@ -73,7 +38,7 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
             if (input[i] != 'undefined' && typeof (input[i]) != "undefined") {
                 if (input[i].nodeType === Node.ELEMENT_NODE ){
                    console.log(input[i],iterateArrayResponse,'json');
-                   key = createEntity(input[i],iterateArrayResponse,'json')
+                 //  key = createEntity(input[i],iterateArrayResponse,'json')
                    // iterateArrayResponse.push();
                 }
                

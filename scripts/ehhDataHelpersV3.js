@@ -56,6 +56,15 @@ function clean(obj) {
 }
 
 
+//this function takes an relative path and returns with an absolute path.
+function toAbsolute(relativePath) {
+    //const url = new URL(url[, base])
+    var absoluteURL = new URL(relativePath, document.baseURI).href
+    // console.log(absoluteURL);
+    return absoluteURL;
+    //=> "https://stackoverflow.com/questions/mypath"
+}
+
 //helper Function to get the name protoNameof an entity
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
@@ -71,9 +80,6 @@ function save(entity, keyTitle) {
 // var invalidjsontext = '{"firstnam""James","surname":"Bond","mobile":["007-700-007","001-007-007-0007"]}'; 
 // console.log("With Valid JSON Text: "+IsValidJSONString(validjsontext));
 // console.log("With inValid JSON Text: "+IsValidJSONString(invalidjsontext));
-
-
-
 
 function IsValidJSONString(str) {
     try {
