@@ -1,6 +1,8 @@
 
 function createEntity(input, output, outputType, model2Process) { 
-   console.log("input",input,"output",output,outputType);
+  
+    if (!input) return '';
+    console.log("input", input, "output", output, outputType);
     switch (outputType) {
         case 'json':
             var output = {
@@ -19,15 +21,12 @@ function createEntity(input, output, outputType, model2Process) {
         case 'array':
             output = 'Tuesday';
             break;
-       
         default:
             output = 'Invalid day';
     }
   //  console.log(output); // Tuesday
     return output;;
 }
-
-
 
 function iterateArrayEntity(input, iterateArrayResponse, outputType) {
    // console.log("iterateArrayResponse",iterateArrayResponse);
@@ -38,8 +37,8 @@ function iterateArrayEntity(input, iterateArrayResponse, outputType) {
             var key = {};
             if (input[i] != 'undefined' && typeof (input[i]) != "undefined") {
                 if (input[i].nodeType === Node.ELEMENT_NODE ){
-                    console.log(input[i],iterateArrayResponse,'json');
-                  // key = createEntity(input[i],iterateArrayResponse,'json')
+                    //console.log(input[i],iterateArrayResponse,'json');
+                   key = createEntity(input[i],iterateArrayResponse,'json')
                    // iterateArrayResponse.push();
                 }
                
