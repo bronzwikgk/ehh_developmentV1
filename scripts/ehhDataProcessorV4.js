@@ -8,9 +8,11 @@ class process {
         }
         if (json.nodeType === 3) {
             var output = document.createTextNode(json.textContent);
+            if (json.childNodes) { process.iterateArr(json.childNodes, output); }
         }
+        
         return output;
-    }
+    }   
     static iterateObj(obj, objResponse) {
         if (!obj) return;
         if (!objResponse) { var objResponse = {}; };
@@ -31,7 +33,6 @@ class process {
                 if (arr[i].nodeType === Node.ELEMENT_NODE) {
 
                     if (getEntityType(arrResponse).includes("HTML")){
-                        //console.log("found Child");
                         arrResponse.appendChild(process.json2node(arr[i]));
                     } else {
                         arrResponse.push(process.node2json(arr[i]));

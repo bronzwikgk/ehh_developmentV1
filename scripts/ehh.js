@@ -112,7 +112,6 @@ function click(e) {
 
     } if (getEntityType(targetElement).includes("Element") && targetElement!= contextElement) { 
        // console.log("foundclick", targetElement);
-       
         var outputType = "json";
         var entity2Process = "CSSRuleList";
         var entity2Find = "CSSStyleRule";
@@ -129,7 +128,7 @@ function click(e) {
             nodeValue: 'get'
         }
 
-        var jsonOutput = process.node2json(element);
+        var jsonOutput = process.node2json(targetElement);
         //var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
         
         
