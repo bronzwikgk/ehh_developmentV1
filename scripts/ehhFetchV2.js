@@ -15,7 +15,6 @@ request = {
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data) // body data type must match "Content-Type" header
 }
-
 var gAuthRequestparams = {
     'client_id': '385607167966-u90ri3n5qkapcuq8gmhheg781qr7jbkp.apps.googleusercontent.com',
     'redirect_uri': 'https://bronzwikgk.github.io/ehh_Wip/',
@@ -24,8 +23,6 @@ var gAuthRequestparams = {
     'include_granted_scopes': 'true',
     'response_type': 'token'
 };
-
-
 function fetchHttpRequest(url, request) {
     fetch(url,request)
         .then(status)
@@ -37,7 +34,6 @@ function fetchHttpRequest(url, request) {
             console.log('Request failed', error);
         });
 }
-
 function status(response) {
     if (response.status >= 200 && response.status < 300) {
         console.log(response.statusText);
@@ -46,7 +42,6 @@ function status(response) {
         return Promise.reject(new Error(response.statusText))
     }
 }
-
 function json(response) {
     return response.json()
 }
