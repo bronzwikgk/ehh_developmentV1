@@ -117,7 +117,7 @@ function click(e) {
         var entity2Find = "CSSStyleRule";
         var values = "active";
         var request = "get";
-        var element = document.getElementsByTagName("body")[0];
+        var element = document.getElementsByTagName("HTML")[0];
         var output = {};
         var nodeEntityInJson = {
             tagName: 'get',
@@ -128,13 +128,12 @@ function click(e) {
             nodeValue: 'get'
         }
 
-        var jsonOutput = process.node2json(targetElement);
+        var jsonOutput = process.node2json(element);
         //var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
-        
-        
-    
-      console.log(jsonOutput);
+        console.log(jsonOutput);
+
         var htmlOutput = process.json2node(jsonOutput);
+
         console.log(htmlOutput);
         // var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
         // var myWindow = window.open("", windowFeatures);
