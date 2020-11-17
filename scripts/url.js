@@ -1,4 +1,3 @@
-
 function buildEncodedUri(request) {
     const response = [];
     for (let d in request)

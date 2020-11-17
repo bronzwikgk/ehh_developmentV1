@@ -4,10 +4,8 @@
 
 //return true if all items are the same in two unordered Array
 function compareTwoArray_(arr1, arr2){
-  
     arr1.sort();
-    arr2.sort();
-    
+    arr2.sort(); 
     if(arr1. length !== arr2.length) return false;
       for(let i = 0; i < arr1.length; i++){
       if(arr1[i] !== arr2[i]) return false;
@@ -24,18 +22,10 @@ function compareTwoArray_(arr1, arr2){
   
   }
   
-  
-  
-  
-  
-  
-  
-  
   // Returns if a value is a string
   function isString (value) {
   return typeof value === 'string' || value instanceof String;
   }
-  
   
   // Returns if a value is really a number
   function isNumber (value) {
