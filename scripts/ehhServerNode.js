@@ -3,3 +3,5 @@
 //https://www.bpwebs.com/how-to-create-a-data-entry-form-in-google-sheet/
 //https://www.bpwebs.com/how-to-create-an-online-data-entry-form-that-can-perform-crud-operations-on-google-sheets/
 //https://www.taniarascia.com/how-to-connect-to-an-api-with-javascript/
+
+//AppScript Server Node : https://docs.google.com/spreadsheets/d/13D_0tiH7u0MteIZGF2m8QAW-0jM-DI7lujfpJle9J_g/edit#gid=591513872
