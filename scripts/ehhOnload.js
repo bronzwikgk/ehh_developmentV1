@@ -16,10 +16,6 @@ if (window.requestFileSystem) {
     console.log("FileSystem Not Supported")
 }
 
-
-
-
-
 // Returns "WINNT" on Windows Vista, XP, 2000, and NT systems;
 // "Linux" on GNU/Linux; and "Darwin" on Mac OS X.
 var osString = Services.appinfo.OS;
