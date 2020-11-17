@@ -1,3 +1,4 @@
+
 // create the nodeType constants if the Node object is not defined
 if (!window.Node) {
     var Node =
