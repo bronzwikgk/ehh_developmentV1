@@ -1,22 +1,14 @@
 
 class process {
-
     static json2node(json) {
-       // console.log("input", json);
         if (json.nodeType === 1) {
             var output = document.createElement(json.tagName);
-            if (json.attributes) {
-            // console.log(json.attributes, getEntityType(output));
-                process.iterateObj(json.attributes, output);
-            }
-            if (json.childNodes) {
-             process.iterateArr(json.childNodes, output);
-            }
+            if (json.attributes) { process.iterateObj(json.attributes, output); }
+            if (json.childNodes) { process.iterateArr(json.childNodes, output); }
         }
         if (json.nodeType === 3) {
             var output = document.createTextNode(json.textContent);
         }
-
         return output;
     }
     static iterateObj(obj, objResponse) {
@@ -33,11 +25,9 @@ class process {
     static iterateArr(arr, arrResponse) {
         if (!arr) return;
         if (!arrResponse) { var arrResponse = []; };
-     
         for (var i = 0; i <= arr.length - 1; i++) {
-       
             if (arr[i].nodeType != 'undefined') { //This is to check if the Array Element an HTML Element;
-                
+            
                 if (arr[i].nodeType === Node.ELEMENT_NODE) {
 
                     if (getEntityType(arrResponse).includes("HTML")){
@@ -68,7 +58,6 @@ class process {
            // console.log(input[key].name);
             output[input[key].name] = input[key].value;
         } 
-
         if (getEntityType(output).includes("HTML")) { 
             if (key === 'href' || key === 'src') {
                 if (isValidUrl(input[key]) === false) {
@@ -76,10 +65,12 @@ class process {
                     output.setAttribute(key, absoluteUrl);
                 } 
             } else {
-                    output.setAttribute(key, input[key]);
-                }
+                output.setAttribute(key, input[key]);
+            }
            
         }
+        
+
         return output;
     }
     static node2json(nodeEl) {
