@@ -19,8 +19,15 @@ const app = {
     hasFSAccess: 'chooseFileSystemEntries' in window ||
                  'showOpenFilePicker' in window,
     isMac: navigator.userAgent.includes('Mac OS X'),
-  };
-
+};
+  
+if (app.hasNativeFS) {
+ 
+ console.log('File System APIs', 'Native');
+} else {
+  console.log('File System APIs', 'Legacy');
+  //gaEvent('File System APIs', 'Legacy');
+}
 
 
 class processFile {
