@@ -1,6 +1,7 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 //http://dummy.restapiexample.com/
-
+//https://github.com/mdn/fetch-examples/
+//https://github.com/mdn/fetch-examples/blob/master/fetch-array-buffer/index.html
 // async function name([param[, param[, ...param]]]) {
 //     statements
 // }
@@ -10,7 +11,7 @@ class processUrl {
     static fetchUrl(url) {
         fetch(url)
             .then((response) => {
-                return response.blob()
+              return response.text()
             })
             .then((data) => {
                 // Work with JSON data here
