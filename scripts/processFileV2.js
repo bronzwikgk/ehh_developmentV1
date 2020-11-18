@@ -27,6 +27,9 @@ class processFiles{
         }
 }
 static newfile(){
+    var file = new File(["foo"], "foo.txt", {
+        type: "text/plain",
+    });
     var file = new File([fileData[name].data], name, { type: fileData[name].type, lastModified: Date.now() });
     // See http://docs.webplatform.org/wiki/apis/file/URL/createObjectURL
     var url = URL.createObjectURL(file, { oneTimeOnly: true });
