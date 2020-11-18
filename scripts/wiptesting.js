@@ -76,10 +76,7 @@ fetch(myRequest)
     .catch(error => console.log(error));
 
 
-
-
 var filesElement = document.querySelector('#files');
-
 // Some in-memory attributes of the new File objects that will be constructed.
 var fileData = {
     'sample.xml': {
@@ -107,6 +104,27 @@ Object.keys(fileData).forEach(function (name) {
     var url = URL.createObjectURL(file, {
         oneTimeOnly: true
     });
+
+    var aElement = document.createElement('a');
+    aElement.href = url;
+    aElement.download = name;
+    aElement.textContent = name;
+
+    var liElement = document.createElement('li');
+    liElement.appendChild(aElement);
+    filesElement.appendChild(liElement);
+});
+
+
+
+var filesElement = document.querySelector('#files');
+
+Object.keys(fileData).forEach(function (name) {
+    // This example passes in an array of string data as the first argument to File().
+    // The array can also contain ArrayBuffer, ArrayBufferView, Blob, and File instances.
+    var file = new File([fileData[name].data], name, { type: fileData[name].type,lastModified: Date.now()});
+    // See http://docs.webplatform.org/wiki/apis/file/URL/createObjectURL
+    var url = URL.createObjectURL(file, {  oneTimeOnly: true});
 
     var aElement = document.createElement('a');
     aElement.href = url;
