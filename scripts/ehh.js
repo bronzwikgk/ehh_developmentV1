@@ -1,10 +1,9 @@
 
-
+var element = document.getElementsByTagName("HTML")[0];
 let event = {
     "origin": ["mouse", "window", "ehh", "HTTP", "keyBoard"],
 }
 window.onload = OnLoad();
-
 function OnLoad(e) {
     //window storage == session storage
     console.log("ehh is running! on >>>", window.document.title, window.document.location.origin);
@@ -30,7 +29,6 @@ function initState(e) {
     });
     
 }
-
 function changeState(e) {
     //console.log("changing state for event");
     var targetElement = e.target;
@@ -51,7 +49,6 @@ conductEvent(e);
     //console.log(targetElement.getAttributes(prevstate));
 
 }
-
 function conductEvent(e) {
     if (e.type === "mouseover") {
         mouseOver(e);
@@ -70,13 +67,9 @@ function conductEvent(e) {
          } 
      }
 }
-
 //this function acts like a event conductor, read it's event command mapp from a json file, which mapps 
 //Ignore Events from Json to be implemented
 //https://github.com/philipwalton/router/blob/master/index.js
-
-
-
 function onEvent(e) {
    // console.log(e.constructor.name, e.type, "captured", e.target.tagName);
     if (e.type === "pageshow") {
@@ -89,11 +82,9 @@ function onEvent(e) {
         // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     }
 }
-
 function create(entity) {
     window[entity] = onEvent;
 }
-
 function rightClick(event) { 
     //console.log("contextClick", event);
     var contextElement = document.getElementById("context-menu");
@@ -101,7 +92,6 @@ function rightClick(event) {
     contextElement.style.left = event.clientX + "px";
     contextElement.style.display = 'block';
 }
-
 function click(e) { 
     var targetElement = e.target;
   //  console.log(getEntityType(targetElement));
@@ -117,7 +107,6 @@ function click(e) {
         var entity2Find = "CSSStyleRule";
         var values = "active";
         var request = "get";
-        var element = document.getElementsByTagName("HTML")[0];
         var output = {};
         var nodeEntityInJson = {
             tagName: 'get',
@@ -130,31 +119,20 @@ function click(e) {
 
         var jsonOutput = process.node2json(element);
         //var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
-        console.log(jsonOutput);
-
-        // Check for support.
-        if (window.requestFileSystem) {
-            console.log("FileSystem Supported")
-        } else {
-            console.log("FileSystem Not Supported")
-        }
-
+        console.log(jsonOutput);      
         var htmlOutput = process.json2node(jsonOutput);
-
+        //console.log(temp);
         console.log(htmlOutput);
         // var windowFeatures = "menubar=no,location=no,toolbar=no,resizable=yes,scrollbars=yes,status=no";
         // var myWindow = window.open("", windowFeatures);
 
         // var tempHtml = myWindow.document.getElementsByTagName("html")[0];
         // myWindow.document.replaceChild(htmlOutput, tempHtml);
-       // ehhProcessEntity(targetElement, entity2Process, entity2Find,values,output,outputType,request);     
+      
     }
 
 
 }
-
-
-
 function mouseOver(e) {
     // console.log(e.constructor.name, e.type, "captured", e.target.constructor.name);
     
