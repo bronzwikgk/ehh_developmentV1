@@ -132,6 +132,13 @@ function click(e) {
         //var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
         console.log(jsonOutput);
 
+        // Check for support.
+        if (window.requestFileSystem) {
+            console.log("FileSystem Supported")
+        } else {
+            console.log("FileSystem Not Supported")
+        }
+
         var htmlOutput = process.json2node(jsonOutput);
 
         console.log(htmlOutput);
