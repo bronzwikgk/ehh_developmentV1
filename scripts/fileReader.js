@@ -3,23 +3,23 @@
 //https://wicg.github.io/file-system-access/#api-showopenfilepicker
 //https://developer.mozilla.org/en-US/docs/Web/API/Blob
 
-// const app = {
-//     appName: 'Text Editor',
-//     file: {
-//       handle: null,
-//       name: null,
-//       isModified: false,
-//     },
-//     options: {
-//       captureTabs: true,
-//       fontSize: 14,
-//       monoSpace: false,
-//       wordWrap: true,
-//     },
-//     hasFSAccess: 'chooseFileSystemEntries' in window ||
-//                  'showOpenFilePicker' in window,
-//     isMac: navigator.userAgent.includes('Mac OS X'),
-//   };
+const app = {
+    appName: 'Text Editor',
+    file: {
+      handle: null,
+      name: null,
+      isModified: false,
+    },
+    options: {
+      captureTabs: true,
+      fontSize: 14,
+      monoSpace: false,
+      wordWrap: true,
+    },
+    hasFSAccess: 'chooseFileSystemEntries' in window ||
+                 'showOpenFilePicker' in window,
+    isMac: navigator.userAgent.includes('Mac OS X'),
+  };
 
 
 
