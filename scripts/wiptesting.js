@@ -31,48 +31,80 @@ var url = 'https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/t
 //https://developer.mozilla.org/en-US/docs/Web/API/Response/type
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json
 //https://upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.jpg
-var myRequest = new Request('https://jsonplaceholder.typicode.com/todos/1');
-fetch(myRequest).then(function (response) {
-  //  console.log(response.type); // returns basic by default
-    response.blob().then(function (myBlob) {
-        var objectURL = URL.createObjectURL(myBlob);
-       // console.log(objectURL);
-        //let outputResponse = document.createElement(outputResponse);
-        let outputResponse = new Image();
-        outputResponse.src = objectURL;
-        document.getElementsByTagName('body')[0].appendChild(outputResponse)
+
+// fetch(myRequest).then(function (response) {
+//   //  console.log(response.type); // returns basic by default
+    // response.blob().then(function (myBlob) {
+    //     var objectURL = URL.createObjectURL(myBlob);
+    //    // console.log(objectURL);
+    //     //let outputResponse = document.createElement(outputResponse);
+    //     let outputResponse = new Image();
+    //     outputResponse.src = objectURL;
+    //     document.getElementsByTagName('body')[0].appendChild(outputResponse)
       
-    });
-});
+    // });
+// });
+
+var myRequest = new Request('http://dummy.restapiexample.com/api/v1/employees');
+var tempo = processUrl.fetchUrl(myRequest);
+console.log(tempo);
+// fetch(myRequest)
+//     .then(response => {
+//         const contentType = response.headers.get('content-type');
+//         console.log("response Type is ",contentType); 
+//         if (contentType.includes('application/json')) {
+//             console.log(contentType, "Caught Json");
+//             return response.json();
+//         }
+//         if (contentType.includes('text/html')) {
+//             console.log(contentType,"Caught HTML");
+//             return response.text();
+//         } 
+//         if (contentType.includes('image/jpeg')) {
+//             console.log(contentType, "Caught Image");
+//             response.blob()
+//                 .then(function (myBlob) {
+//                     var objectURL = URL.createObjectURL(myBlob);
+//                     let outputResponse = new Image();
+//                     outputResponse.src = objectURL;
+//                     document.getElementsByTagName('body')[0].appendChild(outputResponse)
+//                 });
+//         }
+//         if (contentType.includes('text/plain')) {
+//             console.log(contentType, "Caught Text");
+//             return response.text();
+//         }
+//     })
+//     .then(data => {
+//         console.log("data is ", typeof data, data); /* process your data further */
+//     })
+//     .catch(error => console.log(error));
+
+// var data = { "name": "test", "salary": "123", "age": "23" }
+// var url = 'http://dummy.restapiexample.com/api/v1/create';
 
 
-fetch(myRequest)
-    .then(response => {
-        const contentType = response.headers.get('content-type');
-        console.log(response);
-     //console.log(contentType); 
-        if (contentType.includes('application/json')) {
-            console.log(contentType, "Caught Json");
-            return response.json();
-        }
-        if (contentType.includes('text/html')) {
-            console.log(contentType,"Caught HTML");
-            return response.text();
-        } 
-        if (contentType.includes('image/jpeg')) {
-            console.log(contentType,"Caught Image");
-            // return response.json();
-        }
-        
-        if (contentType.includes('text/plain')) {
-            console.log(contentType, "Caught Text", response.text());
-             return response.text();
-        }
 
-    })
-    .then(data => {
-       console.log("data",data); /* process your data further */
-    })
-    .catch(error => console.log(error));
+// // Example POST method implementation:
+// async function postData(url, data) {
+//     // Default options are marked with *
+//     const response = await fetch(url, {
+//         method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//         mode: 'cors', // no-cors, *cors, same-origin
+//         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//         credentials: 'omit', // include, *same-origin, omit
+//         headers: {
+//             'Content-Type': 'application/json'
+//             // 'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//         redirect: 'follow', // manual, *follow, error
+//         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+//         body: JSON.stringify(data) // body data type must match "Content-Type" header
+//     });
+//     return response.json(); // parses JSON response into native JavaScript objects
+// }
 
-
+// postData(url,data)
+//     .then(data => {
+//         console.log(data); // JSON data parsed by `data.json()` call
+//     });

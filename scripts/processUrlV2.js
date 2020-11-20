@@ -10,16 +10,37 @@
 class processUrl {
     static fetchUrl(url) {
         fetch(url)
-            .then((response) => {
-              return response.text()
-            })
-            .then((data) => {
-                // Work with JSON data here
-                console.log(data)
-            })
-            .catch((err) => {
-                // Do something for an error here
-            })
+        .then(response => {
+            const contentType = response.headers.get('content-type');
+            console.log("response Type is ", contentType);
+            if (contentType.includes('application/json')) {
+                console.log(contentType, "Caught Json");
+                return response.json();
+            }
+            if (contentType.includes('text/html')) {
+                console.log(contentType, "Caught HTML");
+                return response.text();
+            }
+            if (contentType.includes('image/jpeg')) {
+                console.log(contentType, "Caught Image");
+                response.blob()
+                    .then(function (myBlob) {
+                        var objectURL = URL.createObjectURL(myBlob);
+                        let outputResponse = new Image();
+                        outputResponse.src = objectURL;
+                        document.getElementsByTagName('body')[0].appendChild(outputResponse)
+                    });
+            }
+            if (contentType.includes('text/plain')) {
+                console.log(contentType, "Caught Text");
+                return response.text();
+            }
+        })
+        .then(data => {
+            console.log("data is ", typeof data, data); /* process your data further */
+        })
+        .catch(error => console.log(error));
+
     }
     static buildEncodedUri(request) {
         const response = [];

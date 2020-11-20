@@ -130,8 +130,6 @@ function click(e) {
         // myWindow.document.replaceChild(htmlOutput, tempHtml);
       
     }
-
-
 }
 function mouseOver(e) {
     // console.log(e.constructor.name, e.type, "captured", e.target.constructor.name);
