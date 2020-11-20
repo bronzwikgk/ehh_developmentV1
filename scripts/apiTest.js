@@ -1,6 +1,6 @@
 
 function getResponse() {
-    var requestURL = "https://script.google.com/a/0dot1.live/macros/s/AKfycbxjy_A1pOVpuAEsJDXdnRbsA83S_1oy7Dt81hf0beLL/dev";
+    var requestURL = "https://script.google.com/a/0dot1.live/macros/s/AKfycbyOQZ3JCvko4kI8_Fr9PoZjJA0ERjQftjHwf70VZwkf/dev";
     var response = processUrl.fetchUrl(requestURL);
     console.log(JSON.stringify(response));
 }
