@@ -1,3 +1,34 @@
+//var spreadsheetResource ={
+//  "spreadsheetId": string,
+//  "properties": {object (SpreadsheetProperties)},
+//  "sheets": [ 
+//    {
+//      object (Sheet)
+//    }
+//  ],
+//  "namedRanges": [
+//    {
+//      object (NamedRange)
+//    }
+//  ],
+//  "spreadsheetUrl": string,
+//  "developerMetadata": [
+//    {
+//      object (DeveloperMetadata)
+//    }
+//  ],
+//  "dataSources": [
+//    {
+//      object (DataSource)
+//    }
+//  ],
+//  "dataSourceSchedules": [
+//    {
+//      object (DataSourceRefreshSchedule)
+//    }
+//  ]
+//}
+
 //let deployedURL ="https://script.google.com/macros/s/AKfycbzs1uHX-vtR_Vj2uwNoBvOt5kHAO0m8t9eFXOujtgof9pJW0qqA/exec"
 //let serverSheetID = "1cAbSk2mLzwuLwLgKxX_-Ve8-8UrUgSCWG7qj_OQ7MVM";
 //let serverApiUrl = " sheet api";
