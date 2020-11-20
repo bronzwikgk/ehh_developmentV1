@@ -15,7 +15,8 @@
  */
 
 
-
+//For Eg.creatFile should be able to take an input(blob, metadata for attributes, location) and should be able to create a file of mimeTypes 
+//allowed in javaScipt
 
 
 /**
