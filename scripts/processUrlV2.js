@@ -2,6 +2,7 @@
 //http://dummy.restapiexample.com/
 //https://github.com/mdn/fetch-examples/
 //https://github.com/mdn/fetch-examples/blob/master/fetch-array-buffer/index.html
+//https://www.w3schools.com/tags/ref_httpmethods.asp
 // async function name([param[, param[, ...param]]]) {
 //     statements
 // }

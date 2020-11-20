@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+   <link rel="stylesheet" href="login.css">
+    <script>
+        // Prevent forms from submitting.
+        function preventFormSubmit() {
+            var forms = document.querySelectorAll('form');
+            for (var i = 0; i < forms.length; i++) {
+                forms[i].addEventListener('submit', function (event) {
+                    event.preventDefault();
+                });
+            }
+        }
+        window.addEventListener('load', preventFormSubmit);
+
+        function handleFormSubmitAuth(object) {
+            google.script.run.withSuccessHandler(update).processAuthForm(object);
+        }
+
+        function update(redirectUri) {
+            if (redirectUri == "error") {
+                $("#badCredentials").show();
+                return;
+            } else {
+                let frame = document.getElementById('output');
+                var uri
+                frame.contentWindow.postMessage(uri, 'https://script.google.com/macros/s/AKfycbxu5QHhTzHuFPmAoyWDrvLoODnKNjMxXiMuGFrFOHG4jLWT4IU/exec');
+
+                //window.top.location.href(redirectUri);
+                //window.top.location.href="/Index";
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <form id="loginForm" class="form-signin" onsubmit="handleFormSubmitAuth(this)">
+        <h1 class="h1 mb-3 font-weight-normal">Sign in</h1>
+        <div id="badCredentials" class="alert alert-danger" style="display: none" role="alert">
+            bad credentials
+        </div>
+        <label for="inputLogin" class="sr-only">Login</label>
+        <input type="text" id="inputLogin" name="login" class="form-control form-control-lg" placeholder="Login"
+            required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="password" class="form-control form-control-lg"
+            placeholder="Password" required>
+        <input type="hidden" name="client_id" class="form-control form-control-lg" placeholder="client_id"
+            value="<?= client_id ?>">
+        <input type="hidden" name="scope" class="form-control form-control-lg" value="<?= scope ?>">
+        This app will have access to <?= scope ?>
+        <input type="hidden" name="redirect_uri" class="form-control form-control-lg" value="<?= redirect_uri ?>">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            <?var url = getScriptUrl();?><a class="btn btn-lg btn-primary btn-block" href='<?=url?>?page=Index'>Sign
+                in</a></button>
+    </form>
+
+
+    <div class="bottomleft">
+        <p>&copy; 2019 <a href="please-open.it">please-open.it</a></p>
+    </div>
+</body>
+
+</html>
