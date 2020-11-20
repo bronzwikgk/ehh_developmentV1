@@ -1,13 +1,15 @@
 var serversheetId = '1cAbSk2mLzwuLwLgKxX_-Ve8-8UrUgSCWG7qj_OQ7MVM';
 
+
 function doGet() {
   
   const response = [ { status : "cool!"}];
   
   return ContentService
   .createTextOutput(JSON.stringify(response))
-  .setMimeType(ContentService.MimeType.JSON);
+ // .setMimeType(ContentService.MimeType.JSON);
 }
+
 
 
 function doPost(e){
