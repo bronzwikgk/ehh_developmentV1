@@ -7,7 +7,7 @@
 // console.log(temp);
 // console.log(htmlOutput);
 
-var url = 'https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json';
+//var url = 'https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json';
 //var urlResponse = processUrl.fetchUrl(url);
 //console.log("urlResponse",JSON.stringify(urlResponse),urlResponse);
 // fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -42,9 +42,9 @@ var url = 'https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/t
     // });
 // });
 
-var myRequest = new Request('https://script.google.com/a/0dot1.live/macros/s/AKfycbxjy_A1pOVpuAEsJDXdnRbsA83S_1oy7Dt81hf0beLL/dev?username=jsmith&age=21');
-var tempo = processUrl.fetchUrl(myRequest);
-console.log(tempo);
+// var myRequest = new Request('https://script.google.com/a/0dot1.live/macros/s/AKfycbxjy_A1pOVpuAEsJDXdnRbsA83S_1oy7Dt81hf0beLL/dev?username=jsmith&age=21');
+// var tempo = processUrl.fetchUrl(myRequest);
+// //console.log(tempo);
 
 
 // fetch(myRequest)
@@ -112,5 +112,16 @@ console.log(tempo);
 
 
 
+function testGS() {
+    var requestURL = "https://script.google.com/macros/s/AKfycbzs1uHX-vtR_Vj2uwNoBvOt5kHAO0m8t9eFXOujtgof9pJW0qqA/exec";
+    fetch(requestURL)
+        .then(d => d.json())
+        .then(d => {
+           document.getElementById("app").textContent = d[0].status;
+        });
+    
 
-var requestURL = 
+}
+
+document.getElementById("btn").addEventListener("click", testGS);
+
