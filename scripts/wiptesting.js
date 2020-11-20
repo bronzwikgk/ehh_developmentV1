@@ -42,9 +42,11 @@ var url = 'https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/t
     // });
 // });
 
-var myRequest = new Request('https://script.google.com/a/0dot1.live/macros/s/AKfycbxjy_A1pOVpuAEsJDXdnRbsA83S_1oy7Dt81hf0beLL/dev?action=get&prodid=g1234&prodid=g2435');
+var myRequest = new Request('https://script.google.com/a/0dot1.live/macros/s/AKfycbxjy_A1pOVpuAEsJDXdnRbsA83S_1oy7Dt81hf0beLL/dev?username=jsmith&age=21');
 var tempo = processUrl.fetchUrl(myRequest);
 console.log(tempo);
+
+
 // fetch(myRequest)
 //     .then(response => {
 //         const contentType = response.headers.get('content-type');
