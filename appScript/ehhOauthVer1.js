@@ -1,56 +1,54 @@
-let deployedURL ="https://script.google.com/macros/s/AKfycbzs1uHX-vtR_Vj2uwNoBvOt5kHAO0m8t9eFXOujtgof9pJW0qqA/exec"
-let serverSheetID = "1cAbSk2mLzwuLwLgKxX_-Ve8-8UrUgSCWG7qj_OQ7MVM";
-let serverApiUrl = " sheet api";
+var serversheetId = '1cAbSk2mLzwuLwLgKxX_-Ve8-8UrUgSCWG7qj_OQ7MVM';
 
-
-function doGet(e){
-
-  return response = ehhServer.doGet(e);
+function doGet() {
+  
+  const response = [ { status : "cool!"}];
+  
+  return ContentService
+  .createTextOutput(JSON.stringify(response))
+  .setMimeType(ContentService.MimeType.JSON);
 }
 
 
 function doPost(e){
-  var requestType = (e.parameter.TypeOfRequest);
-  if (requestType == "updateUserInformation") {
-    return updateUserInformation(e);
-  }
-  if (requestType == "signUpUser") {
-    return signUpUser(e);
-  }
-  if (requestType == "loginUser"){
-    return loginUser(e);
-  }
+  //{name : "joe"}
+
+  const body = e.postData.contents;
+  const bodyJson = json.parse(body);
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var tab = ss.getSheetByName("test");
+  tab.appendRow([bodyJSON.name]);
+}
+
+/* INCLUDE HTML PARTS, EG. JAVASCRIPT, CSS, OTHER HTML FILES */
+function include(filename) {
+  return HtmlService.createHtmlOutputFromFile(filename)
+      .getContent();
+}
+
+/**
+ * Get the URL for the Google Apps Script running as a WebApp.
+ */
+function getScriptUrl() {
+ var url = ScriptApp.getService().getUrl();
+ return url;
 }
 
 
-
-class ehhServer {
-  static doGet(e) {
-    var op = e.parameter.action;
-    Logger.log(e,op);
-    var ss = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1UUBGKGvm4b9LOhqbdh0UDG6vYz9Phr1DqGyg8DvCiUc/edit?usp=sharing");
-    var sheet = ss.getSheetByName("Sheet1");
-    if (op == "insert")
-      
-      return insert_value(e, sheet);
-    //Make sure you are sending proper parameters
-    if (op == "read")
-      return read_value(e, ss);
-
-    if (op == "update")
-      return update_value(e, sheet);
-
-    if (op == "delete")
-      return delete_value(e, sheet);
-
+function fetchUrl() {
+  var token = ScriptApp.getOAuthToken();
+  var apiKey = 'Your-API-Key-Goes-Here';
+  var endPoint = 'https://script.googleapis.com/v1/processes';
+  var headers = {
+    'Accept':'application/json',
+    'Authorization': 'Bearer ' + token
+  };
+  var options = {
+    'method': 'GET',
+    'headers': headers,
+    'muteHttpExceptions': true
   }
-  static doPost() {
-    
-
-  }
-
+  var url = endPoint + '?key=' + apiKey;
+  var response = UrlFetchApp.fetch(url, options);
+  Logger.log(response);
 }
-
-
-
-

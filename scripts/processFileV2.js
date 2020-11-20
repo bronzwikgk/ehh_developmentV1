@@ -3,10 +3,25 @@
 //https://web.dev/file-system-access/
 //https://wicg.github.io/file-system-access/
 //https://github.com/bronzwikgk/text-editor/blob/main/src/inline-scripts/fs-helpers.js
+
 /**
- * Create a handle to a new (text) file on the local file system.
+ * processFile version 2 is a file [Object] processor.
+ * this module has service workers which allows the conductor/workflow to handle any kind of fileOperations.
+ * A model defining a file Object || Directory Object. [ this could be loaded during Installation].
+ * method to execute CRUD operations of files.
+ * method to verify permissions / mimeTypes. BackGround Save.
+ * 
+ * @return {!mostly FileBlob, with Object and methods useful for other ServiceWorkers.} 
+ */
+
+
+
+
+
+/**
+ * Create a Object to a new (text) file on the local file system.
  *
- * @return {!Promise<FileSystemFileHandle>} Handle to the new file.
+ * @return {!fileData>} Handle to the new file.
  */
 // Some in-memory attributes of the new File objects that will be constructed.
 var fileData = {
