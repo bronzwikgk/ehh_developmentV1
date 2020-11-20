@@ -14,9 +14,6 @@ var url = 'https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/t
 //     .then(response => response.json())
 //     .then(json => console.log(json))
 
-
-
-
 // fetch('https://upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.jpg')
 //     .then(res => res.blob()) // Gets the response and returns it as a blob
 //     .then(blob => {
