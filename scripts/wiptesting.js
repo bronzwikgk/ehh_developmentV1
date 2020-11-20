@@ -112,12 +112,3 @@
 
 
 
-function testGS() {
-    var requestURL = "https://script.google.com/macros/s/AKfycbzs1uHX-vtR_Vj2uwNoBvOt5kHAO0m8t9eFXOujtgof9pJW0qqA/exec?username=jsmith&age=21";
-    var response = processUrl.fetchUrl(requestURL);
-    console.log(JSON.stringify(response));
-
-}
-
-document.getElementById("btn").addEventListener("click", testGS);
-
