@@ -2,28 +2,33 @@
 // create the nodeType constants if the Node object is not defined
 
 class process {
+    static hasProp(obj, prop) {
+        return hasOwn.call(obj, prop);
+    }
     static json2Array(json) {
 
-
-        if (json.nodeType === 1) {
-            var output = document.createElement(json.tagName);
-            if (json.attributes) { process.iterateObj(json.attributes, output); }
-            if (json.childNodes) { process.iterateArr(json.childNodes, output); }
+        if (typeof json === "object") {
+           // console.log(getEntityType(json), json);
+            var json2ArrayResponse = process.iterateObj(json, []);
+            
+            // var output = document.createElement(json.tagName);
+            // if (json.attributes) { process.iterateObj(json.attributes, output); }
+            // if (json.childNodes) { process.iterateArr(json.childNodes, output); }
         }
-        if (json.nodeType === 3) {
-            var output = document.createTextNode(json.textContent);
-            if (json.childNodes) { process.iterateArr(json.childNodes, output); }
-        }
+        // if (json.nodeType === 3) {
+        //     var output = document.createTextNode(json.textContent);
+        //     if (json.childNodes) { process.iterateArr(json.childNodes, output); }
+        // }
         
-        return output;
+        return json2ArrayResponse;
     }   
     static iterateObj(obj, objResponse) {
         if (!obj) return;
         if (!objResponse) { var objResponse = {}; };
         for (var key in obj) {
             if ({}.hasOwnProperty.call(obj, key)) {
-               //  console.log(key, obj[key],objResponse);
-                objResponse = process.setData(obj,objResponse,key);
+                 console.log(key, obj[key],objResponse);
+            //    objResponse = process.setData(obj,objResponse,key);
             }
         }
         return objResponse;

@@ -1,12 +1,26 @@
+// var output = getResponse();
+// console.log(output);
+
 
 function getResponse() {
     var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json";
-    var requestResponse = fetch(requestURL)
-        .then(response => response.json())
-        .then(data => {data = requestResponse});
-    // var output = process.json2Array(JSON.parse(response));
-    console.log(requestResponse);
+    var tempo = fetch(requestURL)
+    .then(response => response.json())
+       .then(json => { getPayload(json)})
+  //  console.log("requestResponse", tempo);
+  //  return requestResponse;
 }
+
+function getPayload(payload) { 
+    
+  //  console.log(payload);
+    var temp = process.json2Array(payload);
+  //  console.log(temp);
+
+
+    
+}
+
 
 function getResponse2() {
     var requestURL = "https://script.google.com/macros/s/AKfycbyOQZ3JCvko4kI8_Fr9PoZjJA0ERjQftjHwf70VZwkf/dev";
