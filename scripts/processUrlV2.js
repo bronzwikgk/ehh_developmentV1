@@ -39,6 +39,7 @@ class processUrl {
         })
         .then(data => {
             console.log("data is ", typeof data, data); /* process your data further */
+            return data;
         })
         .catch(error => console.log(error));
 
