@@ -2,7 +2,7 @@
 function getResponse() {
     var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json";
     var response = processUrl.fetchUrl(requestURL);
-    var output = process.json2Array(response);
+    var output = process.json2Array(JSON.parse(response));
     console.log(output);
 }
 
