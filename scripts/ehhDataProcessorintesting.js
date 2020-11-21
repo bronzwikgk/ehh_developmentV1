@@ -2,7 +2,9 @@
 // create the nodeType constants if the Node object is not defined
 
 class process {
-    static json2node(json) {
+    static json2Array(json) {
+
+
         if (json.nodeType === 1) {
             var output = document.createElement(json.tagName);
             if (json.attributes) { process.iterateObj(json.attributes, output); }
@@ -35,16 +37,16 @@ class process {
                 if (arr[i].nodeType === Node.ELEMENT_NODE) {
 
                     if (getEntityType(arrResponse).includes("HTML")){
-                        arrResponse.appendChild(process.json2node(arr[i]));
+                        arrResponse.appendChild(process.json2Array(arr[i]));
                     } else {
-                        arrResponse.push(process.node2json(arr[i]));
+                        arrResponse.push(process.array2Json(arr[i]));
                     }
                     
-                    // arrResponse = process.setData(process.node2json(arr[i]),arrResponse); //Why is this not working
+                    // arrResponse = process.setData(process.array2Json(arr[i]),arrResponse); //Why is this not working
                 }
                 if (arr[i].nodeType === Node.TEXT_NODE) {
                     arrResponse.push(arr[i].textContent);
-                    // arrResponse = process.setData(process.node2json(arr[i]),arrResponse); //Why is this not working
+                    // arrResponse = process.setData(process.array2Json(arr[i]),arrResponse); //Why is this not working
                 }
             }
 
@@ -76,7 +78,7 @@ class process {
 
         return output;
     }
-    static node2json(nodeEl) {
+    static array2Json(nodeEl) {
       
         return {
             tagName: nodeEl.tagName,

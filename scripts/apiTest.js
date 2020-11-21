@@ -1,8 +1,9 @@
 
 function getResponse() {
-    var requestURL = "https://script.google.com/macros/s/AKfycbyOQZ3JCvko4kI8_Fr9PoZjJA0ERjQftjHwf70VZwkf/dev";
+    var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json";
     var response = processUrl.fetchUrl(requestURL);
-    console.log(JSON.stringify(response));
+    var output = process.json2Array(response);
+    console.log(output);
 }
 
 function getResponse2() {
@@ -51,5 +52,5 @@ console.log(payload);
 
 }
 
-document.getElementById("btn").addEventListener("click", getResponse2);
+document.getElementById("btn").addEventListener("click", getResponse);
 document.getElementById("btn2").addEventListener("click", setPayload);
