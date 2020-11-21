@@ -11,16 +11,6 @@ function getResponse() {
   //  return requestResponse;
 }
 
-function getPayload(payload) { 
-    
-   console.log(payload);
-  //  var temp = process.json2Array(payload);
-  //  console.log(temp);
-
-
-    
-}
-
 
 function getResponse2() {
     var requestURL = "https://script.google.com/macros/s/AKfycbyOQZ3JCvko4kI8_Fr9PoZjJA0ERjQftjHwf70VZwkf/dev";
