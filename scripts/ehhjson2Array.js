@@ -38,7 +38,7 @@ function json2Array(input, json2ArrayOutput) {
       
 
     }
-    console.log(json2ArrayOutput);
+    console.log("json2ArrayOutput",json2ArrayOutput);
     return json2ArrayOutput;
 }
 
@@ -49,6 +49,14 @@ function iterateObj(input,iterateObjOutput,options) {
     for (var key in input) {
 
         if ({}.hasOwnProperty.call(input, key)) {
+
+            if (typeof input[key] === 'object' && !input[key].length) { 
+
+                console.log("childFound", key, input[key]);
+                recurseResponse = [];
+                recurseResponse = iterateObj(input[key], recurseResponse);
+
+            }
            // console.log(key,input[key]);
             iterateObjOutput = setData(input, iterateObjOutput, key);
 
