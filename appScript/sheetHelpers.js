@@ -134,7 +134,7 @@ function remove(){
 }
 
 
-function logNamesAndMajors() {
+function getNamedRangeValues() {
   var spreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
   var rangeName = 'Class Data!A2:E';
   var values = Sheets.Spreadsheets.Values.get(spreadsheetId, rangeName).values;
