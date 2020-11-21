@@ -12,6 +12,11 @@ function doGet() {
 }
 
 
+function doPost(){
+
+
+
+}
 
 
 /* INCLUDE HTML PARTS, EG. JAVASCRIPT, CSS, OTHER HTML FILES */
