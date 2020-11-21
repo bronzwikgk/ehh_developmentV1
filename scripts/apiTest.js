@@ -13,8 +13,8 @@ function getResponse() {
 
 function getPayload(payload) { 
     
-  //  console.log(payload);
-    var temp = process.json2Array(payload);
+   console.log(payload);
+  //  var temp = process.json2Array(payload);
   //  console.log(temp);
 
 
