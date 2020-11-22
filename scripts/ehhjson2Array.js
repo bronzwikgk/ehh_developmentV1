@@ -1,6 +1,4 @@
-function iterateArray() { 
 
-}
 
 function processRequest() { 
     var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json";
@@ -37,7 +35,7 @@ function json2Array(input, json2ArrayOutput) {
     if (input.length) { console.log("foundArray")}
     if (typeof input === 'object' && !input.length) {
       //  console.log("Found Object");
-        json2ArrayOutput = iterateObj(input, json2ArrayOutput);
+        json2ArrayOutput = iterateObj(input);
     }
     console.log("json2ArrayOutput",json2ArrayOutput);
     return json2ArrayOutput;
@@ -46,32 +44,29 @@ function json2Array(input, json2ArrayOutput) {
 
 function iterateObj(input,iterateObjOutput,parent,options) {
     if (!input) return;
-    if (!iterateObjOutput) { var iterateObjOutput = []; };
+    if (!iterateObjOutput) { var iterateObjOutput = [];};
+    if (!parent) { var parent = "root"; 
+  rootnode = []
+  rootnode.push("keyName");
+  rootnode.push("parent");
+  iterateObjOutput.push(rootnode);
+  };
     for (var key in input) {
 
         if ({}.hasOwnProperty.call(input, key)) {
-
-            if (typeof input[key] === 'object' && !input[key].length) { 
-                console.log("childFound", key, input[key]);
-                recurseResponse = [];
-                recurseResponse.concat(key);
-                recurseResponse.concat(parent);
-                iterateObj(input[key], recurseResponse,key);
-                // iterateObjOutput = setData(input, iterateObjOutput, key);
-                iterateObjOutput.push(recurseResponse);
-                iterateObjOutput = setData(recurseResponse, iterateObjOutput, key);
+          
+         
+            
+          if (typeof input[key] === 'object' && !input[key].length) { 
+            var row = []; row.push(key);row.push(parent);iterateObjOutput.push(row);    
+            iterateObj(input[key], iterateObjOutput,key);
             } else if (input[key].length) { 
-                console.log("arrayFound", key, input[key]);
-                // recurseResponse = [];
-                // recurseResponse.concat(key);
-                // recurseResponse.concat(parent);
-                // iterateObj(input[key], recurseResponse,key);
-                // // iterateObjOutput = setData(input, iterateObjOutput, key);
-                // iterateObjOutput.push(recurseResponse);
-                // iterateObjOutput = setData(recurseResponse, iterateObjOutput, key);
+                console.log("arrayFound", key, input[key],parent);
+                iterateArray(input[key],row,key);
+                console.log(row);
             }
            // console.log(key,input[key]);
-            iterateObjOutput = setData(input, iterateObjOutput, key);
+           // iterateObjOutput = setData(input, iterateObjOutput, key);
 
     
             
@@ -81,6 +76,13 @@ function iterateObj(input,iterateObjOutput,parent,options) {
 
 }
 
+
+function iterateArray(input,iterateArrayOutput,parent) {
+  for(i=0;i<=input.length;i++){
+    console.log(input[i]);
+  }
+
+}
 
 
 function setData(input, output, key) { 
@@ -94,7 +96,7 @@ function setData(input, output, key) {
       }
         
     }
-  // console.log("output from Set",output);
+  console.log("output from Set",output);
     return output;
 }
 
