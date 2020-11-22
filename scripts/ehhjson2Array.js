@@ -5,17 +5,20 @@ function iterateArray() {
 function processRequest() { 
     var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json";
     var output = fetchRequest(requestURL);
-    console.log(output);
+    console.log("output >>>>",JSON.stringify(output));
 
 
 }
 
 function fetchRequest(requestURL) { 
-    var tempo = fetch(requestURL)
+     var requestResponse = fetch(requestURL)
     .then(response => response.json())
-    .then(json => { getPayload(json,tempo) })
-  //  console.log("requestResponse", tempo);
-    return tempo;
+    .then(function (data){
+     console.log("data Recived",data)
+      return data;
+    });
+   console.log("requestResponse", requestResponse);
+    return requestResponse;
 }
 
 
