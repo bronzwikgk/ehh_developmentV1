@@ -13,7 +13,7 @@ class processUrl {
         fetch(url)
         .then(response => {
             const contentType = response.headers.get('content-type');
-            console.log("response Type is ", contentType);
+           // console.log("response Type is ", contentType);
             if (contentType.includes('application/json')) {
                 console.log(contentType, "Caught Json");
                 return response.json();
@@ -39,6 +39,7 @@ class processUrl {
         })
         .then(data => {
             console.log("data is ", typeof data, data); /* process your data further */
+            return data;
         })
         .catch(error => console.log(error));
 
