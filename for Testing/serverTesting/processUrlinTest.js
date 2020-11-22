@@ -8,7 +8,7 @@ function makeDoGetRequest() {
     fetch(url)
         .then(res => res.json())
         .then(res => {
-            document.getElementById("here").textContent = res[0].status;
+            document.getElementById("getResponse").textContent = res[0].status;
         });
 }
 
@@ -29,6 +29,10 @@ function makeDoPostRequest() {
         body: JSON.stringify({
                 name: "Testing doPost"
             }) // body data type must match "Content-Type" header
+    })
+    .then(res => res.json())
+    .then(res => {
+        document.getElementById("postResponse").textContent = res[0].status;
     });
 }
 document.getElementById("btn").addEventListener("click", makeDoGetRequest);
