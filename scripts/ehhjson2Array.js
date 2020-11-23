@@ -65,34 +65,38 @@ function iterateObj(input,iterateObjOutput,currentRow,parent,d,id,options) {
           }
 
           if (typeof input[key] === 'string') {
-         //   console.log("String Value found", input[key]);
-            currentRow.push(key, input[key]); // check headers, update headers, insert values at the header position in currentRow
-            console.log("currentRow", currentRow);
-            iterateObjOutput.push(currentRow);
-
-          
+            if (iterateObjOutput[0].indexOf(key) === -1) {
+              console.log("Headers", iterateObjOutput[0], key, iterateObjOutput[0].indexOf(key))
+              iterateObjOutput[0].push(key);
+              console.log("HeadersNow", iterateObjOutput[0], key, iterateObjOutput[0].indexOf(key))
+            }
+            if (iterateObjOutput[0].indexOf(key) !== -1) {
+              keyIndex = iterateObjOutput[0].indexOf(key);
+              currentRow.splice(keyIndex, 0,key + input[key]);
+              console.log("current row", currentRow)
+              iterateObjOutput.push(currentRow);
+            }
+            // check headers, update headers, insert values at the header position in currentRow
+           // console.log("currentRow", currentRow);
+            //currentRow.push(key, input[key]);
+           // iterateObjOutput.push(currentRow);
+        //  console.log(iterateObjOutput)
           //  setData(currentRow, iterateObjOutput);
            // console.log("left out", parent, currentRow, key, input[key], typeof input[key]);
 
           }
          
-          
+         
           //d++;
           // setData(input, iterateObjOutput, key);
-          
+        
         }
   }
- // console.log('iterateObjOutput', iterateObjOutput)
+  //  console.log('iterateObjOutput', iterateObjOutput)
     return iterateObjOutput;
 
 }
 
-function iterateArray(input,iterateArrayOutput,parent) {
-  for(i=0;i<=input.length;i++){
-   // console.log(input[i]);
-  }
-
-}
 
 function setData(input, output, key) { 
   //  console.log(key, getEntityType(output), output.length);
@@ -109,4 +113,18 @@ function setData(input, output, key) {
     return output;
 }
 
-document.getElementById("btn").addEventListener("click", processRequest);
+var headerRow = {
+  'id': "", 'depth': "", 'name': "", 'parent': "",'type' : 'typeofRow'
+}
+
+var output2 = pushRow(headerRow,[]);
+//console.log("output2",output2)
+function pushRow(headers, data) {
+  data = [];
+  for (key in headers) { //console.log(key); data.push(key)
+  }
+  return data;
+
+}
+
+

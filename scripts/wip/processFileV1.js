@@ -30,7 +30,6 @@ if (app.hasNativeFS) {
   //gaEvent('File System APIs', 'Legacy');
 }
 
-
 class processFile {
 
     static getFile(fileHandle,location) {
