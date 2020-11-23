@@ -2,7 +2,7 @@
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json
 function processRequest() {
-    var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json";
+    var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/rich-text-tools.json";
     var output = fetchRequest(requestURL);
     console.log("output >>>>", output);
 }
@@ -62,7 +62,17 @@ function iterateObj2(input, output, currentRow, parent) {
                 output.push(currentRow);
             } else if (typeof input[key] === 'object' && getEntityType(input[key]) === "Array") {
 
-              //  console.log("Array object", parent, key, input[key]);
+                console.log("Array object", parent, key, input[key]);
+                if (!currentRow) {
+                    currentRow = []
+                    currentRow.push(id); id++
+                    currentRow.push(d);
+                    currentRow.push(key);
+                    currentRow.push(parent);
+                    currentRow.push(typeof input[key]);
+                    fillEmptyDepth(currentRow, output[0]);
+                    console.log(currentRow);
+                }
                 //  fillEmptyDepth(currentRow, output[0]);
                 //  console.log("value found", parent, key, input[key],"output is ",output)
                 if (output[0].indexOf(key) === -1) {
