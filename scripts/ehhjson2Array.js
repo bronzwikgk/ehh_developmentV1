@@ -17,7 +17,6 @@ function fetchRequest(requestURL) {
     return requestResponse;
 }
 
-
 function getPayload(payload,payloadOutput) {
     console.log(payload,payload);
     var payloadOutput = json2Array(payload);
@@ -35,8 +34,7 @@ function json2Array(input, json2ArrayOutput) {
     return json2ArrayOutput;
 }
 
-
-function iterateObj(input,iterateObjOutput,parent,d,id,options) {
+function iterateObj(input,iterateObjOutput,currentRow,parent,d,id,options) {
     if (!input) return;
     if (!iterateObjOutput) { var iterateObjOutput = [];};
     if (!parent) { var parent = "root"; 
@@ -49,39 +47,45 @@ function iterateObj(input,iterateObjOutput,parent,d,id,options) {
       rootnode.push("parent");
       rootnode.push("type");
       setData(rootnode, iterateObjOutput);
-
   };
     for (var key in input) {
 
         if ({}.hasOwnProperty.call(input, key)) {
           
-          if (typeof input[key] === 'object'&& !input[key].length) { 
-            var row = []; row.push(id); id++; row.push(d); row.push(key); row.push(parent), row.push(typeof input[key]);//to be done using Header Key as an array and using iterateArray and SetData
-            //iterateObjOutput.push(row); 
-            iterateObj(input[key], row, key, d,id);
-            setData(row, iterateObjOutput); d++;
+          if (typeof input[key] === 'object' && !input[key].length ) { 
+            var currentRow = []; currentRow.push(id); id++; currentRow.push(d); currentRow.push(key); currentRow.push(parent), currentRow.push(typeof input[key]);//to be done using Header Key as an array and using iterateArray and SetData
+            //iterateObjOutput.push(row);
+            //setData(currentRow, iterateObjOutput); d++;
+            iterateObj(input[key], iterateObjOutput, currentRow, key, d, id);
+         
           } else if (input[key].length) { 
-
              //console.log("arrayFound", key, input[key],parent);
-            
-            iterateArray(input[key], row, key);
+            iterateArray(input[key], currentRow, key);
               //  console.log(row);
           }
+
           if (typeof input[key] === 'string') {
-            console.log("row",row);
-            console.log("left out", parent, key, input[key], typeof input[key]);  
-            
+         //   console.log("String Value found", input[key]);
+            currentRow.push(key, input[key]); // check headers, update headers, insert values at the header position in currentRow
+            console.log("currentRow", currentRow);
+            iterateObjOutput.push(currentRow);
+
+          
+          //  setData(currentRow, iterateObjOutput);
+           // console.log("left out", parent, currentRow, key, input[key], typeof input[key]);
+
           }
+         
           
           //d++;
           // setData(input, iterateObjOutput, key);
           
         }
-    }
+  }
+ // console.log('iterateObjOutput', iterateObjOutput)
     return iterateObjOutput;
 
 }
-
 
 function iterateArray(input,iterateArrayOutput,parent) {
   for(i=0;i<=input.length;i++){
@@ -89,7 +93,6 @@ function iterateArray(input,iterateArrayOutput,parent) {
   }
 
 }
-
 
 function setData(input, output, key) { 
   //  console.log(key, getEntityType(output), output.length);
@@ -105,8 +108,5 @@ function setData(input, output, key) {
   //console.log("output from Set",output);
     return output;
 }
-
-
-
 
 document.getElementById("btn").addEventListener("click", processRequest);
