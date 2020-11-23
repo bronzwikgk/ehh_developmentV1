@@ -3,24 +3,19 @@
 function processRequest() { 
     var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json";
     var output = fetchRequest(requestURL);
-    console.log("output >>>>",JSON.stringify(output));
-
-
-}
+    console.log("output >>>>",JSON.stringify(output));}
 
 function fetchRequest(requestURL) { 
      var requestResponse = fetch(requestURL)
     .then(response => { return response.json()})
     .then(function (data){
-     console.log("data Recived",data)
+    // console.log("data Recived",data)
      getPayload(data);
       return data;
     });
-   console.log("requestResponse", requestResponse);
+   //console.log("requestResponse", requestResponse);
     return requestResponse;
 }
-
-
 
 
 function getPayload(payload,payloadOutput) {
@@ -31,7 +26,6 @@ function getPayload(payload,payloadOutput) {
 
 function json2Array(input, json2ArrayOutput) { 
     if (!json2ArrayOutput) { var json2ArrayOutput = []; }
-    
     if (input.length) { console.log("foundArray")}
     if (typeof input === 'object' && !input.length) {
       //  console.log("Found Object");
@@ -42,34 +36,46 @@ function json2Array(input, json2ArrayOutput) {
 }
 
 
-function iterateObj(input,iterateObjOutput,parent,options) {
+function iterateObj(input,iterateObjOutput,parent,d,id,options) {
     if (!input) return;
     if (!iterateObjOutput) { var iterateObjOutput = [];};
     if (!parent) { var parent = "root"; 
-  rootnode = []
-  rootnode.push("keyName");
-  rootnode.push("parent");
-  iterateObjOutput.push(rootnode);
+      rootnode = [];
+      id = 0;
+      d = 0;
+      rootnode.push("id");
+      rootnode.push("d");
+      rootnode.push("keyName");
+      rootnode.push("parent");
+      rootnode.push("type");
+      setData(rootnode, iterateObjOutput);
+
   };
     for (var key in input) {
 
         if ({}.hasOwnProperty.call(input, key)) {
           
-         
-            
-          if (typeof input[key] === 'object' && !input[key].length) { 
-            var row = []; row.push(key);row.push(parent);iterateObjOutput.push(row);    
-            iterateObj(input[key], iterateObjOutput,key);
-            } else if (input[key].length) { 
-                console.log("arrayFound", key, input[key],parent);
-                iterateArray(input[key],row,key);
-                console.log(row);
-            }
-           // console.log(key,input[key]);
-           // iterateObjOutput = setData(input, iterateObjOutput, key);
+          if (typeof input[key] === 'object'&& !input[key].length) { 
+            var row = []; row.push(id); id++; row.push(d); row.push(key); row.push(parent), row.push(typeof input[key]);//to be done using Header Key as an array and using iterateArray and SetData
+            //iterateObjOutput.push(row); 
+            iterateObj(input[key], row, key, d,id);
+            setData(row, iterateObjOutput); d++;
+          } else if (input[key].length) { 
 
-    
+             //console.log("arrayFound", key, input[key],parent);
             
+            iterateArray(input[key], row, key);
+              //  console.log(row);
+          }
+          if (typeof input[key] === 'string') {
+            console.log("row",row);
+            console.log("left out", parent, key, input[key], typeof input[key]);  
+            
+          }
+          
+          //d++;
+          // setData(input, iterateObjOutput, key);
+          
         }
     }
     return iterateObjOutput;
@@ -79,7 +85,7 @@ function iterateObj(input,iterateObjOutput,parent,options) {
 
 function iterateArray(input,iterateArrayOutput,parent) {
   for(i=0;i<=input.length;i++){
-    console.log(input[i]);
+   // console.log(input[i]);
   }
 
 }
@@ -96,7 +102,7 @@ function setData(input, output, key) {
       }
         
     }
-  console.log("output from Set",output);
+  //console.log("output from Set",output);
     return output;
 }
 
