@@ -44,7 +44,7 @@ function obj2Array(obj, output, currentResponse, parent, d, id, options) {
     }
 
 
-    console.log("from obj2Array",JSON.stringify(output))
+    console.log("from obj2Array",(output))
     return output;
 }
 
