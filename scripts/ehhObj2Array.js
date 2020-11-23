@@ -79,7 +79,8 @@ function obj2Array(obj, output, currentRow, parent, d, id, options) {
                 }
                // currentResponse.push(key, obj[key]);
             } else if (typeof obj[key] === 'string') {
-                currentRow = [];
+                currentRow = output[0];
+                console.log(currentRow);
                 currentRow.push(id); id++;
                 currentRow.push(d);
                 currentRow.push(key);
@@ -89,7 +90,8 @@ function obj2Array(obj, output, currentRow, parent, d, id, options) {
                 if (output[0].indexOf(key) === -1) {
                    // console.log("found New Attribute header", key);
                     output[0].push(key);
-                    
+                    console.log(output[0].indexOf(key));
+
                     currentRow.splice(output[0].indexOf(key), 0, obj[key]);//Inserts the value in the specific header position in the current
                 } else if (output[0].indexOf(key) !== -1) {
                    // console.log("found Attribute Value", currentRow,obj[key]);
@@ -130,7 +132,6 @@ function setData(input, output, key, nextSW) {
     //console.log("output from Set",output);
     return output;
 }
-
 
 function iterateArray(input, output, parent) {
     for (i = 0; i <= input.length; i++) {
