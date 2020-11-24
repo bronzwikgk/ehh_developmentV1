@@ -55,7 +55,6 @@ class process {
                     } else {
                         arrResponse.push(process.node2json(arr[i]));
                     }
-                    
                     // arrResponse = process.setData(process.node2json(arr[i]),arrResponse); //Why is this not working
                 }
                 if (arr[i].nodeType === Node.TEXT_NODE) {

@@ -30,8 +30,6 @@ function getPayload(payload, payloadOutput) {
 
 var headerRow = ['ehhId', 'd', 'key', 'parent', 'type'];
 
-
-
 function obj2Arr(ob,output,currentRw,parent) {
     var toReturn = {};
     if (!output) { var output = []; }
@@ -54,15 +52,14 @@ function obj2Arr(ob,output,currentRw,parent) {
             // output.push(currentRw);
            // console.log(currentRw,output);
             
-            if (output[0][0].indexOf(key) === -1 && !ob.length) {
-                console.log("found New Attribute header", key, ob[key]);
+            if (output[0][0].indexOf(key) === -1 ) {
+               // console.log("found New Attribute header", key, ob[key]);
                 output[0][0].push(key);
             }
             obj2Arr(ob[key], output, currentRw, key);
            // console.log(flatObject);
-        }
-        if (output[0][0].indexOf(key) === -1 && !ob.length) {
-            console.log("found New Attribute header", key, ob[key]);
+        }else if (output[0][0].indexOf(key) !== -1) {
+            console.log("found New Attribute value", key, ob[key]);
             output[0][0].push(key);
 
         }
