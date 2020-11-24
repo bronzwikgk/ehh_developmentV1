@@ -7,7 +7,7 @@
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/testui.json
 
 function processRequest() {
-    var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/testui.json";
+    var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json";
     var output = fetchRequest(requestURL);
     console.log("output >>>>", output);
 }
