@@ -3,8 +3,9 @@
 //http://dummy.restapiexample.com/api/v1/employees
 //https://developer.mozilla.org/en-US/docs/Web/API/Response/type
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json
-//https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json
+//https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/testui.json
+
 function processRequest() {
     var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/testui.json";
     var output = fetchRequest(requestURL);
@@ -22,13 +23,83 @@ function fetchRequest(requestURL) {
     return requestResponse;
 }
 function getPayload(payload, payloadOutput) {
-
-    var payloadOutput = flattenObject(payload);
+    var payloadOutput = obj2Arr(payload);
     console.log("output array", payloadOutput);
     return payloadOutput;
 }
 
-var headerRow = ['id', 'd', 'key', 'parent', 'type'];
+var headerRow = ['ehhId', 'd', 'key', 'parent', 'type'];
+
+
+
+function obj2Arr(ob,output,currentRw,parent) {
+    var toReturn = {};
+    if (!output) { var output = []; }
+    if (!currentRw) { var currentRw = []; }
+    if (!parent) {
+        var parent = "root";
+        id = 0;
+        d = 0;
+        output.push([headerRow]);
+    };
+    for (var key in ob) {
+        if (!ob.hasOwnProperty(key)) continue;
+        if ((typeof ob[key]) == 'object' && ob[key] !== null &&!ob.length) {
+            
+            var currentRw = [];
+            currentRw.push(id); id++
+            currentRw.push(d);
+            currentRw.push(key);
+            currentRw.push(parent);
+            currentRw.push(typeof ob[key]); // to be modified
+            output.push(currentRw);
+           // console.log(currentRw,output);
+            var flatObject = obj2Arr(ob[key], output, currentRw, key);
+           // console.log(flatObject);
+        } else {
+            if (output[0][0].indexOf(key) === -1) { 
+               // console.log("found New Attribute header", key, ob[key]);
+                output[0][0].push(key);
+            } 
+
+            console.log("found Attribute Value", output[0][0].indexOf(key),key,ob[key]);
+            console.log(currentRw,parent,id,key,ob[key]);
+            //   console.log(key, ob[key])
+             // currentRw.splice(output[0][0].indexOf(key), 0, ob[key]);//Inserts the value in the specific header position in the current
+                    // console.log(currentRow);
+                
+
+                // output.push(currentRow);
+                // currentRow.push(key, obj[key]);
+            
+            // output.push(ob[key])
+           
+            toReturn[key] = ob[key];
+        }
+    }
+    //return toReturn;
+    return output;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function obj2Array(input,output,currentRow,parent,id) { 
     if (!output) { var output = []; }
@@ -50,6 +121,9 @@ function obj2Array(input,output,currentRow,parent,id) {
     }
     return output;
 }
+
+
+
 function createRow(input, output, parent, id) {
     newRow = output[0];
     console.log("newRow", newRow);
@@ -121,10 +195,14 @@ function flattenObject (ob) {
             var flatObject = flattenObject(ob[key]);
             for (var x in flatObject) {
                 if (!flatObject.hasOwnProperty(x)) continue;
+                console.log(key, ob[key]);
                 toReturn[key + '.' + x] = flatObject[x];
             }
         } else {
            // output.push(ob[key])
+        //    console.log(key, ob[key])
+            
+
             toReturn[key] = ob[key];
         }
     }

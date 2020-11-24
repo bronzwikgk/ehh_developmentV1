@@ -3,6 +3,8 @@
 //https://github.com/mdn/fetch-examples/
 //https://github.com/mdn/fetch-examples/blob/master/fetch-array-buffer/index.html
 //https://www.w3schools.com/tags/ref_httpmethods.asp
+//https://www.youtube.com/watch?v=_1xa8Bsho6A
+//https://github.com/bradtraversy/vanilla-node-rest-api
 // async function name([param[, param[, ...param]]]) {
 //     statements
 // }
