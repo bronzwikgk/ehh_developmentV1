@@ -44,40 +44,40 @@ function obj2Arr(ob,output,currentRw,parent) {
     };
     for (var key in ob) {
         if (!ob.hasOwnProperty(key)) continue;
-        if ((typeof ob[key]) == 'object' && ob[key] !== null &&!ob.length) {
+        if ((typeof ob[key]) === 'object' && ob[key] !== null && !ob.length) {
             
             var currentRw = [];
-            currentRw.push(id); id++
-            currentRw.push(d);
-            currentRw.push(key);
-            currentRw.push(parent);
-            currentRw.push(typeof ob[key]); // to be modified
-            output.push(currentRw);
+            // currentRw.push(id); id++
+            // currentRw.push(d);
+            // currentRw.push(key);
+            // currentRw.push(parent);
+            // currentRw.push(typeof ob[key]); // to be modified
+            // output.push(currentRw);
            // console.log(currentRw,output);
-            var flatObject = obj2Arr(ob[key], output, currentRw, key);
-           // console.log(flatObject);
-        } else {
-            if (output[0][0].indexOf(key) === -1) { 
-               // console.log("found New Attribute header", key, ob[key]);
-                output[0][0].push(key);
-            } 
-
-            console.log("found Attribute Value", output[0][0].indexOf(key),key,ob[key]);
-            console.log(currentRw,parent,id,key,ob[key]);
-            //   console.log(key, ob[key])
-             // currentRw.splice(output[0][0].indexOf(key), 0, ob[key]);//Inserts the value in the specific header position in the current
-                    // console.log(currentRow);
-                
-
-                // output.push(currentRow);
-                // currentRow.push(key, obj[key]);
             
-            // output.push(ob[key])
-           
-            toReturn[key] = ob[key];
+            if (output[0][0].indexOf(key) === -1 && !ob.length) {
+                console.log("found New Attribute header", key, ob[key]);
+                output[0][0].push(key);
+
+            }
+
+            obj2Arr(ob[key], output, currentRw, key);
+           // console.log(flatObject);
         }
+        
+        if (output[0][0].indexOf(key) === -1 && !ob.length) {
+            console.log("found New Attribute header", key, ob[key]);
+            output[0][0].push(key);
+
+        }
+
+        
+      
+        
+         
+        
     }
-    //return toReturn;
+  
     return output;
 }
 
