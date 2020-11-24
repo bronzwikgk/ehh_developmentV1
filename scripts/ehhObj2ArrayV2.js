@@ -6,7 +6,6 @@ function processRequest() {
     var output = fetchRequest(requestURL);
     console.log("output >>>>", output);
 }
-
 function fetchRequest(requestURL) {
     var requestResponse = fetch(requestURL)
         .then(response => { return response.json() })
@@ -18,16 +17,13 @@ function fetchRequest(requestURL) {
     //console.log("requestResponse", requestResponse);
     return requestResponse;
 }
-
 function getPayload(payload, payloadOutput) {
 
     var payloadOutput = buildTable(payload);
     console.log("payload", payloadOutput);
     return payloadOutput;
 }
-
 var headerRow = ['id', 'd', 'name', 'parent', 'type'];
-
 function buildTable(input,output,currentRow,parent) {
     if (!output) { var output = []; }
     if (!parent) {
@@ -46,7 +42,6 @@ function buildTable(input,output,currentRow,parent) {
     }
     return output;
 }
-
 function iterateObj2(input, output, currentRow, parent) {
     for (var key in input) { 
         if ({}.hasOwnProperty.call(input, key)) {
@@ -87,7 +82,7 @@ function iterateObj2(input, output, currentRow, parent) {
                     // console.log(currentRow);
                 }
 
-               // output.push(currentRow);
+                output.push(currentRow);
 
             } else if (typeof input[key] === 'string') {
              
@@ -145,7 +140,6 @@ function setData(input, output, key, nextSW) {
     //console.log("output from Set",output);
     return output;
 }
-
 function fillEmptyDepth(input, header) { 
     for (j = 0; j <= header.length - input.length;j++) { 
         input.push("");
@@ -153,5 +147,4 @@ function fillEmptyDepth(input, header) {
     }
 return input
 }
-
 document.getElementById("btn").addEventListener("click", processRequest);
