@@ -5,12 +5,12 @@ Let's call this HTMl Element >> Entity Container
 
 Ref for Color Font of Entity Containter >>> https://codepen.io/leenalavanya/pen/RJYwOV
 // http://singlepageappbook.com/
-Helpers >> https://www.learnwithjason.dev/blog/get-form-values-as-json/
+//https://www.youtube.com/watch?v=2PPSXonhIck
+//  Helpers >> https://www.learnwithjason.dev/blog/get-form-values-as-json/
 //https://github.com/bradtraversy/vanilla-node-rest-api
 //https://github.com/bradtraversy/chatcord/blob/master/server.js
 //https://github.com/tomcatbuzz/meanauthapp/wiki
 //https://github.com/bradtraversy/nodeauthapp
-
 //Edit CSS >> https://cssscanpro.com/
 //CCSS_Inspect >> https://github.com/ilyashubin/hover-inspect
 //Edit Css >> https://aminoeditor.com/
@@ -18,7 +18,6 @@ Helpers >> https://www.learnwithjason.dev/blog/get-form-values-as-json/
 //Theme Builder  >> https://themer.dev/
 //Design ref>>https://codepen.io/calvinalx/pen/aOZNwj
 //CSS Selector Refe >> https://www.w3.org/TR/CSS21/selector.html%23id-selectors
-
 https://chromium.googlesource.com/chromium/src/+/master/chrome/browser/resources/components/components.js
 https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/docs/examples/api
 Implement Snippet, sample Snippet  "http://www.betterprogramming.com/htmlclipper.html"

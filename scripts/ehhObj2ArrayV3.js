@@ -44,8 +44,7 @@ function obj2Arr(ob,output,currentRw,parent) {
     };
     for (var key in ob) {
         if (!ob.hasOwnProperty(key)) continue;
-        if ((typeof ob[key]) === 'object' && ob[key] !== null && !ob.length) {
-            
+        if ((typeof ob[key]) === 'object' && ob[key] !== null && !ob.length) { 
             var currentRw = [];
             // currentRw.push(id); id++
             // currentRw.push(d);
@@ -58,13 +57,10 @@ function obj2Arr(ob,output,currentRw,parent) {
             if (output[0][0].indexOf(key) === -1 && !ob.length) {
                 console.log("found New Attribute header", key, ob[key]);
                 output[0][0].push(key);
-
             }
-
             obj2Arr(ob[key], output, currentRw, key);
            // console.log(flatObject);
         }
-        
         if (output[0][0].indexOf(key) === -1 && !ob.length) {
             console.log("found New Attribute header", key, ob[key]);
             output[0][0].push(key);
