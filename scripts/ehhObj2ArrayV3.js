@@ -23,7 +23,7 @@ function fetchRequest(requestURL) {
 }
 function getPayload(payload, payloadOutput) {
 
-    var payloadOutput = obj2Array(payload);
+    var payloadOutput = flattenObject(payload);
     console.log("output array", payloadOutput);
     return payloadOutput;
 }
@@ -109,3 +109,25 @@ function recurse(obj) {
 
 
 document.getElementById("btn").addEventListener("click", processRequest);
+
+
+
+function flattenObject (ob) {
+    var toReturn = {};
+    var output = [];
+    for (var key in ob) {
+        if (!ob.hasOwnProperty(key)) continue;
+        if ((typeof ob[key]) == 'object' && ob[key] !== null) {
+            var flatObject = flattenObject(ob[key]);
+            for (var x in flatObject) {
+                if (!flatObject.hasOwnProperty(x)) continue;
+                toReturn[key + '.' + x] = flatObject[x];
+            }
+        } else {
+           // output.push(ob[key])
+            toReturn[key] = ob[key];
+        }
+    }
+    //return toReturn;
+    return output;
+};
