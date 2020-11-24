@@ -4,7 +4,7 @@ This code will be used everywhere to create vertical menu / form / right Click M
 Let's call this HTMl Element >> Entity Container
 
 Ref for Color Font of Entity Containter >>> https://codepen.io/leenalavanya/pen/RJYwOV
-
+// http://singlepageappbook.com/
 Helpers >> https://www.learnwithjason.dev/blog/get-form-values-as-json/
 
 Edit CSS >> https://cssscanpro.com/

@@ -23,10 +23,7 @@
 //         myImage.src = objectURL;
 //         document.getElementsByTagName('body')[0].appendChild(myImage)
 //     });
-//https://jsonplaceholder.typicode.com/todos/1
-//http://dummy.restapiexample.com/api/v1/employees
-//https://developer.mozilla.org/en-US/docs/Web/API/Response/type
-//https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json
+
 //https://upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.jpg
 
 // fetch(myRequest).then(function (response) {

@@ -1,8 +1,12 @@
 //test links https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/rich-text-tools.json
+//https://jsonplaceholder.typicode.com/todos/1
+//http://dummy.restapiexample.com/api/v1/employees
+//https://developer.mozilla.org/en-US/docs/Web/API/Response/type
+//https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json
 //https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/json/sampleData/sampleSchemaV2.json
 function processRequest() {
-    var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/rich-text-tools.json";
+    var requestURL = "https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/testui.json";
     var output = fetchRequest(requestURL);
     console.log("output >>>>", output);
 }
@@ -23,7 +27,8 @@ function getPayload(payload, payloadOutput) {
     console.log("payload", payloadOutput);
     return payloadOutput;
 }
-var headerRow = ['id', 'd', 'name', 'parent', 'type'];
+var headerRow = ['id', 'd', 'key', 'parent', 'type'];
+
 function buildTable(input,output,currentRow,parent) {
     if (!output) { var output = []; }
     if (!parent) {
