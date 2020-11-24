@@ -120,7 +120,7 @@ function click(e) {
         var jsonOutput = process.node2json(element);
         //var jsonOutput = createEntity(element, output, outputType, nodeEntityInJson);
         //console.log(jsonOutput);      
-        console.log(JSON.stringify(jsonOutput))
+        console.log((jsonOutput))
         var htmlOutput = process.json2node(jsonOutput);
         //console.log(temp);
         console.log(htmlOutput);
