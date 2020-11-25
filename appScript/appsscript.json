@@ -1,17 +1,13 @@
 {
-  "timeZone": "America/New_York",
+  "timeZone": "Asia/Kolkata",
   "dependencies": {
     "enabledAdvancedServices": [{
-      "userSymbol": "Docs",
-      "serviceId": "docs",
-      "version": "v1"
-    }, {
       "userSymbol": "Drive",
       "serviceId": "drive",
       "version": "v2"
     }, {
-      "userSymbol": "Slides",
-      "serviceId": "slides",
+      "userSymbol": "People",
+      "serviceId": "peopleapi",
       "version": "v1"
     }, {
       "userSymbol": "Sheets",
@@ -21,10 +17,6 @@
       "userSymbol": "DriveActivity",
       "serviceId": "driveactivity",
       "version": "v2"
-    }, {
-      "userSymbol": "Calendar",
-      "serviceId": "calendar",
-      "version": "v3"
     }]
   },
   "webapp": {
@@ -32,8 +24,5 @@
     "executeAs": "USER_DEPLOYING"
   },
   "exceptionLogging": "STACKDRIVER",
-  "executionApi": {
-    "access": "ANYONE"
-  },
   "runtimeVersion": "V8"
 }

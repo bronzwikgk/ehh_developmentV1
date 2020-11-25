@@ -4,13 +4,10 @@ function test(){
  var options = {
       recurse :'true',
       ignore : ['function','null',]
-                };
-                
+                };             
      var json4rmUrl = processJsonUrl(jsonUrl);
      console.log(json4rmUrl);
-
-}
-                
+}              
 function processJsonUrl() {
     var response = UrlFetchApp.fetch(jsonUrl);
     var json = response.getContentText();

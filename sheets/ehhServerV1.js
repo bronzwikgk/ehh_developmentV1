@@ -1,4 +1,4 @@
-let deployedUrl ="https://script.google.com/a/0dot1.live/macros/s/AKfycbyOQZ3JCvko4kI8_Fr9PoZjJA0ERjQftjHwf70VZwkf/dev";
+let deployedUrl ="https://script.google.com/macros/s/AKfycbw5ms6neWmUKNUilhwQpqtD8p62lEpsbaVWnp5tvUJnf0XrUk09/exec";
 
 
 function doGet() {
