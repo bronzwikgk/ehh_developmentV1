@@ -89,3 +89,11 @@ static status(response) {
         }
     }
 }
+
+
+function processGet() {
+    output = processUrl.fetchUrl(url);
+   // console.log("output", output);
+    // initUrlRequest(url);
+}
+document.getElementById("btn").addEventListener('click',processGet())

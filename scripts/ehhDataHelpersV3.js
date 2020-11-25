@@ -153,12 +153,26 @@ Iterator.prototype = {
   }
 }
 
-const iter = new Iterator(items)
+// const iter = new Iterator(items)
 
-console.log(iter.hasNext())
+// console.log(iter.hasNext())
 
-while(iter.hasNext())
-  console.log(iter.next())
+// while(iter.hasNext())
+//   console.log(iter.next())
 
-console.log(iter.hasNext())
+// console.log(iter.hasNext())
 
+
+
+
+class dataHelpers { 
+    //This function compares two array's
+    static compare2Array(arr1, arr2) {
+        arr1.sort(); arr2.sort();
+        if (arr1.length !== arr2.length) return false;
+        for (let i = 0; i < arr2.length; i++) {
+            if (arr[i] !== arr2[i]) return false;
+        }
+        return true;
+    }
+}

@@ -152,4 +152,3 @@ function fillEmptyDepth(input, header) {
     }
 return input
 }
-document.getElementById("btn").addEventListener("click", processRequest);
