@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Montserrat&family=Open+Sans&family=Poppins"
+    rel="stylesheet">
+    <link rel="stylesheet" href="apiTesting.css">
 <body> 
-    <div id="urlReqForm">
+    <div id="restApiForm">
         <label for="reqUrl">url</label>
-        <input type="url" id="reqUrl" name="reqUrl" class="form-control form-control-lg" placeholder="Paste Url Here" required autofocus>
-        <div id="urlReqParameters">
-            
+        <input type="url" id="reqUrl" placeholder="Paste Url Here" required autofocus>
+        <select type="ReqType">
+            <option>get</option>
+            <option>post</option>
+        </select>
+        <div id="reqBody">
+            <label for="reqUrl">body</label>
+            <textarea id="reqBody"wrap="off" style="position:relative;height:200px;width: 500px;"></textarea>
         </div>
     </div>
-
     <div id="app"></div>
     <button id="btn" >get response</button>
     <button id="btn2">set Payload</button>
@@ -22,19 +28,3 @@
 </body>
 </html>
 
-
-urlReq = {
-url = 'https://jsonplaceholder.typicode.com/todos/1',
-urlReqParameters = {
-method: 'POST',
-body: JSON.stringify({
-title: 'foo',
-body: 'bar',
-userId: 1,
-}),
-headers: {
-'Content-type': 'application/json; charset=UTF-8',
-},
-}
-}
-}
