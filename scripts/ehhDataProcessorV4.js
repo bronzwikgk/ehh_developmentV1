@@ -101,3 +101,23 @@ class process {
         };
     }
 }
+
+
+
+// function mapObject(obj, func, scope) {
+//     var newObj = {}, key;
+//     for (key in obj) {
+//         if (obj[key] !== O[key]) {
+//             newObj[key] = func.call(scope, obj[key], key, obj);
+//         }
+//     }
+//     return newObj;
+// }
+
+// mapArray = function (arr, func, scope) {
+//     var x = 0, xl = arr.length, newArr = new Array(xl);
+//     for (; x < xl; ++x) {
+//         newArr[x] = func.call(scope, arr[x], x, arr);
+//     }
+//     return newArr;
+// };

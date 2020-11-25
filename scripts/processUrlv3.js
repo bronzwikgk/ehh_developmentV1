@@ -1,9 +1,9 @@
+
+
 var urlReq = {
     url = 'https://jsonplaceholder.typicode.com/todos/1',
     urlReqParameters = {
         method: 'POST',
-        body: JSON.stringify({
-            title: 'foo',
             body: 'bar',
             userId: 1,
         }),
