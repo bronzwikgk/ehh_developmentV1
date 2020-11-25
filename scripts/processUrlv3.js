@@ -1,4 +1,4 @@
-urlReq = {
+var urlReq = {
     url = 'https://jsonplaceholder.typicode.com/todos/1',
     urlReqParameters = {
         method: 'POST',
@@ -12,7 +12,7 @@ urlReq = {
         },
     }
     }
-}
+
 
 
 class reqUrl{
