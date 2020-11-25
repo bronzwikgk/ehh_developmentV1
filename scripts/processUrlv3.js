@@ -17,7 +17,7 @@ urlReq = {
 
 
 class reqUrl{
-    static createUrlRequest(url,parameters) {
+    static initUrlRequest(url,parameters) {
         fetch('')
             .then(response => response.json())
             .then(json => console.log(json));
