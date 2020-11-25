@@ -15,7 +15,6 @@ urlReq = {
 }
 
 
-
 class reqUrl{
     static initUrlRequest(url,parameters) {
         fetch('')
