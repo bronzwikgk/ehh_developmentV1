@@ -1,8 +1,8 @@
 var requrl = 'https://script.google.com/macros/s/AKfycbw5ms6neWmUKNUilhwQpqtD8p62lEpsbaVWnp5tvUJnf0XrUk09/exec';
-data = {};
+//data = {};
 // Default options are marked with *
 urlParameters = {
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'no-cors', // no-cors, *cors, same-origin
   //  cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
     // credentials: 'same-origin', // include, *same-origin, omit
@@ -19,9 +19,9 @@ urlParameters = {
 
 function fetchUrl(url, params) { 
     fetch(url,params)
-        .then(res => res.json()).then(json => {
+        .then(res => res.text()).then(json => {
            //console.log(json)
-            document.getElementById("output").innerText = json[0].status;
+            document.getElementById("output").innerText = json;
         });
     
         // .then(response => { response.json() })
@@ -33,17 +33,48 @@ function fetchUrl(url, params) {
         // .catch(error => console.log(error));
     
 }
-
+//while making a get Req with Query parameters url has to build from the process Url
+// when no parameter it return a seems, you have lost you way message.
+//when making a post reqst a normal post works.
 function processSubmit(e) { 
     e.preventDefault();
     console.log("processing Submit")
+  //  params1 =? TypeOfRequest = signUpUser;
     var url = requrl;
-    params = {};
-    fetchUrl(url,params);
+    params1 = {
+     }
+   
+    fetchUrl(url, params1);
+
+}
+
+function addRow(e) { 
+
+    e.preventDefault();
+    console.log("processing Submit")
+    //  params1 =? TypeOfRequest = signUpUser;
+    var url = requrl;
+   
+    params1 = {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+       mode: 'no-cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    //   //  credentials: 'omit', // include, *same-origin, omit
+    //     // headers: {
+    //     //     'Content-Type': 'application/json'
+    //     //     // 'Content-Type': 'application/x-www-form-urlencoded',
+    //     // },
+        redirect: 'follow', // manual, *follow, error
+    //     //  referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({ name:"jsmith"}) // body data type must match "Content-Type" header
+    }
+
+    fetchUrl(url, params1);
+
+
 
 }
 
 
-var submitButton = document.getElementById("btn");
-
-submitButton.addEventListener("click", processSubmit);
+document.getElementById("btn").addEventListener("click", processSubmit);
+document.getElementById("btn2").addEventListener("click", addRow);
