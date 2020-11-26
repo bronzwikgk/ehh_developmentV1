@@ -1,4 +1,4 @@
-url = 'https://script.google.com/macros/s/AKfycbw5ms6neWmUKNUilhwQpqtD8p62lEpsbaVWnp5tvUJnf0XrUk09/exec';
+url = 'https://script.google.com/macros/s/AKfycbyOQZ3JCvko4kI8_Fr9PoZjJA0ERjQftjHwf70VZwkf/dev';
 data = {};
 // Default options are marked with *
 urlReqParameters = {
@@ -85,6 +85,6 @@ function processSubmit() {
 
 }
 
-document.getElementById("btn2").addEventListener("click", processSubmit());
+document.getElementById("btn").addEventListener("click", processSubmit());
 
 
