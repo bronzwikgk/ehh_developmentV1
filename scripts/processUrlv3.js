@@ -19,7 +19,7 @@ class processUrl {
   static fetchUrl(url) {
     fetch(url)
       .then(response => { response.text() })
-      .then(json => {
+      .then(data => {
      //   console.log(data); /* process your data further */
         return data;
       })

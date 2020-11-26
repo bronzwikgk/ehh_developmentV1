@@ -20,7 +20,7 @@ urlParameters = {
 function fetchUrl(url, params) { 
     fetch(url,params)
         .then(res => res.text()).then(json => {
-           //console.log(json)
+           console.log(json)
             document.getElementById("output").innerText = json;
         });
     
@@ -51,26 +51,40 @@ function processSubmit(e) {
 function addRow(e) { 
 
     e.preventDefault();
-    console.log("processing Submit")
+    console.log("processing AddRow")
     //  params1 =? TypeOfRequest = signUpUser;
     var url = requrl;
    
-    params1 = {
+    // params1 = {
+    //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    //    mode: 'no-cors', // no-cors, *cors, same-origin
+    //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    // //   //  credentials: 'omit', // include, *same-origin, omit
+    // //     // headers: {
+    // //     //     'Content-Type': 'application/json'
+    // //     //     // 'Content-Type': 'application/x-www-form-urlencoded',
+    // //     // },
+    //     redirect: 'follow', // manual, *follow, error
+    // //     //  referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    //     body: JSON.stringify({ name:"jsmith"}) // body data type must match "Content-Type" header
+    // }
+
+    // fetchUrl(url, params1);
+    fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
-       mode: 'no-cors', // no-cors, *cors, same-origin
+        mode: 'no-cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    //   //  credentials: 'omit', // include, *same-origin, omit
-    //     // headers: {
-    //     //     'Content-Type': 'application/json'
-    //     //     // 'Content-Type': 'application/x-www-form-urlencoded',
-    //     // },
+        //credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
         redirect: 'follow', // manual, *follow, error
-    //     //  referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify({ name:"jsmith"}) // body data type must match "Content-Type" header
-    }
-
-    fetchUrl(url, params1);
-
+        //   referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        payload: JSON.stringify({
+                name: "Samyuktha"
+            }) // body data type must match "Content-Type" header
+    });
 
 
 }
