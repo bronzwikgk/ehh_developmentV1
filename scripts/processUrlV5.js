@@ -1,4 +1,14 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+//http://dummy.restapiexample.com/
+//https://github.com/mdn/fetch-examples/
+//https://github.com/mdn/fetch-examples/blob/master/fetch-array-buffer/index.html
+//https://www.w3schools.com/tags/ref_httpmethods.asp
+//https://www.youtube.com/watch?v=_1xa8Bsho6A
+//https://github.com/bradtraversy/vanilla-node-rest-api
+// async function name([param[, param[, ...param]]]) {
+//     statements
+// }
+//https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 data = { status: "notCool!"};
 url = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
 request = {
@@ -26,7 +36,8 @@ var gAuthRequestparams = {
 
 
 function fetchHttpRequest(url, request) {
-    fetch(url,request)
+    fetch(url, request)
+        
         .then(status)
         .then(json)
         .then(function (data) {
@@ -37,12 +48,13 @@ function fetchHttpRequest(url, request) {
         });
 }
 
-function fetchUrl(url, params) {
-    fetch(url, params)
-        .then(response => {
-            if (!response.ok) { throw new Error("Could not reach website."); }
-            return response.json();
-        })
+function fetchUrl(url) {
+    fetch(url)
+        .then(status)
+        // .then(response => {
+        //     if (!response.ok) { throw new Error("Could not reach website."); }
+        //     return response.json();
+        // })
         .then(json => console.log(json))
         .catch(err => console.error(err));
     
@@ -58,7 +70,7 @@ function fetchUrl(url, params) {
 function status(response) {
     if (response.status >= 200 && response.status < 300) {
         console.log(response.statusText);
-        return Promise.resolve(response)
+        return Promise.resolve(response.json()  )
     } else {
         return Promise.reject(new Error(response.statusText))
     }
@@ -74,6 +86,7 @@ function buildEncodedUri(request) {
         {response.push(encodeURIComponent(d) + '=' + encodeURIComponent(request[d]));}
     return response.join('&');
 }
+
 // unbuilds the URL parameters and returns an object
 function unbuildEndodedUri(request) { 
     var urifragment = request.split("&"), data = {}, i, parts;
@@ -93,10 +106,6 @@ function unbuildEndodedUri(request) {
 }
 
 
-
-
-
-
 document.getElementById("btn").addEventListener("click", processSubmit);
 //while making a get Req with Query parameters url has to build from the process Url
 // when no parameter it return a seems, you have lost you way message.
@@ -110,8 +119,8 @@ function processSubmit(e) {
   //  params1 = { status: "notCool!" }
     var encodedParam = buildEncodedUri(request);
   //  var decodedParam = unbuildEndodedUri(encodedParam);
-      var url2 = url + "?"+encodedParam
-console.log(url2)
+    var url2 = url + "?"+encodedParam
+    console.log(url2)
     fetchUrl(url2);
    // console.log(url)
 }
