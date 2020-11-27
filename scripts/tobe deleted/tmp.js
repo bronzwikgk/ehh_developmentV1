@@ -42,7 +42,7 @@ function afterSubmit(e) {
 
     fetch(url, {
         method: 'POST',
-        
+        mode: 'cors',
         cache: 'no-cache',
         redirect: 'follow',
         body: JSON.stringify(info)

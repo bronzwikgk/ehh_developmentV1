@@ -9,19 +9,25 @@
 //     statements
 // }
 //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-data = { status: "notCool!"};
+ data = { status: "notCool!" };
+// //var data = {
+//     'first': firstName."Gitesh",
+//     last: lastName.value,
+//     phone: phoneNumber.value,
+//     city: city.value,
+// };
 url = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
 request = {
      // Default options are marked with *
-    method: 'get', // *GET, POST, PUT, DELETE, etc.
-   // mode: 'cors', // no-cors, *cors, same-origin
-   // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-  //  credentials: 'same-origin', // include, *same-origin, omit
-    // headers: {
-    //     'Content-Type': 'application/json'
-    //     // 'Content-Type': 'application/x-www-form-urlencoded',
-    // },
-  //  redirect: 'follow', // manual, *follow, error
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+   headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data) // body data type must match "Content-Type" header
 }
@@ -50,11 +56,10 @@ function fetchHttpRequest(url, request) {
 
 function fetchUrl(url) {
     fetch(url)
-        .then(status)
-        // .then(response => {
-        //     if (!response.ok) { throw new Error("Could not reach website."); }
-        //     return response.json();
-        // })
+        .then(response => {
+            if (!response.ok) { throw new Error("Could not reach website."); }
+            return response.json();
+        })
         .then(json => console.log(json))
         .catch(err => console.error(err));
     
@@ -118,9 +123,10 @@ function processSubmit(e) {
    // let url = new URL(requrl);
   //  params1 = { status: "notCool!" }
     var encodedParam = buildEncodedUri(request);
-  //  var decodedParam = unbuildEndodedUri(encodedParam);
+    console.log(url)
+    //  var decodedParam = unbuildEndodedUri(encodedParam);
     var url2 = url + "?"+encodedParam
     console.log(url2)
     fetchUrl(url2);
-   // console.log(url)
+   
 }
