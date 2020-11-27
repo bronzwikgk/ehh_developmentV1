@@ -16,7 +16,7 @@
 //     phone: phoneNumber.value,
 //     city: city.value,
 // };
-url = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
+reqUrl = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
 request = {
      // Default options are marked with *
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -119,14 +119,15 @@ function processSubmit(e) {
     e.preventDefault();
 
     //  params1 =? TypeOfRequest = signUpUser;
-    // var url = requrl;
-   // let url = new URL(requrl);
+    
+    let url1 = new URL(reqUrl);
   //  params1 = { status: "notCool!" }
     var encodedParam = buildEncodedUri(request);
-    console.log(url)
+    console.log(encodedParam)
     //  var decodedParam = unbuildEndodedUri(encodedParam);
-    var url2 = url + "?"+encodedParam
+    var url2 = url1 + "?"+encodedParam
     console.log(url2)
-    fetchUrl(url2);
+  //  fetchUrl(url2);
+
    
 }
