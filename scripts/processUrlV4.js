@@ -17,40 +17,6 @@ urlParameters = {
 
 
 
-function fetchUrl(url, params) { 
-    fetch(url,params)
-        .then(res => res.text()).then(json => {
-           console.log(json)
-            document.getElementById("output").innerText = json;
-        });
-    
-        // .then(response => { response.json() })
-        // .then(json => {
-        //     
-        //     console.log(data); /* process your data further */
-        //     return data;
-        // })
-        // .catch(error => console.log(error));
-    
-}
-//while making a get Req with Query parameters url has to build from the process Url
-// when no parameter it return a seems, you have lost you way message.
-//when making a post reqst a normal post works.
-function processSubmit(e) { 
-    e.preventDefault();
-    console.log("processing Submit")
-  //  params1 =? TypeOfRequest = signUpUser;
-  var url = requrl;
- // let url = new URL(requrl);
-
-
-    // url.searchParams.set('q', 'test me!');
-    // params1 = {
-    //  }
-   
-    fetchUrl(url);
-
-}
 
 function addRow(e) { 
 
@@ -94,5 +60,5 @@ function addRow(e) {
 }
 
 
-document.getElementById("btn").addEventListener("click", processSubmit);
+
 document.getElementById("btn2").addEventListener("click", addRow);
