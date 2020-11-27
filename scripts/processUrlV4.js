@@ -40,15 +40,15 @@ function processSubmit(e) {
     e.preventDefault();
     console.log("processing Submit")
   //  params1 =? TypeOfRequest = signUpUser;
-  //var url = requrl;
-  let url = new URL(requrl);
+  var url = requrl;
+ // let url = new URL(requrl);
 
 
-    url.searchParams.set('q', 'test me!');
-    params1 = {
-     }
+    // url.searchParams.set('q', 'test me!');
+    // params1 = {
+    //  }
    
-    fetchUrl(url, params1);
+    fetchUrl(url);
 
 }
 
