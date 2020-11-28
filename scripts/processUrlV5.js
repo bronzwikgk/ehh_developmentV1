@@ -19,17 +19,17 @@
 //data = { status: "notCool!" };
 var data = {
     'first': "firstName.value",
-    last: "lastName.value",
-    phone: "phoneNumber.value",
-    city: "city.value",
+    "last": "lastName.value",
+    'phone': "phoneNumber.value",
+    "city": "city.value",
 };
 
 reqUrl = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
 request = {
      // Default options are marked with *
      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-     mode: 'no-cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    // mode: 'no-cors', // no-cors, *cors, same-origin
+    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 //    // credentials: 'same-origin', // include, *same-origin, omit
 //     headers: {
 //         'Content-Type': 'application/json'
@@ -50,15 +50,14 @@ var gAuthRequestparams = {
 
 
 function fetchHttpRequest(url, request) {
-    fetch(url, request)  
-        .then(status)
-        .then(json)
-        .then(function (data) {
-         //   console.log('Request succeeded with JSON response', data);
-            return data;
-        }).catch(function (error) {
-            console.log('Request failed', error);
-        });
+    fetch(url, request)
+        .then(response => {
+            if (!response.ok) { throw new Error("Could not reach website."); }
+            return response.json();
+        })
+        .then(json => console.log(json))
+        .catch(err => console.error(err));
+
 }
 
 function fetchUrl(url) {
@@ -150,12 +149,15 @@ function processGet(e) {
 // when no parameter in the get Req "it return a seems, you have lost you way" message is responded back.
 //when making a post reqst a normal post works.
 function processPost(e) {
+    
     e.preventDefault();
+    
     console.log(e.target.id);
     //  params1 =? TypeOfRequest = signUpUser;
     let url = reqUrl;
     //  let url1 = new URL(reqUrl);
     params1 = { status: "notCool!" }
+    
     var data = {
         'first': "firstName.value",
         last: "lastName.value",
@@ -168,18 +170,14 @@ function processPost(e) {
     var url2 = url + "?" + encodedParam;
 
     console.log(url2)
-
-  //  fetchHttpRequest(url, request);  
-
-
-
-    fetch(url,request)
-        .then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            console.log(data);
-        });
-
+   fetchHttpRequest(url, request);  
+    // fetch(url,request)
+    //     .then(response => {
+    //        // if (!response.ok) { throw new Error("Could not reach website."); }
+    //         return response.json();
+    //     })
+    //     .then(json => console.log(json))
+    //     .catch(err => console.error(err)); 
 }
 
 document.getElementById("get").addEventListener("click", processGet);
