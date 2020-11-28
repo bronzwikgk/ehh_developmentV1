@@ -24,6 +24,8 @@ var data = {
     "city": "city.value",
 };
 
+
+
 reqUrl = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
 request = {
      // Default options are marked with *
