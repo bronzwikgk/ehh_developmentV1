@@ -34,7 +34,12 @@ function isValidHttpUrl(string) {
 
 
 function isArray(o) {
-    return o.length;
+    return o.length && Object.prototype.toString.call(o) === '[object Array]';
+}
+
+
+function isArrayObject(o) {
+    return o.length&&typeof o === "object";
 }
 
 /**

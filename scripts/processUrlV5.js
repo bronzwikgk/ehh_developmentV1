@@ -222,7 +222,7 @@ function processPost(e) {
     
     console.log(e.target.id);
     //  params1 =? TypeOfRequest = signUpUser;
-    let url = reqUrl;
+    let url = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
     //  let url1 = new URL(reqUrl);
     params1 = { status: "notCool!" }
     
