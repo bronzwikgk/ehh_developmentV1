@@ -170,14 +170,14 @@ function processPost(e) {
     var url2 = url + "?" + encodedParam;
 
     console.log(url2)
-   fetchHttpRequest(url, request);  
-    // fetch(url,request)
-    //     .then(response => {
-    //        // if (!response.ok) { throw new Error("Could not reach website."); }
-    //         return response.json();
-    //     })
-    //     .then(json => console.log(json))
-    //     .catch(err => console.error(err)); 
+    //fetchUrl(url, request);  
+    fetch(url,request)
+        .then(response => {
+           // if (!response.ok) { throw new Error("Could not reach website."); }
+            return response.json();
+        })
+        .then(json => console.log(json))
+        .catch(err => console.error(err)); 
 }
 
 document.getElementById("get").addEventListener("click", processGet);
