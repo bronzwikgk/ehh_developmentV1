@@ -16,28 +16,29 @@
 //     phone: phoneNumber.value,
 //     city: city.value,
 // };
-//data = { status: "notCool!" };
-var data = {
-    'first': "firstName.value",
-    "last": "lastName.value",
-    'phone': "phoneNumber.value",
-    "city": "city.value",
-};
+data = { status: "notCool!" };
+// var data = {
+//     first: "firstName.value",
+//     last: "lastName.value",
+//     phoneNumber: "phoneNumber.value",
+//     city: "city.value",
+// };
+//params1 = { status: "notCool!" }
 
 reqUrl = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
 request = {
      // Default options are marked with *
      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    // mode: 'no-cors', // no-cors, *cors, same-origin
-    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      mode: 'no-cors', // no-cors, *cors, same-origin
+     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 //    // credentials: 'same-origin', // include, *same-origin, omit
-//     headers: {
-//         'Content-Type': 'application/json'
-//         // 'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     redirect: 'follow', // manual, *follow, error
+    // headers: {
+    //     'Content-Type': 'application/json'
+    //     // 'Content-Type': 'application/x-www-form-urlencoded',
+    // },
+     redirect: 'follow', // manual, *follow, error
 //    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-   body: JSON.stringify(data) // body data type must match "Content-Type" header
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
 }
 var gAuthRequestparams = {
     'client_id': '385607167966-u90ri3n5qkapcuq8gmhheg781qr7jbkp.apps.googleusercontent.com',
@@ -51,7 +52,7 @@ var gAuthRequestparams = {
 function fetchHttpRequest(url, request) {
     fetch(url, request)
         .then(response => {
-            if (!response.ok) { throw new Error("Could not reach website."); }
+          //  if (!response.ok) { throw new Error("Could not reach website."); }
             return response.json();
         })
         .then(json => console.log(json))
@@ -94,20 +95,53 @@ fetch(myRequest)
 
 }
 
-function fetchUrl2(url) {
-        fetch(url)
-        .then(response => {
-         if (!response.ok) { throw new Error("Could not reach website."); }
-            return response.text();
-        })
-        .then(json => console.log(json))
-        .catch(err => console.error(err));
+function fetchUrl2(url,params) {
+    // fetch(url,request)
+    //     .then(response => {
+    //         const contentType = response.headers.get('content-type');
+    //         console.log("response Type is ", contentType);
+    //         if (contentType.includes('application/json')) {
+    //             console.log(contentType, "Caught Json");
+    //             return response.json();
+    //         }
+    //         if (contentType.includes('text/html')) {
+    //             console.log(contentType, "Caught HTML");
+    //             return response.text();
+    //         }
+    //         if (contentType.includes('image/jpeg')) {
+    //             console.log(contentType, "Caught Image");
+    //             response.blob()
+    //                 .then(function (myBlob) {
+    //                     var objectURL = URL.createObjectURL(myBlob);
+    //                     let outputResponse = new Image();
+    //                     outputResponse.src = objectURL;
+    //                     document.getElementsByTagName('body')[0].appendChild(outputResponse)
+    //                 });
+    //         }
+    //         if (contentType.includes('text/plain')) {
+    //             console.log(contentType, "Caught Text");
+    //             return response.text();
+    //         }
+    //     })
+    //     .then(data => {
+    //         console.log("data is ", typeof data, data); /* process your data further */
+    //     })
+    //     .catch(error => console.log(error));
+  
     
-    // fetch(url, params)
-    //     .then(res => res.text()).then(json => {
-    //         console.log(json)
-    //         document.getElementById("output").innerText = json;
-    // });
+    // fetch(url)
+        // .then(response => {
+        //  if (!response.ok) { throw new Error("Could not reach website."); }
+        //     return response.text();
+        // })
+        // .then(json => console.log(json))
+        // .catch(err => console.error(err));
+    
+    fetch(url, params)
+        .then(res => res.text()).then(json => {
+            console.log(json)
+            document.getElementById("output").innerText = json;
+    });
 
 }
 
@@ -193,7 +227,7 @@ function processPost(e) {
     params1 = { status: "notCool!" }
     
     var data = {
-        'first': "firstName.value",
+        first: "firstName.value",
         last: "lastName.value",
         phone: "phoneNumber.value",
         city: "city.value",
@@ -202,16 +236,46 @@ function processPost(e) {
     //  console.log(url)
     //  var decodedParam = unbuildEndodedUri(encodedParam);
     var url2 = url + "?" + encodedParam;
-
-    console.log(url2)
-    //fetchUrl(url, request);  
-    fetch(url,request)
-        .then(response => {
-           // if (!response.ok) { throw new Error("Could not reach website."); }
-            return response.json();
+    request = {
+        // Default options are marked with *
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        //    // credentials: 'same-origin', // include, *same-origin, omit
+        // headers: {
+        //     'Content-Type': 'application/json'
+        //     // 'Content-Type': 'application/x-www-form-urlencoded',
+        // },
+        redirect: 'follow', // manual, *follow, error
+        //    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+    }
+   postParam =  {
+        method: 'POST',
+            mode: 'cors',
+                cache: 'no-cache',
+                    redirect: 'follow',
+                        body: JSON.stringify(data)
+    }
+    fetch(url, request )
+        .then(res => res.text())
+        .then(res => {
+            console.log(res);
+            // customerForm.reset();
+            // buttonText.textContent = "Send";
+            // buttonSpinner.classList.add("d-none");
+            // submitButton.disabled = false;
         })
-        .then(json => console.log(json))
         .catch(err => console.error(err)); 
+  //  console.log(url2)
+   // fetchUrl2(url, request);  
+    // fetch(url,request)
+    //     .then(response => {
+    //       //  if (!response.ok) { throw new Error("Could not reach website."); }
+    //         return response.text();
+    //     })
+    //     .then(data => console.log(data))
+    //    
 }
 
 document.getElementById("get").addEventListener("click", processGet);
