@@ -115,19 +115,18 @@ document.getElementById("btn").addEventListener("click", processSubmit);
 // when no parameter it return a seems, you have lost you way message.
 //when making a post reqst a normal post works.
 function processSubmit(e) {
-   e.preventDefault();
-
+    e.preventDefault();
+    console.log(e);
     //  params1 =? TypeOfRequest = signUpUser;
     let url = reqUrl;
-
-  //  let url1 = new URL(reqUrl);
+    //  let url1 = new URL(reqUrl);
     params1 = { status: "notCool!" }
-     var encodedParam = buildEncodedUri(request);
-   //  console.log(url)
-    // //  var decodedParam = unbuildEndodedUri(encodedParam);
-     var url2 = url + "?"+encodedParam
+    var encodedParam = buildEncodedUri(request);
+    //  console.log(url)
+    //  var decodedParam = unbuildEndodedUri(encodedParam);
+    var url2 = url + "?" + encodedParam;
+    
     console.log(url2)
-    fetchUrl(url2);
-
-   
+    
+    fetchUrl(url2);  
 }
