@@ -71,7 +71,6 @@ function fetchUrl(url) {
 
 }
 
-
 function status(response) {
     if (response.status >= 200 && response.status < 300) {
         console.log(response.statusText);
@@ -116,18 +115,19 @@ document.getElementById("btn").addEventListener("click", processSubmit);
 // when no parameter it return a seems, you have lost you way message.
 //when making a post reqst a normal post works.
 function processSubmit(e) {
-    e.preventDefault();
+   e.preventDefault();
 
     //  params1 =? TypeOfRequest = signUpUser;
-    
-    let url1 = new URL(reqUrl);
-  //  params1 = { status: "notCool!" }
-    var encodedParam = buildEncodedUri(request);
-    console.log(encodedParam)
-    //  var decodedParam = unbuildEndodedUri(encodedParam);
-    var url2 = url1 + "?"+encodedParam
+    let url = reqUrl;
+
+  //  let url1 = new URL(reqUrl);
+    params1 = { status: "notCool!" }
+     var encodedParam = buildEncodedUri(request);
+   //  console.log(url)
+    // //  var decodedParam = unbuildEndodedUri(encodedParam);
+     var url2 = url + "?"+encodedParam
     console.log(url2)
-  //  fetchUrl(url2);
+    fetchUrl(url2);
 
    
 }
