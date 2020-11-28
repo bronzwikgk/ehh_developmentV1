@@ -58,10 +58,7 @@ function fetchHttpRequest(url, request) {
         .catch(err => console.error(err));
 
 }
-function tempFetch(myRequest) { 
-
-
-
+function fetchUrl(myRequest) { 
 fetch(myRequest)
     .then(response => {
         const contentType = response.headers.get('content-type');
@@ -97,11 +94,11 @@ fetch(myRequest)
 
 }
 
-function fetchUrl(url) {
+function fetchUrl2(url) {
         fetch(url)
         .then(response => {
          if (!response.ok) { throw new Error("Could not reach website."); }
-            return response.json();
+            return response.text();
         })
         .then(json => console.log(json))
         .catch(err => console.error(err));
@@ -175,7 +172,7 @@ function processGet(e) {
     
     console.log(url2)
     
-    tempFetch(url2);  
+    fetchUrl(url2);  
 
 
     
