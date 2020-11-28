@@ -1,28 +1,32 @@
 const UserSchema = { name: { type: String, required: true}, email: { type: String, required: true }, password: { type: String, required: true }, date: { type: Date, default: Date.now } };
-console.log("input",UserSchema);
-var row = new Array('ehhId', 'd', 'parent', 'type')
+var schema = {
+    "name": {
+        "title": "Name",
+        "description": "Nickname allowed",
+        "type": "string"
+    },
+    "gender": {
+        "title": "Gender",
+        "description": "Your gender",
+        "type": "string",
+        "enum": [
+            "male",
+            "female",
+            "alien"
+        ]
+    }
+}
+
+
+console.log("input",schema);
+var row = new Array('d', 'ehhId', 'parent','type','rowName')
 
 
 
 
 
 function createRow(input, output, currentRow, parent, id, d, key, options, callback) {
-
-    id++;
-    // console.log(typeof key,"saving",input, currentRow,id)
-    if (output[0].indexOf(key) === -1 || typeof key !== null || typeof key !== undefined) {
-     //   console.log("found New Attribute header", key, input);
-      //  output[0].push(key);
-    }
-
-    currentRow.push(id, d, parent, typeof input);
-
-    for (var i = 0; i <= output[0].length; i++) {
-
-    }
-
-
-
+    currentRow.push(id, d, parent,typeof input,key); 
     return currentRow;
 }
 
@@ -31,8 +35,10 @@ function createRow(input, output, currentRow, parent, id, d, key, options, callb
 function obj2Arr(input, output, currentRow, parent, id, d, key, options, callback) {
     
     if (!output) { var output = []; }
-    if (!id) { var id = 0; }
-    d = d || 0;
+    if (!key) { var key = ""; }
+    if (!d) { var d = 0; }
+    if (!currentRow) { var currentRow = [];id++ }
+    id = id || 0;
   
   //  console.log(d,id)
     if (!parent) {
@@ -48,32 +54,37 @@ function obj2Arr(input, output, currentRow, parent, id, d, key, options, callbac
         case 'object':
            // console.log(id);
             //send to iteration with a new currentRow
-            console.log("objectFound", currentRow, parent, input, typeof input, key)
-            console.log(Object.getOwnPropertyNames(input));
-            currentRow = createRow(input, output, [], parent, id, d, key);
+            //console.log("objectFound", currentRow, parent, input, typeof input, key)
+            //console.log(Object.getOwnPropertyNames(input));
             
-           //  console.log(currentRow);
-            iterateObj(input, output, currentRow, parent, id,d, key ,options, obj2Arr);
-
-            output.push(currentRow);
+            currentRow = createRow(input, output, [], parent, d, id, key);d++;
+            
+             //console.log(currentRow,parent,key);
+             
+             iterateObj(input, output, currentRow, parent, d,id, key ,options, obj2Arr);
+             output.push(currentRow);
             
             break;
         
         case 'string':
-            console.log(Object.getOwnPropertyNames(input));
-            console.log("string found", currentRow, parent, input, typeof input,key);
+           // console.log(Object.getOwnPropertyNames(input));
+           //currentRow = appendRow(key,currentRow,currentRow,parent,id,d,input,output);
+            //console.log("string found", currentRow, parent, input, typeof input,key);
            // console.log(parent,input);
        //
             break;
         case 'function':
-            //console.log("function found", currentRow, parent, input, typeof input, key);
-           // console.log(Object.getOwnPropertyNames(input));
+            console.log("function found", currentRow, parent, input, typeof input, key);
+            //currentRow = appendRow(key,currentRow,currentRow,parent,id,d,input,output);
+            // console.log(Object.getOwnPropertyNames(input));
             // createRow(key, output, parent, id, d);
             break;
         case 'boolean':
-            console.log("boolean found", currentRow, parent, input, typeof input, key);
-            console.log(Object.getOwnPropertyNames(input));
+           // console.log("boolean found", currentRow, parent, key, input, typeof input);
+           // currentRow = appendRow(key,currentRow,currentRow,parent,id,d,input,output);
+            //console.log(Object.getOwnPropertyNames(input));
             // createRow(key, output, parent, id, d);
+            
             break;
 
        
@@ -88,15 +99,27 @@ function obj2Arr(input, output, currentRow, parent, id, d, key, options, callbac
 }
 
 
+function appendRow(key,currentRow,currentRow,parent,d,id,input,output){
+   // console.log(key);
+    // console.log(typeof key,"saving",input, currentRow,id)
+    if (output[0].indexOf(key) === -1 && typeof key !== null && typeof key !== undefined) {
+           console.log("found New Attribute header", key);
+          output[0].push(key);
+        }
+        currentRow.splice(output[0].indexOf(key),0,JSON.stringify(input))
+}
 
-function iterateObj(input, output,currentRow, parent, id, d, key,options, callback) {
+
+
+
+function iterateObj(input, output,currentRow, parent, d,id, key,options, callback) {
     
     if (!input) return;
     for (var key in input) {
         if ({}.hasOwnProperty.call(input, key)) {
-           // parent = JSON.stringify(key)
+            parent = JSON.stringify(key);
          //   console.log(parent)
-            callback(input[key], output, currentRow, parent, id, d, key,options, callback)
+            callback(input[key], output, currentRow, parent, d,id, key,options, callback)
           
             
            
@@ -152,12 +175,11 @@ function iterateArray() {
 
 
 
-
 function processTest(e) {
     e.preventDefault();
-    var output = obj2Arr(UserSchema, []);
+    var output = obj2Arr(schema, []);
     console.log(output)
-    document.getElementById("output").innerText = output;
+    document.getElementById("output").innerText = JSON.stringify(output);
 
 
 
