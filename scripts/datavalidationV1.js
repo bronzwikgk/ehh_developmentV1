@@ -2,20 +2,6 @@
 //https://sites.google.com/site/scriptsexamples/custom-methods/2d-arrays-library
 
 
-
-function isArray(o) {
-  return o.length && Object.prototype.toString.call(o) === '[object Array]';
-}
-
-
-
-/** 
- * Returns true if the given test value is an object; false otherwise.
- */
-function isObject_(test) {
-  return Object.prototype.toString.call(test) === '[object Object]';
-}
-
 //return true if all items are the same in two unordered Array
 function compareTwoArray_(arr1, arr2){
     arr1.sort();
@@ -45,6 +31,9 @@ function compareTwoArray_(arr1, arr2){
   function isNumber (value) {
   return typeof value === 'number' && isFinite(value);
   }
+  
+  
+  
   
   // Returns if a value is an array
   function isArray (value) {
