@@ -25,7 +25,6 @@ var data = {
 };
 
 
-
 reqUrl = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
 request = {
      // Default options are marked with *
@@ -49,7 +48,6 @@ var gAuthRequestparams = {
     'include_granted_scopes': 'true',
     'response_type': 'token'
 };
-
 
 function fetchHttpRequest(url, request) {
     fetch(url, request)
