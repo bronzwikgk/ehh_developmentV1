@@ -53,10 +53,14 @@ class objProcessor {
         if (!currentRow) { var currentRow = []; }
 
         output[0].forEach((element, index) => {
-
             currentRow.push(input[output[0][index]]);
-
         });
+
+
+
+
+
+
         //  console.log('createRow',currentRow)
         return currentRow;
     }
@@ -87,12 +91,7 @@ class objProcessor {
                 console.log(newRow);
                 objProcessor.iterateObj(input[key], output, currentRow, key, id, d, key, options, callback)
                 output.push(newRow);
-                for (var value in newRow) {
-                    if (!newRow.hasOwnProperty(value)) continue;
-                    console.log(key, value);
-                    
-                   // output[key + '.' + value] = newRow[value];
-                }
+                
             } else {
 
               
