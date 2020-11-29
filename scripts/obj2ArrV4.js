@@ -22,11 +22,14 @@ console.log("input",schema);
 var row = new Array('d', 'ehhId', 'parent','type','rowName')
 
 
-
+//helper Function to get the name protoNameof an entity
+function getEntityType(entity) {
+    return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
+}
 
 
 function createRow(input, output, currentRow, parent, id, d, key, options, callback) {
-    currentRow.push(id, d, parent,typeof input,key); 
+    currentRow.push(id, d, parent, typeof input, key); 
     return currentRow;
 }
 
@@ -38,7 +41,7 @@ function obj2Arr(input, output, currentRow, parent, id, d, key, options, callbac
     if (!key) { var key = ""; }
     if (!d) { var d = 0; }
     if (!currentRow) { var currentRow = [];id++ }
-    id = id || 0;
+   // id = id || 0;
   
   //  console.log(d,id)
     if (!parent) {
@@ -47,17 +50,21 @@ function obj2Arr(input, output, currentRow, parent, id, d, key, options, callbac
         output.push(row);
         
     };
- // console.log("input", typeof input, input);
+    console.log("input", getEntityType(input), input);
 
-    switch (typeof input) {
+    switch (getEntityType(input)) {
         // If score is 90 or greater
-        case 'object':
+        case 'Object':
+          
+          //  console.log(Object.entries(input))
            // console.log(id);
             //send to iteration with a new currentRow
-            //console.log("objectFound", currentRow, parent, input, typeof input, key)
+            console.log("objectFound", parent, currentRow, input, typeof input, key)
+           // validateHeaders =()
             //console.log(Object.getOwnPropertyNames(input));
-            
-            currentRow = createRow(input, output, [], parent, d, id, key);d++;
+            id++;
+            console.log(id), id = id + 1;
+           currentRow = createRow(input, output, [], parent, d, id, key);
             
              //console.log(currentRow,parent,key);
              
@@ -65,22 +72,38 @@ function obj2Arr(input, output, currentRow, parent, id, d, key, options, callbac
              output.push(currentRow);
             
             break;
+        case 'Array':
+            // console.log(Object.keys(input))
+            //  console.log(Object.entries(input))
+            // console.log(id);
+            //send to iteration with a new currentRow
+            console.log("ArrayFound", parent, currentRow, input, typeof input, key)
+            //console.log(Object.getOwnPropertyNames(input));
+
+            //currentRow = createRow(input, output, [], parent, d, id, key); d++;
+
+            //console.log(currentRow,parent,key);
+
+            //iterateObj(input, output, currentRow, parent, d, id, key, options, obj2Arr);
+            //output.push(currentRow);
+
+            break;
         
-        case 'string':
+        case 'String':
            // console.log(Object.getOwnPropertyNames(input));
            //currentRow = appendRow(key,currentRow,currentRow,parent,id,d,input,output);
-            //console.log("string found", currentRow, parent, input, typeof input,key);
+            console.log("string found", parent, currentRow,  input, typeof input,key);
            // console.log(parent,input);
        //
             break;
-        case 'function':
-            console.log("function found", currentRow, parent, input, typeof input, key);
-            //currentRow = appendRow(key,currentRow,currentRow,parent,id,d,input,output);
+        case 'Function':
+           console.log("function found", parent, currentRow,  input, typeof input, key);
+           // currentRow = appendRow(key,currentRow,currentRow,parent,id,d,input,output);
             // console.log(Object.getOwnPropertyNames(input));
             // createRow(key, output, parent, id, d);
             break;
-        case 'boolean':
-           // console.log("boolean found", currentRow, parent, key, input, typeof input);
+        case 'Boolean':
+            console.log("boolean found", parent, currentRow, input, typeof input, key);
            // currentRow = appendRow(key,currentRow,currentRow,parent,id,d,input,output);
             //console.log(Object.getOwnPropertyNames(input));
             // createRow(key, output, parent, id, d);
@@ -91,7 +114,7 @@ function obj2Arr(input, output, currentRow, parent, id, d, key, options, callbac
         
         // Anything 59 or below is failing
         default:
-            console.log("F");
+            console.log(getEntityType(input));
     }
     
    // output.push([obj]);
@@ -108,9 +131,6 @@ function appendRow(key,currentRow,currentRow,parent,d,id,input,output){
         }
         currentRow.splice(output[0].indexOf(key),0,JSON.stringify(input))
 }
-
-
-
 
 function iterateObj(input, output,currentRow, parent, d,id, key,options, callback) {
     
@@ -177,7 +197,7 @@ function iterateArray() {
 
 function processTest(e) {
     e.preventDefault();
-    var output = obj2Arr(schema, []);
+    var output = obj2Arr(UserSchema, []);
     console.log(output)
     document.getElementById("output").innerText = JSON.stringify(output);
 
