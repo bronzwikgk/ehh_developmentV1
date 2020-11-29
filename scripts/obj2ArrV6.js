@@ -1,3 +1,26 @@
+
+function flattenObject(ob) {
+    var toReturn = {};
+
+    for (var i in ob) {
+        if (!ob.hasOwnProperty(i)) continue;
+
+        if ((typeof ob[i]) == 'object' && ob[i] !== null) {
+            var flatObject = flattenObject(ob[i]);
+            for (var x in flatObject) {
+                if (!flatObject.hasOwnProperty(x)) continue;
+
+                toReturn[i + '.' + x] = flatObject[x];
+            }
+        } else {
+            toReturn[i] = ob[i];
+        }
+    }
+    return toReturn;
+}
+
+
+
 const UserSchema = { name: { type: String, required: true }, email: { type: String, required: true }, password: { type: String, required: true }, date: { type: Date, default: Date.now } };
 var schema = {
     "name": {
@@ -23,33 +46,23 @@ function getEntityType(entity) {
 }
 
 var row = new Array('id', 'd', 'parent');
-class objProcessor { 
+class objProcessor {
 
- 
-    static createRow(input, output, currentRow, parent, id, d, key, options, callback) { 
+
+    static createRow(input, output, newRow, parent, id, d, key, options, callback) {
         if (!currentRow) { var currentRow = []; }
 
         output[0].forEach((element, index) => {
-            
+
             currentRow.push(input[output[0][index]]);
-            
+
         });
-      //  console.log('createRow',currentRow)
+        //  console.log('createRow',currentRow)
         return currentRow;
     }
 
     static iterateObj(input, output, currentRow, parent, id, d, key, options, callback) {
         if (!input) return;
-        for (var key in input) {
-            if ({}.hasOwnProperty.call(input, key)) {
-               var tmp =  callback(input[key], output, currentRow, JSON.stringify(key), d, id, key, options, callback)
-            }
-        }
-
-        return output;
-    }
-   
-    static obj2Array(input, output, currentRow, parent, id, d, key, options, callback) { 
         if (!output) { var output = []; }
         key = key || "";
         if (!d) { var d = 0; }
@@ -57,13 +70,53 @@ class objProcessor {
         if (!currentRow) { var currentRow = []; }
         if (!parent) {
             var parent = "root";
-          //  var parentRow = objProcessor.createRow(input, output, parentRow, parent, id, d, key, options, callback);
+            //  var parentRow = objProcessor.createRow(input, output, parentRow, parent, id, d, key, options, callback);
             output.push(row);
-           // console.log(output);
+            // console.log(output);
+
+        };
+
+        for (var key in input) {
+            if ((typeof input[key]) == 'object' && input[key] !== null) {
+                console.log(key, input[key]);
+                input["parent"] = parent;
+                input["id"] = id;
+                input["d"] = d;
+                if (!input.type) { input["type"] = getEntityType(input); };
+                var newRow = objProcessor.createRow(input, output, newRow, parent, id, d, key, options, callback); id = id + 1;
+                console.log(newRow);
+                objProcessor.iterateObj(input[key], output, currentRow, key, id, d, key, options, callback)
+                output.push(newRow);
+                for (var value in newRow) {
+                    if (!newRow.hasOwnProperty(value)) continue;
+                    console.log(key, value);
+                    
+                   // output[key + '.' + value] = newRow[value];
+                }
+            } else {
+
+              
+             //  output[key] = input[key];
+            }
+        }
+        return output;
+    }
+
+    static obj2Array(input, output, currentRow, parent, id, d, key, options, callback) {
+        if (!output) { var output = []; }
+        key = key || "";
+        if (!d) { var d = 0; }
+        if (!id) { var id = 0; }
+        if (!currentRow) { var currentRow = []; }
+        if (!parent) {
+            var parent = "root";
+            //  var parentRow = objProcessor.createRow(input, output, parentRow, parent, id, d, key, options, callback);
+            output.push(row);
+            // console.log(output);
 
         };
         switch (getEntityType(input)) {
-          
+
             case 'Object':
                 console.log(id);
                 id = id + 1;
@@ -73,10 +126,10 @@ class objProcessor {
                 input["id"] = id; id++;
                 input["d"] = d;
                 if (!input.type) { input["type"] = getEntityType(input); };
-                
-              //  console.log(input),
-                    currentRow = objProcessor.createRow(input, output, [], parent, id, d, key);
-               // console.log(currentRow,parent,key);
+
+                //  console.log(input),
+                currentRow = objProcessor.createRow(input, output, [], parent, id, d, key);
+                // console.log(currentRow,parent,key);
 
                 objProcessor.iterateObj(input, output, currentRow, parent, d, id, key, options, objProcessor.obj2Array);
                 output.push(currentRow);
@@ -103,20 +156,20 @@ class objProcessor {
                 // console.log(Object.getOwnPropertyNames(input));
                 console.log("string found", parent, currentRow, input, typeof input, key);
                 currentRow = objProcessor.appendRow(input, output, currentRow, parent, id, d, key, options, callback);
-            
+
                 // console.log(parent,input);
                 //
                 break;
             case 'Function':
                 var func = input.toString();
-              //  console.log(func)
-              //  console.log("function found", parent, currentRow, input, key);
+                //  console.log(func)
+                //  console.log("function found", parent, currentRow, input, key);
                 currentRow = objProcessor.appendRow(input.toString(), output, currentRow, parent, id, d, key, options, callback);
                 // console.log(Object.getOwnPropertyNames(input));
                 // createRow(key, output, parent, id, d);
                 break;
-            case 'Boolean' :
-               // console.log("boolean found", parent, currentRow, input, typeof input, key);
+            case 'Boolean':
+                // console.log("boolean found", parent, currentRow, input, typeof input, key);
                 currentRow = objProcessor.appendRow(input, output, currentRow, parent, id, d, key, options, callback);
                 //console.log(Object.getOwnPropertyNames(input));
                 // createRow(key, output, parent, id, d);
@@ -127,9 +180,9 @@ class objProcessor {
 
             // Anything 59 or below is failing
             default:
-               console.log(getEntityType(input),input);
+                console.log(getEntityType(input), input);
         }
-        
+
 
         return output;
     }
@@ -138,12 +191,12 @@ class objProcessor {
         // console.log(key);
         // console.log(typeof key,"saving",input, currentRow,id)
         if (output[0].indexOf(key) === -1 && typeof input !== null && typeof input !== undefined) {
-           // console.log("found New Attribute header", key,input.toString());
+            // console.log("found New Attribute header", key,input.toString());
             output[0].push(key);
             currentRow.splice(output[0].indexOf(key), 0, input);
         }
-       
-     //   console.log(currentRow)
+
+        //   console.log(currentRow)
     }
 
 
@@ -152,7 +205,7 @@ class objProcessor {
 
 function processTest(e) {
     e.preventDefault();
-    var output = objProcessor.obj2Array(UserSchema, []);
+    var output =objProcessor.iterateObj(schema, []);
     console.log(output)
     document.getElementById("output").innerText = JSON.stringify(output);
 
@@ -161,4 +214,3 @@ function processTest(e) {
 }
 
 document.getElementById("get").addEventListener("click", processTest);
- 
