@@ -366,7 +366,7 @@ function processTest(e) {
     e.preventDefault();
     console.log(sample2)
     var output = obj2Array(sample2, []);
-    outputJson = array2Json(output);
+   // outputJson = array2Json(output);
   //  console.log(output)
     document.getElementById("output").innerText = JSON.stringify(output);
 }
