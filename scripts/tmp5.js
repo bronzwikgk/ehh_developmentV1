@@ -243,7 +243,6 @@ function updateRow(input, output, currentRow, prevRow, id, d, key, options, call
     return currentRow;
 }
 
-
 function obj2Array(input, output, parentID, id, d, key, currentRow) {
     if (!output) { var output = [];}
     if (!d) { var d = 0; }
@@ -306,7 +305,6 @@ function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
 
-
 function printArray(outout, ss) {
     for (var i = 0; i <= output.length; i++) {
         if (output[i]) {
@@ -364,7 +362,7 @@ function array2Json(input, output) {
 function processTest(e) {
     e.preventDefault();
     console.log(sample2)
-    var output = obj2Array(sample2, []);
+    var output = obj2Array(sample, []);
    // outputJson = array2Json(output);
    console.log(output)
     document.getElementById("output").innerText = JSON.stringify(output);
