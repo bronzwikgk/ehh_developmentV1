@@ -339,14 +339,12 @@ function printArray(outout, ss) {
 function fillEmptyDepth(input, header) {
     for (j = 1; j <= header.length - input.length; j++) {
         input.push("");
-     
     }
     return input
 }
 
 //this function primarly check for the presence of a keys in any an array, if not present and options [ returns false and update and return position]
 function validateNupdate(input, output) {
-
     if (output[0].indexOf(input) === -1 && typeof input !== null && typeof input !== undefined) {
         output[0].push(input);    
     }
