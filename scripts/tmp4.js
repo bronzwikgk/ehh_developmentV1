@@ -291,16 +291,18 @@ function obj2Array(input, output, parentID, id, d, key, currentRow) {
                 updateRow(input[key].toString(), output, currentRow, parentID, id, d, key);
               //   console.log("String Value Found", input[key], " in key", key, "parent", parentID, currentRow)
             } else {
-                console.log("errand", key, input[key])
+                console.log("errand", key, input[key],typeof key)
             }
         }
     } else if (getEntityType(input) === "Array") { 
         
         for (i = 0; i < input.length; i++) {
             if (typeof input[i] === "object" && input[i] !== null) {
-                console.log("Found Object in Array", input[i]);
-                // obj2Array(arr[i], output, parentID, id, d, key, currentRow);
-                // obj2Array(input[key], output, key, id, d, key, newRow);
+            //    console.log("Found Object in Array", input[i]);
+                newRow = createRow(input[i], output, parentID, id, d, key);
+                output.push(newRow);
+                obj2Array(input[i], output, key, id, d, key, newRow);
+              
             } else {
                // console.log("Found value in Array", input[i], typeof input[i], parentID, input[i]);
                 newRow = createRow(input[i], output, parentID, id, d, input[i]);
