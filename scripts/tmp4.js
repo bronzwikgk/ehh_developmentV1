@@ -36,7 +36,6 @@ var sample = {
         }
     }
 }
-
 var sample2 = {
     "menus": [
         {
@@ -202,7 +201,6 @@ var sample2 = {
         }
     ]
 }
-
 const UserSchema = {
     name: {
         type: String, required: true
@@ -231,46 +229,30 @@ var schema = {
         ]
     }
 }
-
-function test() {
-    output = obj2Array(sample);
-    console.log(output);
-    var ss = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    // printArray(output,ss);
-    // var range = ss.getRange(1, 1, output.length, output[0].length);
-    //  range.setValues(output);
-}
-
 var row = new Array('id', 'd', 'parent', 'entity',"type");
 
 function createRow(input, output, parent, id, d, key, options, callback) {
     id = output.length;
-    // console.log(id,d);
     var newRow = [id, d, parent,key,getEntityType(input)];
-    //  fillEmptyDepth(newRow,output[0])
-    // console.log('createRow', newRow,"header" ,output[0])
     return newRow;
 }
 
 function updateRow(input, output, currentRow, prevRow, id, d, key, options, callback) {
-  //  console.log("updating ", currentRow)
     fillEmptyDepth(currentRow, output[0])
     currentRow.splice(output[0].indexOf(key), 1, input);
-   // console.log("updated Row", currentRow, "for key", key, output[0], output[0].indexOf(key))
     return currentRow;
 }
 
 
-function obj2Array(input, output, parentID, id, d, key, currentRow) { 
-      if (!output) { var output = [];}
-    if (!d) { var d = 0; } 
+function obj2Array(input, output, parentID, id, d, key, currentRow) {
+    if (!output) { var output = [];}
+    if (!d) { var d = 0; }
     d = d + 1;
-    //console.log("current Depth",d)
-    if (!parentID) {
+    if (!parentID){
         var parentID = "root";
         output.push(row);
-        // console.log(output);
     };
+    
     if (getEntityType(input) === 'Object') {
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
