@@ -332,35 +332,32 @@ function validateNupdate(input, output) {
     }
     return output;
 }
+function getChild() { 
 
+}
 function array2Json(input, output) { 
-    if (!output) { var output = []; }
+    if (!output) { var output = {}; }
     
     if (getEntityType(input) === 'Array') { 
         console.log("input array", input);
 
         for (i = 0; i < input.length; i++) { 
 
-            for (j = 0; j < input[i].length; i++) {
-                console.log(input[i]);
+            for (j = 1; j < input[i].length; i++) {
+                if (input[i][4] === "Array") { 
+                    
+                    console.log(input[i]);
+                    output[input[i][3]] = getChild();
 
 
-
+                }
+                
             }
-
-
-
 
         }
 
 
-
-
-
-
-
     }
-
 
 }
 
