@@ -7,12 +7,12 @@
 
 
 function array2Json2(inputTable, output) {
-    maxDepth = max(inputTable[][1]);
+   // maxDepth = max(inputTable[][1]);
     if (!output) { var output = {}; }
     for (i = 1; i < inputTable.length; i++) { 
         rwObject = getRow(inputTable, output, inputTable[i], i);
         children = getChild(inputTable, output, inputTable[i], rwObject)
-        console.log(children);
+        console.log(rwObject);
        // console.log(rwObject)
     }
 }
@@ -35,7 +35,7 @@ function getRow(input, output, currentRow, nwRowObject) {
 
 function getChild(input, output, currentRow, parentRow) {
     child = {};
-   children = input.forEach((row, value) => {         // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
+    children = input.forEach((row, value) => {         // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
         if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
          // console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
             children[row[3]] = getRow(input, output, row);

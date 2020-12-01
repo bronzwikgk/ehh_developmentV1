@@ -344,53 +344,6 @@ function getChild() {
 
 
 
-function array2Json(input, output) { 
-    if (!output) { var output = {}; }
-     
-    if (getEntityType(input) === 'Array') {  
-       // console.log("input array", input, input.length);
-        input.forEach((currentRow, value) => {
-            if (currentRow[4] === 'Object') { 
-                newObj = getRowObject(input, output, currentRow);
-                console.log(newObj)
-            }
-        });
-        for (i = 1; i < input.length; i++) {    
-            for (depth = 1; depth <= input[i][1]; depth++) { 
-              //  console.log("input array", input[i], input.length);
-            }
-        }
-    }
-}
-
-function getRowObject(input, output, currentRow,nwRowObject) { 
-    if (!nwRowObject) { var nwRowObject = {}; }
-    children = {}
-    nwRowObject[currentRow[3]] = getAttributes(input, output, currentRow, nwRowObject);
-   children = getChild (input, output, currentRow, nwRowObject);
-  //  console.log(children);
-//   console.log(currentRow, nwRowObject);
-    return nwRowObject;
-}
-
-
-
-function getChild2(input, output, currentRow,parentRow) {
-    child = {}
-    input.forEach((row, value) => {
-       // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
-        if (row[2] === currentRow[3] && row[1] === currentRow[1]+1) { 
-        console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
-         
-            var child = getRowObject(input, output, row);
-          // console.log("child", child);
-        }
-
-    });
-    return child;
-}
-
-
 //javascript create JSON object from two dimensional Array
 function arrayToJSONObject(arr) {
     //header
