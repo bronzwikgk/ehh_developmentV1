@@ -50,7 +50,7 @@ class process {
             
                 if (arr[i].nodeType === Node.ELEMENT_NODE) {
 
-                    if (getEntityType(arrResponse).includes("HTML")){
+                    if (getEntityType(arrResponse).includes("HTML")) {
                         arrResponse.appendChild(process.json2node(arr[i]));
                     } else {
                         arrResponse.push(process.node2json(arr[i]));
@@ -62,9 +62,7 @@ class process {
                     // arrResponse = process.setData(process.node2json(arr[i]),arrResponse); //Why is this not working
                 }
             }
-
         }
-
         return arrResponse;
     }
     static setData(input, output,key) {

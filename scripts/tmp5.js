@@ -243,6 +243,8 @@ function updateRow(input, output, currentRow, prevRow, id, d, key, options, call
     return currentRow;
 }
 
+
+
 function obj2Array(input, output, parentID, id, d, key, currentRow) {
     if (!output) { var output = [];}
     if (!d) { var d = 0; }
@@ -291,8 +293,7 @@ function obj2Array(input, output, parentID, id, d, key, currentRow) {
               //  obj2Array(input[i], output, parentID, id, d, key, currentRow);
             }
         }
-     //   iterateArray(input, output,parentID,id,d,key,currentRow)
-        
+     //   iterateArray(input, output,parentID,id,d,key,currentRow)   
     } else if (getEntityType(input) === 'String') { 
    // console.log("String Value Found", input, " in key", key, "parent", parentID, currentRow)
     }
@@ -335,25 +336,27 @@ function getChild() {
 }
 function array2Json(input, output) { 
     if (!output) { var output = {}; }
-    
-    if (getEntityType(input) === 'Array') { 
-        console.log("input array", input);
-
-        for (i = 0; i < input.length; i++) { 
-
-            for (j = 1; j < input[i].length; i++) {
-                if (input[i][4] === "Array") { 
-                    
-                    console.log(input[i]);
-                    output[input[i][3]] = getChild();
-
-
-                }
-                
+     
+    if (getEntityType(input) === 'Array') {  
+       // console.log("input array", input, input.length);
+        input.forEach((element, value) => {
+            if (element[4] === 'Object') { 
+                console.log("found Object", element)
+              //  output[element[3]] = 
             }
 
-        }
+        });
 
+        for (i = 1; i < input.length; i++) { 
+            
+            
+            for (depth = 1; depth <= input[i][1]; depth++) { 
+              //  console.log("input array", input[i], input.length);
+            }
+
+
+
+        }
 
     }
 
@@ -363,8 +366,9 @@ function processTest(e) {
     e.preventDefault();
     console.log(sample2)
     var output = obj2Array(sample, []);
-   // outputJson = array2Json(output);
-   console.log(output)
+   outputJson = array2Json(output);
+  //  console.log(output)
+    console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(output);
 }
 
