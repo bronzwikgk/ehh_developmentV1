@@ -37,13 +37,12 @@ function getChild(input, output, currentRow, parentRow) {
         if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
          // console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
             var child = getRow(input, output, row);
-            children[row[3]] = child;
-            console.log(children)
-
+          
+            console.log(child)
         }
     });
   //  console.log("children", children);
-    return children;
+    return child;
 }
 
 
