@@ -1,5 +1,13 @@
-function array2Json2(inputTable, output) {
+// An object consitis of below mentioned kind of entity
+//an Object Entity with Typeof 'object' and getEntityType 'Object'.
+// an Object Entity can have an object (Object / Array) inside it or a value.
+//an Array Entity with Typeof 'object' and getEntityType 'Array'. 
+// an 'Object' inside an array is a child of array, but then the array has values, they become it's values, with values/arrayname as attribute
+// Keys inside an object with value [value cannot be an *Object] are attributes
 
+
+function array2Json2(inputTable, output) {
+    maxDepth = max(inputTable[][1]);
     if (!output) { var output = {}; }
     for (i = 1; i < inputTable.length; i++) { 
         rwObject = getRow(inputTable, output, inputTable[i], i);
@@ -7,11 +15,8 @@ function array2Json2(inputTable, output) {
         console.log(children);
        // console.log(rwObject)
     }
- }
-
-
-
-
+}
+ 
 function getRow(input, output, currentRow, nwRowObject) {
     if (!nwRowObject) { var nwRowObject = {}; }
     children = {}
@@ -28,21 +33,17 @@ function getRow(input, output, currentRow, nwRowObject) {
     return nwRowObject;
 }
 
-
-
 function getChild(input, output, currentRow, parentRow) {
-    child = {}
-    children = {}
-    input.forEach((row, value) => {         // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
+    child = {};
+   children = input.forEach((row, value) => {         // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
         if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
          // console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
-            var child = getRow(input, output, row);
+            children[row[3]] = getRow(input, output, row);
           
-            console.log(child)
         }
     });
-  //  console.log("children", children);
-    return child;
+   console.log("children", children);
+    return children;
 }
 
 
