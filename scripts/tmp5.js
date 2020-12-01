@@ -410,11 +410,11 @@ function arrayToJSONObject(arr) {
 
 function processTest(e) {
     e.preventDefault();
-    console.log(sample)
+  console.log(sample)
     var output = obj2Array(sample, []);
      outputJson = array2Json2(output);
   console.log(output)
-    console.log(outputJson)
+  //  console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(output);
 }
 
