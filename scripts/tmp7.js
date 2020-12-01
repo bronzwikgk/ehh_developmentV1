@@ -1,4 +1,4 @@
-
+//https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
 function updateAttributesNvalues(input, output, currentRow, currentObj) {
     header = input[0];
 
