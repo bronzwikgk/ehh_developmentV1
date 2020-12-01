@@ -1,37 +1,105 @@
 
-function getAttributes(input, output, currentRow, row) {
+function updateAttributesNvalues(input, output, currentRow, currentObj) {
     header = input[0];
 
-    rowAttributes = currentRow.slice(4);
+    rowAttributes = currentRow.slice(3);
     if (rowAttributes.length > 0) {
-        attr = {}
-        //  console.log(rowAttributes)
-        rowAttributes.forEach((value) => {
+     //   row = {}
+       rowAttributes.forEach((value) => {
             if (value !== "") {
                 key = input[0][currentRow.indexOf(value)];
-                attr[key] = value;
+                currentObj[key] = value;
             }
         });
-        //   console.log(attr)
-        return attr;
+        //console.log("row",row)
+        return currentObj;
     }
 }
+function getChildren(input, output, currentRow, currentObj, d) { 
+
+    for (i = 1; i < input.length; i++) { 
 
 
-function getRow(input, output, currentRow, nwRowObject) {
-    if (!nwRowObject) { var nwRowObject = {}; }
-    children = {}
-    nwRowObject = new Object();
-    //  console.log(nwRowObject);
-    attri = getAttributes(input, output, currentRow, nwRowObject);
 
-    if (typeof attri !== 'undefined') {
-        nwRowObject[currentRow[3]] = attri
+        if (input[i][1] === d + 1 && input[i][2] ===currentRow[3]) {
+            
+          
+            
+            if (input[i][4] === 'Object') {
+                nwObj = {};
+               // console.log("child found", input[i], "for", currentObj)
+                nwObj[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
+              //  getChildren(input, output, input[i], nwObj, d);
+              //  console.log(nwObj);
+
+            } else if (input[i][4] === 'Array') {
+                nwObj = [];
+              //  nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
+              //  getChildren(input, output, input[i], nwObj, d);
+              //  console.log(nwObj);
+
+            } else if (input[i][4] === 'String') {
+                // nwObj = [];
+                // nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
+                // getChildren(input, output, input[i], nwObj, d);
+              //  console.log("String Found ", input[i]);
+
+            }
+
+
+        }
+
+
+
+
     }
-    rwChild = getChild(input, output, currentRow);
-    nwRowObject = { ...rwChild }
-    //  console.log(nwRowObject);
-    return nwRowObject;
+
+//delete the
+    return nwObj;
+}
+function arr2json2(input, output, currentRow) {
+    if (!output) { var output = {}; }
+
+    maxDepth = Math.max(...splitArray(input, 2));
+    //   console.log("maxDepth", maxDepth)
+
+    for (d = 1; d <= maxDepth; d++) {
+
+        for (i = 1; i < input.length; i++) { 
+           // console.log(input[i][1]);
+            if (input[i][1] === d) { 
+
+                if (input[i][4] === 'Object') {
+                    nwObj = {};
+                 
+                    nwObj = updateAttributesNvalues(input, output, input[i], nwObj);
+                    console.log("NewObj before children", nwObj);
+                    getChildren(input, output, input[i], nwObj, d);
+                    console.log("NewObj", nwObj);
+                    
+                   
+                } else if (input[i][4] === 'Array') {
+                    nwObj = [];
+                  //  nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
+                   // getChildren(input, output, input[i], nwObj, d);
+                    console.log(nwObj);
+
+                } else if (input[i][4] === 'String') {
+                    // nwObj = [];
+                    // nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
+                    // getChildren(input, output, input[i], nwObj, d);
+                 //   console.log("String Found ",input[i]);
+
+                }
+
+              
+            }
+          
+
+        }
+    }
+    console.log(output)
+    return output;
 }
 
 
@@ -42,32 +110,29 @@ function arr2json(input,output,currentRow) {
  //   console.log("maxDepth", maxDepth)
  
     for (d = 1; d <= maxDepth; d++){
+
+
         const currentDepth = input.filter(row => row[1] === d);
-        currentDepth.forEach(element => {
-            rwObject = getRow(input, output, element);
-            console.log(rwObject,"at depth",d);
+        console.log("currentDepth",currentDepth,d)
+        currentDepth.forEach(currentRow => {
+            if (currentRow[4] === 'Object') { 
+                nwObj = {};
+                nwObj[currentRow[3]] = updateAttributesNvalues(input, output, currentRow);
+                
+               console.log(nwObj)
+            }
+           
+               
         });
+
+
     }
-
+    console.log(output)
+    return output;
 }
 
 
-function getChild(input, output, currentRow, parentRow) {
-    child = {};
-    children = input.forEach((row, value) => {
-     //   console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], row, value)
-        if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
-          //  console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
-            child[row[3]] = getRow(input, output, row);  
-        }
-    });
-    
-// console.log("children", child);
-    return child;
-}
-
-
-//This function takes an array as input and extract a column 
+//This function takes an array as input and extract a column as a return array
 function splitArray(input,column) { 
      var output = [];
     for (i = 1; i < input.length; i++) {
@@ -77,4 +142,18 @@ function splitArray(input,column) {
 
   //  console.log(output);
     return output;
+}
+
+
+function createRowObject(input, output, currentRow) { 
+   
+    if (currentRow[4] === 'Object') {
+        nwObj = {};
+       
+    }
+    if (currentRow[4] === 'Array') {
+        nwObj = [];
+    }
+
+    return nwObj;
 }

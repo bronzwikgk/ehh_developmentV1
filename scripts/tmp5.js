@@ -374,7 +374,7 @@ function processTest(e) {
   console.log(sample)
     var outputArray = obj2Array(sample, []);
     console.log(outputArray)
-    outputJson = arr2json(outputArray);
+    outputJson = arr2json2(outputArray);
  
    console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
