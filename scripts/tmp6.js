@@ -4,34 +4,38 @@
 //an Array Entity with Typeof 'object' and getEntityType 'Array'. 
 // an 'Object' inside an array is a child of array, but then the array has values, they become it's values, with values/arrayname as attribute
 // Keys inside an object with value [value cannot be an *Object] are attributes
-
+//HasNext Iterator to be added from the dataHelper
 
 function array2Json2(inputTable, output) {
    // maxDepth = max(inputTable[][1]);
+
     if (!output) { var output = {}; }
     for (i = 1; i < inputTable.length; i++) { 
+       // console.log("here");
         rwObject = getRow(inputTable, output, inputTable[i], i);
+       // console.log("rwObject",rwObject);
         children = getChild(inputTable, output, inputTable[i], rwObject)
-        console.log(rwObject);
-       // console.log(rwObject)
+        console.log("children",children)
+      
     }
 }
  
+
 function getRow(input, output, currentRow, nwRowObject) {
     if (!nwRowObject) { var nwRowObject = {}; }
     children = {}
     nwRowObject = new Object();
-  //  nwRowObject[currentRow[3]] = getAttributes(input, output, currentRow, nwRowObject);
+  //  console.log(nwRowObject);
     attri = getAttributes(input, output, currentRow, nwRowObject);
   
     if (typeof attri !== 'undefined') { 
         nwRowObject[currentRow[3]]= attri
     }
 
-
   //  console.log(nwRowObject);
     return nwRowObject;
 }
+
 
 function getChild(input, output, currentRow, parentRow) {
     child = {};
@@ -39,10 +43,10 @@ function getChild(input, output, currentRow, parentRow) {
         if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
          // console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
             children[row[3]] = getRow(input, output, row);
-          
+            console.log("children", children);
         }
     });
-   console.log("children", children);
+  
     return children;
 }
 
