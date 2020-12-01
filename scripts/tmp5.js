@@ -243,8 +243,6 @@ function updateRow(input, output, currentRow, prevRow, id, d, key, options, call
     return currentRow;
 }
 
-
-
 function obj2Array(input, output, parentID, id, d, key, currentRow) {
     if (!output) { var output = [];}
     if (!d) { var d = 0; }
@@ -334,40 +332,88 @@ function validateNupdate(input, output) {
 function getChild() { 
 
 }
+
+
+
+
 function array2Json(input, output) { 
     if (!output) { var output = {}; }
      
     if (getEntityType(input) === 'Array') {  
        // console.log("input array", input, input.length);
-        input.forEach((element, value) => {
-            if (element[4] === 'Object') { 
-                console.log("found Object", element)
-              //  output[element[3]] = 
+        input.forEach((currentRow, value) => {
+            if (currentRow[4] === 'Object') { 
+                newObj = getRowObject(input, output, currentRow);
+                console.log(newObj)
             }
-
         });
-
-        for (i = 1; i < input.length; i++) { 
-            
-            
+        for (i = 1; i < input.length; i++) {    
             for (depth = 1; depth <= input[i][1]; depth++) { 
               //  console.log("input array", input[i], input.length);
             }
+        }
+    }
+}
+
+function getRowObject(input, output, currentRow,nwRowObject) { 
+    if (!nwRowObject) { var nwRowObject = {}; }
+    children = {}
+    nwRowObject[currentRow[3]] = getAttributes(input, output, currentRow, nwRowObject);
+   children = getChild (input, output, currentRow, nwRowObject);
+  //  console.log(children);
+//   console.log(currentRow, nwRowObject);
+    return nwRowObject;
+}
 
 
 
+function getChild2(input, output, currentRow,parentRow) {
+    child = {}
+    input.forEach((row, value) => {
+       // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
+        if (row[2] === currentRow[3] && row[1] === currentRow[1]+1) { 
+        console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
+         
+            var child = getRowObject(input, output, row);
+          // console.log("child", child);
         }
 
-    }
-
+    });
+    return child;
 }
+
+
+//javascript create JSON object from two dimensional Array
+function arrayToJSONObject(arr) {
+    //header
+    var keys = arr[0];
+
+    //vacate keys from main array
+    var newArr = arr.slice(1, arr.length);
+
+    var formatted = [],
+        data = newArr,
+        cols = keys,
+        l = cols.length;
+    for (var i = 0; i < data.length; i++) {
+        var d = data[i],
+            o = {};
+        for (var j = 0; j < l; j++)
+            o[cols[j]] = d[j];
+        formatted.push(o);
+    }
+    return formatted;
+}
+
+
+
 
 function processTest(e) {
     e.preventDefault();
-    console.log(sample2)
+    console.log(sample)
     var output = obj2Array(sample, []);
-   outputJson = array2Json(output);
-  //  console.log(output)
+     outputJson = array2Json2(output);
+  console.log(output)
     console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(output);
 }
