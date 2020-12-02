@@ -18,17 +18,17 @@ function updateAttributesNvalues(input, output, currentRow, currentObj) {
 function getChildren(input, output, currentRow, currentObj, d) { 
     if (!children) { var children = {}; }
     for (i = 1; i < input.length; i++) { 
-
+//we can think of creating a 2d array of child Row and sending it for recusing to the main code.
         if (input[i][1] === d + 1 && input[i][2] ===currentRow[3]) {
            
             if (input[i][4] === 'Object') {
                 childObj = {};
                 // console.log("child found", input[i], "for", currentObj)
                 children[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
-                
-              //  getChildren(input, output, input[i], nwObj, d);
-                //console.log("chidl",childObj);
-
+              //  input.splice(i, 1);
+              //  console.log(input)
+              //  children[currentRow[3]] = { ...getChildren(input, output, currentRow, nwObj, d) };
+             
             } else if (input[i][4] === 'Array') {
                 nwObj = [];
               //  nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
@@ -40,29 +40,16 @@ function getChildren(input, output, currentRow, currentObj, d) {
                 // nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
                 // getChildren(input, output, input[i], nwObj, d);
               //  console.log("String Found ", input[i]);
-
             }
-
-
         }
-
-
-
-
     }
 
-    console.log("Children",children);
+   // console.log("Children",children);
     return children;
 }
 
 
-class rowObject{
 
-    constructor(name) {
-        this.name = name;
-}
-
-}
 function arr2json2(input, output, currentRow) {
     if (!output) { var output = {}; }
     
@@ -81,7 +68,7 @@ function arr2json2(input, output, currentRow) {
                     nwObj = {};
                    
                     nwObj[input[i][3]] = updateAttributesNvalues(input, output, currentRow, nwObj);
-                    console.log("NewObj", nwObj);
+                   // console.log("NewObj", nwObj);
                  //   tmp = getChildren(input, output, input[i], nwObj, d)
                     nwObj[currentRow[3]] = { ... getChildren(input, output, currentRow, nwObj, d)  };
                     console.log("NewObj with children", nwObj);
