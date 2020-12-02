@@ -14,6 +14,7 @@ function updateAttributesNvalues(input, output, currentRow, currentObj) {
         return currentObj;
     }
 }
+
 function getChildren(input, output, currentRow, currentObj, d) { 
 
     for (i = 1; i < input.length; i++) { 
@@ -52,8 +53,16 @@ function getChildren(input, output, currentRow, currentObj, d) {
 //delete the
     return nwObj;
 }
+class rowObject{
+
+    constructor(name) {
+        this.name = name;
+}
+
+}
 function arr2json2(input, output, currentRow) {
     if (!output) { var output = {}; }
+    
 
     maxDepth = Math.max(...splitArray(input, 2));
     //   console.log("maxDepth", maxDepth)
@@ -65,11 +74,11 @@ function arr2json2(input, output, currentRow) {
             if (input[i][1] === d) { 
 
                 if (input[i][4] === 'Object') {
-                    nwObj = {}; 
+                    nwObj = {};
                    
-                    console.log("NewObj before children", nwObj, input[i][3], typeof input[i][3]);
-                    nwObj = updateAttributesNvalues(input, output, input[i], nwObj);
                   
+                    nwObj = updateAttributesNvalues(input, output, input[i], nwObj);
+                    console.log("NewObj before children", nwObj.entity, typeof nwObj);
                    // getChildren(input, output, input[i], nwObj, d);
                     console.log("NewObj", nwObj);
                     
