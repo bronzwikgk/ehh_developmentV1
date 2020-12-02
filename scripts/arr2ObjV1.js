@@ -67,13 +67,14 @@ function arr2json2(input, output, currentRow) {
                 if (input[i][4] === 'Object') {
                     nwObj = {};
                    
-                    nwObj[input[i][3]] = updateAttributesNvalues(input, output, currentRow, nwObj);
+                    nwObj = updateAttributesNvalues(input, output, currentRow, nwObj);
                    // console.log("NewObj", nwObj);
                  //   tmp = getChildren(input, output, input[i], nwObj, d)
-                    nwObj[currentRow[3]] = { ... getChildren(input, output, currentRow, nwObj, d)  };
+                    nwObj = { ... getChildren(input, output, currentRow, nwObj, d)  };
                     console.log("NewObj with children", nwObj);
-                    
-                   
+                    output[currentRow[3]] = nwObj;
+                    console.log("output",output)
+
                 } else if (input[i][4] === 'Array') {
                     nwObj = [];
                     console.log("Array Found ", input[i]);
