@@ -72,9 +72,9 @@ function arr2json2(input, output, currentRow) {
                    // console.log("NewObj", nwObj);
                  //   tmp = getChildren(input, output, input[i], nwObj, d)
                     nwObj = { ... getChildren(input, output, currentRow, nwObj, d)  };
-                    console.log("NewObj with children", nwObj);
+                 //   console.log("NewObj with children", nwObj);
                     output[currentRow[3]] = nwObj;
-                    console.log("output",output)
+                  //  console.log("output",output)
 
                 } else if (input[i][4] === 'Array') {
                     nwObj = [];
