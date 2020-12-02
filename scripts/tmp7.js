@@ -1,10 +1,9 @@
 //https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
 function updateAttributesNvalues(input, output, currentRow, currentObj) {
     header = input[0];
-
     rowAttributes = currentRow.slice(3);
     if (rowAttributes.length > 0) {
-     //   row = {}
+
        rowAttributes.forEach((value) => {
             if (value !== "") {
                 key = input[0][currentRow.indexOf(value)];
@@ -19,12 +18,8 @@ function getChildren(input, output, currentRow, currentObj, d) {
 
     for (i = 1; i < input.length; i++) { 
 
-
-
         if (input[i][1] === d + 1 && input[i][2] ===currentRow[3]) {
-            
-          
-            
+           
             if (input[i][4] === 'Object') {
                 nwObj = {};
                // console.log("child found", input[i], "for", currentObj)
@@ -70,11 +65,12 @@ function arr2json2(input, output, currentRow) {
             if (input[i][1] === d) { 
 
                 if (input[i][4] === 'Object') {
-                    nwObj = {};
-                 
+                    nwObj = {}; 
+                   
+                    console.log("NewObj before children", nwObj, input[i][3], typeof input[i][3]);
                     nwObj = updateAttributesNvalues(input, output, input[i], nwObj);
-                    console.log("NewObj before children", nwObj);
-                    getChildren(input, output, input[i], nwObj, d);
+                  
+                   // getChildren(input, output, input[i], nwObj, d);
                     console.log("NewObj", nwObj);
                     
                    
@@ -101,36 +97,6 @@ function arr2json2(input, output, currentRow) {
     console.log(output)
     return output;
 }
-
-
-function arr2json(input,output,currentRow) {
-    if (!output) { var output = {}; }
-   
-    maxDepth = Math.max(...splitArray(input, 2));
- //   console.log("maxDepth", maxDepth)
- 
-    for (d = 1; d <= maxDepth; d++){
-
-
-        const currentDepth = input.filter(row => row[1] === d);
-        console.log("currentDepth",currentDepth,d)
-        currentDepth.forEach(currentRow => {
-            if (currentRow[4] === 'Object') { 
-                nwObj = {};
-                nwObj[currentRow[3]] = updateAttributesNvalues(input, output, currentRow);
-                
-               console.log(nwObj)
-            }
-           
-               
-        });
-
-
-    }
-    console.log(output)
-    return output;
-}
-
 
 //This function takes an array as input and extract a column as a return array
 function splitArray(input,column) { 

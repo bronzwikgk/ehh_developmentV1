@@ -47,9 +47,7 @@ class process {
         if (!arrResponse) { var arrResponse = []; };
         for (var i = 0; i <= arr.length - 1; i++) {
             if (arr[i].nodeType != 'undefined') { //This is to check if the Array Element an HTML Element;
-            
                 if (arr[i].nodeType === Node.ELEMENT_NODE) {
-
                     if (getEntityType(arrResponse).includes("HTML")) {
                         arrResponse.appendChild(process.json2node(arr[i]));
                     } else {
