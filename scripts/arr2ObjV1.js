@@ -58,7 +58,7 @@ function arr2json2(input, output, currentRow) {
     //   console.log("maxDepth", maxDepth)
 
     for (d = 1; d <= maxDepth; d++) {
-
+console.log("iterating at depeth",d)
         for (i = 1; i < input.length; i++) { 
            // console.log(input[i][1]);
             if (input[i][1] === d) { 
@@ -76,6 +76,7 @@ function arr2json2(input, output, currentRow) {
                    
                 } else if (input[i][4] === 'Array') {
                     nwObj = [];
+                    console.log("Array Found ", input[i]);
                   //  nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
                    // getChildren(input, output, input[i], nwObj, d);
                     console.log(nwObj);
@@ -84,7 +85,7 @@ function arr2json2(input, output, currentRow) {
                     // nwObj = [];
                     // nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
                     // getChildren(input, output, input[i], nwObj, d);
-                 //   console.log("String Found ",input[i]);
+                  console.log("String Found ",input[i]);
 
                 }
 
