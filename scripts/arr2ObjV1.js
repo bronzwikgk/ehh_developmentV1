@@ -58,7 +58,7 @@ function arr2json2(input, output, currentRow) {
     //   console.log("maxDepth", maxDepth)
 
     for (d = 1; d <= maxDepth; d++) {
-console.log("iterating at depeth",d)
+        console.log("iterating at depeth",d)
         for (i = 1; i < input.length; i++) { 
            // console.log(input[i][1]);
             if (input[i][1] === d) { 
