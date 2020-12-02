@@ -53,7 +53,7 @@ function getChildren(input, output, currentRow, currentObj, d) {
 
 function arr2json2(input, output, currentRow,currentObj,d) {
     if (!output) { var output = {}; }
-   
+   console.log(input)
     maxDepth = Math.max(...splitArray(input, 2));
     //   console.log("maxDepth", maxDepth)
 
