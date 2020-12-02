@@ -1,7 +1,7 @@
 //https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
 function updateAttributesNvalues(input, output, currentRow, currentObj) {
     header = input[0];
-    rowAttributes = currentRow.slice(3);
+    rowAttributes = currentRow.slice(2);
     if (rowAttributes.length > 0) {
         row = {};
        rowAttributes.forEach((value) => {
@@ -25,9 +25,9 @@ function getChildren(input, output, currentRow, currentObj, d) {
                 childObj = {};
                 // console.log("child found", input[i], "for", currentObj)
                 currentObj[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
-                console.log("before splice",input[i]);
+              //  console.log("before splice",input[i]);
                 input.splice(i, 1);
-                console.log("After splice",input[i])
+              //  console.log("After splice",input[i])
               //  children[currentRow[3]] = { ...getChildren(input, output, currentRow, nwObj, d) };
              
             } else if (input[i][4] === 'Array') {
@@ -51,15 +51,16 @@ function getChildren(input, output, currentRow, currentObj, d) {
 
 
 
-function arr2json2(input, output, currentRow) {
+function arr2json2(input, output, currentRow,currentObj,d) {
     if (!output) { var output = {}; }
-    
-
+   
     maxDepth = Math.max(...splitArray(input, 2));
     //   console.log("maxDepth", maxDepth)
 
     for (d = 1; d <= maxDepth; d++) {
-        console.log("iterating at depeth",d)
+        
+        console.log("iterating at depth", d)
+        
         for (i = 1; i < input.length; i++) { 
            // console.log(input[i][1]);
             if (input[i][1] === d) { 
@@ -67,18 +68,28 @@ function arr2json2(input, output, currentRow) {
                 
                 if (input[i][4] === 'Object') {
                     nwObj = {};
-                   
-                    nwObj = updateAttributesNvalues(input, output, currentRow, nwObj);
-                   // console.log("NewObj", nwObj);
+                    nwObj[currentRow[3]] = updateAttributesNvalues(input, output, currentRow, nwObj);
+                    console.log("NewObj", nwObj);
+                    
+                    children = input.filter((row, value) => {         // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
+                        if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
+                           console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
+                            //children[row[3]] = getRow(input, output, row);
+                            return row;      
+                        }
+                    });
+                            
+                    console.log("children", children);
+                    nwObj = { ...arr2json2(children, output, currentRow, nwObj, d)}
+                    console.log("NewObj with children", nwObj, currentRow[3]); 
                  //   tmp = getChildren(input, output, input[i], nwObj, d)
-                    nwObj = { ... getChildren(input, output, currentRow, nwObj, d)  };
-                 //   console.log("NewObj with children", nwObj);
-                    output[currentRow[3]] = nwObj;
-                  //  console.log("output",output)
-
+                      //getChildren(input, output, currentRow, nwObj, d)  ;
+                  
+                    output = { ...nwObj[currentRow[3]]}
+                    console.log("output", output)
                 } else if (input[i][4] === 'Array') {
                     nwObj = [];
-                    console.log("Array Found ", input[i]);
+                 //   console.log("Array Found ", input[i]);
                   //  nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
                    // getChildren(input, output, input[i], nwObj, d);
                     console.log(nwObj);
@@ -87,7 +98,7 @@ function arr2json2(input, output, currentRow) {
                     // nwObj = [];
                     // nwObj.push(updateAttributesNvalues(input, output, input[i], nwObj));
                     // getChildren(input, output, input[i], nwObj, d);
-                  console.log("String Found ",input[i]);
+                 // console.log("String Found ",input[i]);
 
                 }
 
@@ -96,6 +107,9 @@ function arr2json2(input, output, currentRow) {
           
 
         }
+
+
+
     }
     console.log(output)
     return output;
