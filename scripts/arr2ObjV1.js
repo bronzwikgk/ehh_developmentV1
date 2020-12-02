@@ -24,9 +24,10 @@ function getChildren(input, output, currentRow, currentObj, d) {
             if (input[i][4] === 'Object') {
                 childObj = {};
                 // console.log("child found", input[i], "for", currentObj)
-                children[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
-              //  input.splice(i, 1);
-              //  console.log(input)
+                currentObj[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
+                console.log("before splice",input[i]);
+                input.splice(i, 1);
+                console.log("After splice",input[i])
               //  children[currentRow[3]] = { ...getChildren(input, output, currentRow, nwObj, d) };
              
             } else if (input[i][4] === 'Array') {
@@ -45,7 +46,7 @@ function getChildren(input, output, currentRow, currentObj, d) {
     }
 
    // console.log("Children",children);
-    return children;
+    return currentObj;
 }
 
 
