@@ -3,30 +3,31 @@ function updateAttributesNvalues(input, output, currentRow, currentObj) {
     header = input[0];
     rowAttributes = currentRow.slice(3);
     if (rowAttributes.length > 0) {
-
+        row = {};
        rowAttributes.forEach((value) => {
             if (value !== "") {
                 key = input[0][currentRow.indexOf(value)];
-                currentObj[key] = value;
+                row[key] = value;
             }
         });
         //console.log("row",row)
-        return currentObj;
+        return row;
     }
 }
 
 function getChildren(input, output, currentRow, currentObj, d) { 
-
+    if (!children) { var children = {}; }
     for (i = 1; i < input.length; i++) { 
 
         if (input[i][1] === d + 1 && input[i][2] ===currentRow[3]) {
            
             if (input[i][4] === 'Object') {
-                nwObj = {};
-               // console.log("child found", input[i], "for", currentObj)
-                nwObj[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
+                childObj = {};
+                // console.log("child found", input[i], "for", currentObj)
+                children[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
+                
               //  getChildren(input, output, input[i], nwObj, d);
-              //  console.log(nwObj);
+                //console.log("chidl",childObj);
 
             } else if (input[i][4] === 'Array') {
                 nwObj = [];
@@ -50,9 +51,11 @@ function getChildren(input, output, currentRow, currentObj, d) {
 
     }
 
-//delete the
-    return nwObj;
+    console.log("Children",children);
+    return children;
 }
+
+
 class rowObject{
 
     constructor(name) {
@@ -72,13 +75,16 @@ function arr2json2(input, output, currentRow) {
         for (i = 1; i < input.length; i++) { 
            // console.log(input[i][1]);
             if (input[i][1] === d) { 
-
+                currentRow = input[i];
+                
                 if (input[i][4] === 'Object') {
-                    nwObj = {};                
-                    nwObj = updateAttributesNvalues(input, output, input[i], nwObj);
-                    console.log("NewObj before children", nwObj.entity, typeof nwObj);
-                   // getChildren(input, output, input[i], nwObj, d);
+                    nwObj = {};
+                   
+                    nwObj[input[i][3]] = updateAttributesNvalues(input, output, currentRow, nwObj);
                     console.log("NewObj", nwObj);
+                 //   tmp = getChildren(input, output, input[i], nwObj, d)
+                    nwObj[currentRow[3]] = { ... getChildren(input, output, currentRow, nwObj, d)  };
+                    console.log("NewObj with children", nwObj);
                     
                    
                 } else if (input[i][4] === 'Array') {
