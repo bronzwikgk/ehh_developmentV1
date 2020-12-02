@@ -74,9 +74,7 @@ function arr2json2(input, output, currentRow) {
             if (input[i][1] === d) { 
 
                 if (input[i][4] === 'Object') {
-                    nwObj = {};
-                   
-                  
+                    nwObj = {};                
                     nwObj = updateAttributesNvalues(input, output, input[i], nwObj);
                     console.log("NewObj before children", nwObj.entity, typeof nwObj);
                    // getChildren(input, output, input[i], nwObj, d);
