@@ -47,6 +47,8 @@ function getChildren(input, output, currentRow, currentObj, d,childrenRows) {
     return currentObj;
 }
 
+
+
 function arr2json2(input, output, currentRow,currentObj,d,children) {
     if (!output) { var output = {}; table = input; }
    //console.log(input)
@@ -65,12 +67,13 @@ function arr2json2(input, output, currentRow,currentObj,d,children) {
                 if (input[i][4] === 'Object') {
                     nwObj = {};
                     nwObj[currentRow[3]] = updateAttributesNvalues(input, output, currentRow, nwObj);
-                    console.log("NewObj", nwObj);
-                    children = table.filter((row, value) => { if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) return row;} );
-                            
-                   console.log("children", children);
-                   // nwObj = { ...arr2json2(children, nwObj, currentRow, nwObj, d,children)}
-                    output[currentRow[3]] = { ... nwObj[currentRow[3]]}
+                     console.log("NewObj", nwObj);
+                    children = table.filter((row, value) => { if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) return row;} );      
+                    //  console.log("children", children);
+                    nwObj[currentRow[3]] = { ...arr2json2(children, output, currentRow, nwObj, d,children)}
+                    console.log("NewObjwiith Children", nwObj);
+                    output[currentRow[3]] = { ...nwObj[currentRow[3]] }
+                 
                     console.log("output", output)
                 } else if (input[i][4] === 'Array') {
                     nwObj = [];
@@ -87,8 +90,6 @@ function arr2json2(input, output, currentRow,currentObj,d,children) {
 
                 }
             }
-          
-
         }
 
 
