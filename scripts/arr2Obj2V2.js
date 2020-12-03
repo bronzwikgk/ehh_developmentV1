@@ -10,16 +10,19 @@ function array2Obj(table, outputObj) {
       //  console.log(currentDepthRows)
          currentDepthObj={}
               currentDepthRows.forEach((currentRow, i) => {
-             currentObj = {};
-                 currentObj[currentRow[3]] = updateAttributesNvalues(table, currentObj, currentRow);
-                 
-                 currentDepthObj[currentRow[3]] = { ...currentObj };
-                     
+                currentObj = {};
+                  currentObj[currentRow[3]] = updateAttributesNvalues(table, currentObj, currentRow);
+                  children = {};
+                  children = table.filter((row, value) => { if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) return row; });      
+                  console.log(currentDepthObj)
+                  currentObj = { ...array2Obj(children, outputObj) };
+                  currentDepthObj[currentRow[3]] = { ...currentObj };          
         })
            
-  console.log(currentDepthObj)
+            console.log(currentDepthObj)
         output = { ...currentDepthObj };
     }
+
     console.log(output)
     return output;
 
