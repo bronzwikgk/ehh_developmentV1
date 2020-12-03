@@ -348,7 +348,7 @@ function getChild() {
 function arrayToJSONObject(arr) {
     //header
     var keys = arr[0];
-
+output={}
     //vacate keys from main array
     var newArr = arr.slice(1, arr.length);
 
@@ -361,9 +361,10 @@ function arrayToJSONObject(arr) {
             o = {};
         for (var j = 0; j < l; j++)
             o[cols[j]] = d[j];
-        formatted.push(o);
+        output[d] = o;
+
     }
-    return formatted;
+    return output;
 }
 
 

@@ -15,16 +15,14 @@ function updateAttributesNvalues(input, output, currentRow, currentObj) {
     }
 }
 
-function getChildren(input, output, currentRow, currentObj, d) { 
+function getChildren(input, output, currentRow, currentObj, d,childrenRows) { 
     if (!children) { var children = {}; }
-    for (i = 1; i < input.length; i++) { 
-//we can think of creating a 2d array of child Row and sending it for recusing to the main code.
-        if (input[i][1] === d + 1 && input[i][2] ===currentRow[3]) {
-           
-            if (input[i][4] === 'Object') {
+    for (i = 1; i < childrenRows.length; i++) { 
+//we can think of creating a 2d array of child Row and sending it for recusing to the main code.       
+            if (childrenRows[i][4] === 'Object') {
                 childObj = {};
-                // console.log("child found", input[i], "for", currentObj)
-                currentObj[input[i][3]] = updateAttributesNvalues(input, output, input[i], nwObj);
+                 console.log("child found", input[i], "for", currentObj)
+                currentObj[childrenRows[i][3]] = updateAttributesNvalues(childrenRows, output, childrenRows[i], nwObj);
               //  console.log("before splice",input[i]);
                 input.splice(i, 1);
               //  console.log("After splice",input[i])
@@ -42,20 +40,18 @@ function getChildren(input, output, currentRow, currentObj, d) {
                 // getChildren(input, output, input[i], nwObj, d);
               //  console.log("String Found ", input[i]);
             }
-        }
+     
     }
 
    // console.log("Children",children);
     return currentObj;
 }
 
-
-
-function arr2json2(input, output, currentRow,currentObj,d) {
-    if (!output) { var output = {}; }
-   console.log(input)
+function arr2json2(input, output, currentRow,currentObj,d,children) {
+    if (!output) { var output = {}; table = input; }
+   //console.log(input)
     maxDepth = Math.max(...splitArray(input, 2));
-    //   console.log("maxDepth", maxDepth)
+    console.log("input", input)
 
     for (d = 1; d <= maxDepth; d++) {
         
@@ -70,22 +66,11 @@ function arr2json2(input, output, currentRow,currentObj,d) {
                     nwObj = {};
                     nwObj[currentRow[3]] = updateAttributesNvalues(input, output, currentRow, nwObj);
                     console.log("NewObj", nwObj);
-                    
-                    children = input.filter((row, value) => {         // console.log("searchign child for ", currentRow[3], "at depth", currentRow[1], element, value)
-                        if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
-                           console.log("Found child for ", currentRow[3], "at depth", currentRow[1], row[3])
-                            //children[row[3]] = getRow(input, output, row);
-                            return row;      
-                        }
-                    });
+                    children = table.filter((row, value) => { if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) return row;} );
                             
-                    console.log("children", children);
-                    nwObj = { ...arr2json2(children, output, currentRow, nwObj, d)}
-                    console.log("NewObj with children", nwObj, currentRow[3]); 
-                 //   tmp = getChildren(input, output, input[i], nwObj, d)
-                      //getChildren(input, output, currentRow, nwObj, d)  ;
-                  
-                    output = { ...nwObj[currentRow[3]]}
+                   console.log("children", children);
+                   // nwObj = { ...arr2json2(children, nwObj, currentRow, nwObj, d,children)}
+                    output[currentRow[3]] = { ... nwObj[currentRow[3]]}
                     console.log("output", output)
                 } else if (input[i][4] === 'Array') {
                     nwObj = [];
@@ -101,8 +86,6 @@ function arr2json2(input, output, currentRow,currentObj,d) {
                  // console.log("String Found ",input[i]);
 
                 }
-
-              
             }
           
 
