@@ -29,7 +29,7 @@ function getChildren(input, currentObj, currentRow,inputTable) {
     childrenObj = {};
     children = input.filter((row, value) => { if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) return row; });
 
-    console.log("chidlren",children) 
+    console.log("children",children) 
     for (i = 1; i < children.length; i++) {
         if (children[i][1] === d) {
             currentRow = children[i];
@@ -55,7 +55,7 @@ function row2object(inputRow, outputObj, currentObj, currentRow,inputTable) {
     attributes = updateAttributesNvalues(inputTable, currentObj, currentRow, inputTable);
     
     getChildren(inputTable, currentObj, currentRow);
-    
+    console.log( "currentObect", currentObj)
     if (children.length>0) { console.log("children", children) }
      set(attributes, currentObj, inputRow[3]);
     return currentObj;
