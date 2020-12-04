@@ -9,7 +9,7 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
         console.log("iterating at depth", d);
         for (i = 1; i < inputTable.length; i++) { 
             if (input[i][1] === d) { 
-
+getnode()
             }
         }
     }
@@ -17,6 +17,12 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
     return output;
 }
 
+function row2object(inputRow, outputObj,currentObj,currentRow) {
+
+
+
+
+ }
 
 function set(input, output, key) {
     switch (output?.constructor) {
