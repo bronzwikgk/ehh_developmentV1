@@ -1,3 +1,4 @@
+//https://jrsinclair.com/articles/2019/functional-js-traversing-trees-with-recursive-reduce/
 function arr2Obj(inputTable, output, currentObj, currentRow) { 
 
     if (!output) { var output = {}; }
@@ -23,6 +24,7 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
     }
     console.log(output)
     return output;
+
 }
 
 function getChildren(input, currentObj, currentRow,inputTable) {
