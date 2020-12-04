@@ -6,12 +6,17 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
     console.log("input", inputTable)
 
     for (d = 1; d <= maxDepth; d++) {
+
         console.log("iterating at depth", d);
+
         for (i = 1; i < inputTable.length; i++) { 
+
             if (inputTable[i][1] === d) { 
                 currentRow = inputTable[i];
-                currentObj = row2object(currentRow, currentObj, currentObj, currentRow, inputTable);
-               // console.log(currentObj)
+                currentObj = {};
+                currentObj[currentRow[3]] = updateAttributesNvalues(inputTable, currentObj, currentRow, inputTable);
+            //  getChildren(inputTable, currentObj, currentObj, currentRow, inputTable);
+                console.log(currentObj, typeof currentObj)
                 output[currentRow[3]] = currentObj;
             }
         }
@@ -29,22 +34,23 @@ function getChildren(input, currentObj, currentRow,inputTable) {
     childrenObj = {};
     children = input.filter((row, value) => {
         if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
-            console.log("delteing", inputTable[i], "currentObect", currentObj)
-
+            console.log("delteing", inputTable[i], "currentObect", currentObj);
             inputTable.splice(row[1], 1);
             return row;   
     } });
-
   //  console.log("children",children) 
     for (i = 1; i < children.length; i++) {
         if (children[i][1] === d) {
             currentRow = children[i];
-           currentObj = row2object(currentRow, currentObj, currentObj, currentRow, inputTable);
-            getChildren(children, currentObj, currentObj, currentRow, inputTable);
+            currentObj[currentRow[3]] = updateAttributesNvalues(inputTable, currentObj, currentRow, inputTable);
+          //  getChildren(children, currentObj, currentObj, currentRow, inputTable);
             currentObj[currentRow[3]] = currentObj;
             }
-        }
+    }
+    console.log("current Obj with children",currentObj)
+    return currentObj;
 }
+
 
 function row2object(inputRow, outputObj, currentObj, currentRow,inputTable) {
     if (!currentObj) { var currentObj = {}; }
@@ -54,7 +60,7 @@ function row2object(inputRow, outputObj, currentObj, currentRow,inputTable) {
    // console.log( "currentObect", currentObj)
     //if (children.length>0) { console.log("children", children) }
     set(attributes, currentObj, inputRow[3]);
-    console.log(currentObj)
+   // console.log(currentObj)
     return currentObj;
 }
 
@@ -82,7 +88,7 @@ function updateAttributesNvalues(inputTable, currentObj, currentRow) {
                 set(value, attrs, key);
             }
         });
-        //console.log("row",row)
+     //   console.log("attrs",attrs)
         return attrs;
     }
 }
