@@ -8,18 +8,29 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
     for (d = 1; d <= maxDepth; d++) {
         console.log("iterating at depth", d);
         for (i = 1; i < inputTable.length; i++) { 
-            if (input[i][1] === d) { 
-getnode()
+            if (inputTable[i][1] === d) { 
+                currentRow = inputTable[i];
+                currentObj = row2object(currentRow, currentObj, currentObj, currentRow,inputTable);
+                console.log("CurrentObj",currentObj);
+                output[currentRow[3]] = currentObj;
             }
         }
+        
     }
     console.log(output)
     return output;
 }
 
-function row2object(inputRow, outputObj,currentObj,currentRow) {
 
 
+
+function row2object(inputRow, outputObj, currentObj, currentRow,inputTable) {
+    if (!currentObj) { var currentObj = {}; }
+    attributes = updateAttributesNvalues(inputTable, currentObj, currentRow, inputTable);
+ 
+     set(attributes, currentObj, inputRow[3]);
+   
+    return currentObj;
 
 
  }
@@ -27,7 +38,7 @@ function row2object(inputRow, outputObj,currentObj,currentRow) {
 function set(input, output, key) {
     switch (output?.constructor) {
         case Object:
-            return output[key] = input[key];
+            return output[key] = input;
         case Array:
             return output.push(input[key]);
         default:
@@ -35,19 +46,20 @@ function set(input, output, key) {
     }
 }
 
-function updateAttributesNvalues(input, currentObj, currentRow) {
-    header = input[0];
+function updateAttributesNvalues(inputTable, currentObj, currentRow) {
+    header = inputTable[0];
     rowAttributes = currentRow.slice(2);
     if (rowAttributes.length > 0) {
-        row = {};
+        attrs = {};
         rowAttributes.forEach((value) => {
             if (value !== "") {
-                key = input[0][currentRow.indexOf(value)];
-                row[key] = value;
+                key = inputTable[0][currentRow.indexOf(value)];
+                //attrs[key] = value;
+                set(value, attrs, key);
             }
         });
         //console.log("row",row)
-        return row;
+        return attrs;
     }
 }
 
