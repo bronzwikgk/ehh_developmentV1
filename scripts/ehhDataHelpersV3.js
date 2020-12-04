@@ -141,9 +141,9 @@ function isObjectArray_(test) {
 
 const items = [1, false, "Devsage", 3.14]
 
-function Iterator(items)
+function Iterator(Array)
 {
-  this.items = items
+    this.Array = Array
   this.index = 0
 }
 
