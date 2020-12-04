@@ -27,26 +27,18 @@ function array2Obj(table, outputObj) {
     return output;
 
 }
-function setData(input, output, key) {
 
-    if (typeof output === 'Array') {
-        output.push(input[key]);
+
+
+function set(input, output, key) {
+    switch (output?.constructor) {
+        case Object:
+            return output[key] = input[key];
+        case Array:
+            return output.push(input[key]);
+        default:
+            return "Output UnIdentified"
     }
-    if (typeof output === 'object' && input[key].value) {
-       // console.log(input[key].name);
-        output[input[key].name] = input[key].value;
-    } 
-    if (getEntityType(output).includes("HTML")) { 
-        if (key === 'href' || key === 'src') {
-            if (isValidUrl(input[key]) === false) {
-                var absoluteUrl = toAbsolute(input[key]);
-                output.setAttribute(key, absoluteUrl);
-            } 
-        } else {
-            output.setAttribute(key, input[key]);
-        }  
-    }
-    return output;
 }
 
 function updateAttributesNvalues(input, currentObj, currentRow) {
@@ -64,7 +56,6 @@ function updateAttributesNvalues(input, currentObj, currentRow) {
         return row;
     }
 }
-
 
 //This function takes an array as input and extract a column as a return array
 function splitArray(input, column) {

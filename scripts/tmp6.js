@@ -6,6 +6,9 @@
 // Keys inside an object with value [value cannot be an *Object] are attributes
 //HasNext Iterator to be added from the dataHelper
 
+
+
+
 function array2Json2(inputTable, output) {
    // maxDepth = max(inputTable[][1]);
 
@@ -31,7 +34,6 @@ function getRow(input, output, currentRow, nwRowObject) {
     if (typeof attri !== 'undefined') { 
         nwRowObject[currentRow[3]]= attri
     }
-
   //  console.log(nwRowObject);
     return nwRowObject;
 }
@@ -68,3 +70,14 @@ function getAttributes(input, output, currentRow, row) {
         return attr;
     }
 }
+
+
+/*MATRIX TO JSON*/
+let jsonData = [];
+matrix.forEach(row => {
+    let myObject = {}
+    keys.forEach((key, i) => myObject[key] = row[i]);
+    jsonData.push(myObject);
+});
+let myJsonData = JSON.stringify(jsonData);
+console.log(myJsonData);

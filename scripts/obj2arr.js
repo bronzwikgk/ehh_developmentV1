@@ -5,7 +5,6 @@
 // an 'Object' inside an array is a child of array, but then the array has values, they become it's values, with values/arrayname as attribute
 // Keys inside an object with value [value cannot be an *Object] are attributes
 
-
 var sample = {
     "quiz": {
         "sport": {
@@ -368,14 +367,12 @@ output={}
 }
 
 
-
-
 function processTest(e) {
     e.preventDefault();
-  console.log(sample)
+    console.log(sample)
     var outputArray = obj2Array(sample, []);
     console.log(outputArray)
-    outputJson = array2Obj(outputArray);
+    outputJson = arr2Obj(outputArray);
  
    console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);

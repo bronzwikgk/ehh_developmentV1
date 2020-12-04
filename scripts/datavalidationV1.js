@@ -52,10 +52,10 @@ function compareTwoArray_(arr1, arr2){
   
   
   
-  // Returns if a value is an object
-  function isObject (value) {
-  return value && typeof value === 'object' && value.constructor === Object;
-  }
+  // // Returns if a value is an object
+  // function isObject (value) {
+  // return value && typeof value === 'object' && value.constructor === Object;
+  // }
   
   
   
