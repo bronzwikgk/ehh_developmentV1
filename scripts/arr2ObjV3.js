@@ -1,10 +1,32 @@
 //https://jrsinclair.com/articles/2019/functional-js-traversing-trees-with-recursive-reduce/
-function arr2Obj(inputTable, output, currentObj, currentRow) { 
 
+
+//this function taken a row and a table as in an input, if it find Children in next depth of the row Send back an array of children.
+//else returns false/
+function hasChildren(row, inputTable) { 
+    children = {};
+    inputTable.shift()
+    children = inputTable.filter((rowElement, i) => {
+       // console.log("rowElement", rowElement,row)
+        if (row[3] === rowElement[2] && rowElement[1] === row[1] + 1) {
+           // inputTable.splice(rowElement[1], 1);
+           // console.log("deleted ", rowElement,"from",inputTable)
+            return rowElement;
+        }
+    });
+    if (children.length > 0) {
+        return children;
+    } else {
+        return false;
+    }
+   // console.log("Children", children, "for",row);
+}
+
+function arr2Obj(inputTable, output, currentObj, currentRow) { 
     if (!output) { var output = {}; }
     //console.log(input)
     maxDepth = Math.max(...splitArray(inputTable, 2));
-    console.log("input", inputTable)
+ //   console.log("input", inputTable)
 
     for (d = 1; d <= maxDepth; d++) {
 
@@ -16,13 +38,18 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
                 currentRow = inputTable[i];
                 currentObj = {};
                 currentObj[currentRow[3]] = updateAttributesNvalues(inputTable, currentObj, currentRow, inputTable);
-            //  getChildren(inputTable, currentObj, currentObj, currentRow, inputTable);
-                console.log(currentObj, typeof currentObj)
-                output[currentRow[3]] = currentObj;
+                if (hasChildren(currentRow, inputTable) !== "false") { 
+                    children = { ...hasChildren(currentRow, inputTable) }
+                    
+                     childrenObj = arr2Obj(children, currentObj, currentObj, currentRow);
+                    console.log("childrenObj", childrenObj , "of", currentObj);
+                }
+                output[currentRow[3]] = { ...currentObj ,...output};
+             console.log("output here >>>",output)
             }
         }
     }
-    console.log(output)
+   console.log(output)
     return output;
 
 }

@@ -98,8 +98,6 @@ class process {
     }
 }
 
-
-
 // function mapObject(obj, func, scope) {
 //     var newObj = {}, key;
 //     for (key in obj) {
