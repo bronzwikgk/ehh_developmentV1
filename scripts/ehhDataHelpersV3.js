@@ -147,6 +147,7 @@ function Iterator(Array)
   this.index = 0
 }
 
+
 Iterator.prototype = {
   hasNext: function()
   {
