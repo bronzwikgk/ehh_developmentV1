@@ -11,8 +11,7 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
             if (inputTable[i][1] === d) { 
                 currentRow = inputTable[i];
                 currentObj = row2object(currentRow, currentObj, currentObj, currentRow, inputTable);
-                console.log("delteing", inputTable[i], "currentObect", currentObj)
-                inputTable.splice(inputTable[i], 1);
+              
                 output[currentRow[3]] = currentObj;
             }
         }
@@ -29,34 +28,27 @@ function getChildren(input, currentObj, currentRow,inputTable) {
     childrenObj = {};
     children = input.filter((row, value) => { if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) return row; });
 
-    console.log("children",children) 
+  //  console.log("children",children) 
     for (i = 1; i < children.length; i++) {
         if (children[i][1] === d) {
             currentRow = children[i];
-                currentObj = row2object(currentRow, currentObj, currentObj, currentRow, inputTable);
-            console.log("delteing", input[i], "currentObje", currentObj);
-            input.splice(inputTable[i], 1);
-
-              //  console.log("children", children);
-                  childrenObj = getChildren(children, currentObj, currentObj, currentRow, inputTable);
-                console.log("childrenObj", childrenObj);
-                //  console.log(inputTable)
-                //   break;
-                // console.log("CurrentObj",currentObj);
+            currentObj = row2object(currentRow, currentObj, currentObj, currentRow, inputTable);
+            arr2Obj(children, currentObj, currentObj, currentRow, inputTable);
             currentObj[currentRow[3]] = currentObj;
             }
         }
    
-    console.log(currentObj)
-    return currentObj;
+  //  console.log(currentObj)
+  //  return currentObj;
 }
 function row2object(inputRow, outputObj, currentObj, currentRow,inputTable) {
     if (!currentObj) { var currentObj = {}; }
     attributes = updateAttributesNvalues(inputTable, currentObj, currentRow, inputTable);
-    
-    getChildren(inputTable, currentObj, currentRow);
-    console.log( "currentObect", currentObj)
-    if (children.length>0) { console.log("children", children) }
+    console.log("delteing", inputTable[i], "currentObect", currentObj)
+    inputTable.splice(inputTable[i], 1);
+  //  getChildren(inputTable, currentObj, currentRow);
+   // console.log( "currentObect", currentObj)
+    //if (children.length>0) { console.log("children", children) }
      set(attributes, currentObj, inputRow[3]);
     return currentObj;
 }
