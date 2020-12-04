@@ -10,12 +10,12 @@ function array2Obj(table, outputObj) {
       //  console.log(currentDepthRows)
          currentDepthObj={}
               currentDepthRows.forEach((currentRow, i) => {
-                currentObj = {};
+                    currentObj = {};
                   currentObj[currentRow[3]] = updateAttributesNvalues(table, currentObj, currentRow);
                   children = {};
                   children = table.filter((row, value) => { if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) return row; });      
                   console.log(currentDepthObj)
-                  currentObj = { ...array2Obj(children, outputObj) };
+                  currentObj = { ...array2Obj(children, currentObj) };
                   currentDepthObj[currentRow[3]] = { ...currentObj };          
         })
            
@@ -27,7 +27,27 @@ function array2Obj(table, outputObj) {
     return output;
 
 }
+function setData(input, output, key) {
 
+    if (typeof output === 'Array') {
+        output.push(input[key]);
+    }
+    if (typeof output === 'object' && input[key].value) {
+       // console.log(input[key].name);
+        output[input[key].name] = input[key].value;
+    } 
+    if (getEntityType(output).includes("HTML")) { 
+        if (key === 'href' || key === 'src') {
+            if (isValidUrl(input[key]) === false) {
+                var absoluteUrl = toAbsolute(input[key]);
+                output.setAttribute(key, absoluteUrl);
+            } 
+        } else {
+            output.setAttribute(key, input[key]);
+        }  
+    }
+    return output;
+}
 
 function updateAttributesNvalues(input, currentObj, currentRow) {
     header = input[0];
