@@ -369,10 +369,10 @@ output={}
 
 function processTest(e) {
     e.preventDefault();
-    console.log(sample)
-    var outputArray = obj2Array(sample, []);
+    console.log(UserSchema)
+    var outputArray = obj2Array(UserSchema, []);
     console.log(outputArray)
-    outputJson = arr2Obj(outputArray);
+    outputJson = array2Obj(outputArray);
  
    console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
