@@ -43,6 +43,7 @@ var sample = {
         }
     }
 }
+
 var sample2 = {
     "menus": [
         {
@@ -208,6 +209,7 @@ var sample2 = {
         }
     ]
 }
+
 const UserSchema = {
     name: {
         type: String, required: true
@@ -219,6 +221,7 @@ const UserSchema = {
         type: Date, default: Date.now
     }
 };
+
 var schema = {
     "name": {
         "title": "Name",
@@ -236,7 +239,8 @@ var schema = {
         ]
     }
 }
-var row = new Array('id', 'd', 'parent', 'entity',"type");
+
+var row = new Array('id', 'd', 'parent', 'entity', "type");
 
 function createRow(input, output, parent, id, d, key, options, callback) {
     id = output.length;

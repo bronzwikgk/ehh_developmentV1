@@ -77,7 +77,6 @@ function array2Obj(params) {
             len = key.length;
             prevKey = key;
         }
-
     }
     return output.root;
 }

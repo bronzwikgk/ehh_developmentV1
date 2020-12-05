@@ -47,8 +47,6 @@ function getChildren(input, output, currentRow, currentObj, d,childrenRows) {
     return currentObj;
 }
 
-
-
 function arr2json2(input, output, currentRow,currentObj,d,children) {
     if (!output) { var output = {}; table = input; }
    //console.log(input)
