@@ -240,7 +240,151 @@ var schema = {
     }
 }
 
-var row = new Array('id', 'd', 'parent', 'entity', "type");
+var sample4 = {
+    "id": "https://example.com/person.schema.json",
+    "schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Person",
+    "type": "object",
+    "properties": {
+        "firstName": {
+            "type": "string",
+            "description": "The person's first name."
+        },
+        "lastName": {
+            "type": "string",
+            "description": "The person's last name."
+        },
+        "age": {
+            "description": "Age in years which must be equal to or greater than zero.",
+            "type": "integer",
+            "minimum": 0
+        }
+    }
+}
+
+var samplen = {
+    "type": "Categorization",
+    "elements": [
+        {
+            "type": "Category",
+            "label": "Basic Information",
+            "elements": [
+                {
+                    "type": "HorizontalLayout",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/firstName"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/secondName"
+                        }
+                    ]
+                },
+                {
+                    "type": "HorizontalLayout",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/birthDate"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/nationality"
+                        }
+                    ]
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/provideAddress"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/vegetarian"
+                }
+            ]
+        },
+        {
+            "type": "Category",
+            "label": "Address",
+            "elements": [
+                {
+                    "type": "HorizontalLayout",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/address/properties/street"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/address/properties/streetNumber"
+                        }
+                    ]
+                },
+                {
+                    "type": "HorizontalLayout",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/address/properties/city"
+                        },
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/address/properties/postalCode"
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "scope": "#/properties/provideAddress",
+                    "schema": {
+                        "const": true
+                    }
+                }
+            }
+        },
+        {
+            "type": "Category",
+            "label": "Additional",
+            "elements": [
+                {
+                    "type": "Control",
+                    "scope": "#/properties/vegetarianOptions/properties/vegan"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/vegetarianOptions/properties/favoriteVegetable"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/vegetarianOptions/properties/otherFavoriteVegetable",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "scope": "#/properties/vegetarianOptions/properties/favoriteVegetable",
+                            "schema": {
+                                "const": "Other"
+                            }
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "scope": "#/properties/vegetarian",
+                    "schema": {
+                        "const": true
+                    }
+                }
+            }
+        }
+    ]
+}
+var row = new Array('ehhid', 'd', 'parent', 'entity', "type");
 
 function createRow(input, output, parent, id, d, key, options, callback) {
     id = output.length;
@@ -249,8 +393,10 @@ function createRow(input, output, parent, id, d, key, options, callback) {
 }
 
 function updateRow(input, output, currentRow, prevRow, id, d, key, options, callback) {
+   // console.log("updating Current Row",currentRow, output[0],key)
     fillEmptyDepth(currentRow, output[0])
     currentRow.splice(output[0].indexOf(key), 1, input);
+   // console.log("updated", currentRow, output[0])
     return currentRow;
 }
 
@@ -279,8 +425,13 @@ function obj2Array(input, output, parentID, id, d, key, currentRow) {
                 // console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
                 obj2Array(input[key], output, key, id, d, key, newRow);
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
+                newRow = createRow(input[key], output, parentID, id, d, key);
+                output.push(newRow);
+                
                 validateNupdate(key, output);
-                updateRow(input[key].toString(), output, currentRow, parentID, id, d, key);
+             //   console.log(input[key], typeof input[key], input[key].toString(),output)
+                updateRow(input[key].toString(), output, newRow, parentID, id, d, key);
+                console.log("newRow", newRow)
               //   console.log("String Value Found", input[key], " in key", key, "parent", parentID, currentRow)
             } else {
                 console.log("errand", key, input[key],typeof key)
@@ -327,6 +478,7 @@ function printArray(outout, ss) {
 }
 
 function fillEmptyDepth(input, header) {
+//console.log("filling gap",input)
     for (j = 1; j <= header.length - input.length; j++) {
         input.push("");
     }
@@ -340,41 +492,13 @@ function validateNupdate(input, output) {
     }
     return output;
 }
-function getChild() { 
 
-}
-
-
-
-
-//javascript create JSON object from two dimensional Array
-function arrayToJSONObject(arr) {
-    //header
-    var keys = arr[0];
-output={}
-    //vacate keys from main array
-    var newArr = arr.slice(1, arr.length);
-
-    var formatted = [],
-        data = newArr,
-        cols = keys,
-        l = cols.length;
-    for (var i = 0; i < data.length; i++) {
-        var d = data[i],
-            o = {};
-        for (var j = 0; j < l; j++)
-            o[cols[j]] = d[j];
-        output[d] = o;
-
-    }
-    return output;
-}
 
 
 function processTest(e) {
     e.preventDefault();
-    console.log(UserSchema)
-    var outputArray = obj2Array(UserSchema, []);
+    console.log(samplen)
+    var outputArray = obj2Array(samplen, []);
     console.log(outputArray)
     outputJson = array2Obj(outputArray);
  
