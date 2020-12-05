@@ -7,7 +7,6 @@ function array2Obj(params) {
     let columns = [];
 
     for (const [i, key] of params.entries()) {
-       
 
         if (i === 0) {
             var idx = {};
@@ -17,12 +16,9 @@ function array2Obj(params) {
             columns = params[0];
 
         } else {
-
             var ref;
             var istype;
             let arr;
-            
-            
             if (depth < key[idx.d]) {
 
 
@@ -59,8 +55,7 @@ function array2Obj(params) {
                 }
 
                 depth = key[idx.d];
-            } else if (depth > key[idx.d]) {
-                
+            } else if (depth > key[idx.d]) { 
                 if (key[idx.d] === 2)
                     ref = output.root[key[idx.parent]]
                 else if (key[idx.d] === 3)
