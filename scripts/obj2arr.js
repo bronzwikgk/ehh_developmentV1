@@ -497,8 +497,8 @@ function validateNupdate(input, output) {
 
 function processTest(e) {
     e.preventDefault();
-    console.log(samplen)
-    var outputArray = obj2Array(samplen, []);
+    console.log(sample)
+    var outputArray = obj2Array(sample, []);
     console.log(outputArray)
     outputJson = array2Obj(outputArray);
  

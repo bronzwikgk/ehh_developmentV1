@@ -138,39 +138,40 @@ function array2Obj(params) {
         }
 
     }
-    return output.root;
-}dx.d]] = ref
+     return output.root;
+    }
+// }dx.d]] = ref
 
-                        }
-                    }
+//                         }
+//                     }
 
 
-                }
+//                 }
 
-                depth = key[idx.d];
-            } else if (depth > key[idx.d]) {
+//                 depth = key[idx.d];
+//             } else if (depth > key[idx.d]) {
 
-                // if (key[idx.d] === 2)
-                //     ref = output.root[key[idx.parent]]
-                // else if (key[idx.d] === 3)
-                //     ref = output.root.quiz[key[idx.parent]]
-                ref = row[key[idx.d]]
+//                 // if (key[idx.d] === 2)
+//                 //     ref = output.root[key[idx.parent]]
+//                 // else if (key[idx.d] === 3)
+//                 //     ref = output.root.quiz[key[idx.parent]]
+//                 ref = row[key[idx.d]]
 
-                depth = key[idx.d]
-                istype = key[idx.type]
+//                 depth = key[idx.d]
+//                 istype = key[idx.type]
 
-            }
-            // else if (depth === key[idx.d]) {
+//             }
+//             // else if (depth === key[idx.d]) {
 
-            //     if (istype === "String") {
+//             //     if (istype === "String") {
 
-            //         arr = ref;
-            //         arr.push(key[idx.entity])
-            //         depth = key[idx.d];
-            //         istype = key[idx.type]
-            //     }
-            //     //ref = row[key[idx.d]]
-            // }
-            len = key.length;
-            prevKey = key;
-            console.log("my output", JSON.parse(JSON.string
+//             //         arr = ref;
+//             //         arr.push(key[idx.entity])
+//             //         depth = key[idx.d];
+//             //         istype = key[idx.type]
+//             //     }
+//             //     //ref = row[key[idx.d]]
+//             // }
+//             len = key.length;
+//             prevKey = key;
+//             console.log("my output", JSON.parse(JSON.string
