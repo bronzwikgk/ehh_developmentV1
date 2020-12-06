@@ -466,17 +466,6 @@ function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
 
-function printArray(outout, ss) {
-    for (var i = 0; i <= output.length; i++) {
-        if (output[i]) {
-            console.log(output[i])
-            ss.appendRow(output[i]);
-
-        }
-    }
-
-}
-
 function fillEmptyDepth(input, header) {
 //console.log("filling gap",input)
     for (j = 1; j <= header.length - input.length; j++) {
