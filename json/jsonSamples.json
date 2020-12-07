@@ -1,3 +1,4 @@
+
 var sample = {
     "quiz": {
         "sport": {
@@ -203,12 +204,18 @@ var sample2 = {
     ]
 }
 
-const UserSchema = { name: { type: String, required: true
-    }, email: { type: String, required: true
-    }, password: { type: String, required: true
-    }, date: { type: Date, default: Date.now
+const UserSchema = {
+    name: {
+        type: String, required: true
+    }, email: {
+        type: String, required: true
+    }, password: {
+        type: String, required: true
+    }, date: {
+        type: Date, default: Date.now
     }
 };
+
 var schema = {
     "name": {
         "title": "Name",
@@ -226,8 +233,6 @@ var schema = {
         ]
     }
 }
-
-
 
 var sample4 = {
     "id": "https://example.com/person.schema.json",
@@ -251,7 +256,7 @@ var sample4 = {
     }
 }
 
-var samplen ={
+var samplen = {
     "type": "Categorization",
     "elements": [
         {

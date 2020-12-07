@@ -87,8 +87,6 @@ function compareTwoArray_(arr1, arr2){
   return value instanceof Error && typeof value.message !== 'undefined';
   }
   
-  
-  
   // Returns if value is a date object
   function isDate (value) {
   return value instanceof Date;
