@@ -4,6 +4,12 @@ const isObject = t =>
 const set = (t, [k, v]) =>
     (t[k] = v, t)
 
+function set(inputObj, [key, value]) { 
+    inputObj[key] = value, inputObj;
+
+    return inputObj
+}
+
 const merge = (l = {}, r = {}) =>
     Object
         .entries(r)
@@ -45,9 +51,7 @@ function toJS(t) {
 
 function toJS1([v, ...more]) {
     if (more.length)
-        return set
-            (Number.isInteger(v) ? [] : {}, [v, toJS1(more)]
-            )
+        return set (Number.isInteger(v) ? [] : {}, [v, toJS1(more)])
     else
         return v
 }

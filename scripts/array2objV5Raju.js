@@ -7,17 +7,19 @@ function array2Obj(params) {
             for (const [j, ele] of key.entries()) {
                 idx[ele] = j
             }
-           // console.log(idx);
+        //  console.log(idx);
             columns = params[0];
         } else {
             var ref; var istype; let arr;
+         //   console.log(key,idx)
             if (depth <= key[idx.d]) {
                 if (key[idx.d] === 1 && key[idx.id] === 1) {
-                    output[key[idx.parent]] = {}
+                 //   output[key[idx.parent]] = {}
                     ref = output[key[idx.parent]];
-                    console.log("ref", ref, key, idx)
+                   // console.log("ref", ref, key, idx)
                     istype = key[idx.type]
                     row[key[idx.d]] = ref
+                   // console.log(row,output)
                 } else {       
                     if (Array.isArray(ref)) {
                         // let index = 0
