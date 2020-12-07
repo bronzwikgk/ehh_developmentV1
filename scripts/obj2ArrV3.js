@@ -9,15 +9,18 @@ class processData {
         return newRow;
     }
 
-    static processObj(input) {
+    static processObj(input, output, current, previous) {
         console.log(input)
         var entries = Object.entries(input);
         entries.forEach((element, index, entries) => {
+
+
             console.log(element[0], index, entries); 
         });
     }
 
     static Obj2(input, output, current, previous) { 
+        if (!d) { var d = 0; }
         switch (input?.constructor) {
             case Object:   
                 return processData.processObj(input);
@@ -36,7 +39,7 @@ class processData {
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = UserSchema;
+    var in2 = sample;
     console.log(in2)
     var outputArray = processData.Obj2(in2, []);
   //  console.log(outputArray)
