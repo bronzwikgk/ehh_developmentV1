@@ -1,3 +1,4 @@
+
 function array2Obj(table, outputObj) {
     if (!output) { var output = {}; }
     //console.log(input)
