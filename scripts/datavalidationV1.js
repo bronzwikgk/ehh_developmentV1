@@ -2,7 +2,7 @@
 //https://sites.google.com/site/scriptsexamples/custom-methods/2d-arrays-library
 
 
-//return true if all items are the same in two unordered Array
+//return true if all items are the same in two unordered Array need to add a return of mismatch values as option.
 function compareTwoArray_(arr1, arr2){
     arr1.sort();
     arr2.sort(); 

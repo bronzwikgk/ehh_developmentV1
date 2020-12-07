@@ -7,8 +7,6 @@
 //HasNext Iterator to be added from the dataHelper
 
 
-
-
 function array2Json2(inputTable, output) {
    // maxDepth = max(inputTable[][1]);
 

@@ -4,8 +4,19 @@
 // console.log(jsonOutput);
 // var htmlOutput = process.json2node(jsonOutput);
 // var temp = processFiles.verifyPermissions();
-// console.log(temp);
-// console.log(htmlOutput);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //var url = 'https://raw.githubusercontent.com/bronzwikgk/ehh_developmentV1/main/testData/package.json';
 //var urlResponse = processUrl.fetchUrl(url);
