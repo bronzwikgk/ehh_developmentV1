@@ -31,6 +31,7 @@ function obj2Array(input, output, parentID, id, d, key, currentRow) {
     };
     
     if (getEntityType(input) === 'Object') {
+        console.log(input);
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
             if (getEntityType(input[key]) === 'Object') {
