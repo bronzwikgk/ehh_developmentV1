@@ -46,8 +46,7 @@ function toJS(t) {
 function toJS1([v, ...more]) {
     if (more.length)
         return set
-            (Number.isInteger(v) ? [] : {}
-                , [v, toJS1(more)]
+            (Number.isInteger(v) ? [] : {}, [v, toJS1(more)]
             )
     else
         return v

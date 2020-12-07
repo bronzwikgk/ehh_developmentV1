@@ -31,7 +31,8 @@ function obj2Array(input, output, parentID, id, d, key, currentRow) {
     };
     
     if (getEntityType(input) === 'Object') {
-        console.log(Object.keys(input));
+        console.log(Object.entries(input), parentID, typeof input, input?.constructor);
+        
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
             if (getEntityType(input[key]) === 'Object') {
@@ -106,13 +107,13 @@ function validateNupdate(input, output) {
 
 function processTest(e) {
     e.preventDefault();
-    console.log(sample4)
-    var outputArray = obj2Array(sample4, []);
+    console.log(sample)
+    var outputArray = obj2Array(sample, []);
     console.log(outputArray)
     outputJson = array2Obj(outputArray);
- 
-   console.log(outputJson)
+    console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
 }
+
 
 document.getElementById("get").addEventListener("click", processTest);
