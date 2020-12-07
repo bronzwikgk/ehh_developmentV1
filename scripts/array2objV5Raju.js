@@ -18,8 +18,7 @@ function array2Obj(params) {
                     console.log("ref", ref, key, idx)
                     istype = key[idx.type]
                     row[key[idx.d]] = ref
-                } else {
-                  
+                } else {       
                     if (Array.isArray(ref)) {
                         // let index = 0
                         if (depth === key[idx.d]) {
