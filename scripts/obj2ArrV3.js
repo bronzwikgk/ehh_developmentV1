@@ -1,17 +1,26 @@
+
+var row = new Array('ehhid', 'd', 'parent', 'entityName', "typeOf");
+
+
 class processData { 
+    static createRow(input, output, parent, id, d, key, options, callback) {
+        id = output.length;
+        var newRow = [id, d, parent, key, getEntityType(input)];
+        return newRow;
+    }
+    static processObj(input) { 
+         console.log(Object.entries(input));
+        var entries = Object.entries(input);
+        entries.forEach((element, index, entries) => {
+
+            
+            console.log(element, index, entries); 
+        });
+    }
     static Obj2(input, output, current, previous) { 
         switch (input?.constructor) {
-            case Object:
-                var a = Object.entries(input);
-                a.forEach((element,i,o) => {
-                    console.log(element,"kzjdh", o, i)
-                })
-                console.log(a, typeof a);
-                for (var key in a) { 
-                    console.log(key,a[key])
-                }
-                    
-                return Object.entries(input);
+            case Object:   
+                return processData.processObj(input);
             case Array:
                 return input
             default:
@@ -31,8 +40,8 @@ function processTest(e) {
     console.log(in2)
     var outputArray = processData.Obj2(in2, []);
     console.log(outputArray)
-    outputJson = array2Obj(outputArray);
-    console.log(outputJson)
+ //   outputJson = array2Obj(outputArray);
+  //  console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
 }
 
