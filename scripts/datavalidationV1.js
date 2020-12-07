@@ -43,8 +43,6 @@ function compareTwoArray_(arr1, arr2){
   // ES5 actually has a method for this (ie9+)
   //Array.isArray(value);
   
-  
-  
   // Returns if a value is a function
   function isFunction (value) {
   return typeof value === 'function';

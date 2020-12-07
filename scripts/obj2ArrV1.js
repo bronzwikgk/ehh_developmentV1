@@ -5,8 +5,6 @@
 // an 'Object' inside an array is a child of array, but then the array has values, they become it's values, with values/arrayname as attribute
 // Keys inside an object with value [value cannot be an *Object] are attributes
 
-
-
 var row = new Array('ehhid', 'd', 'parent', 'entityName', "typeOf");
 
 function createRow(input, output, parent, id, d, key, options, callback) {
@@ -23,7 +21,7 @@ function updateRow(input, output, currentRow, prevRow, id, d, key, options, call
     return currentRow;
 }
 
-function obj2Array(input, output, parentID, id, d, key, currentRow) {
+function obj2Array2(input, output, parentID, id, d, key, currentRow) {
     if (!output) { var output = []; }
     if (!d) { var d = 0; }
     d = d + 1;
@@ -41,13 +39,13 @@ function obj2Array(input, output, parentID, id, d, key, currentRow) {
                 newRow = createRow(input[key], output, parentID, id, d, key);
                 output.push(newRow);
                 // console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
-                obj2Array(input[key], output, key, id, d, key, newRow);
+                obj2Array2(input[key], output, key, id, d, key, newRow);
             } else if (getEntityType(input[key]) === 'Array') {
                 // console.log("Array Found", input[key], " in key", key)
                 newRow = createRow(input[key], output, parentID, id, d, key);
                 output.push(newRow);
                 // console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
-                obj2Array(input[key], output, key, id, d, key, newRow);
+                obj2Array2(input[key], output, key, id, d, key, newRow);
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
                 newRow = createRow(input[key], output, parentID, id, d, key);
                 output.push(newRow);
@@ -106,11 +104,10 @@ function validateNupdate(input, output) {
     return output;
 }
 
-
 function processTest(e) {
     e.preventDefault();
     console.log(sample)
-    var outputArray = obj2Array(sample, []);
+    var outputArray = obj2Array2(sample, []);
     console.log(outputArray)
     outputJson = arr2Obj(outputArray);
  

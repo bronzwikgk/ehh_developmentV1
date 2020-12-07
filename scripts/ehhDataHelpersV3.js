@@ -183,7 +183,16 @@ class dataHelpers {
     }
 }
 
+//This function validates a valid Url, Returns True or false
+function isValidUrl(string) {
+    try {
+        new URL(string);
+    } catch (_) {
+        return false;
+    }
 
+    return true;
+}
 
 
 
