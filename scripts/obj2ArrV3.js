@@ -22,10 +22,8 @@ class processData {
           //  var current = processData.createRow(element[0], [],)
             var current = processData.createRow(input, output, previous, d, element[0]);
             output.push(current);
-            console.log(element,element?.constructor.name);
-            console.log(output)
-          
-   
+          //  console.log(element,element?.constructor.name);
+          //  console.log(output)
         });
     }
     static Obj2(input, output, current, previous) { 
