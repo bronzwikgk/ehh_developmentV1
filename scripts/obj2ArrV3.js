@@ -7,29 +7,29 @@ var row = new Array('ehhid', 'd', 'parent', 'entityName', "typeOf");
 //has to be added, along with entire Crud operation.
 class processData { 
    
-    static createRow(input, output, previous, d, currentKey, currentObj,currentRow) {
+    static createRow(input, output, previous, d, currentKey, currentObj, currentRow, previousRow, previsouObj) {
       //  console.log("createRow ", input, output)
         var id = output.length;
         var newRow = [id, d, previous, currentKey, input?.constructor.name];
         return newRow;
     }
     
-    static updateRow(input, output, previous, d, currentKey, currentObj, currentRow, options, callback) {
-        console.log("updating Current Row", currentRow, output[0], currentKey)
+    static updateRow(input, output, previous, d, currentKey, currentObj, currentRow, previousRow, previsouObj,options, callback) {
+      console.log("updating Current Row", currentRow, output[0], currentKey)
          processData.fillEmptyDepth(currentRow, output[0])
         currentRow.splice(output[0].indexOf(currentKey), 1, input);
-    // console.log("updated", currentRow, output[0])
+     console.log("updated", currentRow, output[0])
         return currentRow;
     }
     static fillEmptyDepth(input, output) {
-     console.log("filling gap",input,output)
+    // console.log("filling gap",input,output)
     for (var j = 1; j <= output[0].length - input.length; j++) {
         input.push("");
     }
         return input;
     }
 
-    static processObj(input, output, previous, d, currentKey, currentObj, currentRow) {
+    static processObj(input, output, previous, d, currentKey, currentObj, currentRow,previousRow,previsouObj) {
    
       //  console.log("processing", input, output)
    
@@ -37,32 +37,26 @@ class processData {
             if (!input.hasOwnProperty(key)) continue;
             if (getEntityType(input[key]) === 'Object') { // console.log("object",key,input[key])
                 currentObj = input[key];
-                var currentRow = processData.createRow(input[key], output, previous, d, key, currentObj, currentRow);
+                var currentRow = processData.createRow(input[key], output, previous, d, key, currentObj, currentRow, previousRow, previsouObj);
                 output.push(currentRow);
-            // console.log("output",output)
                 processData.Obj2(input[key], output, key, d, key, currentObj, currentRow);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
             } else if (getEntityType(input[key]) === 'Array') {
-          //  console.log("Array",key,input[key])
                 currentObj = input[key];
-                var currentRow = processData.createRow(input[key], output, previous, d, key, currentObj, currentRow);
+                var currentRow = processData.createRow(input[key], output, previous, d, key, currentObj, currentRow, previousRow, previsouObj);
                 output.push(currentRow);
-                // console.log("output",output)
                 processData.Obj2(input[key], output, key, d, key, currentObj, currentRow);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
-                var currentRow = processData.createRow(input[key], output, previous, d, key, currentObj, currentRow);
-
-                output.push(currentRow);
-
-                processData.validateNupdate(key, output);
-                console.log(input[key], typeof input[key], input[key].toString(), output)
-                processData.updateRow(input[key], output, previous, d, currentKey, currentObj, currentRow)
-              
+                currentObj = input[key];
+                console.log("found value", key, input[key], output, currentRow, previous);
+               processData.validateNupdate(key, output);
+                processData.updateRow(input[key], output, key, d, key, currentObj, currentRow)
             } else {
                 console.log("errand", key, input[key],typeof key)
             }
         }
          return output;
     }
+
     static processArr(input, output, previous, d, currentKey, currentObj, currentRow) { 
 
         for (var i = 0; i < input.length; i++) {
@@ -81,6 +75,7 @@ class processData {
              
         }
     }
+
     static Obj2(input, output, previous, d, currentKey, currentObj, currentRow) { 
        // console.log("main",input)
         if (!previous) {
@@ -91,10 +86,11 @@ class processData {
         d = d + 1;
         switch (input?.constructor) {
             case Object:   
-                return processData.processObj(input, output, previous, d, currentKey);
+                // console.log("output",output)
+                return processData.processObj(input, output, previous, d, currentKey, currentObj, currentRow);
             case Array:
                // console.log(input);
-                return processData.processArr(input, output, previous, d);
+                return processData.processArr(input, output, previous, d, currentKey, currentObj, currentRow);
             default:
                 return
         } 
@@ -103,6 +99,7 @@ class processData {
    
      //this function primarly check for the presence of a keys in any an array, if not present and options [ returns false and update and return position]
     static validateNupdate(input, output) {
+      //  console.log(output[0],input)
             if (output[0].indexOf(input) === -1 && typeof input !== null && typeof input !== undefined) {
                 output[0].push(input);
             }
