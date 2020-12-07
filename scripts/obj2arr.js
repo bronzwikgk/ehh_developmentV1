@@ -53,10 +53,10 @@ function obj2Array(input, output, parentID, id, d, key, currentRow) {
                 validateNupdate(key, output);
              //   console.log(input[key], typeof input[key], input[key].toString(),output)
                 updateRow(input[key].toString(), output, newRow, parentID, id, d, key);
-                console.log("newRow", newRow)
+              //  console.log("newRow", newRow)
               //   console.log("String Value Found", input[key], " in key", key, "parent", parentID, currentRow)
             } else {
-                console.log("errand", key, input[key],typeof key)
+               // console.log("errand", key, input[key],typeof key)
             }
         }
     } else if (getEntityType(input) === "Array") { 
