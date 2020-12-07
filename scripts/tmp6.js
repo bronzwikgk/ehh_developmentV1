@@ -1,10 +1,3 @@
-// An object consitis of below mentioned kind of entity
-//an Object Entity with Typeof 'object' and getEntityType 'Object'.
-// an Object Entity can have an object (Object / Array) inside it or a value.
-//an Array Entity with Typeof 'object' and getEntityType 'Array'. 
-// an 'Object' inside an array is a child of array, but then the array has values, they become it's values, with values/arrayname as attribute
-// Keys inside an object with value [value cannot be an *Object] are attributes
-//HasNext Iterator to be added from the dataHelper
 
 
 function array2Json2(inputTable, output) {

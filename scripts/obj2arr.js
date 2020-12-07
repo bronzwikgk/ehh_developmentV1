@@ -5,7 +5,7 @@
 // an 'Object' inside an array is a child of array, but then the array has values, they become it's values, with values/arrayname as attribute
 // Keys inside an object with value [value cannot be an *Object] are attributes
 
-var row = new Array('ehhid', 'd', 'parent', 'entity', "type");
+var row = new Array('ehhid', 'd', 'parent', 'entityName', "typeOf");
 
 function createRow(input, output, parent, id, d, key, options, callback) {
     id = output.length;
@@ -108,7 +108,7 @@ function processTest(e) {
     console.log(sample)
     var outputArray = obj2Array(sample, []);
     console.log(outputArray)
-    outputJson = arr2Obj([outputArray]);
+    outputJson = array2Obj(outputArray);
  
    console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
