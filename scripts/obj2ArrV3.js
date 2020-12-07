@@ -8,15 +8,15 @@ class processData {
         var newRow = [id, d, parent, key, getEntityType(input)];
         return newRow;
     }
-    static processObj(input) { 
-         console.log(Object.entries(input));
+
+    static processObj(input) {
+        console.log(input)
         var entries = Object.entries(input);
         entries.forEach((element, index, entries) => {
-
-            
-            console.log(element, index, entries); 
+            console.log(element[0], index, entries); 
         });
     }
+
     static Obj2(input, output, current, previous) { 
         switch (input?.constructor) {
             case Object:   
@@ -36,10 +36,10 @@ class processData {
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = sample;
+    var in2 = UserSchema;
     console.log(in2)
     var outputArray = processData.Obj2(in2, []);
-    console.log(outputArray)
+  //  console.log(outputArray)
  //   outputJson = array2Obj(outputArray);
   //  console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
