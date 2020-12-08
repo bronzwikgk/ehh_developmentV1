@@ -21,7 +21,7 @@ class processData {
     static updateRow(input, output, previousRow, currentRow, currentKey, d, path) {
        //  console.log("updating Current Row", currentRow, output[0], currentKey,input)
            processData.fillEmptyDepth(currentRow, output)
-          currentRow.splice(output[0].indexOf(currentKey), 1, input);//Adding the inputValue in the currentRow at the index of the currentKey, also deletes an empty space from before.
+             currentRow.splice(output[0].indexOf(currentKey), 1, input);//Adding the inputValue in the currentRow at the index of the currentKey, also deletes an empty space from before.
         // console.log("updated", currentRow, output[0])
         return currentRow;
     }
@@ -131,14 +131,14 @@ class processData {
             case Object: 
              
                 if (!currentRow) {
-                   
+                    var path =  previousRow[5]; 
                     var currentRow = processData.createRow(input, output, previousRow,currentKey, d, path)
                  //   console.log("found value", key, input[key], currentRow, output);
                    output.push(currentRow);
                 }
                 
-                var path = path + "." + previousRow[3];
-                console.log("Object  >>>", path, input, currentRow, previousRow)
+                var path = previousRow[5] + "." + previousRow[3];
+              //  console.log("Object  >>>", path, input, currentRow, previousRow)
                 return processData.processObj(input, output, previousRow, currentRow, currentKey, d, path);
             case Array:
              //  console.log(previousRow,currentRow)
@@ -148,7 +148,7 @@ class processData {
                     //   console.log("found value", key, input[key], currentRow, output);
                     output.push(currentRow);
                 }
-                var path = path + "." + previousRow[3];
+              //  var path = path + "." + previousRow[3];
              //  console.log("array  >>>", input, output, currentRow, previousRow)// console.log(input);
                 return processData.processArr(input, output, currentRow, currentRow, currentKey, d, path);
             default:
@@ -172,7 +172,7 @@ class processData {
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = sample2;
+    var in2 = sample;
     console.log(in2)
     var outputArray = processData.Obj2(in2, []);
    console.log(outputArray)
