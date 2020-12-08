@@ -1,5 +1,9 @@
-//works well with Sample
-//has issues on rootObject
+//seems to have an issue with the root object.
+//Need to add options.
+//set has to be a seperate method
+//Child index need to be created along with the path.
+//
+
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
@@ -10,19 +14,19 @@ var row = new Array('ehhid', 'd', 'parent', 'root', "typeOf","path");
 class processData { 
    //This is kind of an constructor function. It should be able to create an object based on the input Schema object.
     //currently it creates a array/a Row on req using row as a base array.
-    static createRow(input, output, previousRow,currentKey, d, path) {
-   
-       // console.log("previous row", previousRow,currentKey)
+    static createRow(input, output, previousRow, currentKey, d, path, parent) {
         var id = output.length;
-        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name,path];
-       // console.log(newRow)
+        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name];
+       // console.log("row created",newRow)
         return newRow;
     }
+
     static updateRow(input, output, previousRow, currentRow, currentKey, d, path) {
-       //  console.log("updating Current Row", currentRow, output[0], currentKey,input)
-           processData.fillEmptyDepth(currentRow, output)
-             currentRow.splice(output[0].indexOf(currentKey), 1, input);//Adding the inputValue in the currentRow at the index of the currentKey, also deletes an empty space from before.
-        // console.log("updated", currentRow, output[0])
+        processData.fillEmptyDepth(currentRow, output)
+      //  console.log("current Key",currentKey,input)
+        //Adding the inputValue in the currentRow at the index of the currentKey, also deletes an empty space from before.
+        currentRow.splice(output[0].indexOf(currentKey), 1, input);
+        console.log("updated Row",currentRow)
         return currentRow;
     }
     static fillEmptyDepth(input, output) {
@@ -33,52 +37,37 @@ class processData {
         return input;
     }
 
-    static processObj(input, output, previousRow, currentRow, currentKey, d, path) {
-     // console.log("path here", path)
+    static processObj(input, output, previousRow, currentRow, currentKey, d, path,parent) {
+    
        
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
-            if (getEntityType(input[key]) === 'Object') { // console.log("object",key,input[key])
-              //  console.log("Found Object in object",key ,input[key], getEntityType(input[key]), currentRow);
-
+            if (getEntityType(input[key]) === 'Object') { //console.log("object",key,input[key])
+              
                 if (typeof currentRow[3] === 'undefined') { 
                     processData.updateRow(key, output, previousRow, currentRow, 'root', d, path);
-                  // console.log(">>>>????",currentRow, previousRow, path)
-                  
-                  
-                    
-                  //  console.log(key, input[key], currentRow)
                 } else {
-                    var currentRow = processData.createRow(input[key], output, previousRow, key, d, path);
-                
-                  output.push(currentRow);
+                    var currentRow = processData.createRow(input[key], output, previousRow, key, d, path,parent);
+                    output.push(currentRow); 
                 }
-               
-              
-              //  var path = path + "." + previousRow[3];
-               // console.log(currentRow, previousRow, path)
-             //  output.push(path);
-              //  console.log("{{{{",key,input[key],currentRow,previousRow)
-                processData.Obj2(input[key], output, currentRow, currentRow, key, d, path);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
+              //  previousRow = currentRow;
+                processData.Obj2(input[key], output, currentRow, currentRow, key, d, path,parent);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
             } else if (getEntityType(input[key]) === 'Array') {
             
-             
                 if (typeof currentRow[3] === 'undefined') {
-                    processData.updateRow(key, output, previousRow, currentRow, 'entityName', d, path);
+                    processData.updateRow(key, output, previousRow, currentRow, 'root', d, path);
 
                 } else {
                     var currentRow = processData.createRow(input[key], output, previousRow, key, d, path);
-                    //   console.log(key, input[key], currentRow)
-                    output.push(currentRow);
-                } // console.log(">>>>",key, currentRow, previousRow, input[key])
-               // console.log("currentRow",currentRow)
-            //    var path = previousRow[5] + "." + previousRow[3] + "." + key;
+                    output.push(currentRow);   
+                } 
+              //  previousRow = currentRow;
                 processData.Obj2(input[key], output, currentRow, currentRow, key, d, path);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
-               
-             //  console.log("found value", key, input[key], currentRow);
+               console.log(previousRow,currentRow)
                 processData.validateNupdate(key, output);
-                processData.updateRow(input[key], output, previousRow, currentRow, key, d, path)
+
+                processData.updateRow(input[key], output, currentRow, currentRow, key, d, path);
             } else {
              //   console.log("errand", key, input[key],typeof key)
             }
@@ -86,71 +75,55 @@ class processData {
          return output;
     }
 
-    static processArr(input, output, previousRow, currentRow, currentKey, d, path) { 
+    static processArr(input, output, previousRow, currentRow, currentKey, d, path,parent) { 
 
         for (var i = 0; i < input.length; i++) {
             if (typeof input[i] === "object" && input[i] !== null) {
-         //  console.log("Found Object in Array", input[i],getEntityType(input[i]),currentRow);
-             //   var path = previousRow[5] + "." + previous;
-                // console.log(path)               
-             // console.log("currentRow???", currentRow)
+                console.log("here",currentRow, input[i],currentKey)
 
                 if (typeof currentRow[3] === 'undefined') {
-                    processData.updateRow(currentKey, output, previousRow, currentRow, 'entityName', d, path);
+                    processData.updateRow(currentKey, output, previousRow, currentRow, 'root', d, path);
+                    console.log(currentRow)
                 } else {
-                 // console.log("currentRow???",currentRow)
                     var currentRow = processData.createRow(input[i], output, previousRow, i, d, path);
-                   //  console.log(i, input[i], currentRow)
                     output.push(currentRow);
                 }
                 processData.Obj2(input[i], output, previousRow, currentRow, currentKey, d, path);
-            //processData.Obj2(input[i], output, previous, d, currentKey, currentObj, currentRow, currentRow, previsouObj, path)
+           
             } else {
-               // console.log(path)
-              //  console.log("Found value in Array", input[i], typeof input[i], previousRow, input[i]);
-               // var currentRow = processData.createRow(input[i], output, previousRow, currentRow, currentKey, d, path);
-                var currentRow = processData.createRow(input[i], output, previousRow, input[i], d, path);
-                //   console.log(key, input[key], currentRow)
+             //creating Value Row for Array Parent
+              var currentRow = processData.createRow(input[i], output, previousRow, input[i], d, path);
+             
                 output.push(currentRow);
                
-               
             }
-             
+ 
         }
     }
-    static Obj2(input, output, previousRow, currentRow, currentKey, d, path) { 
-      // console.log("cu", input, previousRow,currentRow)
+    static Obj2(input, output, previousRow, currentRow, currentKey, d, path,parent) { 
+    
         if (!previousRow) {
             output.push(row);
             previousRow = output[0];
-            path = "";
+            parent = "root";
+            path = '';
         };
         if (!d) { var d = 0; }
         d = d + 1;
         switch (input?.constructor) {
             case Object: 
-             
                 if (!currentRow) {
-                    var path =  previousRow[5]; 
-                    var currentRow = processData.createRow(input, output, previousRow,currentKey, d, path)
-                 //   console.log("found value", key, input[key], currentRow, output);
-                   output.push(currentRow);
+                    var currentRow = processData.createRow(input, output, previousRow, currentKey, d, path, parent);
+                    output.push(currentRow);
                 }
-                
-                var path = previousRow[5] + "." + previousRow[3];
-              //  console.log("Object  >>>", path, input, currentRow, previousRow)
-                return processData.processObj(input, output, previousRow, currentRow, currentKey, d, path);
+                return processData.processObj(input, output, previousRow, currentRow, currentKey, d, path, currentRow[3]);
             case Array:
              //  console.log(previousRow,currentRow)
                 if (!currentRow) {
-                  
-                    var currentRow = processData.createRow(input, output, previousRow, currentKey, d, path)
-                    //   console.log("found value", key, input[key], currentRow, output);
+                    var currentRow = processData.createRow(input, output, previousRow, currentKey, d, path, parent);
                     output.push(currentRow);
                 }
-              //  var path = path + "." + previousRow[3];
-             //  console.log("array  >>>", input, output, currentRow, previousRow)// console.log(input);
-                return processData.processArr(input, output, currentRow, currentRow, currentKey, d, path);
+                return processData.processArr(input, output, previousRow, currentRow, currentKey, d, path);
             default:
                 return
         } 
@@ -162,17 +135,15 @@ class processData {
        
             if (output[0].indexOf(input) === -1 && typeof input !== null && typeof input !== undefined) {
                 output[0].push(input);
-
         }
        // console.log(output[0], input);
             return output;
-        }
-  
+        }  
 }
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = sample;
+    var in2 = sample2;
     console.log(in2)
     var outputArray = processData.Obj2(in2, []);
    console.log(outputArray)

@@ -143,7 +143,7 @@ class processData {
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = sample;
+    var in2 = sample2;
     console.log(in2)
     var outputArray = processData.Obj2(in2, []);
    console.log(outputArray)
