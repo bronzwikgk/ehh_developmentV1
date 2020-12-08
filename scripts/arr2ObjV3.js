@@ -27,7 +27,6 @@ function arr2Obj(inputTable, output, currentObj, currentRow) {
     //console.log(input)
     maxDepth = Math.max(...splitArray(inputTable, 2));
  //   console.log("input", inputTable)
-
     for (d = 1; d <= maxDepth; d++) {
 
         console.log("iterating at depth", d);

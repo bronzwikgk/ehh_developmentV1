@@ -26,10 +26,11 @@ class mutate {
         }
         // console.log(output[0], input);
         return output;
-    }  
+    }
+
     static createRow(input, output, previousRow, currentKey, d, path) {
         var id = output.length;
-        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name,path];
+        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name, path];
         return newRow;
     }
 
@@ -41,11 +42,29 @@ class mutate {
         //  console.log("updated Row",currentRow)
         return currentRow;
     }
-    static Obj2(input, output, previousRow, currentRow, currentKey,d, path, parent) { 
+    static setEntity(input, output, key) { 
+       var  outputType = getEntityType(output);
+      //  console.log(outputType);
+        switch (output?.constructor) { 
+            case Object:
+                output[key] = input[key];
+            case Array:
+                if (key) {
+                    output.push(input[key])
+                } else { 
+                    output.push(input);
+                }
+            case String:
+                default:
+        }
+
+        return output;
+    }
+    static Obj2(input, output, previousRow, currentRow, currentKey, d, path, parent) {
         if (!previousRow) {
-            output.push(row);
+            mutate.setEntity(row, output);
             previousRow = output[0];
-          //  parent = "root";
+            //  parent = "root";
             path = '';
         };
         if (!d) { var d = 0; }
@@ -55,36 +74,39 @@ class mutate {
                 if (!currentRow) {
                     path = path + '.' + previousRow[3];
                     var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
-                    output.push(currentRow);
-                   // console.log("path",path);
+                    mutate.setEntity(currentRow, output);
+                    //output.push(currentRow);
+                    // console.log("path",path);
                 }
                 path = path + '.' + previousRow[3];
-               mutate.processObj(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
+                mutate.processObj(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
             case Array:
                 if (!currentRow) {
                     path = path + '.' + previousRow[3];
                     var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
-                    output.push(currentRow);
-                    // console.log("path",path);
+                    mutate.setEntity(currentRow, output);
+
+                   // output.push(currentRow);
+                  //  // console.log("path",path);
                 }
                 path = path + '.' + previousRow[3];
                 mutate.processArr(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
             default:
-               // return
-        } 
-      //  console.log(output)
+            // return
+        }
+        //  console.log(output)
         return output;
     }
     static processObj(input, output, previousRow, currentRow, currentKey, d, path, parent) {
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
             if (getEntityType(input[key]) === 'Object' || getEntityType(input[key]) === 'Array') {
-              // console.log(path)
+                // console.log(path)
                 var currentRow = mutate.createRow(input[key], output, previousRow, key, d, path, previousRow[3]);
-                output.push(currentRow); 
-             //  console.log(currentRow)
+                mutate.setEntity(currentRow, output);
+
                 mutate.Obj2(input[key], output, currentRow, currentRow, currentKey, d, path, currentRow[3]);
-            }  else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
+            } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
                 mutate.validateNupdate(key, output);
                 mutate.updateRow(input[key], output, previousRow, previousRow, key, d, path);
 
@@ -95,15 +117,15 @@ class mutate {
         return output;
     }
     static processArr(input, output, previousRow, currentRow, currentKey, d, path, parent) {
-
         for (var i = 0; i < input.length; i++) {
             if (typeof input[i] === "object" && input[i] !== null) {
-              if (typeof currentRow[3] === 'undefined') {
-              //      console.log(currentRow)
+                if (typeof currentRow[3] === 'undefined') {
+                    //      console.log(currentRow)
                     mutate.updateRow(currentKey, output, previousRow, currentRow, 'root', d, path);
                 } else {
                     var currentRow = mutate.createRow(input[i], output, previousRow, previousRow[3] + i, d, path);
-                    output.push(currentRow);
+                    mutate.setEntity(currentRow, output);
+//                    output.push(currentRow);
                 }
 
                 mutate.Obj2(input[i], output, currentRow, currentRow, currentKey, d, path);
@@ -111,13 +133,18 @@ class mutate {
             } else {
                 //creating Value Row for Array Parent
                 var currentRow = mutate.createRow(input[i], output, previousRow, input[i], d, path);
+                 mutate.setEntity(currentRow, output);
+
                 output.push(currentRow);
             }
-
         }
         return output
     }
 }
+
+
+
+
 
 function processTest(e) {
     e.preventDefault();
@@ -125,8 +152,8 @@ function processTest(e) {
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray",outputArray)
-    outputJson = processArr.arr2(outputArray,{});
-     console.log(outputJson)
+   outputJson = arr2Obj(outputArray);
+   console.log(outputJson);
     document.getElementById("output").innerText = JSON.stringify(outputArray);
 }
 

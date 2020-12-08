@@ -25,7 +25,7 @@ function arr2Obj(params) {
 
                 isType = key[idx.type]
                 entity = key[idx.entity]
-
+console.log(output)
                 if (isType === "Object")
                     output[key[idx.parent]][entity] = {}
                 else if (isType === "Array")
@@ -273,6 +273,6 @@ function arr2Obj(params) {
 
 
     }
-
+console.log(output)
     return output.root
 }
