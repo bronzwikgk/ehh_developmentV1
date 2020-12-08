@@ -120,6 +120,7 @@ class processData {
             case Array:
              //  console.log(previousRow,currentRow)
                 if (!currentRow) {
+                    console.log("here>",typeof input, getEntityType(input),input)
                     var currentRow = processData.createRow(input, output, previousRow, currentKey, d, path, parent);
                     output.push(currentRow);
                 }

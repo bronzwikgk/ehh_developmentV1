@@ -513,10 +513,13 @@ function arrayToJSONObject(arr) {
     return output;
 }
 
+
+
+
 function processTest(e) {
     e.preventDefault();
     //console.log("mango", sample)
-    var outputArray = obj2Array(sample, []);
+    var outputArray = obj2Array(sample2, []);
     console.log("mango outputArray", outputArray)
 
     outputJson = array2Obj(outputArray);
