@@ -17,16 +17,16 @@ class processData {
     static createRow(input, output, previousRow, currentKey, d, path, parent) {
         var id = output.length;
         var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name];
-       // console.log("row created",newRow)
+       console.log("row created",newRow)
         return newRow;
     }
 
     static updateRow(input, output, previousRow, currentRow, currentKey, d, path) {
         processData.fillEmptyDepth(currentRow, output)
-      //  console.log("current Key",currentKey,input)
+     // console.log("current Key in updation",currentKey,input,currentRow,previousRow)
         //Adding the inputValue in the currentRow at the index of the currentKey, also deletes an empty space from before.
         currentRow.splice(output[0].indexOf(currentKey), 1, input);
-        console.log("updated Row",currentRow)
+      //  console.log("updated Row",currentRow)
         return currentRow;
     }
     static fillEmptyDepth(input, output) {
@@ -39,16 +39,17 @@ class processData {
 
     static processObj(input, output, previousRow, currentRow, currentKey, d, path,parent) {
     
-       
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
-            if (getEntityType(input[key]) === 'Object') { //console.log("object",key,input[key])
-              
+            if (getEntityType(input[key]) === 'Object') {
+       
                 if (typeof currentRow[3] === 'undefined') { 
                     processData.updateRow(key, output, previousRow, currentRow, 'root', d, path);
                 } else {
+                    console.log("previous Row",previousRow)
                     var currentRow = processData.createRow(input[key], output, previousRow, key, d, path,parent);
                     output.push(currentRow); 
+                    console.log("Hereaaaa", currentRow);
                 }
               //  previousRow = currentRow;
                 processData.Obj2(input[key], output, currentRow, currentRow, key, d, path,parent);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
@@ -64,10 +65,10 @@ class processData {
               //  previousRow = currentRow;
                 processData.Obj2(input[key], output, currentRow, currentRow, key, d, path);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
-               console.log(previousRow,currentRow)
+               // console.log(input[key],previousRow,currentRow)
                 processData.validateNupdate(key, output);
-
-                processData.updateRow(input[key], output, currentRow, currentRow, key, d, path);
+                    //facing issue here in findnig parent between Sample and Sample2.When we change the currentRow to parent row It works in sample2
+               processData.updateRow(input[key], output, previousRow, previousRow, key, d, path);
             } else {
              //   console.log("errand", key, input[key],typeof key)
             }
@@ -79,16 +80,15 @@ class processData {
 
         for (var i = 0; i < input.length; i++) {
             if (typeof input[i] === "object" && input[i] !== null) {
-                console.log("here",currentRow, input[i],currentKey)
-
+//                console.log("here",currentRow, input[i],currentKey)
                 if (typeof currentRow[3] === 'undefined') {
-                    processData.updateRow(currentKey, output, previousRow, currentRow, 'root', d, path);
                     console.log(currentRow)
+                    processData.updateRow(currentKey, output, previousRow, currentRow, 'root', d, path);
                 } else {
                     var currentRow = processData.createRow(input[i], output, previousRow, i, d, path);
-                    output.push(currentRow);
+                    output.push(currentRow); 
                 }
-                processData.Obj2(input[i], output, previousRow, currentRow, currentKey, d, path);
+                processData.Obj2(input[i], output, currentRow, currentRow, currentKey, d, path);
            
             } else {
              //creating Value Row for Array Parent
@@ -113,18 +113,20 @@ class processData {
         switch (input?.constructor) {
             case Object: 
                 if (!currentRow) {
-                    var currentRow = processData.createRow(input, output, previousRow, currentKey, d, path, parent);
+                 //   console.log("bigObj", typeof input, getEntityType(input), input)
+                    var currentRow = processData.createRow(input, output, previousRow, previousRow[3], d, path, parent);
                     output.push(currentRow);
+                   // console.log(currentRow);
                 }
-                return processData.processObj(input, output, previousRow, currentRow, currentKey, d, path, currentRow[3]);
+                return processData.processObj(input, output, currentRow, currentRow, currentKey, d, path);
             case Array:
              //  console.log(previousRow,currentRow)
                 if (!currentRow) {
-                    console.log("here>",typeof input, getEntityType(input),input)
-                    var currentRow = processData.createRow(input, output, previousRow, currentKey, d, path, parent);
+                 //   console.log("bigArray",typeof input, getEntityType(input),input)
+                    var currentRow = processData.createRow(input, output, previousRow, previousRow[3], d, path, parent);
                     output.push(currentRow);
                 }
-                return processData.processArr(input, output, previousRow, currentRow, currentKey, d, path);
+                return processData.processArr(input, output, currentRow, currentRow, currentKey, d, path);
             default:
                 return
         } 
