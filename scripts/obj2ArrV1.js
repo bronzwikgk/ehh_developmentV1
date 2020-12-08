@@ -46,6 +46,7 @@ function obj2Array2(input, output, parentID, id, d, key, currentRow) {
                 output.push(newRow);
                 // console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
                 obj2Array2(input[key], output, key, id, d, key, newRow);
+                
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
                 newRow = createRow(input[key], output, parentID, id, d, key);
                 output.push(newRow);

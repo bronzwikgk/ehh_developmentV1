@@ -52,7 +52,7 @@ class processData {
                     console.log("Hereaaaa", currentRow);
                 }
               //  previousRow = currentRow;
-                processData.Obj2(input[key], output, currentRow, currentRow, key, d, path,parent);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
+                processData.Obj2(input[key], output, currentRow, currentRow, key, d, path,currentRow[3]);// console.log("Sending for recursion", input[key], output, key, id, d, key, newRow)
             } else if (getEntityType(input[key]) === 'Array') {
             
                 if (typeof currentRow[3] === 'undefined') {
@@ -85,17 +85,16 @@ class processData {
                     console.log(currentRow)
                     processData.updateRow(currentKey, output, previousRow, currentRow, 'root', d, path);
                 } else {
-                    var currentRow = processData.createRow(input[i], output, previousRow, i, d, path);
-                    output.push(currentRow); 
+                  var currentRow = processData.createRow(input[i], output, previousRow, i, d, path);
+                     output.push(currentRow); 
                 }
+                
                 processData.Obj2(input[i], output, currentRow, currentRow, currentKey, d, path);
            
             } else {
              //creating Value Row for Array Parent
-              var currentRow = processData.createRow(input[i], output, previousRow, input[i], d, path);
-             
+                 var currentRow = processData.createRow(input[i], output, previousRow, input[i], d, path);
                 output.push(currentRow);
-               
             }
  
         }
@@ -114,17 +113,17 @@ class processData {
             case Object: 
                 if (!currentRow) {
                  //   console.log("bigObj", typeof input, getEntityType(input), input)
-                    var currentRow = processData.createRow(input, output, previousRow, previousRow[3], d, path, parent);
+                    var currentRow = processData.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
                     output.push(currentRow);
                    // console.log(currentRow);
                 }
-                return processData.processObj(input, output, currentRow, currentRow, currentKey, d, path);
+                return processData.processObj(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
             case Array:
              //  console.log(previousRow,currentRow)
                 if (!currentRow) {
                  //   console.log("bigArray",typeof input, getEntityType(input),input)
-                    var currentRow = processData.createRow(input, output, previousRow, previousRow[3], d, path, parent);
-                    output.push(currentRow);
+                  //  var currentRow = processData.createRow(input, output, previousRow, previousRow[3], d, path, parent);
+                   // output.push(currentRow);
                 }
                 return processData.processArr(input, output, currentRow, currentRow, currentKey, d, path);
             default:
