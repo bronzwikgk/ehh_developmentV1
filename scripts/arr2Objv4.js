@@ -69,14 +69,17 @@ class processArr {
     // }
     static arr2(input, output,currentRow) {
         if (!d) { var d = 0; }
-       // maxDepth = Math.max(...splitArray(input, 2));
-        switch (input?.constructor) {
-            case Object:
-            case Array:
-             //   console.log("input req", input)
-                processArr.iterateArr(input, output,d);
-            default:
-            // return
+     var maxDepth = Math.max(...splitArray(input, 2));
+        for (d = 1; d <= maxDepth; d++) {
+          
+            switch (input?.constructor) {
+                case Object:
+                case Array:
+                    //   console.log("input req", input)
+                    processArr.iterateArr(input, output, d);
+                default:
+                // return
+            }
         }
         //  console.log(output)
         return output;
@@ -84,16 +87,10 @@ class processArr {
 
     static iterateArr(input, output, d) {
    
-   
-      var maxDepth = Math.max(...splitArray(input, 2));
-        //   console.log("input", inputTable)
-     //   for (d = 1; d <= maxDepth; d++) {
-
-            console.log("iterating at depth", d);
-
+     // var maxDepth = Math.max(...splitArray(input, 2));
+     //   console.log("input", input)
+        console.log("iterating at depth", d, "for,", input);
             for (var i = 1; i < input.length; i++) {
-            
-
             var entityType = input[i][4];
             //    console.log(input[i], entityType,d);
             if (entityType === "Object" ) {
@@ -108,11 +105,10 @@ class processArr {
                 processArr.setEntity(currentObj, output, input[i][3]);
                 
             } if (entityType === "Array" && input[i][1] === d) {
-                console.log("found Array", input[i]);
+             //   console.log("found Array", input[i]);
             } if (entityType === "String" && input[i][1] === d) {
-                console.log("found String", input[i]);
+              //  console.log("found String", input[i]);
             }
-         
         }
          
         return output;

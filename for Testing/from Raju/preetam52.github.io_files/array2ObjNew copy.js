@@ -15,7 +15,7 @@ console.log(idx,header,key)
             var ref, isType, entity;
             if (key[idx.d] === 1 && key[idx.id] === 1) {
                 output[key[idx.parent]] = {}
-             //  console.log(row)
+            //    console.log(row)
                 row[key[idx.d]] = output[key[idx.parent]]
 
                 isType = key[idx.type]
@@ -37,6 +37,7 @@ console.log(idx,header,key)
                 }
                 row[key[idx.d] + 1] = ref
             }
+
             else {
 
                 if (depth <= key[idx.d]) {
@@ -181,6 +182,8 @@ console.log(idx,header,key)
             }
         }
         depth = key[idx.d]
+
+
     }
 
     return output.root
