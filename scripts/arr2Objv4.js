@@ -13,7 +13,7 @@ function splitArray(input, column) {
 class processArr { 
     static updateAttributesNvalues(input, output, currentRow, currentObj) {
        var header = input[0];
-       var  rowAttributes = currentRow.slice(3);
+       var  rowAttributes = currentRow.slice(4);
         if (rowAttributes.length > 0) {
            var row = {};
          rowAttributes.forEach((value) => {
@@ -31,22 +31,25 @@ class processArr {
         var childrenRows = input.filter((row, value) => {
             if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
                 //console.log("delteing", inputTable[i], "currentObect", currentObj);
-                input.splice(row[1], 1);
+              input.splice(row[1], 1);
                 return row;
             }
         });
-      //  console.log("children", childrenRows)
-        if (0<childrenRows.length) { 
-            var childrenObj = processArr.arr2(childrenRows, childrenObj);
-            console.log(childrenObj);
+
+     console.log("children", childrenRows)
+       
+        if (0 < childrenRows.length) { 
+            var childrenObj = processArr.arr2(childrenRows, childrenObj, currentRow[1]);
+            console.log("childrenOBJ",childrenObj);
         }
-        
+        output = { ...childrenObj, ...output };
         return childrenObj
     }
     static createObject(input, output, currentRow) {
         if (currentRow[4] === 'Object') {
             var newObj = {};
             newObj = processArr.updateAttributesNvalues(input, output, currentRow);
+            processArr.getChildren(input, newObj, currentRow);
         }
         if (currentRow[4] === 'Array') {
             var newObj = [];
@@ -55,12 +58,13 @@ class processArr {
         return newObj;
 
     }
-    static arr2(input, output) {
+    static arr2(input, output,d) {
         if (!d) { var d = 0; }
        // maxDepth = Math.max(...splitArray(input, 2));
         switch (input?.constructor) {
             case Object:
             case Array:
+                console.log("input req", input)
                 processArr.iterateArr(input, output,d);
             default:
             // return
@@ -68,15 +72,17 @@ class processArr {
         //  console.log(output)
         return output;
     }
+
+
+
     static iterateArr(input, output, d) { 
         d = d + 1;
         for (var i = 1; i < input.length; i++) { 
            var  entityType = input[i][4];
-   //console.log(input[i], entityType);
+            console.log(input[i], entityType,d);
             if (entityType === "Object" && input[i][1] === d) { 
                 var currentObj = processArr.createObject(input, output, input[i]);
-              //  processArr.getChildren(input, currentObj, input[i]);
-                        console.log(currentObj);
+              console.log(currentObj);
                 processArr.setEntity(currentObj, output, input[i][3]);
                 
             } if (entityType === "Array" && input[i][1] === d) {
