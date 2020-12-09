@@ -7,7 +7,7 @@
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
-var row = new Array('ehhid', 'd', 'parent', 'name', "typeOf", "path");
+var row = new Array('ehhid', 'd', 'parent', 'root', "typeOf", "path");
 
 class mutate { 
 

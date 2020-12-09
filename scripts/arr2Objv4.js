@@ -51,12 +51,11 @@ class processArr {
         if (currentRow[4] === 'Object') {
             var newObj = {};
             newObj = processArr.updateAttributesNvalues(input, output, currentRow);
-         processArr.getChildren(input, newObj, currentRow);
+       //  processArr.getChildren(input, newObj, currentRow);
         }
         if (currentRow[4] === 'Array') {
             var newObj = [];
         }
-
         return newObj;
 
     }
@@ -75,7 +74,6 @@ class processArr {
             switch (input?.constructor) {
                 case Object:
                 case Array:
-                    //   console.log("input req", input)
                     processArr.iterateArr(input, output, d);
                 default:
                 // return
@@ -89,20 +87,22 @@ class processArr {
    
      // var maxDepth = Math.max(...splitArray(input, 2));
      //   console.log("input", input)
-        console.log("iterating at depth", d, "for,", input);
+        console.log("iterating at depth", d,);
+
             for (var i = 1; i < input.length; i++) {
             var entityType = input[i][4];
             //    console.log(input[i], entityType,d);
             if (entityType === "Object" ) {
                // console.log(input[i], d, input, output)
                 var currentObj = processArr.createObject(input, output, input[i]);
-             //    console.log(currentObj);
+           console.log(currentObj);
                 var path = input[i][5].slice(6);
                // console.log(path);
                 if (path === "") { 
                     path = input[i][3];
                 }
-                processArr.setEntity(currentObj, output, input[i][3]);
+            output[path] = {...currentObj,...output}
+                //processArr.setEntity(currentObj, output, input[i][3]);
                 
             } if (entityType === "Array" && input[i][1] === d) {
              //   console.log("found Array", input[i]);
