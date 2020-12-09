@@ -110,14 +110,7 @@ console.log(lunch);
 
 ///these function set a value to a ONotation path
 
-function setToValue(obj, value, path) {
-    var i;
-    path = path.split('.');
-    for (i = 0; i < path.length - 1; i++)
-        obj = obj[path[i]];
 
-    obj[path[i]] = value;
-}
 function setValue(obj, path, value) {
     var a = path.split('.')
     var o = obj
