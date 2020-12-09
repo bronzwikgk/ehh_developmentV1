@@ -125,7 +125,7 @@ function processTest(e) {
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray",outputArray)
-    outputJson = processArr.arr2(outputArray,{});
+    outputJson = processArr.iterateArr(outputArray,{});
      console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
 }

@@ -12,7 +12,6 @@ function splitArray(input, column) {
     //  console.log(output);
     return output;
 }
-
 class processArr { 
     static updateAttributesNvalues(input, output, currentRow, currentObj) {
        var header = input[0];
@@ -30,6 +29,7 @@ class processArr {
         }
     }
     static getChildren(input, output, currentRow) { 
+       
         var childrenRows = input.filter((row, value) => {
             if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
                 //console.log("delteing", inputTable[i], "currentObect", currentObj);
@@ -41,60 +41,47 @@ class processArr {
     // console.log("children", childrenRows)
         childrenRows.unshift(input[0]); //adding headers. 
         if (0 < childrenRows.length) { 
-            var childrenObj = processArr.arr2(childrenRows, output, currentRow[1]);
+            var childrenObj = processArr.iterateArr(childrenRows, output, currentRow[1]);
           // console.log("childrenOBJ",childrenObj);
         }
-     // output = { ...childrenObj, ...output };
+    // output = { ...childrenObj, ...output };
         return childrenObj
     }
     static createObject(input, output, currentRow) {
         if (currentRow[4] === 'Object') {
+         //   console.log("creating Object for",currentRow)
             var newObj = {};
             var attributes = processArr.updateAttributesNvalues(input, output, currentRow);
-            var children = processArr.getChildren(input, newObj, currentRow);
+           // var children = processArr.getChildren(input, newObj, currentRow);
           //  console.log("chidlren Recieved", children)
             newObj = { ...attributes, ...newObj };
-            newObj = { ...children, ...newObj };
+          //  newObj = { ...children, ...newObj };
         }
         if (currentRow[4] === 'Array') {
             var newObj = [];
         }
-     // console.log(newObj)
+    // console.log("newobject",newObj,currentRow)
         return newObj;
 
     }
-    static arr2(input, output,currentRow,d) {
-     //   if (!d) { var d = 0; }
-     var maxDepth = Math.max(...splitArray(input, 2));
-        for (d = 1; d <= maxDepth; d++) {      
-            switch (input?.constructor) {
-                case Object:
-                case Array:
-                    return processArr.iterateArr(input, output, currentRow, d);
-                default:
-                // return
-            }
-        }
-       // console.log(output)
-        return output;
-    }
-  
 
     static iterateArr(input, output, currentRow, d) {
-   
-     // var maxDepth = Math.max(...splitArray(input, 2));
-     //   console.log("input", input)
         var maxDepth = Math.max(...splitArray(input, 2));
         for (d = 1; d <= maxDepth; d++) {
-            console.log("iterating at depth", d,);
+          //  console.log("iterating at depth", d,);
             for (var i = 1; i < input.length; i++) {
                 var entityType = input[i][4];
-                if ( input[i][1] === d) {
-                 //   console.log("found row", input[i]);
+                if (input[i][1] === d && entityType === 'Object') {
+                  console.log("found row", input[i]);
                     var currentObj = processArr.createObject(input, output, input[i]);
+                    var children = processArr.getChildren(input, currentObj, input[i]);
+                    currentObj = { ...children, ...currentObj };
+                   // console.log("currentObj",currentRow)
                     processArr.setEntity(currentObj, output, input[i][3]);
-                }
+                    console.log(output);
+                   // output = { ...currentObj, ...output };
 
+                }
             }
         }
         console.log("out",output)
@@ -125,8 +112,6 @@ class processArr {
         console.log(output);
     }
 }
-
-
 
 //this function taken a row and a table as in an input, if it find Children in next depth of the row Send back an array of children.
 //else returns false/

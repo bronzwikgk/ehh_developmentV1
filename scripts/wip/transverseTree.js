@@ -149,3 +149,4 @@ var forEach = function (collection, callback, scope) {
     }
   }
 };
+
