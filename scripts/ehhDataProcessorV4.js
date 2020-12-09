@@ -89,16 +89,18 @@ class process {
         return output;
     }
     static node2json(nodeEl) {
-      
+      //  var attributes = process.iterateObj(nodeEl.attributes, {})
+       // var childNodes = process.iterateArr(nodeEl.childNodes, [])
         return {
             tagName: nodeEl.tagName,
+           // childNodes,
+           // attributes,
             attributes: process.iterateObj(nodeEl.attributes, {}),
             childNodes: process.iterateArr(nodeEl.childNodes, []),
             nodeType : nodeEl.nodeType
         };
     }
 }
-
 // function mapObject(obj, func, scope) {
 //     var newObj = {}, key;
 //     for (key in obj) {

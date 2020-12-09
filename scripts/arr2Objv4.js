@@ -1,4 +1,5 @@
 //https://www.youtube.com/watch?v=K7VnBuOlCI8
+//https://medium.com/swlh/traversing-trees-breadth-first-and-depth-first-searches-with-javascript-316f23c9fe8f
 
 //This function takes an array as input and extract a column as a return array
 function splitArray(input, column) {
@@ -32,21 +33,20 @@ class processArr {
         var childrenRows = input.filter((row, value) => {
             if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
                 //console.log("delteing", inputTable[i], "currentObect", currentObj);
-              input.splice(row[1], 1);
+                input.splice(row[1], 1);
+              //  console.log(input)
                 return row;
             }
         });
-
-     console.log("children", childrenRows)
+    // console.log("children", childrenRows)
         childrenRows.unshift(input[0]); //adding headers. 
         if (0 < childrenRows.length) { 
             var childrenObj = processArr.arr2(childrenRows, output, currentRow[1]);
-            console.log("childrenOBJ",childrenObj);
+        //    console.log("childrenOBJ",childrenObj);
         }
         output = { ...childrenObj, ...output };
         return childrenObj
     }
-
     static createObject(input, output, currentRow) {
         if (currentRow[4] === 'Object') {
             var newObj = {};
@@ -74,7 +74,7 @@ class processArr {
             case Object:
             case Array:
              //   console.log("input req", input)
-                processArr.iterateArr(input, output,d,);
+                processArr.iterateArr(input, output,d);
             default:
             // return
         }
@@ -101,7 +101,7 @@ class processArr {
                 var currentObj = processArr.createObject(input, output, input[i]);
              //    console.log(currentObj);
                 var path = input[i][5].slice(6);
-                console.log(path);
+               // console.log(path);
                 if (path === "") { 
                     path = input[i][3];
                 }

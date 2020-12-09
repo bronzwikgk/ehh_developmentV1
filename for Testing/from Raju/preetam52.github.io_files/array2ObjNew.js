@@ -1,26 +1,21 @@
-function array2Obj(params) {
+function array2Obj(input) {
 
-    let output = {};
-    let depth = 0;
-    let len;
-    let prevkey;
-    let row = [];
-    let columns = [];
-    let index = 0;
-
-    for (const [i, key] of params.entries()) {
-
+    let output = {}; let depth = 0; let len; let prevkey; let row = []; let header = []; let index = 0;
+    
+    for (const [i, key] of input.entries()) {
+//creating root
         if (i === 0) {
             var idx = {};
             for (const [j, ele] of key.entries()) {
                 idx[ele] = j
             }
-            columns = params[0];
-
+            header = input[0];
+console.log(idx,header,key)
         } else {
             var ref, isType, entity;
             if (key[idx.d] === 1 && key[idx.id] === 1) {
                 output[key[idx.parent]] = {}
+            //    console.log(row)
                 row[key[idx.d]] = output[key[idx.parent]]
 
                 isType = key[idx.type]
@@ -36,84 +31,40 @@ function array2Obj(params) {
                 if (key.length > 5) {
                     for (let lidx = 5; lidx < key.length; lidx++) {
                         if (key[lidx]) {
-                            ref[columns[lidx]] = key[lidx]
+                            ref[header[lidx]] = key[lidx]
                         }
                     }
-
                 }
                 row[key[idx.d] + 1] = ref
-
-                //depth = key[idx.d]
-
             }
 
             else {
 
                 if (depth <= key[idx.d]) {
 
-
-
                     if (isType === "Array") {
-                        // if(key[idx.parent] === entity) {
 
                         if (key[idx.type] === "Object") {
                             let obj = {}
-
-
                             ref.push(obj)
-
-
-
-
-
-
-
-
-
                             if (key.length > 5) {
                                 for (let lidx = 5; lidx < key.length; lidx++) {
                                     if (key[lidx]) {
-                                        obj[columns[lidx]] = key[lidx]
+                                        obj[header[lidx]] = key[lidx]
                                     }
                                 }
-
                             }
-                            
-
-                            if (params[i + 1] && key[idx.d] < params[i + 1][1]) {
-                                
+                            if (input[i + 1] && key[idx.d] < input[i + 1][1]) {   
                                 ref = obj
                                 isType = key[idx.type]
                                 row[key[idx.d] + 1] = ref
                             }
-
-
                         }
                         if (key[idx.type] === "String") {
-
                             ref.push(key[idx.entity])
                             // ref = obj
                             isType = "Array"
-
                         }
-                        // else if (key[idx.type] === "Array") {
-                        //     let arr = []
-
-                        //     ref.push(arr)
-                        //     ref = arr
-                        //     isType = key[idx.type]
-
-
-                        //     if (key.length > 5) {
-                        //         for (let lidx = 5; lidx < key.length; lidx++) {
-                        //             if (key[lidx]) {
-                        //                 ref[columns[lidx]] = key[lidx]
-                        //             }
-                        //         }
-
-                        //     }
-                        // }
-                        // }
                     }
                     else if (isType === "Object") {
                         if (key[idx.type] === "Object") {
@@ -132,14 +83,10 @@ function array2Obj(params) {
                             if (key.length > 5) {
                                 for (let lidx = 5; lidx < key.length; lidx++) {
                                     if (key[lidx]) {
-                                        obj[columns[lidx]] = key[lidx]
+                                        obj[header[lidx]] = key[lidx]
                                     }
                                 }
-
                             }
-
-
-
                         }
                         else if (key[idx.type] === "Array") {
                             let arr = []
@@ -149,21 +96,14 @@ function array2Obj(params) {
 
                             row[key[idx.d] + 1] = ref
 
-                            // if (key.length > 5) {
-                            //     for (let lidx = 5; lidx < key.length; lidx++) {
-                            //         if (key[lidx]) {
-                            //             ref[columns[lidx]] = key[lidx]
-                            //         }
-                            //     }
-
-                            // }
+                       
                         }
                     }
 
                 }
                 else if (depth > key[idx.d]) {
                     ref = row[key[idx.d]]
-                    // isType = row[key[idx.d].isType]
+                  
 
 
                     if (Array.isArray(ref)) {
@@ -173,16 +113,12 @@ function array2Obj(params) {
                     }
 
                     if (isType === "Array") {
-                        // if(key[idx.parent] === entity) {
+                       
 
                         if (key[idx.type] === "Object") {
                             let obj = {}
 
                             ref.push(obj)
-
-
-
-                            //  if(depth != key[idx.d]){
 
                             ref = obj
                             isType = key[idx.type]
@@ -193,7 +129,7 @@ function array2Obj(params) {
                             if (key.length > 5) {
                                 for (let lidx = 5; lidx < key.length; lidx++) {
                                     if (key[lidx]) {
-                                        ref[columns[lidx]] = key[lidx]
+                                        ref[header[lidx]] = key[lidx]
                                     }
                                 }
 
@@ -206,24 +142,7 @@ function array2Obj(params) {
                             isType = "Array"
 
                         }
-                        // else if (key[idx.type] === "Array") {
-                        //     let arr = []
-
-                        //     ref.push(arr)
-                        //     ref = arr
-                        //     isType = key[idx.type]
-
-
-                        //     if (key.length > 5) {
-                        //         for (let lidx = 5; lidx < key.length; lidx++) {
-                        //             if (key[lidx]) {
-                        //                 ref[columns[lidx]] = key[lidx]
-                        //             }
-                        //         }
-
-                        //     }
-                        // }
-                        // }
+                      
                     }
                     else if (isType === "Object") {
                         if (key[idx.type] === "Object") {
@@ -238,7 +157,7 @@ function array2Obj(params) {
                             if (key.length > 5) {
                                 for (let lidx = 5; lidx < key.length; lidx++) {
                                     if (key[lidx]) {
-                                        ref[columns[lidx]] = key[lidx]
+                                        ref[header[lidx]] = key[lidx]
                                     }
                                 }
 
@@ -253,14 +172,7 @@ function array2Obj(params) {
 
                             row[key[idx.d] + 1] = ref
 
-                            // if (key.length > 5) {
-                            //     for (let lidx = 5; lidx < key.length; lidx++) {
-                            //         if (key[lidx]) {
-                            //             ref[columns[lidx]] = key[lidx]
-                            //         }
-                            //     }
-
-                            // }
+                           
                         }
                     }
                 }
