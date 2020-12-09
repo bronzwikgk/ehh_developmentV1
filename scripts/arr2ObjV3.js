@@ -120,6 +120,7 @@ function updateAttributesNvalues(inputTable, currentObj, currentRow) {
         return attrs;
     }
 }
+
 //This function takes an array as input and extract a column as a return array
 function splitArray(input, column) {
     var output = [];
