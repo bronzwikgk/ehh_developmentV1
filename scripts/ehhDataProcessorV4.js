@@ -19,7 +19,7 @@ if (!window.Node) {
 }
 class process {
     static json2node(json) {
-        console.log(json.constructor.name)
+       // console.log(json.constructor.name)
         if (json.nodeType === 1) {
             var output = document.createElement(json.tagName);
             if (json.attributes) { process.iterateObj(json.attributes, output); }
