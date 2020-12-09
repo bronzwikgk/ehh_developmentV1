@@ -13,19 +13,16 @@ function splitArray(input, column) {
     return output;
 }
 class processArr { 
-    static updateAttributesNvalues(input, output, currentRow, currentObj) {
+    static updateAttributesNvalues(input, output, currentRow) {
        var header = input[0];
-        var rowAttributes = currentRow.slice(6);
+        var rowAttributes = currentRow.slice(5);
         if (rowAttributes.length > 0) {
-           var row = {};
          rowAttributes.forEach((value) => {
                 if (value !== "") {
                    var key = input[0][currentRow.indexOf(value)];
-                    row[key] = value;
+                    output[key] = value;
                 }
             });
-          // console.log("row",row)
-            return row;
         }
     }
     static getChildren(input, output, currentRow) { 
@@ -33,58 +30,58 @@ class processArr {
         var childrenRows = input.filter((row, value) => {
             if (row[2] === currentRow[3] && row[1] === currentRow[1] + 1) {
                 //console.log("delteing", inputTable[i], "currentObect", currentObj);
-                input.splice(row[1], 1);
+               // input.splice(row[1], 1);//slcing the child from the main table;
               //  console.log(input)
                 return row;
             }
         });
-    // console.log("children", childrenRows)
         childrenRows.unshift(input[0]); //adding headers. 
         if (0 < childrenRows.length) { 
-            var childrenObj = processArr.iterateArr(childrenRows, output, currentRow[1]);
+            processArr.iterateArr(childrenRows, output, currentRow[1]);
           // console.log("childrenOBJ",childrenObj);
         }
-    // output = { ...childrenObj, ...output };
-        return childrenObj
+    
     }
     static createObject(input, output, currentRow) {
         if (currentRow[4] === 'Object') {
-         //   console.log("creating Object for",currentRow)
+    //  console.log("creating Object for",currentRow)
             var newObj = {};
-            var attributes = processArr.updateAttributesNvalues(input, output, currentRow);
-           // var children = processArr.getChildren(input, newObj, currentRow);
-          //  console.log("chidlren Recieved", children)
-            newObj = { ...attributes, ...newObj };
-          //  newObj = { ...children, ...newObj };
+           processArr.updateAttributesNvalues(input, newObj, currentRow);
         }
         if (currentRow[4] === 'Array') {
             var newObj = [];
         }
-    // console.log("newobject",newObj,currentRow)
+  //  console.log("newobject",newObj,currentRow)
         return newObj;
-
     }
 
     static iterateArr(input, output, currentRow, d) {
+      //  if (!parentObj) { var parentObj}
         var maxDepth = Math.max(...splitArray(input, 2));
         for (d = 1; d <= maxDepth; d++) {
           //  console.log("iterating at depth", d,);
             for (var i = 1; i < input.length; i++) {
                 var entityType = input[i][4];
                 if (input[i][1] === d && entityType === 'Object') {
-                  console.log("found row", input[i]);
-                    var currentObj = processArr.createObject(input, output, input[i]);
-                    var children = processArr.getChildren(input, currentObj, input[i]);
-                    currentObj = { ...children, ...currentObj };
-                   // console.log("currentObj",currentRow)
+              // console.log("found row", input[i]);
+                    var currentObj = processArr.createObject(input, currentObj, input[i]);
+                    processArr.getChildren(input, currentObj, input[i]);
+                    console.log("found row", input[i], currentObj);
+                     processArr.setEntity(currentObj, output, input[i][3]);
+                    //   console.log(output);
+
+                } if (input[i][1] === d && entityType === 'Array') {
+                    // console.log("found row", input[i]);
+                    var currentObj = processArr.createObject(input, currentObj, input[i]);
+                  //  processArr.getChildren(input, currentObj, input[i]);
+                   // console.log("found row", input[i], currentObj);
                     processArr.setEntity(currentObj, output, input[i][3]);
-                    console.log(output);
-                   // output = { ...currentObj, ...output };
+                    //   console.log(output);
 
                 }
             }
         }
-        console.log("out",output)
+      //  console.log("out",output)
         return output;
     }
     static setEntity(input, output, key) {
