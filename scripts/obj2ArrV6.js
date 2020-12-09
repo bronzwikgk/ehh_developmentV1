@@ -7,7 +7,7 @@
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
-var row = new Array('ehhid', 'd', 'parent', 'root', "typeOf", "path");
+var row = new Array('ehhid', 'd', 'parent', 'name', "typeOf", "path");
 
 class mutate { 
 
@@ -52,23 +52,23 @@ class mutate {
         d = d + 1;
         switch (input?.constructor) {
             case Object:
-                if (!currentRow) {
-                    path = path + '.' + previousRow[3];
-                    var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
-                    output.push(currentRow);
-                   // console.log("path",path);
-                }
+                // if (!currentRow) {
+                //     path = path + '.' + previousRow[3];
+                //     var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
+                //     output.push(currentRow);
+                //    // console.log("path",path);
+                // }
                 path = path + '.' + previousRow[3];
-               mutate.processObj(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
+               mutate.processObj(input, output, previousRow, currentRow, currentKey, d, path, previousRow[3]);
             case Array:
-                if (!currentRow) {
-                    path = path + '.' + previousRow[3];
-                    var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
-                    output.push(currentRow);
-                    // console.log("path",path);
-                }
+                // if (!currentRow) {
+                //     path = path + '.' + previousRow[3];
+                //     var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
+                //     output.push(currentRow);
+                //     // console.log("path",path);
+                // }
                 path = path + '.' + previousRow[3];
-                mutate.processArr(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
+                mutate.processArr(input, output, previousRow, currentRow, currentKey, d, path, previousRow[3]);
             default:
                // return
         } 

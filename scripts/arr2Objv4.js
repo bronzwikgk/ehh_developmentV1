@@ -55,10 +55,8 @@ class processArr {
         return newObj;
 
     }
-
     static arr2(input, output) {
         if (!d) { var d = 0; }
-      
        // maxDepth = Math.max(...splitArray(input, 2));
         switch (input?.constructor) {
             case Object:
@@ -74,10 +72,10 @@ class processArr {
         d = d + 1;
         for (var i = 1; i < input.length; i++) { 
            var  entityType = input[i][4];
-   //  console.log(input[i], entityType);
+   //console.log(input[i], entityType);
             if (entityType === "Object" && input[i][1] === d) { 
                 var currentObj = processArr.createObject(input, output, input[i]);
-                processArr.getChildren(input, currentObj, input[i]);
+              //  processArr.getChildren(input, currentObj, input[i]);
                         console.log(currentObj);
                 processArr.setEntity(currentObj, output, input[i][3]);
                 
@@ -90,7 +88,6 @@ class processArr {
         }
         return output;
     }
-    
     static setEntity(input, output, key) {
         
         if (output?.constructor === Object) { 
@@ -107,8 +104,6 @@ class processArr {
 
         return output;
     }
-
- 
 }
 
 
