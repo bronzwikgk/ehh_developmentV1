@@ -18,7 +18,7 @@ class mutate {
         }
         return input;
     }
-    
+
     //this function primarly check for the presence of a keys in any an array, if not present and options [ returns false and update and return position]
     
     static validateNupdate(input, output) {
@@ -124,11 +124,11 @@ class mutate {
 function processTest(e) {
     e.preventDefault();
     var in2 = sample;
-    console.log(in2)
+    console.log("sample input",in2)
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray",outputArray)
     outputJson = processArr.iterateArr(outputArray,{});
-     console.log(outputJson)
+     console.log("sample output from array",outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
 }
 
