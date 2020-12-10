@@ -40,7 +40,7 @@ function arr2Obj(input, output, previousNode, previvousRow) {
             
             
             var tmp = getChildren(input, node, previvousRow)
-            console.log("tmp", tmp);
+           // console.log("tmp", tmp);
          
         }
         // if (input[i][2] === previvousRow[3] && input[i][1] === previvousRow[1] +1 )
@@ -53,7 +53,7 @@ function arr2Obj(input, output, previousNode, previvousRow) {
     console.log(output);
     return output;
 }
-{"quiz":{"sport":{"q1":{"question":"Which one is correct team name in NBA?","answer":"Huston Rocket","options":["New York Bulls","Los Angeles Kings","Golden State Warriros","Huston Rocket"]}},"maths":{"q1":{"question":"5 + 7 = ?","answer":"12","options":["10","11","12","13"]},"q2":{"question":"12 - 8 = ?","answer":"4","options":["1","2","3","4"]}}}}
+//{"quiz":{"sport":{"q1":{"question":"Which one is correct team name in NBA?","answer":"Huston Rocket","options":["New York Bulls","Los Angeles Kings","Golden State Warriros","Huston Rocket"]}},"maths":{"q1":{"question":"5 + 7 = ?","answer":"12","options":["10","11","12","13"]},"q2":{"question":"12 - 8 = ?","answer":"4","options":["1","2","3","4"]}}}}
 
 
 
@@ -73,4 +73,37 @@ function getChildren(input, output, currentRow, currentNode) {
         var childrenObj = arr2Obj(childrenRows, output, currentRow[1], currentNode);
          console.log("childrenOBJ",childrenObj);
     }
+}
+
+
+
+
+function listToTree(data, options) {
+    options = options || {};
+    var ID_KEY = options.idKey || 'id';
+    var PARENT_KEY = options.parentKey || 'parent';
+    var CHILDREN_KEY = options.childrenKey || 'children';
+
+    var tree = [],
+        childrenOf = {};
+    var item, id, parentId;
+
+    for (var i = 0, length = data.length; i < length; i++) {
+        item = data[i];
+        id = item[ID_KEY];
+        parentId = item[PARENT_KEY] || 0;
+        // every item may have children
+        childrenOf[id] = childrenOf[id] || [];
+        // init its children
+        item[CHILDREN_KEY] = childrenOf[id];
+        if (parentId != 0) {
+            // init its parent's children object
+            childrenOf[parentId] = childrenOf[parentId] || [];
+            // push it into its parent's children object
+            childrenOf[parentId].push(item);
+        } else {
+            tree.push(item);
+        }
+    };
+    return tree;
 }
