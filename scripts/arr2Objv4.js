@@ -27,7 +27,7 @@ class processArr {
             });
         }
     }
-    
+
     static getChildren(input, output, currentRow) { 
        
         var childrenRows = input.filter((row, value) => {
@@ -162,6 +162,5 @@ function listToTree(data, options) {
             tree.push(item);
         }
     };
-
     return tree;
 }
