@@ -8,7 +8,8 @@ var data = [
     { "id": 602, "name": "third level 2", "pid": 6 },
     { "id": 603, "name": "third level 2", "pid": 6 }
 ];
-// Array to tree structure data(the principle is to set the id to the key value, and then through pid to find whether the key is the same, the same is the child data of this data)
+// Array to tree structure data(the principle is to set the id to the key value, 
+//and then through pid to find whether the key is the same, the same is the child data of this data)
 function arrayToJson(treeArray) {
     var r = [];
     var tmpMap = {};
