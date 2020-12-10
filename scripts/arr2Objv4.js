@@ -1,5 +1,7 @@
 //https://www.youtube.com/watch?v=K7VnBuOlCI8
 //https://medium.com/swlh/traversing-trees-breadth-first-and-depth-first-searches-with-javascript-316f23c9fe8f
+//https://www.youtube.com/watch?v=cVTbdo17mYs
+//https://github.com/beforesemicolon/tutorials-files/blob/master/tree-generic.js
 
 //This function takes an array as input and extract a column as a return array
 function splitArray(input, column) {
@@ -25,6 +27,7 @@ class processArr {
             });
         }
     }
+    
     static getChildren(input, output, currentRow) { 
        
         var childrenRows = input.filter((row, value) => {
@@ -41,6 +44,7 @@ class processArr {
           // console.log("childrenOBJ",childrenObj);
         }
     }
+
     static createObject(input, output, currentRow) {
         if (currentRow[4] === 'Object') {
     //  console.log("creating Object for",currentRow)
@@ -53,6 +57,7 @@ class processArr {
   //  console.log("newobject",newObj,currentRow)
         return newObj;
     }
+
     static iterateArr(input, output, currentRow, d) {
       //  if (!parentObj) { var parentObj}
         var maxDepth = Math.max(...splitArray(input, 2));
@@ -64,10 +69,9 @@ class processArr {
               // console.log("found row", input[i]);
                     var currentObj = processArr.createObject(input, currentObj, input[i]);
                     processArr.getChildren(input, currentObj, input[i]);
-                    console.log("found row", input[i], currentObj);
+                   // console.log("found row", input[i], currentObj);
                      processArr.setEntity(currentObj, output, input[i][3]);
                     //   console.log(output);
-
                 } if (input[i][1] === d && entityType === 'Array') {
                     // console.log("found row", input[i]);
                     var currentObj = processArr.createObject(input, currentObj, input[i]);
@@ -98,6 +102,7 @@ class processArr {
 
         return output;
     }
+
     static setToPath(input, output, path) {
         var i;
         path = path.split('.');
@@ -106,6 +111,7 @@ class processArr {
         output[path[i]] = input;
         console.log(output);
     }
+
 }
 //this function taken a row and a table as in an input, if it find Children in next depth of the row Send back an array of children.
 //else returns false/

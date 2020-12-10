@@ -7,7 +7,7 @@
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
-var row = new Array('ehhid', 'd', 'parent', 'root', "typeOf", "path");
+var row = new Array('ehhid', 'd', 'parent', 'node', "typeOf", "path");
 
 class mutate { 
 
@@ -18,7 +18,9 @@ class mutate {
         }
         return input;
     }
+    
     //this function primarly check for the presence of a keys in any an array, if not present and options [ returns false and update and return position]
+    
     static validateNupdate(input, output) {
 
         if (output[0].indexOf(input) === -1 && typeof input !== null && typeof input !== undefined) {
@@ -27,6 +29,7 @@ class mutate {
         // console.log(output[0], input);
         return output;
     }  
+    
     static createRow(input, output, previousRow, currentKey, d, path) {
         var id = output.length;
         var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name,path];
@@ -113,7 +116,6 @@ class mutate {
                 var currentRow = mutate.createRow(input[i], output, previousRow, input[i], d, path);
                 output.push(currentRow);
             }
-
         }
         return output
     }
@@ -121,7 +123,6 @@ class mutate {
 
 function processTest(e) {
     e.preventDefault();
-    test();
     var in2 = sample;
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);

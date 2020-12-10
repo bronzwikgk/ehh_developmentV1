@@ -56,7 +56,6 @@ function flatToTree(data, idKey, parentIdKey, noParentValue = null, bidirectiona
 
     // iterate over all data items
     for (const i of data) {
-
         // add item as a node and possibly as a leaf
         if (nodes[i[idKey]]) { // already seen this item when child was found first
             // add all of the item's data and found children
@@ -67,7 +66,6 @@ function flatToTree(data, idKey, parentIdKey, noParentValue = null, bidirectiona
             // assume it's a leaf for now
             leaves[i[idKey]] = nodes[i[idKey]];
         }
-
         // put the item as a child in parent item and possibly as a root
         if (i[parentIdKey] !== noParentValue) { // item has a parent
             if (nodes[i[parentIdKey]]) { // parent already exist as a node
