@@ -2,7 +2,8 @@ A menu similar to the one in this code pen has to be creted using JSOn to HTML.
 The menu Items has to be collapsible [ ref Mdn doc /Collapsable element ]
 This code will be used everywhere to create vertical menu / form / right Click Menu.
 Let's call this HTMl Element >> Entity Container
-schema and rules validations
+schema and rules validations...
+//https://denic.hashnode.dev/css-tips-you-wont-see-in-most-tutorials
 //https://www.youtube.com/watch?v=47XqX72Hywo
 Ref for Color Font of Entity Containter >>> https://codepen.io/leenalavanya/pen/RJYwOV
 //https://ant.design/components/overview/

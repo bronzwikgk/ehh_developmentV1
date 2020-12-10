@@ -53,7 +53,9 @@ function arr2Obj(input, output, previousNode, previvousRow) {
     console.log(output);
     return output;
 }
+{"quiz":{"sport":{"q1":{"question":"Which one is correct team name in NBA?","answer":"Huston Rocket","options":["New York Bulls","Los Angeles Kings","Golden State Warriros","Huston Rocket"]}},"maths":{"q1":{"question":"5 + 7 = ?","answer":"12","options":["10","11","12","13"]},"q2":{"question":"12 - 8 = ?","answer":"4","options":["1","2","3","4"]}}}}
 
+from the above mentioned 2D array
 
 function getChildren(input, output, currentRow, currentNode) {
 
