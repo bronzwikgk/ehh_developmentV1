@@ -40,7 +40,6 @@ class processArr {
             processArr.iterateArr(childrenRows, output, currentRow[1]);
           // console.log("childrenOBJ",childrenObj);
         }
-    
     }
     static createObject(input, output, currentRow) {
         if (currentRow[4] === 'Object') {
@@ -108,7 +107,6 @@ class processArr {
         console.log(output);
     }
 }
-
 //this function taken a row and a table as in an input, if it find Children in next depth of the row Send back an array of children.
 //else returns false/
 function hasChildren(row, inputTable) {
