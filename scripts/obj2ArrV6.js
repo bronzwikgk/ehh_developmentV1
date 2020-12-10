@@ -123,13 +123,13 @@ class mutate {
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = sample;
-    console.log("sample input",in2)
-    var outputArray = mutate.Obj2(in2, []);
-    console.log("outputArray",outputArray)
-    outputJson = processArr.iterateArr(outputArray,{});
+    // var in2 = sample;
+    // console.log("sample input",in2)
+    // var outputArray = mutate.Obj2(in2, []);
+    // console.log("outputArray",outputArray)
+    outputJson = arr2Obj(array2d,{});
      console.log("sample output from array",outputJson)
-    document.getElementById("output").innerText = JSON.stringify(outputArray);
+  //  document.getElementById("output").innerText = JSON.stringify(outputArray);
 }
 
 
