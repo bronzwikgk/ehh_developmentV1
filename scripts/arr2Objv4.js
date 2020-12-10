@@ -54,7 +54,6 @@ class processArr {
   //  console.log("newobject",newObj,currentRow)
         return newObj;
     }
-
     static iterateArr(input, output, currentRow, d) {
       //  if (!parentObj) { var parentObj}
         var maxDepth = Math.max(...splitArray(input, 2));

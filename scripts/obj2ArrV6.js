@@ -121,6 +121,7 @@ class mutate {
 
 function processTest(e) {
     e.preventDefault();
+    test();
     var in2 = sample;
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);
