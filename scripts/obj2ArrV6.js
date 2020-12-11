@@ -127,7 +127,7 @@ function processTest(e) {
     console.log("sample input",in2)
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray",outputArray)
-    outputJson = arr2Obj(array2d,{});
+    outputJson = arr2Obj(outputArray,{});
      console.log("sample output from array",outputJson)
   //  document.getElementById("output").innerText = JSON.stringify(outputArray);
 }
