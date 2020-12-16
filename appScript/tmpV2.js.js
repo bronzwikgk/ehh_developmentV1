@@ -9,9 +9,6 @@ var spreadsheet = SpreadsheetApp.openById(sheetId);
 
 var ssId = "1sOAYeOP87x-G9-T-05J2IJ7Y99dG8uokGWwz9zEo_bM";
 
-
-
-
 class processSheetNamedRange {
   static createNamedRange() {
   }

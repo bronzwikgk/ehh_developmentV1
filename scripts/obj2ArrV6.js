@@ -1,8 +1,11 @@
-//seems to have an issue with the root object.
+//https://stackoverflow.com/questions/15792794/convert-parent-child-array-to-tree
+//https://stackoverflow.com/questions/18017869/build-tree-array-from-flat-array-in-javascript
+
 //Need to add options.
 //set has to be a seperate method
 //Child index need to be created along with the path.
 //
+
 
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
