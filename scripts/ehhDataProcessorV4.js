@@ -1,4 +1,5 @@
 //https://www.digitalocean.com/community/tutorials/js-tree-traversal
+//https://github.com/andrewhouser/xmlToJson/blob/master/xmlToJson.js
 // create the nodeType constants if the Node object is not defined
 if (!window.Node) {
     var Node =
