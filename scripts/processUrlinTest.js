@@ -34,5 +34,6 @@ function makeDoPostRequest() {
         document.getElementById("postResponse").textContent = res[0].status;
     });
 }
+
 document.getElementById("btn").addEventListener("click", makeDoGetRequest);
 document.getElementById("btn2").addEventListener("click", makeDoPostRequest);
