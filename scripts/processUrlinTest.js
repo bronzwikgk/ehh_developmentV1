@@ -1,12 +1,13 @@
 // server Sheet : https://docs.google.com/spreadsheets/d/1mBZJ01Ddhl9fByyJ5K-JEsruO7XV51i7ctdnRJ6-hGk/edit#gid=1449573075 
-//https://docs.google.com/spreadsheets/d/1sOAYeOP87x-G9-T-05J2IJ7Y99dG8uokGWwz9zEo_bM/edit?pli=1#gid=924939162
-//
+const resourceLocation = "https://docs.google.com/spreadsheets/d/1mBZJ01Ddhl9fByyJ5K-JEsruO7XV51i7ctdnRJ6-hGk/edit#gid=1449573075";
 const url = "https://script.google.com/macros/s/AKfycbxeONL9wDhS1GOnHJapV-67BMKFQk-k9WMA5m4C77mROTCipMQ/exec";
+
 function makeDoGetRequest() {
     console.log(" In DG function:");
     fetch(url)
         .then(res => res.json())
         .then(res => {
+            console.log(res);
             document.getElementById("getResponse").textContent = res[0].status;
         });
 }
