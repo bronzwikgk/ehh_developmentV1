@@ -6,3 +6,10 @@
 //Init Listeners
 //init Dom..Assingn a ID to each element of Dom.
 
+
+window.onload = OnLoad();
+function OnLoad(e) {
+    //window storage == session storage
+    console.log("ehh is running! on >>>", window.document.title, window.document.location.origin);
+    var listeners = createListeners(this);
+}
