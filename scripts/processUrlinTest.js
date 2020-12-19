@@ -1,9 +1,8 @@
-// server Sheet : link 
+// server Sheet : https://docs.google.com/spreadsheets/d/1mBZJ01Ddhl9fByyJ5K-JEsruO7XV51i7ctdnRJ6-hGk/edit#gid=1449573075 
 //https://docs.google.com/spreadsheets/d/1sOAYeOP87x-G9-T-05J2IJ7Y99dG8uokGWwz9zEo_bM/edit?pli=1#gid=924939162
 //
+const url = "https://script.google.com/macros/s/AKfycbxeONL9wDhS1GOnHJapV-67BMKFQk-k9WMA5m4C77mROTCipMQ/exec";
 function makeDoGetRequest() {
-    //const url = "https://script.google.com/macros/s/AKfycbyM98yF8YcaBJ1JkMUG9QNVn-PnKqLvYikPCjgNKcjvoDsGc1o/exec";
-    const url = "https://script.google.com/macros/s/AKfycbw5ms6neWmUKNUilhwQpqtD8p62lEpsbaVWnp5tvUJnf0XrUk09/exec";
     console.log(" In DG function:");
     fetch(url)
         .then(res => res.json())
@@ -14,7 +13,6 @@ function makeDoGetRequest() {
 
 function makeDoPostRequest() {
     console.log(" In AddRow function:");
-    const url = "https://script.google.com/macros/s/AKfycbw5ms6neWmUKNUilhwQpqtD8p62lEpsbaVWnp5tvUJnf0XrUk09/exec";
     fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'no-cors', // no-cors, *cors, same-origin
