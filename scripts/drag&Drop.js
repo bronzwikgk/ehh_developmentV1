@@ -1,9 +1,9 @@
 // // https://www.youtube.com/watch?v=8LtMk4DwLzA&t=22s
 // // https://www.youtube.com/watch?v=w2D-lQtYDks
-
+console.log("A basic implementation of dragNDrop and click and draw")
 
 const el = document.querySelector(".item");
-
+console.log(el)
 let isResizing = false;
 
 el.addEventListener("mousedown", mousedown);
