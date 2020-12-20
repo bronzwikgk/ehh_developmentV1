@@ -93,16 +93,6 @@ function row2object(inputRow, outputObj, currentObj, currentRow,inputTable) {
 }
 
 
-function set(input, output, key) {
-    switch (output?.constructor) {
-        case Object:
-            return output[key] = input;
-        case Array:
-            return output.push(input[key]);
-        default:
-            return "Output UnIdentified"
-    }
-}
 
 function updateAttributesNvalues(inputTable, currentObj, currentRow) {
     header = inputTable[0];

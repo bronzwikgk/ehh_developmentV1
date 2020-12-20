@@ -70,21 +70,21 @@ function processTest(e) {
     e.preventDefault();
     
     console.log(sample2)
-    var outputArray = obj2Array2(sample2, []);
+    var outputArray = obj2Array2(sample, []);
     console.log(outputArray)
     outputJson = arr2Obj(outputArray);
-    console.log(outputJson)
-    console.log(sample4)
-    var outputArray = obj2Array2(sample4, []);
-    console.log(outputArray)
-    outputJson = arr2Obj(outputArray);
-    console.log(outputJson)
-    console.log(samplen)
-    var outputArray = obj2Array2(samplen, []);
-    console.log(outputArray)
-    outputJson = arr2Obj(outputArray);
+    console.log("output Json",outputJson)
+//     console.log(sample4)
+//     var outputArray = obj2Array2(sample4, []);
+//     console.log(outputArray)
+//     outputJson = arr2Obj(outputArray);
+//     console.log(outputJson)
+//     console.log(samplen)
+//     var outputArray = obj2Array2(samplen, []);
+//     console.log(outputArray)
+//     outputJson = arr2Obj(outputArray);
  
-   console.log(outputJson)
+//    console.log(outputJson)
     document.getElementById("output").innerText = JSON.stringify(outputArray);
 }
 

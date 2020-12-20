@@ -7,7 +7,7 @@
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
-var row = new Array('ehhid', 'd', 'parent', 'root', "typeOf", "path");
+var row = new Array('ehhid', 'd', 'parent', 'entity', "typeOf", "path");
 
 class mutate { 
 
@@ -63,34 +63,22 @@ class mutate {
     static Obj2(input, output, previousRow, currentRow, currentKey, d, path, parent) {
         if (!previousRow) {
             mutate.setEntity(row, output);
+            
             previousRow = output[0];
             //  parent = "root";
+          //  console.log(previousRow);
             path = '';
         };
         if (!d) { var d = 0; }
         d = d + 1;
         switch (input?.constructor) {
             case Object:
-                if (!currentRow) {
-                    path = path + '.' + previousRow[3];
-                    var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
-                    mutate.setEntity(currentRow, output);
-                    //output.push(currentRow);
-                    // console.log("path",path);
-                }
                 path = path + '.' + previousRow[3];
-                mutate.processObj(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
+                mutate.processObj(input, output, previousRow, currentRow, currentKey, d, path, previousRow[3]);
             case Array:
-                if (!currentRow) {
-                    path = path + '.' + previousRow[3];
-                    var currentRow = mutate.createRow(input, output, previousRow, previousRow[3], d, path, previousRow[3]);
-                    mutate.setEntity(currentRow, output);
-
-                   // output.push(currentRow);
-                  //  // console.log("path",path);
-                }
+           
                 path = path + '.' + previousRow[3];
-                mutate.processArr(input, output, currentRow, currentRow, currentKey, d, path, previousRow[3]);
+                mutate.processArr(input, output, previousRow, currentRow, currentKey, d, path, previousRow[3]);
             default:
             // return
         }
@@ -104,7 +92,6 @@ class mutate {
                 // console.log(path)
                 var currentRow = mutate.createRow(input[key], output, previousRow, key, d, path, previousRow[3]);
                 mutate.setEntity(currentRow, output);
-
                 mutate.Obj2(input[key], output, currentRow, currentRow, currentKey, d, path, currentRow[3]);
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
                 mutate.validateNupdate(key, output);
@@ -127,14 +114,12 @@ class mutate {
                     mutate.setEntity(currentRow, output);
 //                    output.push(currentRow);
                 }
-
                 mutate.Obj2(input[i], output, currentRow, currentRow, currentKey, d, path);
 
             } else {
                 //creating Value Row for Array Parent
                 var currentRow = mutate.createRow(input[i], output, previousRow, input[i], d, path);
                  mutate.setEntity(currentRow, output);
-
                 output.push(currentRow);
             }
         }
@@ -145,16 +130,17 @@ class mutate {
 
 
 
-
 function processTest(e) {
     e.preventDefault();
-    var in2 = UserSchema;
+    var in2 = sample;
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);
-    console.log("outputArray",outputArray)
-//    outputJson = arr2Obj(outputArray);
-//    console.log(outputJson);
-    document.getElementById("output").innerText = JSON.stringify(outputArray);
+    console.log("outputArray", outputArray)
+   // var table = createTable(outputArray);
+   outputJson = arr2Obj(outputArray);
+  console.log(outputJson);
+    //  document.getElementById("output").innerText = JSON.stringify(outputArray);
+   // document.getElementById("output").appendChild(table);
 }
 
 
