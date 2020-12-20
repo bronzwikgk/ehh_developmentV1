@@ -27,7 +27,7 @@ static unbuildEndodedUri(request) {
 
     return data;
     }
-    
+    //This is a basic working version. 
     static fetchHttpRequest(url, request) {
     fetch(url, request)
         .then(response => {
@@ -38,11 +38,12 @@ static unbuildEndodedUri(request) {
         .catch(err => console.error(err));
 
 }
-
-    static fetchUrl(myRequest) {
-    fetch(myRequest)
+//Added Response mutation as per the headers in response.
+    static fetchUrl(url, request) {
+        fetch(url, request)
         .then(response => {
             const contentType = response.headers.get('content-type');
+            console.log("headers", response.headers);
             console.log("response Type is ", contentType);
             if (contentType.includes('application/json')) {
                 console.log(contentType, "Caught Json");
