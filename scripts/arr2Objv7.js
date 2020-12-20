@@ -7,7 +7,7 @@
 
 
 function updateAttributesNvalues(input,currentRow) {
-   
+   console.log(currentRow)
     var header = input[0];
    
     var rowAttributes = currentRow.slice(6);
@@ -16,6 +16,7 @@ function updateAttributesNvalues(input,currentRow) {
         rowAttributes.forEach((value) => {
             if (value !== "" && value !== 'undefined') {
                 var key = input[0][currentRow.indexOf(value)];
+                console.log(key,value);        
                 attri[key] = value;
             }
         });
@@ -31,9 +32,9 @@ function arr2Obj(input) {
     d = inputTable[0].length;
     for (i = inputTable.length - 1; i >= 0; i--) {
         if (inputTable[i][1] == 1) {
-            if (!outputa) var outputa = {};
+            if (!outputObj) var outputObj = {};
             entity = inputTable[i];
-            outputa[entity[3]] = inputTable[i][d];
+            outputObj[entity[3]] = parentNode;
             continue;
         }
         for (j = i - 1; j >= 0; j--) {
@@ -42,28 +43,16 @@ function arr2Obj(input) {
 
             if (parent[3] == entity[2] && parent[1] + 1 == entity[1]) {
 
-                if (parent[4] == "Object") {
-                    if (!parent[d]) parent[d] = {};
-                    parent[d][entity[3]] = entity[d];
-                    parent[d][entity[3]] = { ...updateAttributesNvalues(inputTable, entity), ...entity[d] }
-                    
-                } else if (parent[4] == "Array") {
-                    /// console.log(inputTable[j])
-                    if (!parent[d]) parent[d] = [];
-                    parent[d].unshift(entity[d]);
-                    //   console.log(inputTable[j][5])
-                } else if (parent[4] == "String") { 
-
-                        console.log("valuesFound")
-
-                }
+                if (!parentNode) var parentNode = {};
+                parentNode[entity[3]] = entity[3];
+                console.log(parentNode)
                 break;
 
             }
         }
     }
     
-    return outputa;
+    return outputObj;
 }
 
 function arr2Obj2(input) {
