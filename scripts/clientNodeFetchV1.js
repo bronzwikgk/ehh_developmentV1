@@ -72,7 +72,7 @@ function buildEncodedUri(request) {
 // unbuilds the URL parameters and returns an object
 function unbuildEndodedUri(request) { 
     var urifragment = request.split("&"), data = {}, i, parts;
-    //process each par
+    //process each parameter
     for (i = 0; i < urifragment.length; i++) {
         parts = urifragment[i].split("=");
         if (parts.length < 2) {
