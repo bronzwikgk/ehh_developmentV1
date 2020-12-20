@@ -11,7 +11,7 @@ let url = serviceUrl;
 getRequest = {
     // Default options are marked with *
      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-     mode: 'no-cors', // no-cors, *cors, same-origin
+   //  mode: 'no-cors', // no-cors, *cors, same-origin
    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 //    // credentials: 'same-origin', // include, *same-origin, omit
    // headers: {
@@ -20,21 +20,21 @@ getRequest = {
    // },
   //  redirect: 'follow', // manual, *follow, error
 //    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-   body: JSON.stringify(data) // body data type must match "Content-Type" header
+body: JSON.stringify(data) // body data type must match "Content-Type" header
 };
 postRequest = {
     method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    redirect: 'follow',
-    body: JSON.stringify(data)
+   // mode: 'cors',
+  //  cache: 'no-cache',
+  //  redirect: 'follow',
+  body: JSON.stringify(data)
 }
 
 function fetchHttpRequest(url, request) {
     fetch(url, request)
         .then(response => {
             //  if (!response.ok) { throw new Error("Could not reach website."); }
-            return response.json();
+            return response.text();
         })
         .then(json => console.log(json))
         .catch(err => console.error(err));
