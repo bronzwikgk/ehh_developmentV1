@@ -31,7 +31,7 @@ serviceUrl = "https://script.google.com/macros/s/AKfycbxeONL9wDhS1GOnHJapV-67BMK
 let url = serviceUrl;
 request = {
     method: 'GET',
-    //mode: 'no-cors', 
+    mode: 'no-cors', 
 
  
       body: JSON.stringify(data)
