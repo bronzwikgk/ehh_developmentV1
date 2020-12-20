@@ -11,7 +11,7 @@ var resourceUrl = "https://docs.google.com/spreadsheets/d/1mBZJ01Ddhl9fByyJ5K-JE
 const serviceUrl =  "https://script.google.com/macros/s/AKfycbxeONL9wDhS1GOnHJapV-67BMKFQk-k9WMA5m4C77mROTCipMQ/exec";
 request = {
     // Default options are marked with *
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
      mode: 'no-cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 //    // credentials: 'same-origin', // include, *same-origin, omit
@@ -73,23 +73,13 @@ function fetchHttpRequest(url, request) {
 function processPost(e) {
     
     e.preventDefault();
-    
     console.log(e.target.id);
     //  params1 =? TypeOfRequest = signUpUser;
-    let url = 'https://script.google.com/macros/s/AKfycby0xncHlv4T2iaNeQ46wyh1BjXBot0htqUcytdduHnSez8X4PE/exec';
+    let url = serviceUrl;
     //  let url1 = new URL(reqUrl);
-    params1 = { status: "notCool!" }
-    
-    var data = {
-        first: "firstName.value",
-        last: "lastName.value",
-        phone: "phoneNumber.value",
-        city: "city.value",
-    };
-    var encodedParam = buildEncodedUri(data);
+  //  params1 = { status: "notCool!" }
     //  console.log(url)
     //  var decodedParam = unbuildEndodedUri(encodedParam);
-    var url2 = url + "?" + encodedParam;
     request = {
         // Default options are marked with *
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -111,6 +101,7 @@ function processPost(e) {
                     redirect: 'follow',
                         body: JSON.stringify(data)
     }
+    
     fetch(url, postParam )
         .then(res => res.text())
         .then(res => {
