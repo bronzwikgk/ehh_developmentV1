@@ -10,15 +10,15 @@ const serviceUrl = "https://script.google.com/macros/s/AKfycbxeONL9wDhS1GOnHJapV
 let url = serviceUrl;
 getRequest = {
     // Default options are marked with *
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+     method: 'GET', // *GET, POST, PUT, DELETE, etc.
      mode: 'no-cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+   // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 //    // credentials: 'same-origin', // include, *same-origin, omit
    // headers: {
    //     'Content-Type': 'application/json'
    //     // 'Content-Type': 'application/x-www-form-urlencoded',
    // },
-    redirect: 'follow', // manual, *follow, error
+  //  redirect: 'follow', // manual, *follow, error
 //    // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
    body: JSON.stringify(data) // body data type must match "Content-Type" header
 };
@@ -46,15 +46,13 @@ function fetchHttpRequest(url, request) {
 function processGet(e) {
     e.preventDefault();
     console.log(e.target.id);
-    if (Object.values(data).length !== 0) { //testing if the data is empty. 
-        console.log(data);
-        var encodedParam = buildEncodedUri(data);
-        var url2 = url + "?" + encodedParam;
-        //console.log(url2);
-    } else { 
-        url2 = url;
-    }
-  
+    //   if (Object.values(data).length !== 0) { //testing if the data is empty. 
+    console.log(data);
+    var encodedParam = buildEncodedUri(getRequest);
+    var url2 = url + "?" + encodedParam;
+    //console.log(url2);
+    
+//}
     fetchHttpRequest(url2);  
 }
 
