@@ -59,41 +59,7 @@ function fetchHttpRequest(url, request) {
         .catch(err => console.error(err));
 
 }
-function fetchUrl(myRequest) { 
-fetch(myRequest)
-    .then(response => {
-        const contentType = response.headers.get('content-type');
-        console.log("response Type is ",contentType); 
-        if (contentType.includes('application/json')) {
-            console.log(contentType, "Caught Json");
-            return response.json();
-        }
-        if (contentType.includes('text/html')) {
-            console.log(contentType,"Caught HTML");
-            return response.text();
-        } 
-        if (contentType.includes('image/jpeg')) {
-            console.log(contentType, "Caught Image");
-            response.blob()
-                .then(function (myBlob) {
-                    var objectURL = URL.createObjectURL(myBlob);
-                    let outputResponse = new Image();
-                    outputResponse.src = objectURL;
-                    document.getElementsByTagName('body')[0].appendChild(outputResponse)
-                });
-        }
-        if (contentType.includes('text/plain')) {
-            console.log(contentType, "Caught Text");
-            return response.text();
-        }
-    })
-    .then(data => {
-        console.log("data is ", typeof data, data); /* process your data further */
-    })
-    .catch(error => console.log(error));
 
-
-}
 
 function fetchUrl2(url,params) {
     // fetch(url,request)
