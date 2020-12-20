@@ -6,8 +6,9 @@ var data = {
         city: "city",
     };
 var resourceUrl = "https://docs.google.com/spreadsheets/d/1mBZJ01Ddhl9fByyJ5K-JEsruO7XV51i7ctdnRJ6-hGk/edit#gid=1449573075";
-const serviceUrl =  "https://script.google.com/macros/s/AKfycbxeONL9wDhS1GOnHJapV-67BMKFQk-k9WMA5m4C77mROTCipMQ/exec";
-request = {
+const serviceUrl = "https://script.google.com/macros/s/AKfycbxeONL9wDhS1GOnHJapV-67BMKFQk-k9WMA5m4C77mROTCipMQ/exec";
+let url = serviceUrl;
+getRequest = {
     // Default options are marked with *
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
      mode: 'no-cors', // no-cors, *cors, same-origin
@@ -40,24 +41,26 @@ function fetchHttpRequest(url, request) {
 
 }
 
-
 //To make a getReq to a appScript server the queryParameter have to be added to the url using buildEncodedURI.
 //when making a post reqst a normal post works.
 function processGet(e) {
     e.preventDefault();
     console.log(e.target.id);
-    //  params1 =? TypeOfRequest = signUpUser;
-    let url = serviceUrl;
-    var encodedParam = buildEncodedUri(data);
-    var url2 = url + "?" + encodedParam;
-    console.log(url2)
+    if (Object.values(data).length !== 0) { //testing if the data is empty. 
+        console.log(data);
+        var encodedParam = buildEncodedUri(data);
+        var url2 = url + "?" + encodedParam;
+        //console.log(url2);
+    } else { 
+        url2 = url;
+    }
+  
     fetchHttpRequest(url2);  
 }
 
 function processPost(e) {
     e.preventDefault();
     console.log(e.target.id);
-    let url = serviceUrl;
     fetchHttpRequest(url,postRequest);  
 }
 
