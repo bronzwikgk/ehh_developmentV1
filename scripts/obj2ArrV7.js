@@ -137,7 +137,7 @@ function processTest(e) {
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray", outputArray)
    // var table = createTable(outputArray);
-   outputJson = arr2Obj(outputArray);
+   outputJson = buildTree(outputArray);
   console.log(outputJson);
     //  document.getElementById("output").innerText = JSON.stringify(outputArray);
    // document.getElementById("output").appendChild(table);

@@ -6,6 +6,20 @@
 // If there is no parent for an element, we know that will be our tree’s “root” element
 
 
+
+function buildTree(input) {
+
+for(var i = 0;i<input.length;i++){
+
+console.log(input[i])
+
+}
+    
+}
+
+
+
+
 function updateAttributesNvalues(input,currentRow) {
    console.log(currentRow)
     var header = input[0];
