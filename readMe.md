@@ -12,3 +12,7 @@ https://bronzwikgk.github.io/ehh_developmentV1/drawElement.html
 
 a simple implementation of drag&Drop&resize
 https://bronzwikgk.github.io/ehh_developmentV1/drag&Drop.html
+
+a simple appScript Server Api testing page
+
+https://bronzwikgk.github.io/ehh_developmentV1/apiTest.html
