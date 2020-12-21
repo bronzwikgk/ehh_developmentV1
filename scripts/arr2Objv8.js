@@ -30,7 +30,7 @@ function arr2(input, output, maxDepth) {
                     
                 }
             } else if (currentRow[1] === index + 1) {
-                console.log(index,currentRow)
+              //  console.log(index,currentRow)
                 let path = currentRow[5];
                 let splitPathArr = path.split('.');
                 splitPathArr.splice(0, 2)
@@ -63,7 +63,9 @@ function appendInObject(currentRow, path, output, parentObj) {
         }
         return;
     } else {
+        
         let objKey = path[0];
+       // console.log(currentRow,objKey)
         path.splice(0, 1);
         appendInObject(currentRow, path, output[objKey], output);
     }

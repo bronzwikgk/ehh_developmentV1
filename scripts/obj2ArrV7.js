@@ -27,10 +27,9 @@ class mutate {
         // console.log(output[0], input);
         return output;
     }
-
     static createRow(input, output, previousRow, currentKey, d, path) {
         var id = output.length;
-        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name, path];
+        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name, path];console.log(newRow)
         return newRow;
     }
 
@@ -93,10 +92,10 @@ class mutate {
                 var currentRow = mutate.createRow(input[key], output, previousRow, key, d, path, previousRow[3]);
                 mutate.setEntity(currentRow, output);
                 mutate.Obj2(input[key], output, currentRow, currentRow, currentKey, d, path, currentRow[3]);
+
             } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {
                 mutate.validateNupdate(key, output);
                 mutate.updateRow(input[key], output, previousRow, previousRow, key, d, path);
-
             } else {
                 //   console.log("errand", key, input[key],typeof key)
             }
@@ -107,9 +106,13 @@ class mutate {
         for (var i = 0; i < input.length; i++) {
             if (typeof input[i] === "object" && input[i] !== null) {
                 if (typeof currentRow[3] === 'undefined') {
-                    //      console.log(currentRow)
+                    //      console.log(currentRow)   
+                    
                     mutate.updateRow(currentKey, output, previousRow, currentRow, 'root', d, path);
+                    console.log("Finding Array Values", previousRow)
                 } else {
+                    console.log("Finding Array Values",currentRow)
+
                     var currentRow = mutate.createRow(input[i], output, previousRow, previousRow[3] + i, d, path);
                     mutate.setEntity(currentRow, output);
 //                    output.push(currentRow);
@@ -119,8 +122,9 @@ class mutate {
             } else {
                 //creating Value Row for Array Parent
                 var currentRow = mutate.createRow(input[i], output, previousRow, input[i], d, path);
-                 mutate.setEntity(currentRow, output);
-                output.push(currentRow);
+                mutate.setEntity(currentRow, output);
+           //     console.log(currentRow)
+              //  output.push(currentRow);
             }
         }
         return output
