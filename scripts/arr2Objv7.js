@@ -8,13 +8,8 @@
 function child(entity,parent) {
     
     if (parent[3] == entity[2] && parent[1] - 1 == entity[1]) {
-        
         console.log(entity,"is child of ",parent);
-    
-    }
-
-
-    
+    } 
 }
 
 function buildTree(input) {
