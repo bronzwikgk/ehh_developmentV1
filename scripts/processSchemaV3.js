@@ -92,13 +92,12 @@ class processSchema {
         }
         return output;
     }
-
-
     static processArr(input, output,key,value) { 
 
         for (var i = 0; i < input.length; i++) {
-
-            if (getEntityType(input[i]) === 'Object' || getEntityType(input[i]) === 'Array') {
+            if (getEntityType(input[i]) === 'Object') {
+                console.log("found Object in array", input[i])
+            } else if (getEntityType(input[i]) === 'Array') {
                 console.log("found Object in array", input[i])
             } else if (getEntityType(input[i]) === 'String' || getEntityType(input[i]) === 'Function' || getEntityType(input[i]) === 'Boolean') {
                 var currentNode = processSchema.create(key, output, input[i], input[i]);
@@ -117,8 +116,9 @@ class processSchema {
 
 
     }
-
 }
+
+
 
 
 
