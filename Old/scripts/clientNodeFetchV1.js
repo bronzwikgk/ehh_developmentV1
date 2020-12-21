@@ -44,6 +44,8 @@ function fetchHttpRequest(url, request) {
         .catch(err => console.error(err));
 
 }
+
+
 ///it takes a inputobject and build's it into a encodedURI
 function buildEncodedUri(request) {
     const response = [];
