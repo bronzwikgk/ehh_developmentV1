@@ -2,7 +2,7 @@
 //Need to add options.
 //set has to be a seperate method
 //Child index need to be created along with the path.
-//
+//https://adrianmejia.com/data-structures-for-beginners-graphs-time-complexity-tutorial/
 
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
@@ -136,8 +136,10 @@ function processTest(e) {
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray", outputArray)
+    const depth = getMax(outputArray,2);
+
    // var table = createTable(outputArray);
-   outputJson = buildTree(outputArray);
+    outputJson = arr2(outputArray,{} ,depth);
   console.log(outputJson);
     //  document.getElementById("output").innerText = JSON.stringify(outputArray);
    // document.getElementById("output").appendChild(table);
