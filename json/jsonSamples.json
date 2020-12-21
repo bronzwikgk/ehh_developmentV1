@@ -391,23 +391,23 @@ var veryBasic = {
 }
 var basic = {
     "schema": {
-        "name": {
-            "title": "Name",
-            "input": "text",
-            "span": "Nickname allowed"
-        },
-        "gender": {
-            "title": "Gender",
-            "select": "text",
-            "option": [
-                "male",
-                "female",
-                "alien"
-            ],
-            "span": "Your gender"
-        }
+      "name": {
+        "title": "Name",
+        "input": "string",
+        "description": "Nickname allowed"
+      },
+      "gender": {
+        "title": "Gender",
+        "select": "string",
+        "option": [
+          "male",
+          "female",
+          "alien"
+        ],
+        "description": "Your gender"
+      }
     }
-}
+  }
 var schema2 = {
     "type": "object",
     "title": "The User Registration Schema",
