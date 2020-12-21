@@ -372,3 +372,88 @@ var samplen = {
         }
     ]
 }
+
+var basic = {
+    "form": {
+        "name": {
+            "lable": "Name",
+            "span": "Nickname allowed",
+            "input": "string"
+        },
+        "gender": {
+            "lable": "Gender",
+            "span": "Your gender",
+            "input": "string",
+            "select": [
+                "male",
+                "female",
+                "alien"
+            ]
+        }
+    }
+}
+var schema2 = {
+    "type": "object",
+    "title": "The User Registration Schema",
+    "description": "Sample Schema 1 for testing",
+    "default": {},
+    "properties": {
+        "UserName": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "Email": {
+            "type": "string",
+            "format": "idn-email"
+        },
+        "Gender": {
+            "type": "string",
+            "enum": [
+                "Male",
+                "Female",
+                "Others"
+            ]
+        },
+        "DateOfBirth": {
+            "type": "string",
+            "format": "date"
+        },
+        "Country": {
+            "const": "India"
+        },
+        "MagicNos": {
+            "type": "array",
+            "contains": {
+                "type": "number",
+                "minimum": 0,
+                "exclusiveMaximum": 10000
+            }
+        },
+        "Document": {
+            "type": "string",
+            "contentMediaType": "text/html"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "UserName",
+        "Email",
+        "Gender",
+        "DateOfBirth",
+        "Country",
+        "MagicNos",
+        "Document"
+    ]
+}
+var htmlSelect = {
+    "type": "object",
+    "title": "htmlClass demonstration",
+    "properties": {
+        "input": {
+            "type": "string"
+        },
+        "input": {
+            "type": "number"
+        }
+    }
+}

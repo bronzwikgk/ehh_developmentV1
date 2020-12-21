@@ -14,7 +14,7 @@ var basic = {
             "title": "Gender",
             "description": "Your gender",
             "type": "string",
-            "enum": [
+            "select": [
                 "male",
                 "female",
                 "alien"
