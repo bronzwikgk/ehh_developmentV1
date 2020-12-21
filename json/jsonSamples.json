@@ -372,19 +372,35 @@ var samplen = {
         }
     ]
 }
-
+var veryBasic = {
+    "schema": {
+        "field": {
+            "type": "string",
+            "title": "A field"
+        }
+    },
+    "form": [
+        {
+            "key": "field"
+        },
+        {
+            "type": "submit",
+            "title": "Submit"
+        }
+    ]
+}
 var basic = {
-    "form": {
+    "schema": {
         "name": {
-            "lable": "Name",
-            "span": "Nickname allowed",
-            "input": "string"
+            "title": "Name",
+            "input": "text",
+            "span": "Nickname allowed"
         },
         "gender": {
-            "lable": "Gender",
+            "title": "Gender",
             "span": "Your gender",
-            "input": "string",
-            "select": [
+            "select": "text",
+            "option": [
                 "male",
                 "female",
                 "alien"

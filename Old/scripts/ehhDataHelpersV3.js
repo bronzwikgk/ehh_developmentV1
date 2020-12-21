@@ -51,13 +51,6 @@ const isValidElement = element => {
     return element.name && element.value;
 };
 
-function find(entity, keyTofind) {
-    //console.log("finding", keyTofind, "in", entity);
-    var result = Object.keys(entity).filter(function (key, index, self) {
-        return !key.indexOf(keyTofind);
-    });
-    return result;
-}
 
 function clean(obj) {
     var propNames = Object.getOwnPropertyNames(obj);
