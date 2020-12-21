@@ -70,7 +70,7 @@ class processSchema {
     static processObj(input,output,key,value) { 
 
         for (var key in input) {
-            if (getEntityType(input[key]) === 'Object' || getEntityType(input[key]) === 'Array') {  
+            if (getEntityType(input[key]) === 'Object') {  
               //  console.log("object", key, input[key])
                 var currentNode = processSchema.create(key, output);
                
@@ -78,7 +78,11 @@ class processSchema {
                
                 processSchema.appendChild(currentNode, output);
 
-            } else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {  
+            } else if (getEntityType(input[key]) === 'Array') {  
+                processSchema.schema2(input[key], currentNode,key,input[key]);
+                //var currentNode = processSchema.create(key, output,key,input[key]);
+                  //  processSchema.appendChild(currentNode, output);
+            }else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {  
                 
                 var currentNode = processSchema.create(key, output,key,input[key]);
                     processSchema.appendChild(currentNode, output);

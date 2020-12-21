@@ -398,13 +398,13 @@ var basic = {
         },
         "gender": {
             "title": "Gender",
-            "span": "Your gender",
             "select": "text",
             "option": [
                 "male",
                 "female",
                 "alien"
-            ]
+            ],
+            "span": "Your gender"
         }
     }
 }
