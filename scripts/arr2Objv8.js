@@ -14,7 +14,7 @@ function arr2(input, output, maxDepth) {
             if (currentRow[1] === index + 1 && index + 1 === 1) {
                 switch (currentRow[4]) {
                     case 'Object':
-                        console.log(index, currentRow)
+                       // console.log(index, currentRow)
 
                         output[currentRow[3]] = {};
                         break;

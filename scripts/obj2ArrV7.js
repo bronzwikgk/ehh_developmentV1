@@ -29,7 +29,7 @@ class mutate {
     }
     static createRow(input, output, previousRow, currentKey, d, path) {
         var id = output.length;
-        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name, path];console.log(newRow)
+        var newRow = [id, d, previousRow[3], currentKey, input?.constructor.name, path];
         return newRow;
     }
 
@@ -136,7 +136,7 @@ class mutate {
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = sample;
+    var in2 = schema;
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray", outputArray)
