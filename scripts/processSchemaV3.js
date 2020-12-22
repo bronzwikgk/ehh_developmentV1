@@ -54,14 +54,11 @@ class processSchema {
         return output;
     }
     static create(input, output,key,value) { 
-
         if (getEntityType(output).includes("HTML")) { //Only HTML creation
-         
-
             if (getEntityType(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
 
               //  console.log("creating fieldSet object", key, value)
-                var nwEle = document.createElement("div");
+                var nwEle = document.createElement("fieldset");
                 nwEle.className = input;
               //  nwEle.className = "createdFromObject";
             } else if (getEntityType(value) === 'Array') {
@@ -183,14 +180,9 @@ function getEntityType(entity) {
 
 function processTest(e) {
     e.preventDefault();
-
     var in2 = slightlyComplex;
-
     console.log(in2)
     var outputElement = document.createElement("outputElement");
-
-    
-    
     console.log(outputElement)
     var outputE = processSchema.schema2(in2, outputElement);
     console.log("outputElement", outputE)
