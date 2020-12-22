@@ -18,6 +18,7 @@ class mutate {
         }
         return input;
     }
+    
     //this function primarly check for the presence of a keys in any an array, if not present and options [ returns false and update and return position]
     static validateNupdate(input, output) {
 

@@ -392,19 +392,19 @@ var veryBasic = {
 var basic = {
     "schema": {
       "name": {
-        "title": "Name",
+        "label": "Name",
         "input": "string",
-        "description": "Nickname allowed"
+        "span": "Nickname allowed"
       },
       "gender": {
-        "title": "Gender",
+        "label": "Gender",
         "select": "string",
         "option": [
           "male",
           "female",
           "alien"
         ],
-        "description": "Your gender"
+        "span": "Your gender"
       }
     }
   }

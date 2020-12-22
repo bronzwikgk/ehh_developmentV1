@@ -1,6 +1,7 @@
 
 var formElements = ["button", 'datalist', "div", 'fieldset', "form", "input", "label", 'legend', 'li', 'meter', 'optgroup', "option", 'output', 'progress', "select", "span", "textarea", "ul"];
-var attributes = ["type","title","class","id","name","value","required"]
+var properties = ["type", "title", "class", "id", "name", "value", "required", "default", "readOnly"]
+var supportedType = [ "string","number","array","integer","boolean","object"]
 
 
 
@@ -22,31 +23,37 @@ class processSchema {
     }
     static create(input, output,key,value) { 
 
-        if (getEntityType(output).includes("HTML")) {
+        if (getEntityType(output).includes("HTML")) { //Only HTML creation
+         
 
-            if (formElements.indexOf(input) < 0) { //check if the input is a formElement by crosschecking in the define array.
-               // console.log("createRequest for ", input, output, value, formElements.indexOf(input))
-               var nwEle = document.createElement("div");
+            if (getEntityType(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
 
-               // nwEle.className = input;
+              //  console.log("creating fieldSet object", key, value)
+                var nwEle = document.createElement("fieldSet");
+                nwEle.className = input;
+              //  nwEle.className = "createdFromObject";
+            } else if (getEntityType(value) === 'Array') {
+            
+            } else if (getEntityType(value) === 'String' || getEntityType(value) === 'Boolean') {
+            
+                console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
+                if (formElements.indexOf(input) < 0) { //check if the input is a formElement by crosschecking in the define array.
+                    var nwEle = document.createElement("div");
+                    nwEle.className = input;
               // console.log("divElement", nwEle);
             } else {
-               var nwEle = document.createElement(input);
-               // console.log("formElement", nwEle);
+                    var nwEle = document.createElement(input);
+                    nwEle.className = "createdFromStringProperty";                  
+                    var content = document.createTextNode(value);
+                    nwEle.appendChild(content);
+                    nwEle.setAttribute("value", key);
+                    console.log("formElement", nwEle);
+                    
+                }
+            } else {
+                console.log("strays")
             }
-
-            if(attributes.indexOf(input)>0){
-            output.setAttribute(key,value);
-                //console.log("attrbutes found",key,value)
-
-            }
-            if(typeof value === 'string') {
-                var content = document.createTextNode(value);
-                nwEle.appendChild(content);
-              //  nwEle.setAttribute("value", value);
-                //  console.log("setting Attributes", key, input, "in", output)
-               // output.setAttribute(input, value);
-            }
+          
             return nwEle;
         }
     }
@@ -63,26 +70,19 @@ class processSchema {
             }
             if (getEntityType(input).includes("String") && typeof value !== 'string') {
              //   output.appendChild(currentNode);
-            }
-           
-
-
-
+            }  
         }
-
-
-
-
-
     }
 
     static processObj(input,output,key,value) { 
 
         for (var key in input) {
             if (getEntityType(input[key]) === 'Object') {  
-              //  console.log("object", key, input[key])
-                var currentNode = processSchema.create(key, output);
+             
+               // console.log("creating fieldSet object", key, input[key])
                
+                var currentNode = processSchema.create(key, output, key, input[key]);
+               //console.log("recived from create",currentNode)
                 processSchema.schema2(input[key], currentNode,key,input[key]);
                
                 processSchema.appendChild(currentNode, output);
@@ -90,11 +90,16 @@ class processSchema {
             } else if (getEntityType(input[key]) === 'Array') {  
                 processSchema.schema2(input[key], currentNode,key,input[key]);
                 //var currentNode = processSchema.create(key, output,key,input[key]);
-                 processSchema.appendChild(currentNode, output);
-            }else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {  
+              //   processSchema.appendChild(currentNode, output);
+            }else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {                  
+               console.log("create req property object", key, input[key])
+                var currentNode = processSchema.create(key, output, key, input[key]);
                 
-                    var currentNode = processSchema.create(key, output,key,input[key]);
-                    processSchema.appendChild(currentNode, output);
+                if (processSchema.validate(input[key], supportedType, key, input[key], "isOneOf")){ 
+                    currentNode.setAttribute("type", input[key]);
+                }
+
+                processSchema.appendChild(currentNode, output);
             } else {
                 console.log("strays")
             }
@@ -110,9 +115,8 @@ class processSchema {
             } else if (getEntityType(input[i]) === 'Array') {
                 console.log("found Object in array", input[i])
             } else if (getEntityType(input[i]) === 'String' || getEntityType(input[i]) === 'Function' || getEntityType(input[i]) === 'Boolean') {
-                
                 var currentNode = processSchema.create(key, output, input[i], input[i]);
-                    processSchema.appendChild(currentNode, output);
+               processSchema.appendChild(currentNode, output);
             } else {
             }
             //            console.log(input[i], getEntityType(input[i]));
@@ -127,6 +131,19 @@ class processSchema {
 
 
     }
+
+    static validate(input, output,key,value,validation) {
+        console.log("validating", input, output, validation)
+            //this condition primarly check for the presence of a keys in any an array, if not present and options [ returns false and update and return position]
+
+        if (validation === 'isOneOf') {
+            if (output.indexOf(input) === -1 && typeof input !== null && typeof input !== undefined) {
+                return false;
+            } else {
+                return true;
+            }
+        } 
+    }
 }
 
 function getEntityType(entity) {
@@ -139,7 +156,10 @@ function processTest(e) {
     var in2 = basic;
 
     console.log(in2)
-    outputElement = processSchema.create("output", document.getElementById("output"));
+    var outputElement = document.createElement("outputElement");
+
+    
+    
     console.log(outputElement)
     var outputE = processSchema.schema2(in2, outputElement);
     console.log("outputElement", outputE)
