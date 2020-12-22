@@ -3,18 +3,18 @@ The menu Items has to be collapsible [ ref Mdn doc /Collapsable element ]
 This code will be used everywhere to create vertical menu / form / right Click Menu.
 Let's call this HTMl Element >> Entity Container
 schema and rules validations...
-https://developer.chrome.com/docs/extensions/reference/automation/
-//https://cssreference.io/animations/
-//https://stackoverflow.com/questions/2952667/find-all-css-rules-that-apply-to-an-element#:~:text=Calling%20css(document.,out%20the%20CSSRule%20object%20documentation.
-//https://gist.github.com/ZER0/5267608
+// https://developer.chrome.com/docs/extensions/reference/automation/
+// https://cssreference.io/animations/
+// https://stackoverflow.com/questions/2952667/find-all-css-rules-that-apply-to-an-element#:~:text=Calling%20css(document.,out%20the%20CSSRule%20object%20documentation.
+// https://gist.github.com/ZER0/5267608
 
-//https://dev.to/pixari/build-a-very-basic-spa-javascript-router-2k4p
-//https://willtaylor.blog/client-side-routing-in-vanilla-js/
+// https://dev.to/pixari/build-a-very-basic-spa-javascript-router-2k4p
+// https://willtaylor.blog/client-side-routing-in-vanilla-js/
 
 //UUID
-//https://www.ietf.org/rfc/rfc4122.txt
-//https://denic.hashnode.dev/css-tips-you-wont-see-in-most-tutorials
-//https://www.youtube.com/watch?v=47XqX72Hywo
+// https://www.ietf.org/rfc/rfc4122.txt
+// https://denic.hashnode.dev/css-tips-you-wont-see-in-most-tutorials
+// https://www.youtube.com/watch?v=47XqX72Hywo
 Ref for Color Font of Entity Containter >>> https://codepen.io/leenalavanya/pen/RJYwOV
 //https://ant.design/components/overview/
 // http://singlepageappbook.com/
