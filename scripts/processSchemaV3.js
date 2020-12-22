@@ -3,7 +3,39 @@ var formElements = ["button", 'datalist', "div", 'fieldset', "form", "input", "l
 var properties = ["type", "title", "class", "id", "name", "value", "required", "default", "readOnly"]
 var supportedType = [ "string","number","array","integer","boolean","object"]
 
-
+var slightlyComplex = {
+    "schema": {
+        "message": {
+            "input": "string",
+            "label": "Message"
+        },
+        "author": {
+            "type": "object",
+            "label": "Author",
+            "properties": {
+                "name": {
+                    "input": "string",
+                    "label": "Name"
+                },
+                "gender": {
+                    "label": "Gender",
+                    "select": "string",
+                    "option": [
+                        "male",
+                        "female",
+                        "alien"
+                    ],
+                    "span": "Your gender"
+                },
+                "magic": {
+                    "input": "integer",
+                    "label": "Magic number",
+                    "default": 42
+                }
+            }
+        }
+    }
+}
 
 class processSchema { 
 
@@ -152,7 +184,7 @@ function getEntityType(entity) {
 function processTest(e) {
     e.preventDefault();
 
-    var in2 = basic;
+    var in2 = slightlyComplex;
 
     console.log(in2)
     var outputElement = document.createElement("outputElement");

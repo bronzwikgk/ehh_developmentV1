@@ -375,8 +375,8 @@ var samplen = {
 var veryBasic = {
     "schema": {
         "field": {
-            "type": "string",
-            "title": "A field"
+            "input": "string",
+            "lable": "A field"
         }
     },
     "form": [
@@ -384,8 +384,8 @@ var veryBasic = {
             "key": "field"
         },
         {
-            "type": "submit",
-            "title": "Submit"
+            "button": "submit",
+            "lable": "Submit"
         }
     ]
 }
