@@ -35,7 +35,7 @@ class processSchema {
             } else if (getEntityType(value) === 'Array') {
             
             } else if (getEntityType(value) === 'String' || getEntityType(value) === 'Boolean') {
-                console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
+           //     console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
                 if (formElements.indexOf(input) < 0) { //check if the input is a formElement by crosschecking in the define array.
                     var nwEle = document.createElement("div");
                     nwEle.className = input;
@@ -45,7 +45,7 @@ class processSchema {
                     nwEle.className = "createdFromStringProperty";                  
                     var content = document.createTextNode(value);
                     nwEle.appendChild(content);
-                    nwEle.setAttribute("value", key);
+                  //  nwEle.setAttribute("value", key);
                     console.log("formElement", nwEle);
                     
                 }
