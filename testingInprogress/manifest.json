@@ -1,0 +1,22 @@
+{
+    "name": "ehh_In_DevelopmentV1",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "everythingHappenHere.",
+    "icons": {
+        "128": "icon/icon_128.png"
+    },
+    "background":{
+        "scripts" : ["scripts/bgServiceV2.js"]
+    },
+    "content_scripts":[ "scripts/client.js"
+"js":
+
+    ],
+    "permissions": [
+        "nativeMessaging",
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
+    ]
+}
