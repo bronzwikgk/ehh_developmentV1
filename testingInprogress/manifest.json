@@ -7,16 +7,24 @@
         "128": "icon/icon_128.png"
     },
     "background":{
-        "scripts" : ["scripts/bgServiceV2.js"]
+        "scripts" : ["scripts/bgServiceV2.js","scripts/hot-reload.js"],"persistent": true
     },
-    "content_scripts":[ "scripts/client.js"
-"js":
-
-    ],
+   "content_scripts": [
+    {
+        "matches": [
+            "http://*/*",
+            "https://*/*"
+        ],
+        "js": ["scripts/client.js"],
+        "all_frames": true
+    }
+],
     "permissions": [
         "nativeMessaging",
         "webRequest",
         "webRequestBlocking",
         "<all_urls>"
-    ]
+    ],
+    "offline_enabled": true
+
 }

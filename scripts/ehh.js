@@ -1,15 +1,4 @@
 
-function createListeners(entity) {
-  // console.log(entity);
-    var events = find(entity, 'on');
-  // console.log("events Found",events);
-    var a = events.forEach(create);
-   // console.log(a);
-    save(events, this.constructor.name + "listeners");
-    
-    console.log("listernes created & Saved to local storagea at ", new Date().toLocaleString().replace(',', ''), this.constructor.name);
-
-}
 function initState(e) {
     var nodes = [];
     //currentState = e.type;

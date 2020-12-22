@@ -1,3 +1,5 @@
+//https://github.com/mdn/webextensions-examples/blob/master/http-response/background.js
+console.log("background is up");
 const defaultFilters = [
     // "<all_urls>",
     "*://*.doubleclick.net/*",
@@ -10,7 +12,7 @@ const defaultFilters = [
     "*://*.quantserve.com/*",
     "*://*.scorecardresearch.com/*",
     "*://*.zedo.com/*",
-    // "*://*.youtube.com/*"   
+   //  "*://*.youtube.com/*"   
 ]
 
 var filters = { urls: defaultFilters};
@@ -25,4 +27,5 @@ chrome.webRequest.onBeforeRequest.addListener(listener, filters, ["blocking"]);
 
 function listener(e) { 
     console.log(e);
+   return cancel(e);
 }

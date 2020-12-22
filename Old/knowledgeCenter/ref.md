@@ -3,7 +3,7 @@ The menu Items has to be collapsible [ ref Mdn doc /Collapsable element ]
 This code will be used everywhere to create vertical menu / form / right Click Menu.
 Let's call this HTMl Element >> Entity Container
 schema and rules validations...
-
+https://developer.chrome.com/docs/extensions/reference/automation/
 //https://cssreference.io/animations/
 //https://stackoverflow.com/questions/2952667/find-all-css-rules-that-apply-to-an-element#:~:text=Calling%20css(document.,out%20the%20CSSRule%20object%20documentation.
 //https://gist.github.com/ZER0/5267608
