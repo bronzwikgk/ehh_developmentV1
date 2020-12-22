@@ -16,3 +16,7 @@ https://bronzwikgk.github.io/ehh_developmentV1/drag&Drop.html
 a simple appScript Server Api testing page
 
 https://bronzwikgk.github.io/ehh_developmentV1/apiTest.html
+
+a schema processing testing page
+
+https://bronzwikgk.github.io/ehh_developmentV1/processSchema.html
