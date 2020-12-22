@@ -1,4 +1,6 @@
 //https://github.com/mdn/webextensions-examples/blob/master/http-response/background.js
+//https://developer.chrome.com/docs/extensions/reference/events/
+
 console.log("background is up");
 const defaultFilters = [
     // "<all_urls>",
@@ -31,8 +33,16 @@ function listener(e) {
    return cancel(e);
 }
 
-function sendMessage() {
-    chrome.runtime.sendMessage(tab.id, { content: "message" }, gotMessage );
+function sendResponse() {
+
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
+          console.log(response.farewell);
+        });
+      });
+
+
+    //chrome.runtime.sendMessage(tab.id, { content: "recieved Message" }, gotMessage );
 }
 
 chrome.runtime.onMessage.addListener(gotMessage);
