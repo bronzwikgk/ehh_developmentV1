@@ -25,7 +25,18 @@ function cancel(details) { //console.log("Canceling: " + requestDetails.url);
 chrome.webRequest.onBeforeRequest.addListener(listener, filters, ["blocking"]);
 
 
+
 function listener(e) { 
     console.log(e);
    return cancel(e);
+}
+
+function sendMessage() {
+    chrome.runtime.sendMessage(tab.id, { content: "message" }, gotMessage );
+}
+
+chrome.runtime.onMessage.addListener(gotMessage);
+
+function gotMessage(message,sender,sendResponse) { 
+    console.log("message recived",message)
 }
