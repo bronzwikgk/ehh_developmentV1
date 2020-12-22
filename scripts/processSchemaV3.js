@@ -29,13 +29,12 @@ class processSchema {
             if (getEntityType(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
 
               //  console.log("creating fieldSet object", key, value)
-                var nwEle = document.createElement("fieldSet");
+                var nwEle = document.createElement("div");
                 nwEle.className = input;
               //  nwEle.className = "createdFromObject";
             } else if (getEntityType(value) === 'Array') {
             
             } else if (getEntityType(value) === 'String' || getEntityType(value) === 'Boolean') {
-            
                 console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
                 if (formElements.indexOf(input) < 0) { //check if the input is a formElement by crosschecking in the define array.
                     var nwEle = document.createElement("div");
