@@ -24,6 +24,8 @@ function cancel(details) { //console.log("Canceling: " + requestDetails.url);
     return { cancel: true };
 }
 
+
+
 chrome.webRequest.onBeforeRequest.addListener(listener, filters, ["blocking"]);
 
 
@@ -33,14 +35,11 @@ function listener(e) {
    return cancel(e);
 }
 
-function sendResponse() {
-
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
-          console.log(response.farewell);
-        });
+function sendMessage(recipient,message) {
+    chrome.tabs.sendMessage(recipient,message, function(response) {
+        console.log(response.farewell);
       });
-
+    
 
     //chrome.runtime.sendMessage(tab.id, { content: "recieved Message" }, gotMessage );
 }
@@ -48,5 +47,6 @@ function sendResponse() {
 chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(message,sender,sendResponse) { 
-    console.log("message recived",message)
+    console.log("message recived",message,sender.tab.id)
+    sendMessage(sender.tab.id,"message Recived")
 }

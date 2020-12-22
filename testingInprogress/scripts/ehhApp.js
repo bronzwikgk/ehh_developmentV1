@@ -20,7 +20,6 @@ var client = {serverNodeRequest : {
 
 var messageRequest = {
     'message' : "welcome"
-    'tabID' : chrome.tabs.resourceID()
 
 }
 
@@ -33,15 +32,14 @@ function OnLoad(e) {
    // var listeners = createEhhlisteners(this);
 }
 
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-      console.log(sender.tab ?
-                  "from a content script:" + sender.tab.url :
-                  "from the extension");
-      if (request.greeting == "hello")
-        sendResponse({farewell: "goodbye"});
-    }
-  );
+
+  chrome.runtime.onMessage.addListener(gotMessage);
+
+  function gotMessage(message,sender,sendResponse) { 
+      console.log("message recived",message,sender.tab.id)
+      sendMessage({farewell: "goodbye"})
+  }
+  
 
 function sendMessage(message) { 
 //    chrome.runtime.sendMessage(extensionId?: string, message: any, options: object, responseCallback: function)
