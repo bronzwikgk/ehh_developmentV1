@@ -44,12 +44,11 @@ class ehhEvent {
      //   initState(e);
         // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     } if (e.constructor.name === "MouseEvent") {
-     //    console.log(e.constructor.name, e.type, "captured", e.target);
-      //  changeState(e);
-        // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
+    console.log(e.constructor.name, e.type, "captured", e.target);
+        ehhState.changeState(e);
+       // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     }
     }
-
     static conductEvent(e) {
         if (e.type === "mouseover") {
             mouseOver(e);
@@ -68,10 +67,6 @@ class ehhEvent {
                 }
             }
     }
-
-
-
-
 }
 class app {
 
@@ -198,10 +193,11 @@ class ehhState {
     static changeState(e) {
     
         var targetElement = e.target;
-        //console.log("changing state for event");
+       console.log("changing state for event");
         // console.log(targetElement);
         let currentState = targetElement.getAttribute('currentstate'); //console.log("current state", currentState);  //console.log("prev state",prevState);
         let prevState = targetElement.getAttribute('prevstate');
+
         if (prevState === currentState) {
             targetElement.setAttribute('currentstate', e.type); //console.log(prevState);
              // console.log("New State",targetElement);
@@ -211,7 +207,7 @@ class ehhState {
         targetElement.setAttribute('currentstate', e.type); //console.log(prevState);
         // console.log("New State",targetElement);
     }
-    conductEvent(e);
+  //  conductEvent(e);
     //console.log(targetElement.getAttributes(prevstate));
 
     }

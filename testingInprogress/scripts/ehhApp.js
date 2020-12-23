@@ -63,45 +63,4 @@ function create(entity) {
 // }
 
 
-// //this function acts like a event conductor, read it's event command mapp from a json file, which mapps 
-// //Ignore Events from Json to be implemented
-// //https://github.com/philipwalton/router/blob/master/index.js
-// function onEvent(e) {
-
-//     //  console.log(e.type);
-//     // console.log(curEvent,preEvent);
-//     if (e.type === 'onload') {
-//         console.log("loadEventFound")
-//     }
-
-//     if (e.constructor.name === 'PointerEvent' || e.type === 'selectstart' || e.type === 'selectionchange' || e.type === 'click') {
-//         return;
-//     }
-//     //console.log(e.constructor.name, e.type, "captured", e.target.constructor.name);
-//     //need better Logic, which works universally.//Output is not consistent.
-
-
-//     if (e.type === 'mousedown') {
-//         mD = true;
-//         mM = false;
-//     }
-//     if (e.type === 'mousemove') {
-//         mM = true;
-//         // console.log("mouseMove",mM)
-//     }
-//     if (e.type === 'mouseup') {
-//         mU = true; mD = false; mM = false;
-//         console.log("mouseUp");
-//     }
-
-
-//     if (mD && mM) {
-//         createElement(e);
-//         console.log("mouseDown", mD, "mouseMove", mM, "clickNDraw");
-//     }
-
-
-
-// }
-
 
