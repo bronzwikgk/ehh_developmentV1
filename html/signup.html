@@ -65,7 +65,10 @@
 
 </body>
 <script>
-
+var event = document.addEventListener(onmouseover,mouseOver);
+function mouseOver(e){
+    console.log(e.target);
+}
 //    const sampleEmail = ['sample@email.com', 'contoh@email.com'];
 //    const samplePassword = ['123456', 'qwerty'];
 
