@@ -20,6 +20,23 @@ const defaultFilters = [
 var filters = { urls: defaultFilters};
 
 
+chrome.webRequest.onBeforeRequest.addListener(listener, filters, ["blocking"]);
+
+
+
+
+function cancel(details) { //console.log("Canceling: " + requestDetails.url);
+    return { cancel: true };
+}
+
+
+
+
+function listener(e) { 
+    console.log(e);
+   return cancel(e);
+}
+
 
 class bgService { 
 
@@ -29,38 +46,15 @@ class bgService {
 
     }
     static gotMessage(message, sender, sendResponse) {
-            console.log("message recived", message, sender.tab.id)
-            sendMessage(sender.tab.id, "message Recived")
+        console.log("message recived", message, sender.tab.id)
+        
+        sendMessage(sender.tab.id, "message Recived")
         }
 
-    
+    static sendMessage(recipient, message) {
+        chrome.tabs.sendMessage(recipient, message, function (response) {console.log(response.farewell);});
+    }
 
 
 }
 
-function cancel(details) { //console.log("Canceling: " + requestDetails.url);
-    return { cancel: true };
-}
-
-
-
-chrome.webRequest.onBeforeRequest.addListener(listener, filters, ["blocking"]);
-
-
-
-function listener(e) { 
-    console.log(e);
-   return cancel(e);
-}
-
-function sendMessage(recipient,message) {
-    chrome.tabs.sendMessage(recipient,message, function(response) {
-        console.log(response.farewell);
-      });
-    
-
-    //chrome.runtime.sendMessage(tab.id, { content: "recieved Message" }, gotMessage );
-}
-
-
-function 
