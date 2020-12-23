@@ -44,7 +44,7 @@ class ehhEvent {
      //   initState(e);
         // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     } if (e.constructor.name === "MouseEvent") {
-    console.log(e.constructor.name, e.type, "captured", e.target);
+     console.log(e.constructor.name, e.type, "captured", e.target);
         ehhState.changeState(e);
        // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     }
@@ -216,7 +216,6 @@ class ehhState {
 
 
 }
-
 
 //chrome.runtime.onStartup.addListener(function () {    // run startup function})
 //window.onload = app.init();
