@@ -69,6 +69,7 @@ function conductEvent(e) {
          } 
      }
 }
+
 //this function acts like a event conductor, read it's event command mapp from a json file, which mapps 
 //Ignore Events from Json to be implemented
 //https://github.com/philipwalton/router/blob/master/index.js
@@ -84,6 +85,9 @@ function onEvent(e) {
         // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     }
 }
+
+
+
 function create(entity) {
     window[entity] = onEvent;
 }
