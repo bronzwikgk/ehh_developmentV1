@@ -2,6 +2,7 @@
 //https://developer.chrome.com/docs/extensions/reference/events/
 
 console.log("background is up");
+
 const defaultFilters = [
     // "<all_urls>",
     "*://*.doubleclick.net/*",
