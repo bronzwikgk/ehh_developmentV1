@@ -28,6 +28,12 @@ class bgService {
         chrome.runtime.onMessage.addListener(gotMessage);
 
     }
+    static gotMessage(message, sender, sendResponse) {
+            console.log("message recived", message, sender.tab.id)
+            sendMessage(sender.tab.id, "message Recived")
+        }
+
+    
 
 
 }
@@ -57,7 +63,4 @@ function sendMessage(recipient,message) {
 }
 
 
-function gotMessage(message,sender,sendResponse) { 
-    console.log("message recived",message,sender.tab.id)
-    sendMessage(sender.tab.id,"message Recived")
-}
+function 
