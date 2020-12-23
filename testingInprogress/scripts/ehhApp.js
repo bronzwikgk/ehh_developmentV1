@@ -1,12 +1,4 @@
-{
-//ehhApp takes care of all the setup or initialising task, when served over HTTP.
-//this is similar ot onInstall for a chrome Extension or webApp.
-//List of function and features
-// Detect Features from the Config.Json
-//Set Nessecary Key's in LocalStorage
-//Init Listeners
-//init Dom..Assingn a ID to each element of Dom.More like Content/Index scripts file
-}
+
 
 var client = {serverNodeRequest : {
     serverActionRequest: 'create',
@@ -20,7 +12,6 @@ var client = {serverNodeRequest : {
 
 var messageRequest = {
     'message' : "welcome"
-
 }
 
 
@@ -34,17 +25,6 @@ function OnLoad(e) {
 
 
   chrome.runtime.onMessage.addListener(gotMessage);
-
-  function gotMessage(message,sender,sendResponse) { 
-      console.log("message recived",message,sender.tab.id)
-      sendMessage({farewell: "goodbye"})
-  }
-  
-
-function sendMessage(message) { 
-//    chrome.runtime.sendMessage(extensionId?: string, message: any, options: object, responseCallback: function)
-    chrome.runtime.sendMessage(message, function (response) { console.log('response', response);});
-}
 
 
 function create(entity) {

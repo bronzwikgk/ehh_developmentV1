@@ -1,3 +1,13 @@
+{
+    //ehhApp takes care of all the setup or initialising task, when served over HTTP.
+    //this is similar ot onInstall for a chrome Extension or webApp.
+    //List of function and features
+    // Detect Features from the Config.Json
+    //Set Nessecary Key's in LocalStorage
+    //Init Listeners
+    //init Dom..Assingn a ID to each element of Dom.More like Content/Index scripts file
+}
+
 class dataHelpers { 
 
 static find(entity, keyTofind) {
@@ -26,7 +36,6 @@ static save(entity, keyTitle) {
 }
 //https://github.com/philipwalton/router/blob/master/index.js
 class ehhEvent { 
-
     // this function acts like a event conductor, read it's event command mapp from a json file.Ignore Events from Json to be implemented
     static onEvent(e) {
     // console.log(e.constructor.name, e.type, "captured", e.target.tagName);
@@ -35,11 +44,33 @@ class ehhEvent {
      //   initState(e);
         // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     } if (e.constructor.name === "MouseEvent") {
-         console.log(e.constructor.name, e.type, "captured", e.target.tagName);
+     //    console.log(e.constructor.name, e.type, "captured", e.target);
       //  changeState(e);
         // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
     }
-}
+    }
+
+    static conductEvent(e) {
+        if (e.type === "mouseover") {
+            mouseOver(e);
+            // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
+        } else
+            if (e.type === "click") {
+                // console.log(e.constructor.name, e.type, "captured", e.target.constructor.name);
+                click(e);
+                // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
+            } else {
+                if (e.type === "contextmenu") {
+                    // console.log(e.constructor.name, e.type, "captured", e.target.constructor.name);
+                    //createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
+                    e.preventDefault();
+                    rightClick(e);
+                }
+            }
+    }
+
+
+
 
 }
 class app {
@@ -47,11 +78,12 @@ class app {
     static init(e) {
         console.log(e)
         var listeners = app.createListeners(e);
-        
-        var checkBox = document.createElement("INPUT");
-        checkBox.setAttribute("type", "checkbox");
+        var contextElement = document.createElement("INPUT");
+        contextElement.setAttribute("type", "checkbox");
 //        console.log(checkBox)
-        ehhView.appendElement(e, checkBox, document.getElementsByTagName("body")[0]) 
+        ehhView.appendElement(e, contextElement, document.getElementsByTagName("body")[0]);
+        contextElement.style.display = 'none';
+        var states = ehhState.initState(e);
     }
     static createListeners(entity) {//   console.log(entity);
     var events = dataHelpers.find(entity, 'on');//  console.log("events Found",events);
@@ -64,11 +96,13 @@ class app {
     }
 
     static gotMessage(message, sender, sendResponse) {
-        
+        console.log("message recived", message, sender.tab.id)
+        sendMessage({ farewell: "goodbye" })
     }
 
     static sendMessage(recipient, message) {
-        
+        chrome.runtime.sendMessage(message, function (response) { console.log('response', response); });
+
     }
     
     static mouseOver(e) { 
@@ -152,6 +186,43 @@ static resize(mm, newElement, startX, startY) {
 
 }
 
+class ehhState {
+    static initState(e) {
+    var nodes = [];
+    //currentState = e.type;
+    document.documentElement.querySelectorAll('*').forEach(function (node) {
+        node.setAttribute("currentstate", "inDom"); node.setAttribute("prevstate", "");
+        //  console.log(node);
+    });
+    }   
+    static changeState(e) {
+    
+        var targetElement = e.target;
+        //console.log("changing state for event");
+        // console.log(targetElement);
+        let currentState = targetElement.getAttribute('currentstate'); //console.log("current state", currentState);  //console.log("prev state",prevState);
+        let prevState = targetElement.getAttribute('prevstate');
+        if (prevState === currentState) {
+            targetElement.setAttribute('currentstate', e.type); //console.log(prevState);
+             // console.log("New State",targetElement);
+        //console.log("samestate",targetElement);
+    } else {
+        targetElement.setAttribute('prevstate', currentState); //console.log(prevState);
+        targetElement.setAttribute('currentstate', e.type); //console.log(prevState);
+        // console.log("New State",targetElement);
+    }
+    conductEvent(e);
+    //console.log(targetElement.getAttributes(prevstate));
+
+    }
+
+
+
+
+}
+
+
+//chrome.runtime.onStartup.addListener(function () {    // run startup function})
 //window.onload = app.init();
 window.onload = OnLoad();
 function OnLoad(e) {

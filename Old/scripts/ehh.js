@@ -31,6 +31,7 @@ function initState(e) {
     });
     
 }
+
 function changeState(e) {
     //console.log("changing state for event");
     var targetElement = e.target;
