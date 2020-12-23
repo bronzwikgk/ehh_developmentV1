@@ -3,8 +3,6 @@ class app {
 
     static init(e) {
         console.log(e)
-       
-
     }
     static create(event,entity) { 
 
