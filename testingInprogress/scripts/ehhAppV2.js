@@ -17,7 +17,6 @@ static isEmpty(obj) {
     }  
 }
 
-
 class localStorageHelpers { 
 
 static save(entity, keyTitle) {
@@ -51,8 +50,8 @@ class app {
         
         var checkBox = document.createElement("INPUT");
         checkBox.setAttribute("type", "checkbox");
-        console.log(checkBox)
-        //app.ehhView.createElement(e, "INPUT","body") 
+//        console.log(checkBox)
+        ehhView.appendElement(e, checkBox, document.getElementsByTagName("body")[0]) 
     }
     static createListeners(entity) {//   console.log(entity);
     var events = dataHelpers.find(entity, 'on');//  console.log("events Found",events);

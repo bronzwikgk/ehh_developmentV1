@@ -16,6 +16,7 @@
             "https://*/*"
         ],
         "js": ["scripts/ehhAppV2.js","scripts/dataHelpersv3.js"],
+        "css":["style/style.css"],
         "all_frames": true
     }
 ],
