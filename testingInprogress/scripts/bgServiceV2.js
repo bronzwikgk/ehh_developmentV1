@@ -20,6 +20,18 @@ const defaultFilters = [
 var filters = { urls: defaultFilters};
 
 
+
+class bgService { 
+
+    static init() { 
+       
+        chrome.runtime.onMessage.addListener(gotMessage);
+
+    }
+
+
+}
+
 function cancel(details) { //console.log("Canceling: " + requestDetails.url);
     return { cancel: true };
 }
@@ -44,7 +56,6 @@ function sendMessage(recipient,message) {
     //chrome.runtime.sendMessage(tab.id, { content: "recieved Message" }, gotMessage );
 }
 
-chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(message,sender,sendResponse) { 
     console.log("message recived",message,sender.tab.id)
