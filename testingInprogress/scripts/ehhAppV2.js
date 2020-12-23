@@ -170,7 +170,7 @@ class ehhEvent {
 
 
         if (e.type === "mouseover") {
-            console.log(e.type)
+          //  console.log(e.type)
             ehhEvent.mouseOver(e);
             // createElement(e); // onmousedown(e); // onmousedown(e); // console.log("body");
         } else
@@ -196,7 +196,7 @@ class ehhEvent {
         if (targetElement.hasAttribute("currentstate")) {
             //ehhView.appendElement(e, contextElement, targetElement);
             targetElement.insertAdjacentElement('afterbegin', contextElement)
-       //   console.log("mouse on",targetElement);  
+          console.log("mouse on",targetElement.innerText.toString());  
              contextElement.style.display = 'block';
         }
     }
@@ -212,16 +212,11 @@ class ehhState {
     }   
     static changeState(e) {
         var targetElement = e.target;       //console.log("changing state for event");
-        ;
         let currentState = targetElement.getAttribute('currentstate'); //console.log("current state", currentState);  //console.log("prev state",prevState);
         let prevState = targetElement.getAttribute('prevstate');
-
-        if (prevState === currentState) {
-        
+        if (prevState === currentState) {       
             targetElement.setAttribute('currentstate', e.type); //console.log(prevState);
-             // console.log("New State",targetElement);
-            //console.log("samestate",targetElement);
-    } else {
+        } else {
         targetElement.setAttribute('prevstate', currentState); //console.log(prevState);
         targetElement.setAttribute('currentstate', e.type); //console.log(prevState);
         // console.log("New State",targetElement);
