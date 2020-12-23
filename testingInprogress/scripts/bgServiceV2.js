@@ -23,15 +23,9 @@ var filters = { urls: defaultFilters};
 
 chrome.webRequest.onBeforeRequest.addListener(listener, filters, ["blocking"]);
 
-
-
-
 function cancel(details) { //console.log("Canceling: " + requestDetails.url);
     return { cancel: true };
 }
-
-
-
 
 function listener(e) { 
     console.log(e);

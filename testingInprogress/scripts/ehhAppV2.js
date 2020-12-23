@@ -27,6 +27,38 @@ static isEmpty(obj) {
     }  
 }
 
+// Store Class: Handles Storage
+class Store {
+    static getEntity(entity) {
+     //   let entity;
+        if (localStorage.getItem(entity) === null) {
+            response = [];
+        } else {
+            response = JSON.parse(localStorage.getItem(entity));
+        }
+
+        return response;
+    }
+
+    static setEntity(entity) {
+        const entitys = Store.getEntity();
+        entitys.push(entity);
+        localStorage.setItem('entity', JSON.stringify(entitys));
+    }
+
+    static removeBook(id) {
+        const entitys = Store.getEntity();
+
+        entitys.forEach((entity, index) => {
+            if (entity.id === entity) {
+                entity.splice(index, 1);
+            }
+        });
+
+        localStorage.setItem('entity', JSON.stringify(entitys));
+    }
+}
+
 class localStorageHelpers { 
 
 static save(entity, keyTitle) {
@@ -143,7 +175,6 @@ static resize(mm, newElement, startX, startY) {
 }
 
 }
-
 //https://github.com/philipwalton/router/blob/master/index.js
 class ehhEvent {
     // this function acts like a event conductor, read it's event command mapp from a json file.Ignore Events from Json to be implemented
@@ -225,10 +256,6 @@ class ehhState {
     //console.log(targetElement.getAttributes(prevstate));
 
     }
-
-
-
-
 }
 
 //chrome.runtime.onStartup.addListener(function () {    // run startup function})

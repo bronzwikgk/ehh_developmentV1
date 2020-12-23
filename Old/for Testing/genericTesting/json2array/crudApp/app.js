@@ -87,11 +87,7 @@ class Book {
     }
   }
   
-var reqUrl ='https://script.google.com/macros/s/AKfycbzHQaqTOgDiAJe6u4W_fhZSlz8huQbujr8By6qagu4/dev';
 
-class urlService{
-
-  }
   // Event: Display Books
   document.addEventListener('DOMContentLoaded', UI.displayBooks);
   
