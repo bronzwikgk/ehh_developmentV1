@@ -46,6 +46,12 @@ function sendMessage(message) {
     chrome.runtime.sendMessage(message, function (response) { console.log('response', response);});
 }
 
+
+function create(entity) {
+    window[entity] = onEvent;
+}
+
+
 // // In ContentScript.js
 // chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
 //     if (request.content) {

@@ -15,7 +15,7 @@
             "http://*/*",
             "https://*/*"
         ],
-        "js": ["scripts/ehhApp.js"],
+        "js": ["scripts/ehhAppV2.js"],
         "all_frames": true
     }
 ],
