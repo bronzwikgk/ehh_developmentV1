@@ -3,12 +3,14 @@ var element = document.getElementsByTagName("HTML")[0];
 let event = {
     "origin": ["mouse", "window", "ehh", "HTTP", "keyBoard"],
 }
+
 window.onload = OnLoad();
 function OnLoad(e) {
     //window storage == session storage
     console.log("ehh is running! on >>>", window.document.title, window.document.location.origin);
     var listeners = createListeners(this);
 }
+
 function createListeners(entity) {
   // console.log(entity);
     var events = find(entity, 'on');

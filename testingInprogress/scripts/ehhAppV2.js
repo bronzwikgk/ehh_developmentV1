@@ -1,8 +1,13 @@
 
 class app {
 
-    static init() {
-        console.log("arguments.callee.name")
+    static init(e) {
+        console.log(e)
+       
+
+    }
+    static create(event,entity) { 
+
     }
     static gotMessage(message, sender, sendResponse) {
         
@@ -14,5 +19,5 @@ class app {
 
 
 }
+window.onload = app.init(e);
 
-app.init();
