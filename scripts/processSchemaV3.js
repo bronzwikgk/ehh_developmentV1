@@ -1,4 +1,4 @@
-var s = let schema = {
+var schema5 = {
     definitions: {
       hobby: {
         type: "object",
@@ -99,6 +99,19 @@ var slightlyComplex = {
     }
 }
 
+var basic = {
+    "toolbar": {
+        "b1": {
+            "command": "submit",
+            "button": "name"
+        },
+        "b2": {
+            "command": "submit",
+            "button": "name"
+        }
+    }
+}
+
 class processSchema { 
 
     static schema2(input, output,key,value) {
@@ -118,9 +131,8 @@ class processSchema {
     static create(input, output,key,value) { 
         if (getEntityType(output).includes("HTML")) { //Only HTML creation
             if (getEntityType(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
-
               //  console.log("creating fieldSet object", key, value)
-                var nwEle = document.createElement("fieldset");
+                var nwEle = document.createElement("div");
                 nwEle.className = input;
               //  nwEle.className = "createdFromObject";
             } else if (getEntityType(value) === 'Array') {
@@ -201,7 +213,13 @@ class processSchema {
 
         for (var i = 0; i < input.length; i++) {
             if (getEntityType(input[i]) === 'Object') {
-                console.log("found Object in array", input[i])
+               console.log("found Object in array", input[i])
+                var currentNode = processSchema.create(key, output, input[i], input[i]);
+                //console.log("recived from create",currentNode)
+                processSchema.schema2(input[i], currentNode, key, input[i]);
+
+                processSchema.appendChild(currentNode, output);
+
             } else if (getEntityType(input[i]) === 'Array') {
                 console.log("found Object in array", input[i])
             } else if (getEntityType(input[i]) === 'String' || getEntityType(input[i]) === 'Function' || getEntityType(input[i]) === 'Boolean') {
@@ -240,9 +258,10 @@ function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
 
+
 function processTest(e) {
-    e.preventDefault();
-    var in2 = slightlyComplex;
+  //  e.preventDefault();
+    var in2 = basic;
     console.log(in2)
     var outputElement = document.createElement("outputElement");
     console.log(outputElement)
@@ -257,7 +276,7 @@ function processTest(e) {
     document.getElementById("output").appendChild(outputE);
 }
 
-
+processTest();
 document.getElementById("get").addEventListener("click", processTest);
 
 

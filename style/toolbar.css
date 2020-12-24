@@ -1,0 +1,34 @@
+*{
+  box-sizing: border-box;
+  margin: px;
+  padding: 0px;
+ -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+    font-family: 'poppins'; 
+ }
+body {
+  background: #e6ecee;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+  /* Content */
+.content {
+    min-height: 200px;
+    border: 1px solid #ecf0f1;
+    border-top: 0px;
+    padding: 21px;
+
+
+
+
+}
+
+

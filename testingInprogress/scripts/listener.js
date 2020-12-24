@@ -9,3 +9,6 @@
 // This event is triggered when a key is sent to the browser.The shift, control and alt keys on their own do not generate a KeyPress event.
 // Lets say that the user types a letter into a text box on a web page, then the order in which events are triggered would be: KeyDown, KeyPress, KeyUp.
 console.log("Listener is up")
+
+
+var listener = { 'event' , callback };
