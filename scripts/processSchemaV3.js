@@ -209,10 +209,9 @@ class processSchema {
                 if (processSchema.validate(input[key], supportedType, key, input[key], "isOneOf")){ 
                     currentNode.setAttribute("type", input[key]);
                 }
-
                 processSchema.appendChild(currentNode, output);
             } else {
-                console.log("strays")
+                console.log("strays",input,key,value)
             }
 
         }
@@ -272,7 +271,7 @@ function getEntityType(entity) {
 
 function processTest(e) {
   //  e.preventDefault();
-    var in2 = slightlyComplex;
+    var in2 = toolbar;
     console.log(in2)
     var outputElement = document.createElement("outputElement");
     console.log(outputElement)
