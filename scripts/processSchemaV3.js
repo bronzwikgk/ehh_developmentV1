@@ -1,4 +1,66 @@
-
+var s = let schema = {
+    definitions: {
+      hobby: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+          durationInMonth: { type: "integer" },
+        }
+      }
+    },
+    title: "A registration form",
+    description: "A simple form example.",
+    type: "object",
+    required: [
+      "firstName",
+      "lastName"
+    ],
+    properties: {
+      firstName: {
+        type: "string",
+        title: "First name"
+      },
+      lastName: {
+        type: "string",
+        title: "Last name"
+      },
+      age: {
+        type: "integer",
+        title: "Age",
+      },
+      bio: {
+        type: "string",
+        title: "Bio",
+      },
+      country: {
+        type: "string",
+        title: "Country" 
+      },
+      state: {
+        type: "string",
+        title: "State" 
+      },
+      zip: {
+        type: "string",
+        title: "ZIP" 
+      },
+      password: {
+        type: "string",
+        title: "Password",
+        minLength: 3
+      },
+      telephone: {
+        type: "string",
+        title: "Telephone",
+        minLength: 10
+      },
+      work: { "$ref": "#/definitions/hobby" },
+      hobbies: {
+          type: "array",
+          items: { "$ref": "#/definitions/hobby" }
+      }
+    }
+  }
 var formElements = ["button", 'datalist', "div", 'fieldset', "form", "input", "label", 'legend', 'li', 'meter', 'optgroup', "option", 'output', 'progress', "select", "span", "textarea", "ul"];
 var properties = ["type", "title", "class", "id", "name", "value", "required", "default", "readOnly"]
 var supportedType = [ "string","number","array","integer","boolean","object"]
