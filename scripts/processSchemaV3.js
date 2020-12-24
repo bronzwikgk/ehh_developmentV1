@@ -99,17 +99,15 @@ var slightlyComplex = {
     }
 }
 
-var basic = {
-    "toolbar": {
-        "name": {
-            "command": "submit",
-            "button": "name"
-        },
-        "gender": {
-            "command": "submit",
-            "button": "name"
-        }
-    }
+var toolbar = {
+
+    "topNav": [
+            {
+                "button": "new"
+            },
+            { "button": "new2" },
+            { "button": "new3" }
+        ]
 }
 
 class processSchema { 
@@ -130,12 +128,16 @@ class processSchema {
     }
     static create(input, output,key,value) { 
         if (getEntityType(output).includes("HTML")) { //Only HTML creation
+        //    console.log("got request for  from create", input, output, key, value)
+
             if (getEntityType(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
-              //  console.log("creating fieldSet object", key, value)
+           //   console.log("creating div object", key, value)
                 var nwEle = document.createElement("div");
                 nwEle.className = input;
               //  nwEle.className = "createdFromObject";
             } else if (getEntityType(value) === 'Array') {
+                var nwEle = document.createElement(input);
+                nwEle.className = "createdFromArrayProperty";
             
             } else if (getEntityType(value) === 'String' || getEntityType(value) === 'Boolean') {
            //     console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
@@ -143,19 +145,21 @@ class processSchema {
                     var nwEle = document.createElement("div");
                     nwEle.className = input;
               // console.log("divElement", nwEle);
-            } else {
+                } else {
+                 
+                //    console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
                     var nwEle = document.createElement(input);
                     nwEle.className = "createdFromStringProperty";                  
                     var content = document.createTextNode(value);
                     nwEle.appendChild(content);
                   //  nwEle.setAttribute("value", key);
-                    console.log("formElement", nwEle);
+                //    console.log("formElement", nwEle);
                     
                 }
             } else {
                 console.log("strays")
             }
-          
+         // console.log("new element from create",nwEle)
             return nwEle;
         }
     }
@@ -184,17 +188,22 @@ class processSchema {
                // console.log("creating fieldSet object", key, input[key])
                
                 var currentNode = processSchema.create(key, output, key, input[key]);
-               //console.log("recived from create",currentNode)
+             //  console.log("recived from create",currentNode)
                 processSchema.schema2(input[key], currentNode,key,input[key]);
                
                 processSchema.appendChild(currentNode, output);
 
-            } else if (getEntityType(input[key]) === 'Array') {  
-                processSchema.schema2(input[key], currentNode,key,input[key]);
-                //var currentNode = processSchema.create(key, output,key,input[key]);
-              //   processSchema.appendChild(currentNode, output);
+            } else if (getEntityType(input[key]) === 'Array') { 
+               
+                var currentNode = processSchema.create(key, output, key, input[key]);
+              //  console.log("recived from create", currentNode)
+
+                processSchema.schema2(input[key], currentNode, key, input[key]);
+                processSchema.appendChild(currentNode, output);
+
+          
             }else if (getEntityType(input[key]) === 'String' || getEntityType(input[key]) === 'Function' || getEntityType(input[key]) === 'Boolean') {                  
-               console.log("create req property object", key, input[key])
+            //   console.log("create req property object", key, input[key])
                 var currentNode = processSchema.create(key, output, key, input[key]);
                 
                 if (processSchema.validate(input[key], supportedType, key, input[key], "isOneOf")){ 
@@ -213,7 +222,8 @@ class processSchema {
 
         for (var i = 0; i < input.length; i++) {
             if (getEntityType(input[i]) === 'Object') {
-               console.log("found Object in array", input[i])
+               // console.log("found Object in array", input[i],output)
+                
                 var currentNode = processSchema.create(key, output, input[i], input[i]);
                 //console.log("recived from create",currentNode)
                 processSchema.schema2(input[i], currentNode, key, input[i]);
@@ -221,7 +231,7 @@ class processSchema {
                 processSchema.appendChild(currentNode, output);
 
             } else if (getEntityType(input[i]) === 'Array') {
-                console.log("found Object in array", input[i])
+              //  console.log("found Object in array", input[i])
             } else if (getEntityType(input[i]) === 'String' || getEntityType(input[i]) === 'Function' || getEntityType(input[i]) === 'Boolean') {
                 var currentNode = processSchema.create(key, output, input[i], input[i]);
                processSchema.appendChild(currentNode, output);
@@ -241,7 +251,7 @@ class processSchema {
     }
 
     static validate(input, output,key,value,validation) {
-        console.log("validating", input, output, validation)
+      //  console.log("validating", input, output, validation)
             //this condition primarly check for the presence of a keys in any an array, if not present and options [ returns false and update and return position]
 
         if (validation === 'isOneOf') {
@@ -255,13 +265,14 @@ class processSchema {
 }
 
 function getEntityType(entity) {
+  //  console.log(entity, Object.getPrototypeOf(entity).constructor.name)
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
 }
 
 
 function processTest(e) {
   //  e.preventDefault();
-    var in2 = basic;
+    var in2 = slightlyComplex;
     console.log(in2)
     var outputElement = document.createElement("outputElement");
     console.log(outputElement)
@@ -277,7 +288,7 @@ function processTest(e) {
 }
 
 processTest();
-document.getElementById("get").addEventListener("click", processTest);
+//document.getElementById("get").addEventListener("click", processTest);
 
 
 // var a = {

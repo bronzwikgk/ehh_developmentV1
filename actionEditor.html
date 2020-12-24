@@ -6,22 +6,40 @@
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style/toolbar.css">
+    <link rel="stylesheet" type="text/css" href="style/menu.css">
 
 </head>
 
 <body>
-    <textarea id="ehhInputEditor" class = 'content' contentEditable="true" rows="4" cols="50">
-
+    <textarea id="ehhActionEditor" class = 'content' contentEditable="true" rows="4" cols="50">
     </textarea>
     
   
     <div id="output"> This is a testing page for toolbar.</div>
 
-  
+        <div class="topnav" id="myTopnav">
+            <a href="#home" class="active">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <div class="dropdown">
+                <button class="dropbtn">Dropdown
+                    <i class="fa fa-caret-down"></i>
+                </button>
+        
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <a href="#about">About</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
 
     <script type="text/javascript" src="scripts/processSchemaV3.js"></script>
     <script type="text/javascript" src="scripts/dataHelpersv3.js"></script>
     <script type="text/javascript" src="json/jsonSamples.json"></script>
+    <script type="text/javascript" src="scripts/actionEditor.js"></script>
     <script type="text/javascript" src="scripts/datavalidationV1.js"></script>
     <script type="text/javascript" src="scripts/create.js"></script>
 </body>
