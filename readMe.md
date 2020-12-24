@@ -17,6 +17,10 @@ a simple appScript Server Api testing page
 
 https://bronzwikgk.github.io/ehh_developmentv2/apiTest.html
 
+a simple actionEditor testing page
+
+https://bronzwikgk.github.io/ehh_developmentv2/actionEditor.html
+
 a schema processing testing page
 
 https://bronzwikgk.github.io/ehh_developmentv2/processSchema.html
