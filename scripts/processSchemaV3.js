@@ -101,11 +101,11 @@ var slightlyComplex = {
 
 var basic = {
     "toolbar": {
-        "b1": {
+        "name": {
             "command": "submit",
             "button": "name"
         },
-        "b2": {
+        "gender": {
             "command": "submit",
             "button": "name"
         }
