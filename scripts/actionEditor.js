@@ -22,10 +22,10 @@ var jsonSyantax = ["{","["]
 //     }
 // }
 //     }"
-var onAction = onAction: {
+var onAction = {"onAction": {
     "event": 'event',
     "target": 'target'
-}
+}}
 
 function refresh(e) { 
     var actionEditor = document.getElementById("ehhActionEditor");
@@ -69,26 +69,26 @@ class Rule{
 
 }
 
-var keyCodeSyntaxDataSet = []
+// var keyCodeSyntaxDataSet = []
 
 
-"if(InputKey.isEqualTo(""{""){
-append(input.value, ""}"");
-createRange(input.value.selectStart, input.value.selectEnd);}"
-"{": { [validate.isEqualTo(input.key, this.key, next(), process.append(input.value, this.reflection)] "this.reflection = ", this.key = "{" } "}
+// "if(InputKey.isEqualTo(""{""){
+// append(input.value, ""}"");
+// createRange(input.value.selectStart, input.value.selectEnd);}"
+// "{": { [validate.isEqualTo(input.key, this.key, next(), process.append(input.value, this.reflection)] "this.reflection = ", this.key = "{" } "}
 
-let rule = {
-    "ruleName": "keyCodeSyntaxValidattion",
-    "key": "{",
-    "input" : input.key,
-    "validation" : isOneof(input.key,keyCodeSyntaxDataSet)
-"actionIfTrue": console.log("true"),
-actionifFalse: console.log("false")
-
-
+// let rule = {
+//     "ruleName": "keyCodeSyntaxValidattion",
+//     "key": "{",
+//     "input" : input.key,
+//     "validation" : isOneof(input.key,keyCodeSyntaxDataSet)
+// "actionIfTrue": console.log("true"),
+// actionifFalse: console.log("false")
 
 
-}
+
+
+// }
 
 function* processRule(validations, ifTrueCallBack, ifFalseCallback) { 
     
@@ -155,21 +155,6 @@ class validate {
 
 }
 
-// <script>
-//     function newContent() {
-//         document.open();
-//       document.write("<h1>Out with the old, in with the new!</h1>");
-//       document.close();
-//     }
-//   </script>
-/**
-   * Inserts a string into the editor.
-   *
-   * @param {string} contents Contents to insert into the document.
-   */
-app.insertIntoDoc = (contents) => {
-   
-};
 
 async function start() {
     /**
