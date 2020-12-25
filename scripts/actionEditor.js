@@ -109,7 +109,6 @@ class validate {
 
 }
 
-
 // <script>
 //     function newContent() {
 //         document.open();
