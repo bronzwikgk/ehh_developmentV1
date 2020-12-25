@@ -280,7 +280,7 @@ function getEntityType(entity) {
 
 function processTest(e) {
   //  e.preventDefault();
-  var in2 = a;
+  var in2 = slightlyComplex;
     console.log(in2)
     var outputElement = document.createElement("outputElement");
     console.log(outputElement)
