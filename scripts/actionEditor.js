@@ -58,7 +58,29 @@ class validate {
     }
 
 }
-
+/**
+   * Inserts a string into the editor.
+   *
+   * @param {string} contents Contents to insert into the document.
+   */
+app.insertIntoDoc = (contents) => {
+    // Find the current cursor position
+    const startPos = textArea.selectionStart;
+    const endPos = textArea.selectionEnd;
+    // Get the current contents of the editor
+    const before = textArea.value;
+    // Get everything to the left of the start of the selection
+    const left = before.substring(0, startPos);
+    // Get everything to the right of the start of the selection
+    const right = before.substring(endPos);
+    // Concatenate the new contents.
+    textArea.value = left + contents + right;
+    // Move the cursor to the end of the inserted content.
+    const newPos = startPos + contents.length;
+    textArea.selectionStart = newPos;
+    textArea.selectionEnd = newPos;
+    app.setModified(true);
+};
 
 async function start() {
     /**
