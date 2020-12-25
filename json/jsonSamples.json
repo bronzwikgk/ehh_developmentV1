@@ -415,3 +415,22 @@ var htmlSelect = {
         }
     }
 }
+
+var rule ={
+        "validate": {
+            "all": [
+            {
+                "from": "displayMessage",
+                "operator": "isOneOf",
+                "value": true
+            }
+        ]
+    },
+ 
+        "event": {
+            "type": 'message',
+            "params": {
+                "data": 'hello-world!'
+        }
+    }
+}

@@ -5,9 +5,39 @@ var actionEditor = document.getElementById("ehhActionEditor");
 actionEditor.addEventListener('keyup', refresh);
 
 var jsonSyantax = ["{","["]
+// "{
+// // define the 'conditions' for when ""hello world"" should display
+// conditions: {
+//     all: [{
+//         fact: 'displayMessage',
+//         operator: 'equal',
+//         value: true
+//     }]
+// },
+// // define the 'event' that will fire when the condition evaluates truthy
+// event: {
+//     type: 'message',
+//         params: {
+//         data: 'hello-world!'
+//     }
+// }
+//     }"
+var onAction = onAction: {
+    "event": 'event',
+    "target": 'target'
+}
+var rule = ruleName : { onAction.{ if.this.then.that }}
 
 
+tempRule = {
+    
+    keyUpInputSyntaxCheck: {
 
+        
+}
+
+
+}
 
 
 function refresh(e) { 
@@ -20,13 +50,33 @@ function refresh(e) {
     buffer = "";
 }
 
+function insertInEditor(editor,input,insertRange) { 
+
+    // Find the current cursor position
+    const startPos = textArea.selectionStart;
+    const endPos = textArea.selectionEnd;
+    // Get the current contents of the editor
+    const before = textArea.value;
+    // Get everything to the left of the start of the selection
+    const left = before.substring(0, startPos);
+    // Get everything to the right of the start of the selection
+    const right = before.substring(endPos);
+    // Concatenate the new contents.
+    textArea.value = left + contents + right;
+    // Move the cursor to the end of the inserted content.
+    const newPos = startPos + contents.length;
+    textArea.selectionStart = newPos;
+    textArea.selectionEnd = newPos;
+    app.setModified(true);
+}
+
 function processBuffer(event, input,buffer) {
    // console.log(event.key, event.which,input)
     //detect Short Cut....Look Up Short Dic..Execute Command
     //Detect Sytax 
     if (validate.isOneof(event.key, jsonSyantax)) { 
        
-        actionEditor.value = actionEditor.value.toString().concat("}")         
+        actionEditor.value = actionEditor.value + "}"
       //  JSON.stringify(buffer).concat("}")
         console.log("Found match", event.key, event.target.selectionStart, actionEditor.value  )
         
@@ -58,28 +108,22 @@ class validate {
     }
 
 }
+
+
+// <script>
+//     function newContent() {
+//         document.open();
+//       document.write("<h1>Out with the old, in with the new!</h1>");
+//       document.close();
+//     }
+//   </script>
 /**
    * Inserts a string into the editor.
    *
    * @param {string} contents Contents to insert into the document.
    */
 app.insertIntoDoc = (contents) => {
-    // Find the current cursor position
-    const startPos = textArea.selectionStart;
-    const endPos = textArea.selectionEnd;
-    // Get the current contents of the editor
-    const before = textArea.value;
-    // Get everything to the left of the start of the selection
-    const left = before.substring(0, startPos);
-    // Get everything to the right of the start of the selection
-    const right = before.substring(endPos);
-    // Concatenate the new contents.
-    textArea.value = left + contents + right;
-    // Move the cursor to the end of the inserted content.
-    const newPos = startPos + contents.length;
-    textArea.selectionStart = newPos;
-    textArea.selectionEnd = newPos;
-    app.setModified(true);
+   
 };
 
 async function start() {

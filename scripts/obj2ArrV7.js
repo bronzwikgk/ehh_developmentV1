@@ -137,7 +137,7 @@ class mutate {
 
 function processTest(e) {
     e.preventDefault();
-    var in2 = schema;
+    var in2 = rule;
     console.log(in2)
     var outputArray = mutate.Obj2(in2, []);
     console.log("outputArray", outputArray)

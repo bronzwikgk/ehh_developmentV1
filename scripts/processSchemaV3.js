@@ -110,6 +110,15 @@ var toolbar = {
         ]
 }
 
+var a = {
+    div:{
+        'class': "preference",
+        "label": "do you like cheese",
+        'type' : "checkBox"
+    }
+
+}
+
 class processSchema { 
 
     static schema2(input, output,key,value) {
@@ -271,7 +280,7 @@ function getEntityType(entity) {
 
 function processTest(e) {
   //  e.preventDefault();
-    var in2 = toolbar;
+  var in2 = a;
     console.log(in2)
     var outputElement = document.createElement("outputElement");
     console.log(outputElement)
@@ -290,14 +299,6 @@ processTest();
 //document.getElementById("get").addEventListener("click", processTest);
 
 
-// var a = {
-//     div:{
-//         'class': "preference",
-//         "label": "do you like cheese",
-//         'type' : "checkBox"
-//     }
-
-// }
 {/* <div class="preference">
     <label for="cheese">Do you like cheese?</label>
     <input type="checkbox" name="cheese" id="cheese">
