@@ -1,4 +1,4 @@
-
+//https://www.fourmilab.ch/cellab/manual/ruledef-js.html
 var actionEditor = document.getElementById("ehhActionEditor");
 
 //actionEditor.addEventListener('keydown', refresh);
@@ -46,8 +46,7 @@ function* createIndex() {
     while (true)
         yield number++;
 }
-let and = every;
-let or = some;
+
 //all || and || or || not
 class validation { 
     constructor(typeofValidation, input, options) { 
@@ -60,6 +59,8 @@ class validation {
 
 class Rule{
 
+    and = every;
+    or = some;
     constructor(validation,ifTrueCallBack,ifFalseCallback) { 
 
         this.validation = this.validate.typeofValidation(input, options);
