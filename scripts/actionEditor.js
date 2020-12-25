@@ -46,7 +46,8 @@ function* createIndex() {
     while (true)
         yield number++;
 }
-
+let and = every;
+let or = some;
 //all || and || or || not
 class validation { 
     constructor(typeofValidation, input, options) { 
@@ -62,6 +63,8 @@ class Rule{
     constructor(validation,ifTrueCallBack,ifFalseCallback) { 
 
         this.validation = this.validate.typeofValidation(input, options);
+        this.ifTrue = ifTrueCallback;
+        this.ifFalse = ifFalseCallback;
         
 
 
@@ -82,11 +85,8 @@ class Rule{
 //     "key": "{",
 //     "input" : input.key,
 //     "validation" : isOneof(input.key,keyCodeSyntaxDataSet)
-// "actionIfTrue": console.log("true"),
-// actionifFalse: console.log("false")
-
-
-
+//      "actionIfTrue": console.log("true"),
+//      actionifFalse: console.log("false")
 
 // }
 
@@ -96,7 +96,6 @@ function* processRule(validations, ifTrueCallBack, ifFalseCallback) {
 
 
 } 
-
 function insertInEditor(editor,input,insertRange) { 
 
     // Find the current cursor position
@@ -116,7 +115,6 @@ function insertInEditor(editor,input,insertRange) {
     textArea.selectionEnd = newPos;
     app.setModified(true);
 }
-
 function processBuffer(event, input,buffer) {
    // console.log(event.key, event.which,input)
     //detect Short Cut....Look Up Short Dic..Execute Command
@@ -130,10 +128,6 @@ function processBuffer(event, input,buffer) {
     }
     
 }
-function executeRule(validation, callbackIfTrue, CallBackIfFalse) { 
-    
-}
-
 
 class validate {
     static isEqual(a, b, key, value) {
@@ -154,7 +148,6 @@ class validate {
     }
 
 }
-
 
 async function start() {
     /**
