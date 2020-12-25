@@ -26,19 +26,6 @@ var onAction = onAction: {
     "event": 'event',
     "target": 'target'
 }
-var rule = ruleName : { onAction.{ if.this.then.that }}
-
-
-tempRule = {
-    
-    keyUpInputSyntaxCheck: {
-
-        
-}
-
-
-}
-
 
 function refresh(e) { 
     var actionEditor = document.getElementById("ehhActionEditor");
@@ -49,6 +36,66 @@ function refresh(e) {
     output.innerHTML = buffer;
     buffer = "";
 }
+
+
+
+
+// This creates an index which when called with sytax of createIndex.next().value will give you an index new value.
+function* createIndex() { 
+    let number = 1;
+    while (true)
+        yield number++;
+}
+
+//all || and || or || not
+class validation { 
+    constructor(typeofValidation, input, options) { 
+        this.typeofValidation = typeofValidation,
+            this.input = input,
+            this.options = options
+    }
+
+}
+
+class Rule{
+
+    constructor(validation,ifTrueCallBack,ifFalseCallback) { 
+
+        this.validation = this.validate.typeofValidation(input, options);
+        
+
+
+    }
+
+}
+
+var keyCodeSyntaxDataSet = []
+
+
+"if(InputKey.isEqualTo(""{""){
+append(input.value, ""}"");
+createRange(input.value.selectStart, input.value.selectEnd);}"
+"{": { [validate.isEqualTo(input.key, this.key, next(), process.append(input.value, this.reflection)] "this.reflection = ", this.key = "{" } "}
+
+let rule = {
+    "ruleName": "keyCodeSyntaxValidattion",
+    "key": "{",
+    "input" : input.key,
+    "validation" : isOneof(input.key,keyCodeSyntaxDataSet)
+"actionIfTrue": console.log("true"),
+actionifFalse: console.log("false")
+
+
+
+
+}
+
+function* processRule(validations, ifTrueCallBack, ifFalseCallback) { 
+    
+
+
+
+} 
 
 function insertInEditor(editor,input,insertRange) { 
 
@@ -99,7 +146,6 @@ class validate {
       //  console.log(a,b)
       return b.indexOf(a) > -1 ? true : false;
     }
-   
     static hasAllof(a, b) {
 
     }
