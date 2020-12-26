@@ -68,7 +68,7 @@ function deserialize(params) {
  * 
  */
 class actionEditor{
-    constructor() {
+    constructor(parent) {
         this.id = 'actionEditor' + createIndex();
         this.name = "actionEditor",
         this.style = style,
@@ -87,7 +87,7 @@ class actionEditor{
         };
 
     }
-    
+
 
     
 }
