@@ -1,8 +1,96 @@
-//https://www.fourmilab.ch/cellab/manual/ruledef-js.html
+class entityRegistry {
+    constructor() {
+        this.items = new WeakSet();
+    }
+
+    addItem(entity) {
+        if (this.hasItem(entity)) {
+            throw new Error(
+                `The entity can only contain one instance of item ${item}`
+            );
+        }
+        return this.items.add(item);
+    }
+
+    removeItem(item) {
+        return this.items.delete(item);
+    }
+
+    hasItem(item) {
+        return this.items.has(item);
+    }
+};
+
+
+// This creates an index which when called with sytax of createIndex.next().value will give you an index new value.
+function* createIndex() {
+    let number = 1;
+    while (true)
+        yield number++;
+}
+
+function serialize() {
+    const languageOverridesByBufferId = {};
+    this.languageOverridesByBufferId.forEach((languageId, bufferId) => {
+        languageOverridesByBufferId[bufferId] = languageId;
+    });
+    return { languageOverridesByBufferId };
+}
+
+function deserialize(params) {
+    for (const bufferId in params.languageOverridesByBufferId || {}) {
+        this.languageOverridesByBufferId.set(
+            bufferId,
+            params.languageOverridesByBufferId[bufferId]
+        );
+    }
+}
+
+/**
+ * 
+ * 
+ */
+class actionEditor{
+    constructor() {
+        this.id = 'actionEditor' + createIndex();
+        this.name = "actionEditor",
+        this.style = style,
+        this.attributes = attributes,
+        this.nonWordCharList = '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?-…',
+        this.parent = parent,
+        this.url = document.location.url,
+        this.textBuffer = { point, range },
+        this.options = {
+        autofocus: true,
+        lineNumbers: true,
+            mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
+        this.output = [self,output],
+        tabSize: 2,
+        indentWithTabs: true
+        };
+
+    }
+
+    
+}
 var actionEditor = document.getElementById("ehhActionEditor");
 
-//actionEditor.addEventListener('keydown', refresh);
 actionEditor.addEventListener('keyup', refresh);
+
+function refresh(e) {
+    autoStart = true;
+    var actionEditor = document.getElementById("ehhActionEditor");
+    var output = document.getElementById("output");
+    var buffer = actionEditor.value;
+    processBuffer(e, buffer);
+    //   console.log(buffer);
+    output.innerHTML = buffer;
+    buffer = "";
+}
+
+//https://www.fourmilab.ch/cellab/manual/ruledef-js.html
+
+//actionEditor.addEventListener('keydown', refresh);
 
 var jsonSyantax = ["{","["]
 // "{
@@ -27,15 +115,6 @@ var onAction = {"onAction": {
     "target": 'target'
 }}
 
-function refresh(e) { 
-    var actionEditor = document.getElementById("ehhActionEditor");
-    var output = document.getElementById("output");
-    var buffer = actionEditor.value;
-    processBuffer(e,buffer);
- //   console.log(buffer);
-    output.innerHTML = buffer;
-    buffer = "";
-}
 
 
 
@@ -51,8 +130,9 @@ function* createIndex() {
 class validation { 
     constructor(typeofValidation, input, options) { 
         this.typeofValidation = typeofValidation,
-            this.input = input,
-            this.options = options
+        this.input = input,
+        this.options = options
+        
     }
 
 }
@@ -62,13 +142,10 @@ class Rule{
     and = every;
     or = some;
     constructor(validation,ifTrueCallBack,ifFalseCallback) { 
-
         this.validation = this.validate.typeofValidation(input, options);
-        this.ifTrue = ifTrueCallback;
-        this.ifFalse = ifFalseCallback;
-        
-
-
+        this.actionIfTrue = ifTrueCallback;
+        this.actionIfFalse = ifFalseCallback(...arguments,);
+        this.options = { autoStart = true }
     }
 
 }
@@ -144,7 +221,7 @@ class validate {
     static hasAllof(a, b) {
 
     }
-    static numberValidator(factValue) {
+    static isNumber(factValue) {
         return Number.parseFloat(factValue).toString() !== 'NaN'
     }
 
