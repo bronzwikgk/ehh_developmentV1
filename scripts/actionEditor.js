@@ -126,16 +126,20 @@ function* createIndex() {
         yield number++;
 }
 
-//all || and || or || not
 class validation { 
     constructor(typeofValidation, input, options) { 
-        this.typeofValidation = typeofValidation,
-        this.input = input,
-        this.options = options
-        
+            this.typeofValidation = typeofValidation,
+            this.input = input,
+            this.options = options,
+            this.options.validateAgainst = options.validateAgainst,
+            this.options.output,
+            this.defaultValidation = validate.is(isEmpty, input, options.output.ifFalseCallback(continue))
+        }    
     }
 
 }
+
+
 
 class Rule{
 
