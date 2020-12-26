@@ -79,7 +79,7 @@ function deserialize(params) {
 // this.accepts = [{ 
 //  mimeTypes: ['text/*'],
    // extensions: ['js', 'css', 'txt', 'html', 'xml', 'tsv', 'csv', 'rtf']
-    }];
+ //   }];
 //         this.textBuffer = { point, range },
 //         this.options = {
 //         autofocus: true,
