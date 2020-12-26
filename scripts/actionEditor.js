@@ -1,3 +1,22 @@
+//https://www.fourmilab.ch/cellab/manual/ruledef-js.html
+
+// "{
+// // define the 'conditions' for when ""hello world"" should display
+// conditions: {
+//     all: [{
+//         fact: 'displayMessage',
+//         operator: 'equal',
+//         value: true
+//     }]
+// },
+// // define the 'event' that will fire when the condition evaluates truthy
+// event: {
+//     type: 'message',
+//         params: {
+//         data: 'hello-world!'
+//     }
+// }
+//     }"
 class entityRegistry {
     constructor() {
         this.items = new WeakSet();
@@ -20,8 +39,6 @@ class entityRegistry {
         return this.items.has(item);
     }
 };
-
-
 // This creates an index which when called with sytax of createIndex.next().value will give you an index new value.
 function* createIndex() {
     let number = 1;
@@ -63,7 +80,7 @@ class actionEditor{
         this.options = {
         autofocus: true,
         lineNumbers: true,
-            mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
+        mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
         this.output = [self,output],
         tabSize: 2,
         indentWithTabs: true
@@ -76,7 +93,7 @@ class actionEditor{
 var actionEditor = document.getElementById("ehhActionEditor");
 
 actionEditor.addEventListener('keyup', refresh);
-
+var jsonSyantax = ["{", "["]
 function refresh(e) {
     autoStart = true;
     var actionEditor = document.getElementById("ehhActionEditor");
@@ -88,46 +105,45 @@ function refresh(e) {
     buffer = "";
 }
 
-//https://www.fourmilab.ch/cellab/manual/ruledef-js.html
+
 
 //actionEditor.addEventListener('keydown', refresh);
 
-var jsonSyantax = ["{","["]
-// "{
-// // define the 'conditions' for when ""hello world"" should display
-// conditions: {
-//     all: [{
-//         fact: 'displayMessage',
-//         operator: 'equal',
-//         value: true
-//     }]
-// },
-// // define the 'event' that will fire when the condition evaluates truthy
-// event: {
-//     type: 'message',
-//         params: {
-//         data: 'hello-world!'
-//     }
-// }
-//     }"
-var onAction = {"onAction": {
+
+var onAction = {
+    "onAction": {
     "event": 'event',
     "target": 'target'
-}}
-
-
-
-
-
+    }
+}
 // This creates an index which when called with sytax of createIndex.next().value will give you an index new value.
 function* createIndex() { 
     let number = 1;
     while (true)
         yield number++;
 }
+class validate {
+    static isEqual(a, b, key, value) {
+        return a === b ? true : false;
+    }
+    static isEmpty(a) {
+        return Object.keys(obj).length === 0 ? true : false;
+    }
+    static isOneof(a, b, key, value) {
+      //  console.log(a,b)
+      return b.indexOf(a) > -1 ? true : false;
+    }
+    static hasAllof(a, b) {
+
+    }
+    static isNumber(factValue) {
+        return Number.parseFloat(factValue).toString() !== 'NaN'
+    }
+
+}
 class validation { 
     constructor(typeofValidation, input, options) {
-            this.defaultValidation = validate.is(isEmpty, input, options.output.ifFalseCallback(continue))
+            this.defaultValidation = validate.is(isEmpty, input, options.output.ifFalseCallback('continue')),
             this.typeofValidation = typeofValidation,
             this.name = typeofValidation,
             this.input = input,
@@ -135,7 +151,6 @@ class validation {
             this.options.validateAgainst = options.validateAgainst,
             this.options.output,
         }    
-    
 }
 
 class validationSet {
@@ -151,24 +166,6 @@ class validationSet {
     }
 
 }
-
-// var keyCodeSyntaxDataSet = []
-
-
-// "if(InputKey.isEqualTo(""{""){
-// append(input.value, ""}"");
-// createRange(input.value.selectStart, input.value.selectEnd);}"
-// "{": { [validate.isEqualTo(input.key, this.key, next(), process.append(input.value, this.reflection)] "this.reflection = ", this.key = "{" } "}
-
-// let rule = {
-//     "ruleName": "keyCodeSyntaxValidattion",
-//     "key": "{",
-//     "input" : input.key,
-//     "validation" : isOneof(input.key,keyCodeSyntaxDataSet)
-//      "actionIfTrue": console.log("true"),
-//      actionifFalse: console.log("false")
-
-// }
 
 function insertInEditor(editor,input,insertRange) { 
 
@@ -203,25 +200,6 @@ function processBuffer(event, input,buffer) {
     
 }
 
-class validate {
-    static isEqual(a, b, key, value) {
-        return a === b ? true : false;
-    }
-    static isEmpty(a) {
-        return Object.keys(obj).length === 0 ? true : false;
-    }
-    static isOneof(a, b, key, value) {
-      //  console.log(a,b)
-      return b.indexOf(a) > -1 ? true : false;
-    }
-    static hasAllof(a, b) {
-
-    }
-    static isNumber(factValue) {
-        return Number.parseFloat(factValue).toString() !== 'NaN'
-    }
-
-}
 
 async function start() {
     /**
