@@ -125,27 +125,25 @@ function* createIndex() {
     while (true)
         yield number++;
 }
-
 class validation { 
-    constructor(typeofValidation, input, options) { 
+    constructor(typeofValidation, input, options) {
+            this.defaultValidation = validate.is(isEmpty, input, options.output.ifFalseCallback(continue))
             this.typeofValidation = typeofValidation,
+            this.name = typeofValidation,
             this.input = input,
             this.options = options,
             this.options.validateAgainst = options.validateAgainst,
             this.options.output,
-            this.defaultValidation = validate.is(isEmpty, input, options.output.ifFalseCallback(continue))
         }    
-    }
-
+    
 }
 
-
-
-class Rule{
-
+class validationSet {
     and = every;
     or = some;
-    constructor(validation,ifTrueCallBack,ifFalseCallback) { 
+    constructor(validation, ifTrueCallBack, ifFalseCallback) {
+        this.defaultValidation = validate.is(isArray, input, options.output.ifTrueCallback(continue))
+        this.validationSetName : validation.name,
         this.validation = this.validate.typeofValidation(input, options);
         this.actionIfTrue = ifTrueCallback;
         this.actionIfFalse = ifFalseCallback(...arguments,);
@@ -172,12 +170,6 @@ class Rule{
 
 // }
 
-function* processRule(validations, ifTrueCallBack, ifFalseCallback) { 
-    
-
-
-
-} 
 function insertInEditor(editor,input,insertRange) { 
 
     // Find the current cursor position
