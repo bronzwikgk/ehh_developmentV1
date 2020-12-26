@@ -76,6 +76,10 @@ function deserialize(params) {
 //         this.nonWordCharList = '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?-…',
 //         this.parent = parent,
 //         this.url = document.location.url,
+// this.accepts = [{ 
+//  mimeTypes: ['text/*'],
+   // extensions: ['js', 'css', 'txt', 'html', 'xml', 'tsv', 'csv', 'rtf']
+    }];
 //         this.textBuffer = { point, range },
 //         this.options = {
 //         autofocus: true,
