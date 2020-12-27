@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../evertythingSchema"
+		},
+		{
+			"path": "../everyEngine"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
