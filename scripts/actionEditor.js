@@ -1,22 +1,4 @@
-//https://www.fourmilab.ch/cellab/manual/ruledef-js.html
 
-// "{
-// // define the 'conditions' for when ""hello world"" should display
-// conditions: {
-//     all: [{
-//         fact: 'displayMessage',
-//         operator: 'equal',
-//         value: true
-//     }]
-// },
-// // define the 'event' that will fire when the condition evaluates truthy
-// event: {
-//     type: 'message',
-//         params: {
-//         data: 'hello-world!'
-//     }
-// }
-//     }"
 class entityRegistry {
     constructor() {
         this.items = new WeakSet();
