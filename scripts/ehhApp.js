@@ -2,10 +2,10 @@
 // model of the app contians dataset 
 model = {
     items : []
-    }
-    
-    // view contians the frontend representaion of the datasets
-    view = {
+}
+// view contians the frontend representaion of the datasets
+
+view = {
         clearList : function(){
                var range = document.createRange(); 
                range.selectNodeContents(document.getElementById("list"));
