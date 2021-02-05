@@ -12,6 +12,7 @@
 	],
 	"settings": {
 		"git.ignoreLimitWarning": true,
-		"liveServer.settings.multiRootWorkspaceName": "evertythingSchema"
+		"liveServer.settings.multiRootWorkspaceName": "ehh_developmentv2",
+		"liveServer.settings.port": 5501
 	}
 }
