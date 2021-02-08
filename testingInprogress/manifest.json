@@ -1,8 +1,8 @@
 {
-    "name": "ehh_In_DevelopmentV1",
+    "name": "ehh_In_Testing",
     "version": "1.0",
     "manifest_version": 2,
-    "description": "everythingHappenHere.",
+    "description": "everythingHappenHere.In_Testing",
     "icons": {
         "128": "icon/icon_128.png"
     },
