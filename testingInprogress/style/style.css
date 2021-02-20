@@ -4,7 +4,7 @@
 }
 
 [currentstate="mousemove"]::before{
-  content: attr(currentstate);
+  content: attr(class);
   color: #1e2326;
   position: absolute; 
   display:block;
@@ -12,9 +12,4 @@
   z-index: -1;
   border-style: solid;
   border-width: thin;
-}
-
-#checkbox_01{
-align-self: flex-start;
-  z-index: 7;
 }

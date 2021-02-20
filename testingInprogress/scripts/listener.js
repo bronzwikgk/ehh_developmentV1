@@ -11,4 +11,4 @@
 console.log("Listener is up")
 
 
-var listener = { 'event' , callback };
+//var listener = { 'event' , callback };
